@@ -1,8 +1,8 @@
 build/*
 build/**/*
-diamond-data/cache/**/*
-diamond-data/cache/*
-diamond-data/resources/[sistema]/[builders]/webpack/**/*
-diamond-data/resources/[sistema]/[builders]/webpack/*
-diamond-data/resources/[sistema]/[builders]/yarn/**/*
-diamond-data/resources/[sistema]/[builders]/yarn/*
+zirix-data/cache/**/*
+zirix-data/cache/*
+zirix-data/resources/[sistema]/[builders]/webpack/**/*
+zirix-data/resources/[sistema]/[builders]/webpack/*
+zirix-data/resources/[sistema]/[builders]/yarn/**/*
+zirix-data/resources/[sistema]/[builders]/yarn/*
