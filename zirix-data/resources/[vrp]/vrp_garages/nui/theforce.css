@@ -1,0 +1,420 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'bahnschrift', sans-serif;
+
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+#estacionamento {
+    position: absolute;
+    width: 835px;
+    height: 531px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.35);
+    display: none;
+}
+
+#titulo {
+    position: absolute;
+    width: 815px;
+    height: 40px;
+    top: 10px;
+    left: 10px;
+}
+
+#nome {
+    position: absolute;
+    width: 495px;
+    height: 40px;
+    top: 0px;
+    left: 0px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#nome p {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.retirar {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    top: 0px;
+    right: 160px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(200, 200, 200);
+
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.retirar p {
+    position: absolute;
+    top: 9px;
+    left: 45px;
+    font-size: 18px;
+}
+
+.retirar:hover {
+    background-color: #EACB66;
+    color: rgb(90, 90, 90);
+    opacity: 90%;
+}
+
+.guardar {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    top: 0px;
+    right: 0px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(200, 200, 200);
+
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.guardar p {
+    position: absolute;
+    top: 9px;
+    left: 45px;
+    font-size: 18px;
+}
+
+.guardar:hover {
+    background-color: #EACB66;
+    color: rgb(90, 90, 90);
+    opacity: 90%;
+}
+
+#carros {
+    position: absolute;
+    width: 830px;
+    height: 462px;
+    bottom: 10px;
+    overflow: auto;
+    padding-left: 5px;
+}
+
+.carro {
+    position: relative;
+    width: 265px;
+    height: 462px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carro:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.carro.active {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.imagem-carro {
+    position: absolute;
+    width: 245px;
+    height: 160px;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+}
+
+
+.imagem-carro img {
+    width: 245px;
+    height: 160px;
+    border-radius: 5px;
+}
+
+
+.nome-carro {
+    position: absolute;
+    width: 245px;
+    height: 26px;
+    text-align: center;
+    top: 180px;
+    left: 10px;
+}
+
+.nome-carro p {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.status {
+    position: absolute;
+    width: 245px;
+    height: 128px;
+    top: 216px;
+    left: 10px;
+    border-radius: 5px;
+    background-color: rgba(184, 184, 184, 0.35);
+}
+
+.status-titulo {
+    position: absolute;
+    width: 225px;
+    height: 18px;
+    top: 10px;
+    left: 10px;
+    text-align: center;
+}
+
+.status-titulo p {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(184, 184, 184, 0.35);
+}
+
+.status-motor {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    top: 38px;
+    left: 10px;
+}
+
+.icone-motor img {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 4px;
+    left: 10px;
+}
+
+.barra-motor {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.10);
+}
+
+.barra-motor span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-color: #EACB66;
+}
+
+.texto-motor p {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-chassis {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    top: 68px;
+    left: 10px;
+}
+
+.icone-chassis img {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 4px;
+    left: 10px;
+}
+
+.barra-chassis {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.10);
+}
+
+.barra-chassis span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-color: #EACB66;
+}
+
+.texto-chassis p {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-fuel {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    bottom: 10px;
+    left: 10px;
+}
+
+.icone-fuel img {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 4px;
+    left: 10px;
+}
+
+.barra-fuel {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.10);
+}
+
+.barra-fuel span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-color: #EACB66;
+}
+
+.texto-fuel p {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.licenca {
+    position: absolute;
+    width: 245px;
+    height: 98px;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 5px;
+    background-color: rgba(184, 184, 184, 0.35);
+}
+
+.licenca-titulo {
+    position: absolute;
+    width: 225px;
+    height: 18px;
+    top: 10px;
+    left: 10px;
+    text-align: center;
+}
+
+.licenca-titulo p {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(184, 184, 184, 0.35);
+}
+
+.licenca-tax {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    top: 38px;
+    left: 10px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.10);
+}
+
+.licenca-tax img {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 4px;
+    left: 10px;
+}
+
+.texto-tax p {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.licenca-valor {
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.10);
+}
+
+.licenca-valor img {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 4px;
+    left: 10px;
+}
+
+.texto-valor p {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 1px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.10);
+    border-radius: 10px;
+}

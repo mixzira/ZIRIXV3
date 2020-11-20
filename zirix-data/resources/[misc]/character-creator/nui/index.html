@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="vue.js"></script>
+</head>
+<body class="">
+    <div id="errMsg"></div>
+    <div id="app" v-show="CharacterMode">
+        <div class="inventory inv_left">
+            <div class="inventory_head">
+                <div class="inventory_head_left">
+                    <span>Criação de</span>
+                    <label>Personagem</label>
+                </div>
+                <div class="inventory_isset isnotset changeGender" data-value="1">
+                    <img src="images/creator/female.png">
+                </div>
+                <div class="inventory_isset changeGender" data-value="0">
+                    <img src="images/creator/male.png">
+                </div>
+            </div>
+            <div class="inventory_content">
+                <div class="creator_menus">
+                    <div class="creator_menu active" data-menu="parents">
+                        <img src="images/creator/parents.png">
+                        <label>Pais</label>
+                    </div>
+                    <div class="creator_menu" data-menu="eyes">
+                        <img src="images/creator/eye.png">
+                        <label>Olhos</label>
+                    </div>
+                    <div class="creator_menu" data-menu="nose">
+                        <img src="images/creator/nose.png">
+                        <label>Nariz</label>
+                    </div>
+                    <div class="creator_menu" data-menu="chin">
+                        <img src="images/creator/chin.png">
+                        <label>Queixo</label>
+                    </div>
+                    <div class="creator_menu" data-menu="cheek">
+                        <img src="images/creator/cheek.png">
+                        <label>Bochecha</label>
+                    </div>
+                    <div class="creator_menu" data-menu="lips">
+                        <img src="images/creator/lips.png">
+                        <label>Lábios</label>
+                    </div>
+                    <div class="creator_menu" data-menu="neck">
+                        <img src="images/creator/neck.png">
+                        <label>Pescoço</label>
+                    </div>
+                </div>
+                <label class="creator_menu_label">Rotação da Camera</label>
+                <li class="range range-success">
+                    <input type="range" min="90" max="270" value="0" step="5" class="slider" id="changeCamRotation" data-type="face" oninput="camRotationOut.value=value" v-model.number="camRotation" @input="changeCamRotation">
+                    <output id="camRotationOut">180</output>
+                </li>
+                <label style="font-size: 10px;">Esquerda<span style="float: right">Direita</span></label>
+            </div>
+
+            <div class="creator_content">
+                <div id="parents" class="creator_submenu">
+                    <ul>
+                        <label class="creator_menu_label">Rosto do pai</label>
+                        <li class="range range-primary">
+                            <input type="range" min="0" max="24" value="0" step="1" class="slider" data-type="parents" id="changeShapeFirstID" oninput="ShapeFirstID.value=value" v-model.number="father" @input="changeAppearance">
+                            <output id="ShapeFirstID">0</output>
+                        </li>
+                        <label class="creator_menu_label">Rosto da mãe</label>
+                        <li class="range range-primary">
+                            <input type="range" min="0" max="22" value="0" step="1" class="slider" data-type="parents" id="changeShapeSecondID" oninput="ShapeSecondID.value=value" v-model.number="mother" @input="changeAppearance">
+                            <output id="ShapeSecondID">0</output>
+                        </li>
+                        <label class="creator_menu_label">Gene dominante da face</label>
+                        <li class="range range-primary">
+                            <input type="range" min="0.0" max="1.0" step="0.05" class="slider" data-type="parents" id="changeShapeMix" oninput="ShapeMix.value=value" v-model.number="shapeMix" @input="changeAppearance"> 
+                            <output id="ShapeMix">0.5</output>
+                        </li>
+                        <label style="font-size: 10px;"><i class="fa fa-mars" aria-hidden="true"></i> Pai<span style="float: right">Mãe <i class="fa fa-venus" aria-hidden="true"></i></span></label>
+                        <label class="creator_menu_label">Gene dominante da ancestralidade</label>
+                        <li class="range range-primary">
+                            <input type="range" min="0" max="12" value="6" step="1" class="slider" data-type="parents" id="changeSkinMix" oninput="SkinMix.value=value" v-model.number="skinColor" @input="changeAppearance">
+                            <output id="SkinMix">6</output>
+                        </li>
+                        <label style="font-size: 10px;"><i class="fa fa-mars" aria-hidden="true"></i> Pai<span style="float: right">Mãe <i class="fa fa-venus" aria-hidden="true"></i></span></label>
+                    </ul>
+                </div>
+
+                <div id="eyes" class="creator_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Cor dos olhos</label>
+                        <li class="range range-success">
+                            <input type="range" min="0" max="31" value="0" step="1" class="slider" id="changeEyeColor" data-type="eyes" oninput="colorEye.value=value" v-model.number="eyesColor" @input="changeAppearance">
+                            <output id="colorEye">0</output>
+                        </li>
+                        <label class="creator_menu_label">Sobrancelhas</label>
+                        <li class="range range-success">
+                            <input type="range" min="0" max="33" step="1" class="slider" id="changeEyebrows" data-type="overlay" oninput="Eyebrows.value=value" v-model.number="eyebrowsModel" @input="changeAppearance">
+                            <output id="Eyebrows">0</output>
+                        </li>
+                        <label class="creator_menu_label">Cor da sobrancelha</label>
+                        <li class="range range-success">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeEyebrows" data-type="overlay_color" oninput="eyebrowsColor.value=value" v-model.number="eyebrowsColor" @input="changeAppearance">
+                            <output id="eyebrowsColor">0</output>
+                        </li>
+                        <label class="creator_menu_label">Largura da testa</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" id="changeBrowWidth" data-type="face" oninput="widthBrow.value=value" v-model.number="eyebrowsWidth" @input="changeAppearance">
+                            <output id="widthBrow">0</output>
+                        </li>
+                        <label class="creator_menu_label">Forma da sobrancelha</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1.0" max="0.99" step="0.01" value="0" class="slider" id="changeBrowHeight" data-type="face" oninput="shapeBrow.value=value" v-model.number="eyebrowsHeight" @input="changeAppearance">
+                            <output id="shapeBrow">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="nose" class="creator_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Largura do nariz</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeNoseWidth" oninput="widthNose.value=value" v-model.number="noseWidth" @input="changeAppearance">
+                            <output id="widthNose">0</output>
+                        </li>
+                        <label class="creator_menu_label">Altura do nariz</label>
+                        <li class="range range-info">
+                            <input type="range"min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeNoseHeight" oninput="heightNose.value=value" v-model.number="noseHeight" @input="changeAppearance">
+                            <output id="heightNose">0</output>
+                        </li>
+                        <label class="creator_menu_label">Comprimento do nariz</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeNoseLength" oninput="lengthNose.value=value" v-model.number="noseLength" @input="changeAppearance">
+                            <output id="lengthNose">0</output>
+                        </li>
+                        <label class="creator_menu_label">Deslocamento da ponte nasal</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeNoseBridge" oninput="bridgeNose.value=value" v-model.number="noseBridge" @input="changeAppearance">
+                            <output id="bridgeNose">0</output>
+                        </li>
+                        <label class="creator_menu_label">Ponta do nariz</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeNoseTip" oninput="tipNose.value=value" v-model.number="noseTip" @input="changeAppearance">
+                            <output id="tipNose">0</output>
+                        </li>
+                        <label class="creator_menu_label">Mudança de nariz</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeNoseShift" oninput="shiftNose.value=value" v-model.number="noseShift" @input="changeAppearance">
+                            <output id="shiftNose">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="chin" class="creator_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Comprimento do queixo</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeChinLength" oninput="lengthChin.value=value" v-model.number="chinLength" @input="changeAppearance">
+                            <output id="lengthChin">0</output>
+                        </li>
+                        <label class="creator_menu_label">Posição do queixo</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeChinPosition" oninput="positionChin.value=value" v-model.number="chinPosition" @input="changeAppearance">
+                            <output id="positionChin">0</output>
+                        </li>
+                        <label class="creator_menu_label">Largura do queixo</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeChinWidth" oninput="widthChin.value=value" v-model.number="chinWidth" @input="changeAppearance">
+                            <output id="widthChin">0</output>
+                        </li>
+                        <label class="creator_menu_label">Altura do queixo</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeChinHeight" oninput="heightChin.value=value" v-model.number="chinShape" @input="changeAppearance">
+                            <output id="heightChin">0</output>
+                        </li>
+                        <label class="creator_menu_label">Largura da mandíbula</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeJawWidth" oninput="widthJawOut.value=value" v-model.number="jawWidth" @input="changeAppearance">
+                            <output id="widthJawOut">0</output>
+                        </li>
+                        <label class="creator_menu_label">Altura da mandíbula</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" data-type="face" id="changeJawHeight" oninput="heightJaw.value=value" v-model.number="jawHeight" @input="changeAppearance">
+                            <output id="heightJaw">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="cheek" class="creator_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Altura da bochecha</label>
+                        <li class="range range-warning">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" id="changeCheekboneHeight" data-type="face" oninput="heightCheekbone.value=value" v-model.number="cheekboneHeight" @input="changeAppearance">
+                            <output id="heightCheekbone">0</output>
+                        </li>
+                        <label class="creator_menu_label">Largura da bochecha</label>
+                        <li class="range range-warning">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" id="changeCheekboneWidth" data-type="face" oninput="widthCheekbone.value=value" v-model.number="cheekboneWidth" @input="changeAppearance">
+                            <output id="widthCheekbone">0</output>
+                        </li>
+                        <label class="creator_menu_label">Largura das bochechas</label>
+                        <li class="range range-warning">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" id="changeCheeksWidth" data-type="face" oninput="widthCheeks.value=value" v-model.number="cheeksWidth" @input="changeAppearance">
+                            <output id="widthCheeks">0</output>
+                        </li>
+					</ul>
+                </div>
+                <div id="lips" class="creator_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Largura dos lábios</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" id="changeLipsWidth" data-type="face" oninput="widthLips.value=value" v-model.number="lips" @input="changeAppearance">
+                            <output id="widthLips">0</output>
+                        </li>
+					</ul>
+                </div>
+                <div id="neck" class="creator_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Altura do pescoço</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1.0" max="0.99" value="0" step="0.01" class="slider" id="changeNeckHeight" data-type="face" oninput="heightNeck.value=value" v-model.number="neckWidth" @input="changeAppearance">
+                            <output id="heightNeck">0</output>
+                        </li>
+					</ul>
+                </div>
+            </div>
+        </div>
+
+		<div id="inventory_main">
+			<div id="inventory_content">
+				<div class="inventory_content_bottom_buttons">
+					<div id="inv_confirm" class="btn-5" @click="done"><div class="inv_confirm"><i class="fa fa-check"></i> <span>Confirmar</span></div></div>
+				</div>
+			</div>
+		</div>
+
+        <div class="inventory inv_right">
+            <!-- <div class="inventory_head">
+                <div class="inventory_head_left">
+                    <span>Identidade</span>
+                    <div style="display: inline-flex;">
+                        <input type="text" v-model="characterNome" @input="changeAppearance" placeholder="Nome" style="width:120px; text-align: center; border-radius: 15px; border: 0; padding: 5px; margin-bottom:5px; margin-right:2px;">
+                        <input type="text" v-model="characterSobrenome" @input="changeAppearance" placeholder="Sobrenome" style="width:120px; text-align: center; border-radius: 15px; border: 0; padding: 5px; margin-bottom:5px; margin-right:2px;">
+                    </div>
+                </div>
+            </div> -->
+            <div class="inventory_head">
+                <div class="inventory_head_left">
+                    <span>Personagem</span>
+                    <label>Estilo</label>
+                </div>
+            </div>
+            <div class="inventory_content">
+                <div class="creator_menus">
+                    <div class="styling_menu active" data-menu="face_skin">
+                        <img src="images/creator/face.png">
+                        <label>Rosto</label>
+                    </div>
+                    <div class="styling_menu" data-menu="hair">
+                        <img src="images/creator/hair.png">
+                        <label>Cabelo</label>
+                    </div>
+                    <div class="styling_menu" data-menu="beard">
+                        <img src="images/creator/beard.png">
+                        <label>Barba</label>
+                    </div>
+                    <div class="styling_menu" data-menu="makeup">
+                        <img src="images/creator/make_up.png">
+                        <label>Maquiagem</label>
+                    </div>
+                    <div class="styling_menu" data-menu="age">
+                        <img src="images/creator/aging.png">
+                        <label>Envelhecimento</label>
+                    </div>
+                    <div class="styling_menu" data-menu="chest">
+                        <img src="images/creator/chest.png">
+                        <label>Peito</label>
+                    </div>
+                    <div class="styling_menu" data-menu="body">
+                        <img src="images/creator/body.png">
+                        <label>Corpo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="styling_content">
+                <div id="face_skin" class="styling_submenu">
+                    <ul>
+                        <label class="creator_menu_label">Manchas</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1" max="23" value="-1" step="1" class="slider" id="changeBlemishes" data-type="overlay" oninput="blemishes.value=value" v-model.number="blemishesModel" @input="changeAppearance">
+                            <output id="blemishes">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Sardas</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1" max="17" value="-1" step="1" class="slider" id="changeFreckles" data-type="overlay" oninput="freckles.value=value" v-model.number="frecklesModel" @input="changeAppearance">
+                            <output id="freckles">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Aspecto</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1" max="11" value="-1" step="1" class="slider" id="changeComplexion" data-type="overlay" oninput="complexion.value=value" v-model.number="complexionModel" @input="changeAppearance">
+                            <output id="complexion">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Blush</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1" max="7" value="-1" step="1" class="slider" id="changeBlush" data-type="overlay" oninput="blush.value=value" v-model.number="blushModel" @input="changeAppearance">
+                            <output id="blush">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Cor</label>
+                        <li class="range range-success">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeBlush" data-type="overlay_color" oninput="blushColorOut.value=value" v-model.number="blushColor" @input="changeAppearance">
+                            <output id="blushColorOut">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="hair" class="styling_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Cabelo</label>
+                        <li class="range range-warning">
+                            <input type="range" min="0" max="37" value="4" step="1" class="slider" id="changeHair" data-type="hair" oninput="hairModelOut.value=value" v-model.number="hairModel" @input="changeAppearance">
+                            <output id="hairModelOut">4</output>
+                        </li>
+                        <label class="creator_menu_label">Cor</label>
+                        <li class="range range-warning">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeHair" data-type="hairColor" oninput="hairColor.value=value" v-model.number="firstHairColor" @input="changeAppearance">
+                            <output id="hairColor">0</output>
+                        </li>
+                        <label class="creator_menu_label">Cor Secundária</label>
+                        <li class="range range-warning">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeHair" data-type="hairColorHighlight" oninput="hairColorHighlight.value=value" v-model.number="secondHairColor" @input="changeAppearance">
+                            <output id="hairColorHighlight">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="beard" class="styling_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Barba</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1" max="28" value="-1" step="1" class="slider" id="changeFacialHair" data-type="overlay" oninput="beardValue.value=value" v-model.number="beardModel" @input="changeAppearance">
+                            <output id="beardValue">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Cor</label>
+                        <li class="range range-danger">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeFacialHair" data-type="overlay_color" oninput="beardColorOut.value=value" v-model.number="beardColor" @input="changeAppearance">
+                            <output id="beardColorOut">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="makeup" class="styling_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Maquiagem</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1" max="71" value="-1" step="1" class="slider" id="changeMakeup" data-type="overlay" oninput="makeupValue.value=value" v-model.number="makeupModel" @input="changeAppearance">
+                            <output id="makeupValue">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Batom</label>
+                        <li class="range range-info">
+                            <input type="range" min="-1" max="9" value="-1" step="1" class="slider" id="changeLipstick" data-type="overlay" oninput="lipstickValue.value=value" v-model.number="lipstickModel" @input="changeAppearance">
+                            <output id="lipstickValue">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Cor do Batom</label>
+                        <li class="range range-info">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeLipstick" data-type="overlay_color" oninput="lipstickColor.value=value" v-model.number="lipstickColor" @input="changeAppearance">
+                            <output id="lipstickColor">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="age" class="styling_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Envelhecimento</label>
+                        <li class="range range-primary">
+                            <input type="range" min="-1" max="14" value="-1" step="1" class="slider" id="changeAgeing" data-type="overlay" oninput="ageingValue.value=value" v-model.number="ageingModel" @input="changeAppearance">
+                            <output id="ageingValue">-1</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="chest" class="styling_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Pelo Corporal</label>
+                        <li class="range range-success">
+                            <input type="range" min="-1" max="16" value="-1" step="1" class="slider" id="changeChestHair" data-type="overlay" oninput="chestHairValue.value=value" v-model.number="chestModel" @input="changeAppearance">
+                            <output id="chestHairValue">-1</output>
+                        </li>
+                        <label class="creator_menu_label">Cor</label>
+                        <li class="range range-success">
+                            <input type="range" min="0" max="63" value="0" step="1" class="slider" id="changeChestHair" data-type="overlay_color" oninput="chestHairColor.value=value" v-model.number="chestColor" @input="changeAppearance">
+                            <output id="chestHairColor">0</output>
+                        </li>
+                    </ul>
+                </div>
+                <div id="body" class="styling_submenu" style="display:none">
+                    <ul>
+                        <label class="creator_menu_label">Danos Solares</label>
+                        <li class="range range-danger">
+                            <input type="range" min="-1" max="10" value="-1" step="1" class="slider" id="changeSunDamage" data-type="overlay" oninput="sunDamageValue.value=value" v-model.number="sundamageModel" @input="changeAppearance">
+                            <output id="sunDamageValue">-1</output>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script>
+$('body').on('click', '.creator_menu', function (event) {
+    $(".creator_menu").each(function() { $(this).removeClass('active'); });
+    $(".creator_submenu").each(function() { $(this).stop().fadeOut(250); });
+    let menu = $(this).attr("data-menu");
+    $(this).addClass('active');
+
+    setTimeout(function() {
+        $("#" + menu).stop().fadeIn(250);
+    }, 300);
+});
+
+$('body').on('click', '.styling_menu', function (event) {
+    $(".styling_menu").each(function() { $(this).removeClass('active'); });
+    $(".styling_submenu").each(function() { $(this).stop().fadeOut(250); });
+    let menu = $(this).attr("data-menu");
+    $(this).addClass('active');
+
+    setTimeout(function() {
+        $("#" + menu).stop().fadeIn(250);
+    }, 300);
+});
+
+$('.range input[type="range"]').on('input', function() {
+    let event = $(this).attr("data-type");
+    
+    if(event == 'parents') {
+        let setting = $(this).attr("id");
+
+            setting = setting.substring(6, setting.length);
+
+        if(this.value < 0) $("#" + setting).val(Math.abs(this.value));
+    }
+});
+
+function checkName(str) {
+    return !(/^[a-zA-Z]*$/g.test(str));
+}
+	
+const app = new Vue({
+	el: '#app',
+	data: {
+		CharacterMode: false,
+		/* characterNome: "",
+		characterSobrenome: "", */
+		gender: 0,
+		father: 0,
+		mother: 0,
+		fathersID: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42, 43, 44],
+		mothersID: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 45],
+		skinColor: 6,
+		shapeMix: 0.5,
+		camRotation: 180,
+		
+		eyesColor: 0,
+		eyebrowsHeight: 0.0,
+		eyebrowsWidth: 0.0,
+		noseWidth: 0.0,
+		noseHeight: 0.0,
+		noseLength: 0.0,
+		noseBridge: 0.0,
+		noseTip: 0.0,
+		noseShift: 0.0,
+		cheekboneHeight: 0.0,
+		cheekboneWidth: 0.0,
+		cheeksWidth: 0.0,
+		lips: 0.0,
+		jawWidth: 0.0,
+		jawHeight: 0.0,
+		chinLength: 0.0,
+		chinPosition: 0.0,
+		chinWidth: 0.0,
+		chinShape: 0.0,
+		neckWidth: 0.0,
+		
+		hairModel: 4,
+		firstHairColor: 0,
+		secondHairColor: 0,
+		eyebrowsModel: 0,
+		eyebrowsColor: 0,
+		beardModel: -1,
+		beardColor: 0,
+		chestModel: -1,
+		chestColor: 0,
+		blushModel: -1,
+		blushColor: 0,
+		lipstickModel: -1,
+		lipstickColor: 0,
+		blemishesModel: -1,
+		ageingModel: -1,
+		complexionModel: -1,
+		sundamageModel: -1,
+		frecklesModel: -1,
+		makeupModel: -1,
+	},
+	methods: {
+		OpenCharacterMode: function() {
+			this.CharacterMode = true;
+            $('body').addClass("appbackground");
+		},
+		CloseCharacterMode: function() {
+			this.CharacterMode = false;
+            $('body').removeClass("appbackground");
+		},
+		changeAppearance: function() {
+			const arr1 = {
+				/* characterNome: this.characterNome.trim(),
+				characterSobrenome: this.characterSobrenome.trim(), */
+				fathersID: this.fathersID[this.father],
+				mothersID: this.mothersID[this.mother], 
+				skinColor: this.skinColor,
+				shapeMix: this.shapeMix,
+			};
+			$.post('http://character-creator/UpdateSkinOptions', JSON.stringify(arr1));
+			
+			const arr2 = {
+				eyesColor: this.eyesColor,
+
+				eyebrowsHeight: this.eyebrowsHeight,
+				eyebrowsWidth: this.eyebrowsWidth,
+
+				noseWidth: this.noseWidth,
+				noseHeight: this.noseHeight,
+				noseLength: this.noseLength,
+				noseBridge: this.noseBridge,
+				noseTip: this.noseTip,
+				noseShift: this.noseShift,
+
+				cheekboneHeight: this.cheekboneHeight,
+				cheekboneWidth: this.cheekboneWidth,
+				cheeksWidth: this.cheeksWidth,
+				lips: this.lips,
+				jawWidth: this.jawWidth,
+				jawHeight: this.jawHeight,
+				chinLength: this.chinLength,
+				chinPosition: this.chinPosition,
+				chinWidth: this.chinWidth,
+				chinShape: this.chinShape,
+				neckWidth: this.neckWidth,
+			};
+			$.post('http://character-creator/UpdateFaceOptions', JSON.stringify(arr2));
+			
+			const arr3 = {
+				hairModel: this.hairModel,
+				firstHairColor: this.firstHairColor,
+				secondHairColor: this.secondHairColor,
+				eyebrowsModel: this.eyebrowsModel,
+				eyebrowsColor: this.eyebrowsColor,
+				beardModel: this.beardModel,
+				beardColor: this.beardColor,
+				chestModel: this.chestModel,
+				chestColor: this.chestColor,
+				blushModel: this.blushModel,
+				blushColor: this.blushColor,
+				lipstickModel: this.lipstickModel,
+				lipstickColor: this.lipstickColor,
+				blemishesModel: this.blemishesModel,
+				ageingModel: this.ageingModel,
+				complexionModel: this.complexionModel,
+				sundamageModel: this.sundamageModel,
+				frecklesModel: this.frecklesModel,
+				makeupModel: this.makeupModel,
+				makeupColor: this.makeupColor,
+			};
+			$.post('http://character-creator/UpdateHeadOptions', JSON.stringify(arr3));
+		},
+		changeGender: function(newGender) {
+			this.gender = newGender;
+			$.post('http://character-creator/ChangeGender', JSON.stringify({ gender: this.gender }));
+			this.changeAppearance();
+		},
+        changeCamRotation: function() {
+            $.post('http://character-creator/cChangeHeading', JSON.stringify({ camRotation: this.camRotation }));
+        },
+		done: function() {
+            app.changeAppearance();
+
+			const arr = [
+				/* this.characterNome.trim(),
+				this.characterSobrenome.trim(), */
+				this.fathersID[this.father],
+				this.mothersID[this.mother], 
+				this.skinColor,  
+				this.shapeMix,
+			];
+			/* if (this.characterNome.trim().length < 1) return;
+			if (this.characterSobrenome.trim().length < 1) return;
+
+			if (checkName(this.characterNome.trim())) return;
+			if (checkName(this.characterSobrenome.trim())) return;*/
+
+			$.post('http://character-creator/cDoneSave');
+		}
+	}
+});
+
+app.changeAppearance();
+
+$('body').on('click', '.changeGender', function (event) {
+	var charDataGender = $(this).attr("data-value");
+	$(this).removeClass('isnotset');
+
+	$(".changeGender").each(function() {
+		if($(this).attr("data-value") != charDataGender) $(this).addClass('isnotset');
+	});
+	
+	app.changeGender(charDataGender);
+});
+
+window.addEventListener('message',function(event){
+	var item = event.data;
+	if (item.CharacterMode == true) {
+		app.OpenCharacterMode();
+	}
+	else if (item.CharacterMode == false) {
+		app.CloseCharacterMode();
+	}
+});
+
+	</script>
+
+  </body>
+</html>

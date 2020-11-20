@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>vrp_skinshop</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="theforce.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div class="loja-de-roupa" style="display: none">
+            <div class="container">
+                <div class="left-colum">
+                    <div class="submenu-item subActive" onclick="selectPart(this)" data-idpart="mascara">
+                        <div class="icon-submenu">
+                            <img style="filter: brightness(0%);" src="https://cdn.discordapp.com/attachments/646512396285902851/651526926296416304/carnival-mask-silhouette.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="mao">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651530225468833800/hand.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="relogio">
+                        <div class="icon-submenu">
+                            <img src="https://media.discordapp.net/attachments/657048253661184012/657050240087490560/relogio.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="bracelete">
+                        <div class="icon-submenu">
+                            <img src="https://i.imgur.com/AJSAXQo.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="bone">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651526169707151390/cap.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="oculos">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651526163117768714/sunglasses.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="brinco">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651526168482283548/ear-lobe-side-view-outline.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="gravata">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651529260829245440/necktie_1.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="camisa">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651526164233584650/shirt.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="jaqueta">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651527738544619539/nylon-jacket.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="calca">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651526160811032578/jeans.png">
+                        </div>
+                    </div>
+                    <div class="submenu-item" onclick="selectPart(this)" data-idpart="sapato">
+                        <div class="icon-submenu">
+                            <img src="https://cdn.discordapp.com/attachments/646512396285902851/651526369993555991/sneakers.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-colum">
+                    <header>
+                        <h1>Mascaras</h1>
+                    </header>
+                    <footer>
+                        
+                    </footer>
+                    <div class="bottom">
+                        <div class="color">
+                            <i class="fas fa-palette"></i>
+                            <div class="selectors">
+                                <i class="fas fa-angle-left"></i>
+                                <div class="line"></div>
+                                <i class="fas fa-angle-right"></i>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <span>Total</span>
+                            <strong style="float: right;color: #b34a41;padding-right: 20px;">R$ <span id="total">0</span></strong>
+                        </div>
+                        <div class="addCartbutton">
+                            <img id="payament" src="https://cdn.discordapp.com/attachments/423974115653976065/651583463152943104/2.png" height="36" width="60px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="actions">
+                <button id="leftHeading"><img src="https://cdn.discordapp.com/attachments/423974115653976065/651577590775152640/right-return-arrow.png"></button>
+                <button id="handsUp"><img src="https://cdn.discordapp.com/attachments/423974115653976065/651579176805203968/mman.png"></button>
+                <button id="rightHeading"><img src="https://cdn.discordapp.com/attachments/423974115653976065/651578633735110657/left-return-arrow.png"></button>
+            </div>
+        </div>
+        <script src="lightsaber.js"></script>
+    </body>
+</html>

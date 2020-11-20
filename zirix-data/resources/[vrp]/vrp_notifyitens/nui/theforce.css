@@ -1,0 +1,95 @@
+html {
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
+	background-color: transparent !important;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#notifyitens {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	bottom: 39px;
+}
+
+#showitem {
+	position: relative;
+	float: left;
+	width: 110px;
+	height: 110px;
+	margin-left: 10px;
+	border-radius: 3px;
+	background: rgba(0,0,0,0.5);
+}
+
+#showitem img {
+	position: absolute;
+	width: 50%;
+	height: 50%;
+	top: 15%;
+	left: 25%;
+}
+
+.quantidade {
+	position: absolute;
+	height: 10px;
+	right: 5px;
+}
+
+.quantidade p {
+	color: #a9a9a9;
+	font-size: 9px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.peso {
+	position: absolute;
+	height: 10px;
+	left: 5px;
+}
+
+.peso p {
+	color: #a9a9a9;
+	font-size: 9px;
+	font-family: 'Roboto', sans-serif;
+}
+
+#showitem b {
+	position: absolute;
+	width: 110px;
+	height: 30px;
+	bottom: 0px;
+	left: 0px;
+
+	color: #a9a9a9;
+
+	font-size: 11px;
+	font-weight: bold;
+	margin-top: 70px;
+	overflow: hidden;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	white-space: nowrap;
+
+	text-overflow: ellipsis;
+	border-radius: 0 0 5px 5px;
+	background: rgba(0,0,0,0.9);
+}
+
+p {
+	margin-top: 8px;
+}
+
+sucesso {
+	color: rgba(80,120,20,1.0);
+}
+
+negado {
+	color: rgba(160,25,25,1.0);
+}

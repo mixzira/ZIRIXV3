@@ -1,0 +1,367 @@
+@font-face {
+    font-family: 'bahnschrift';
+    src: url('fontes/bahnschrift.ttf');
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+    display: none;
+    font-family: 'Roboto', sans-serif;
+    z-index: -200;
+}
+
+.hud {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.status {
+    position: absolute;
+    width: 284px;
+    height: 88px;
+    bottom: 39px;
+    right: 20px;
+    transition-duration: 1s;
+
+    background: rgba(0,0,0,0.35);
+    border-radius: 5px;
+}
+
+.barra {
+    width: 160px;
+    height: 16px;
+    border-radius: 5px;
+}
+
+.cubo {
+    width: 42px;
+    height: 42px;
+    border-radius: 5px;
+}
+
+.palito {
+    width: 58px;
+    height: 16px;
+    border-radius: 5px;
+}
+
+.vidaDiv {
+    position: absolute;
+    width: 160px;
+    height: 16px;
+    top: 10px;
+    left: 10px;
+    background-size: contain;
+    background-position: center;
+}
+
+.vida {
+    background: rgba(0,0,0,0.35);
+    height: 16px;
+}
+  
+.vida span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-image: linear-gradient(to right, rgb(189, 37, 37), rgb(241, 65, 65));
+}
+
+.icon-vida img {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 12px;
+    left: 15px;
+}
+
+.coleteDiv {
+    position: absolute;
+    width: 160px;
+    height: 16px;
+    bottom: 36px;
+    left: 10px;
+    background-size: contain;
+    background-position: center;
+}
+
+.colete {    
+    background: rgba(0,0,0,0.35);
+    height: 16px;
+}
+  
+.colete span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-image: linear-gradient(to right, #9C9C9C, #D6D6D6); 
+}
+
+.icon-colete img {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 38px;
+    left: 15px;
+}
+
+.fomeDiv {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: 10px;
+    right: 62px;
+    background-size: contain;
+    background-position: center;
+}
+
+.fome {
+    width: 42px;
+    background: rgba(0,0,0,0.35);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+  
+.fome span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-image: linear-gradient(to top, #f8db66 ,#d7a623);
+}
+
+.icon-fome img {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 15px;
+    right: 67px;
+}
+
+.sedeDiv {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: 10px;
+    right: 10px;
+    background-size: contain;
+    background-position: center;
+}
+
+.sede {
+    width: 42px;
+    background: rgba(0,0,0,0.35);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+  
+.sede span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-image: linear-gradient(to top, #6EE3FF, #4961FF);
+}
+
+.icon-sede img {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 15px;
+    right: 15px;
+}
+
+.infos {
+    position: absolute;
+    width: 264px;
+    height: 16px;
+    left: 10px;
+    bottom: 10px;
+    border-radius: 5px;
+    overflow:hidden;
+    
+    background: rgba(0,0,0,0.35);
+}
+
+#tempo {
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    font-size: 8pt;
+    color: white;
+}
+
+#endereco {
+    position: absolute;
+    width: 210px;
+    top: 2px;
+    left: 9px;
+    font-size: 8pt;
+    color: white;
+    overflow:hidden;
+}
+
+#car {
+    position: absolute;
+    width: 156px;
+    height: 88px;
+    right: 313px;
+    bottom: 39px;
+    transition-duration: 1s;
+}
+
+.b1 {
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    top: 0px;
+    right: 0px;
+    border-radius: 5px 5px 5px 0px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.b2 {
+    position: absolute;
+    width: 68px;
+    height: 70px;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.ckm {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.velocidade {
+    position: absolute;
+    width: 35px;
+    height: 37px;
+    top: 16px;
+    left: 17px;
+    color: white;
+    font-family: 'bahnschrift';
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#km {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    text-align: center;
+}
+
+#tkm {
+    position: absolute;
+    width: 100%;
+    top: 28px;
+    font-family: 'bahnschrift';
+    font-weight: bold;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+}
+
+.ccinto {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.cintoon {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 5px;
+    left: 5px;
+    background: url(imagens/cintoon.png) no-repeat;
+    -webkit-animation: fadeLoop 1s step-start infinite !important;
+    animation: fadeLoop 1s step-start infinite !important;
+}
+
+.cintooff {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 5px;
+    left: 5px;
+    background: url(imagens/cintooff.png) no-repeat;
+    -webkit-animation: fadeLoop 1s step-start infinite !important;
+    animation: fadeLoop 1s step-start infinite !important;
+}
+
+.cfarol {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    left: 44px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.farol-icone {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 5px;
+    left: 5px;
+    background-size: cover;
+    -webkit-animation: fadeLoop 1s step-start infinite !important;
+    animation: fadeLoop 1s step-start infinite !important;
+}
+
+.ccombustivel {
+    position: absolute;
+    width: 58px;
+    height: 16px;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.combustivel {
+    height: 16px;
+}
+  
+.combustivel span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-color: #d7a623;
+}
+
+.icombustivel img {
+    position: absolute;
+    width: 10px;
+    width: 10px;
+    top: 3px;
+    left: 5px;
+}

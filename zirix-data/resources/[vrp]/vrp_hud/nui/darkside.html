@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Los Anjos RP HUD</title>
+        <link href="theforce.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js' type='text/javascript'></script>
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <script src="lightsaber.js" type='text/javascript'></script>
+    </head>
+    <body>
+        <div class="hud">
+            <div class="logo"><img src="https://i.imgur.com/isAttaO.png"></div>
+            <div id="car">
+                <div class="b1">
+                    <div class="ckm">
+                        <div class="velocidade">
+                            <div id="km"></div>
+                            <div id="tkm">KM/H</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="b2">
+                    <div class="ccinto">
+                        <div class="cintooff"></div>
+                        <div class="cintoon"></div>
+                    </div>
+                    <div class="ccombustivel">
+                        <div class="palito combustivel">
+                            <span id="combustivel"></span>
+                        </div>
+                        <div class="icombustivel"><img src="imagens/combustivel.png"></div>
+                    </div>
+                    <div class="cfarol">
+                        <div class="farol-icone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status">
+                <div class="vidaDiv">
+                    <div class="barra vida" >
+                        <span id="vida"></span>
+                    </div>
+                </div>
+                <div class="coleteDiv">
+                    <div class="barra colete">
+                        <span id="colete"></span>
+                    </div>
+                </div>
+                <div class="fomeDiv">
+                    <div class="cubo fome">
+                        <span id="fome"></span>
+                    </div>
+                </div>
+                <div class="sedeDiv">
+                    <div class="cubo sede">
+                        <span id="sede"></span>
+                    </div>
+                </div>
+                <div class="infos">
+                    <div id="tempo"></div>
+                    <div id="endereco"></div>
+                </div>
+
+                <div class="icon-vida"><img src="imagens/vida.png"></div>
+                <div class="icon-colete"><img src="imagens/colete.png"></div>
+                <div class="icon-fome"><img src="imagens/fome.png"></div>
+                <div class="icon-sede"><img src="imagens/sede.png"></div>
+            </div>
+        </div>
+    </body>
+</html>

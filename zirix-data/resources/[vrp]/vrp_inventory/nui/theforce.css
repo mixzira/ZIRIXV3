@@ -1,0 +1,393 @@
+:focus { 
+    outline: 0;
+    border: 0;
+}
+
+input{
+    border: none;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 11px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    opacity: 90%;
+    transform: translate(-50%,-50%);
+    margin: 0;
+    padding: 0;
+}
+
+::selection { background: transparent; }
+::-moz-selection { background: transparent; }
+
+#actionmenu {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+    left: 0;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+	display: none;
+    overflow: auto;
+    
+}
+
+#inventory {
+	position: absolute;
+	width: 725px;
+	height: 436px;
+	top: 50%;
+	left: 50%;
+    transform: translate(-50%,-50%);
+    
+    /* background-color: rgba( 255, 0, 0, 0.5);  DEC */
+}
+
+#inventory-title {
+    position: absolute;
+    width: 715px;
+    height: 24px;
+    font-weight: 700;
+    padding-left: 10px;
+    padding-top: 6px;
+    border-radius: 3px;
+    background-color: rgba( 0, 0, 0, 0.9);
+}
+
+
+/*=[ ITEMS ]=======================================*/
+
+#inventory-items {
+    position: absolute;
+	width: 725px;
+    height: 350px;
+    margin-top: 40px;
+    float: left;
+    overflow: auto;
+
+    /* background-color: rgba(255, 0, 234, 0.5); */
+}
+
+#inventory-slots {
+    position: absolute;
+	width: 725px;
+    height: 350px;
+    margin-top: 40px;
+    float: left;
+    overflow: hidden;
+
+    /* background-color: rgba(255, 0, 234, 0.5); */
+}
+
+/*=[ ITEM ]========================================*/
+
+.item {
+	position: relative;
+	width: 110px;
+	height: 110px;
+	float: left;
+	background-color: rgba(0,0,0,0.5);
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    -webkit-transition: background-color 0.3s linear;
+    -ms-transition: background-color 0.3s linear;
+    transition: background-color 0.3s linear;
+}
+
+.slot {
+	position: relative;
+	width: 110px;
+	height: 110px;
+	float: left;
+	background-color: rgba(0,0,0,0.5);
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.item s {
+	font-size: 9px;
+	text-decoration: none;
+	position: absolute;
+	margin: -45px 0 0 15px;
+	color: rgba(255,255,255,0.5);
+}
+
+.item.active, .item.active:hover, .item:hover {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.item.active {
+    display: none;
+}
+
+.item:hover {
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+.item.active:hover {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.hoverControl {
+	color: #fff;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#item-name {
+	position: absolute;
+	width: 110px;
+    height: 17px;
+    padding-top: 3px;
+	bottom: 0px;
+	color: #a9a9a9;
+	background: rgba(0,0,0,0.8);
+	border-radius: 0 0 3px 3px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    text-align: center;
+    font-size: 12;
+    font-weight: 900;
+}
+
+#item-amount {
+    position: absolute;
+    width: 49px;
+    top: 5px;
+    right: 5px;
+	color: rgba(255,255,255,0.5);
+	text-align: right;
+	font-size: 11px;
+	float: right;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#item-weight {
+    position: absolute;
+    width: 35px;
+    top: 5px;
+    left: 5px;
+	color: rgba(255,255,255,0.5);
+	text-align: left;
+	font-size: 9px;
+	float: left;
+}
+
+#item-icon {
+    position: absolute;
+    width: 74px;
+    height: 74px;
+    top: 10px;
+    left: 18px;
+}
+
+#item-icon img {
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+/*=[ BOTÕES ]======================================*/
+
+#inventory-buttons {
+    position: absolute;
+    width: 470px;
+    height: 44px;
+    bottom: 0px;
+    border-bottom: 2px solid rgba(66, 236, 134, 1.0);
+}
+
+#inventory-amount {
+    position: absolute;
+    width: 255px;
+    height: 44px;
+    right: 0px;
+    bottom: 0px;
+    border-bottom: 2px solid rgba(66, 236, 134, 1.0);
+}
+
+.use {
+    position: absolute;
+    width: 110px;
+    height: 21px;
+    padding-top: 9px;
+    bottom: 4px;
+    border-radius: 3px;
+    background-color: rgba( 0, 0, 0, 0.9);
+    font-size: 11;
+    font-weight: 400;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.use:hover {
+    color: rgba(0,0,0,0.8);
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+.drop {
+    position: absolute;
+    width: 110px;
+    height: 21px;
+    left: 120px;
+    padding-top: 9px;
+    bottom: 4px;
+    border-radius: 3px;
+    background-color: rgba( 0, 0, 0, 0.9);
+    font-size: 11;
+    font-weight: 400;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.drop:hover {
+    color: rgba(0,0,0,0.8);
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+.send {
+    position: absolute;
+    width: 110px;
+    height: 21px;
+    left: 240px;
+    padding-top: 9px;
+    bottom: 4px;
+    border-radius: 3px;
+    background-color: rgba( 0, 0, 0, 0.9);
+    font-size: 11;
+    font-weight: 400;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.send:hover {
+    color: rgba(0,0,0,0.8);
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+#amount {
+    position: absolute;
+    width: 110px;
+    height: 30px;
+    left: 360px;
+    padding-top: 2px;
+    bottom: 4px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 11;
+    font-weight: 400;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border: none;
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+#amount:hover {
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+input {
+    border: none;
+    text-decoration: none;
+}
+
+::placeholder {
+    border: none;
+    text-decoration: none;
+}
+
+.qtd {
+    border: none;
+    text-decoration: none;
+}
+
+.amount-bar {
+    position: absolute;
+    width: 110px;
+    height: 8px;
+    top: 22px;
+    left: 10px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.amount-bar span {
+    height: 100%;
+    border-radius: 5px;
+    display: block;
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+.amount-text {
+    position: absolute;
+    width: 110px;
+    height: 21px;
+    padding-top: 9px;
+    left: 129px;
+    bottom: 4px;
+    font-size: 11;
+    font-weight: 600;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+}
+
+.amount-text b {
+    font-weight: 900;
+    color: rgba(66, 236, 134, 1.0);
+}
+
+/*=[ SCROLL ]======================================*/
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 1px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(66, 236, 134, 1.0);
+    border-radius: 10px;
+}

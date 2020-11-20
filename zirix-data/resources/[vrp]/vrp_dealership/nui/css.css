@@ -1,0 +1,204 @@
+body,td,th { font-size: 12px; font-family: arial; color: #a9a9a9; cursor: default; vertical-align: baseline; outline: 0; line-height: 1; margin: 0; padding: 0; word-wrap: break-word; }
+a,a:link,a:visited,a:active,a:hover { font-family: arial; font-size: 12px; color: #a9a9a9; text-decoration: none; }
+div,span,applet,object,iframe,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr { border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; margin:0; padding:0; }
+:focus { outline:0; }
+img { border:none; }
+::-webkit-scrollbar { width: 0; }
+::selection { background: #333; color: #999; }
+::-moz-selection { background: #333; color: #999; }
+
+#actionmenu {
+	top: 50%;
+	left: 50%;
+	width: 900px;
+	height: 500px;
+	overflow: auto;
+	position: fixed;
+	display: none;
+	border-top: 9px solid #111;
+	border-left: 9px solid #111;
+	border-right: 9px solid #111;
+	border-bottom: 20px solid #111;
+	transform: translate(-50%,-50%);
+	border-radius:20px;
+	background: #fff;
+}
+
+button {
+	display: none;
+}
+
+.menu {
+	width: 100%;
+	height: 15px;
+	position: relative;
+	padding: 20px;
+	text-align: center;
+	background: #4e73df; 
+	border-bottom: 2px solid #f6c23e;
+}
+
+.menu a {	
+	color: #000;
+	font-family: 'Arial';
+	font-size: 12px;
+	padding: 20px;
+}
+
+.menu a:hover, .menu a:focus {
+	background: #b5b4bb;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.menu a::selection {
+	color: #b5b4bb;
+	border-radius: 5px 5px 5px 5px;
+	background: transparent;
+}
+
+#inicio {
+	width: 880px;
+	height: 500px;
+	margin: 10px;
+	float: left;
+	overflow-y: scroll;
+}
+
+.title {
+	color: #666;
+	width: 880px;	
+	float: left;
+	font-size: 20px;
+	font-weight: 700;
+	padding: 0 0 10px;
+	margin: 0 0 10px;
+	border-bottom: 1px dashed #999;
+}
+
+.model {
+	color: #333;
+	width: 880px;
+	height: 160px;
+	background: rgba(0,0,0,0.1);
+	float: left;
+	margin-bottom: 3px;
+}
+
+.imagem-carro  img {
+	width: 250px;
+	height: 150px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+}
+
+.model.active {
+	background: rgba(58,113,0,0.6);
+}
+
+.id {
+	background: rgba(0,0,0,0.1);
+	padding: 15px 0;
+	width: 60px;
+	height: 11px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+	font-weight: 700;
+	text-align: center;
+}
+
+.name {
+	padding: 15px 0 15px 15px;
+	width: 155px;
+	height: 11px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+	text-align: left;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.name2 {
+	padding: 15px 0 15px 15px;
+	width: 215px;
+	height: 11px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+	text-align: left;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.valor {
+	background: rgba(0,0,0,0.1);
+	padding: 15px 0;
+	width: 120px;
+	height: 11px;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	float: right;
+	text-align: center;
+}
+
+.malas {
+	padding: 15px 0;
+	width: 120px;
+	height: 11px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: right;
+	text-align: center;
+}
+
+.estoque {
+	background: rgba(0,0,0,0.1);
+	padding: 15px 0;
+	width: 90px;
+	height: 11px;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: right;
+	text-align: center;
+}
+
+.comprar {
+	color: #000;
+	background: #f6c23e;
+	padding: 12px 10px 11px;
+	position: absolute;
+	margin: -45px 0 0 800px;
+	font-weight: 700;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.comprar:hover {
+	background: #5d8800;
+}
+
+.vender {
+	color: #000;
+	background: #f6c23e;
+	padding: 12px 10px 11px;
+	position: absolute;
+	margin: -45px 0 0 805px;
+	font-weight: 700;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.vender:hover {
+	background: #b58c00;
+  
+}
+
+.obs {
+	color: #5b0000;
+	background: rgba(255,0,0,0.3);
+	padding: 15px;
+	margin-bottom: 20px;
+	line-height: 15px;
+	border: 1px solid rgba(90,0,0,0.2);
+}

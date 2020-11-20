@@ -1,0 +1,1097 @@
+html, body, p, button{
+	padding: 0;
+    margin: 0;
+    font-family: 'AvenirNextDemi';
+}
+
+body.active{
+	background-color: rgba(0,0,0,0.5);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+@font-face {
+    font-family: 'AvenirNextDemi';
+    src: url('fonts/AvenirNextRoundedStd-Demi.ttf');
+}
+
+@font-face {
+    font-family: 'AvenirNextMed';
+    src: url('fonts/AvenirNextRoundedStd-Med.ttf');
+}
+
+@font-face {
+    font-family: 'AvenirNextRoundedStdBold';
+    src: url('fonts/AvenirNextRoundedStd-Bold.ttf');
+}
+
+.container{
+    position: absolute;
+	height: 600px;
+	width: 900px;
+    margin:auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+body{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'AvenirNextDemi';
+    border-radius: 12px 12px 12px 12px;
+
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.box-shadow{
+	-webkit-box-shadow: 0px 0px 40px 0px rgba(224,224,224,0.5);
+	-moz-box-shadow: 0px 0px 40px 0px rgba(224,224,224,0.5);
+	box-shadow: 0px 0px 40px 0px rgba(224,224,224,0.5);
+}
+
+.cont-content{
+	background: #fff;
+	height: 100%;
+	width: 100%;
+    border-radius: 12px 12px 12px 12px;
+}
+
+#general{
+    border-radius: 12px 12px 12px 12px;  
+}
+
+.flex{
+	display: flex;
+}
+/*######################################################*/
+/* ###############       MAIN MENU       ###############*/
+/*######################################################*/
+.geral{
+    position: absolute;
+    width: 900px;
+    height: 600px;
+}
+
+.m-agua{
+    position: absolute;
+    width: 900px;
+    height: 600px;
+    background-image: url('imagens/m-agua.png');
+    background-repeat: no-repeat;
+}
+
+.top{
+    position: absolute;
+    width: 816px;
+    height: 32px;
+    top: 32px;
+    left: 42px;
+}
+
+.logo-top{
+    display: inline-block;
+    width: 107px;
+    height: 32px;
+    background-image: url('imagens/logo-top.png');
+    background-repeat: no-repeat;
+}
+
+.profile{
+    position: absolute;
+    display: inline-block;
+    width: 192px;
+    height: 32px;
+    right: 0px;
+    background-color: #45FF73;
+    border-radius: 8px;
+}
+
+.btn-sair{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 5px;
+    right: 6px;
+    background-image: url('imagens/botao-sair.png');
+    background-repeat: no-repeat;
+    transition: all .2s ease-in-out;
+}
+
+.btn-sair:hover{
+    transform: scale(1.1);
+}
+
+.btn-profile{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 5px;
+    right: 34px;
+    background-image: url('imagens/botao-perfil.png');
+    background-repeat: no-repeat;
+    transition: all .2s ease-in-out;
+}
+
+.btn-profile:hover{
+    transform: scale(1.1);
+}
+
+.txt-profile{
+    position: absolute;
+    top: 5px;
+    left: 26px;
+    color: #fff;
+}
+
+.txt-saldo{
+    position: absolute;
+    top: 46px;
+    left: 44px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.ma-saldo{
+    position: absolute;
+    width: 506px;
+    height: 297px;
+    bottom: 0px;
+    background-image: url('imagens/ma-img.png');
+    background-repeat: no-repeat;
+}
+
+.saldo{
+    position: absolute;
+    width: 506px;
+    height: 320px;
+    top: 96px;
+    right: 41px;
+    background: #45FF73;
+    color: #fff;
+    border-radius: 12px;
+}
+
+.balance{
+    position: absolute;
+    top: 66px;
+    left: 44px;
+    color: #2C2F33;
+    font-family: 'AvenirNextRoundedStdBold';
+    font-size: 40;
+}
+
+/*######################################################*/
+/* ###############       PUBLICIDADE       #############*/
+/*######################################################*/
+.publicidade{
+    position: absolute;
+    top: 96px;
+    left: 42px;
+    width: 296px;
+    height: 206px;
+}
+
+.publi-one{
+    position: absolute;
+    top: 0px;
+    width: 296px;
+    height: 92px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+    margin-bottom: 22px;
+}
+
+.txt-publi-one{
+    position: absolute;
+    top: 31px;
+    left: 34px;
+    color: #fff;
+    font-family: 'AvenirNextMed';
+    font-size: 13;
+}
+
+.ti-publi-one{
+    position: absolute;
+    top: 6px;
+    left: 34px;
+    color: #45FF73;
+    font-style: bold;
+    font-size: 18px;
+}
+
+.tag-publi-one{
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: 7px;
+    left: 8px;
+    background-image: url('imagens/tag-one.png');
+    background-repeat: no-repeat;  
+}
+
+.icone-publi-one{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 31px;
+    right: 13px;
+    background-image: url('imagens/icon-publi-one.png');
+    background-repeat: no-repeat; 
+}
+
+.publi-two{
+    position: absolute;
+    bottom: 0px;
+    width: 296px;
+    height: 92px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+}
+
+.txt-publi-two{
+    position: absolute;
+    top: 31px;
+    left: 34px;
+    color: #fff;
+    font-family: 'AvenirNextMed';
+    font-size: 13;
+}
+
+.ti-publi-two{
+    position: absolute;
+    top: 6px;
+    left: 34px;
+    color: #45FF73;
+    font-style: bold;
+    font-size: 18px;
+}
+
+.tag-publi-two{
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: 7px;
+    left: 8px;
+    background-image: url('imagens/tag-two.png');
+    background-repeat: no-repeat;  
+}
+
+.icone-publi-two{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 31px;
+    right: 13px;
+    background-image: url('imagens/icon-publi-two.png');
+    background-repeat: no-repeat; 
+}
+
+.acoes{
+    position: absolute;
+    width: 400px;
+    height: 92px;
+    right: 42px;
+    bottom: 46px;
+}
+
+.botao-pagar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 88px;
+    height: 92px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+    margin-right: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-pagar:hover{
+    transform: scale(1.1);
+}
+
+.txt-pagar{
+    position: absolute;
+    bottom: 5px;
+    left: 28px;
+    color: #fff;
+    font-style: bold;
+    font-size: 13;
+}
+
+.img-pagar{
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: 16px;
+    left: 22px;
+    background-image: url('imagens/img-pagar.png');
+    background-repeat: no-repeat;
+}
+
+.botao-depositar{
+    position: absolute;
+    top: 0px;
+    left: 104px;
+    width: 88px;
+    height: 92px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+    margin-right: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-depositar:hover{
+    transform: scale(1.1);
+}
+
+.txt-depositar{
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    color: #fff;
+    font-style: bold;
+    font-size: 13;
+}
+
+
+.img-depositar{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 14px;
+    left: 19px;
+    background-image: url('imagens/img-depositar.png');
+    background-repeat: no-repeat;
+}
+
+.botao-sacar{
+    position: absolute;
+    top: 0px;
+    left: 208px;
+    width: 88px;
+    height: 92px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+    margin-right: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-sacar:hover{
+    transform: scale(1.1);
+}
+
+.txt-sacar{
+    position: absolute;
+    bottom: 5px;
+    left: 29px;
+    color: #fff;
+    font-style: bold;
+    font-size: 13;
+}
+
+.img-sacar{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 14px;
+    left: 19px;
+    background-image: url('imagens/img-sacar.png');
+    background-repeat: no-repeat;
+}
+
+.botao-transferir{
+    position: absolute;
+    top: 0px;
+    left: 312px;
+    width: 88px;
+    height: 92px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-transferir:hover{
+    transform: scale(1.1);
+}
+
+.txt-transferir{
+    position: absolute;
+    bottom: 5px;
+    left: 17px;
+    color: #fff;
+    font-style: bold;
+    font-size: 13;
+}
+
+.img-transferir{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 14px;
+    left: 19px;
+    background-image: url('imagens/img-transferir.png');
+    background-repeat: no-repeat;
+}
+
+/*######################################################*/
+/* ###############     DEPOSITAR      ##################*/
+/*######################################################*/
+.cont-depositar{
+    position: absolute;
+    height: 600px;
+	width: 900px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.cont-form-depositar{
+    position: absolute;
+    height: 320px;
+    width: 400px;
+    margin-left: 250px;
+    margin-top: 96px;
+    background-color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.logo-depositar{
+    position: absolute;
+    width: 108px;
+    height: 50px;
+    top: 25px;
+    left: 146px;
+    background-image: url('imagens/logo-depositar.png');
+}
+
+input{
+    border: none;
+    width: 228px;
+    height: 30px;
+    color: #2C2F33;
+    font-size: 13;
+    text-decoration: none;
+    font-family: 'AvenirNextMed';
+}
+
+input:placeholder{
+    text-decoration: none;
+    color: #C5C5C5;
+}
+
+.form-depositar{
+    position: absolute;
+    width: 228px;
+    top: 145px;
+    left: 85px;
+    border: none;
+    border-bottom: 2px solid #C5C5C5;
+    transition: all .2s ease-in-out;
+}
+
+.form-depositar:hover{
+    border: none;
+    border-bottom: 2px solid #45FF73;
+}
+
+.form-depositar:hover{
+    transform: scale(1.2);
+}
+
+.btns-depositar{
+    position: absolute;
+    height: 92px;
+    width: 400px;
+    bottom: 65px;
+    left: 250px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+}
+
+.botao-retornar-depositar{
+    position: absolute;
+    width: 158px;
+    height: 26px;
+    top: 31px;
+    right: 25px;
+    border-radius: 12px;
+    border-color: #45FF73;
+    border-style: solid;
+    border-width: 2px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-retornar-depositar:hover{
+    transform: scale(1.1);
+}
+
+.text-retornar-depositar{
+    position: absolute;
+    top: 4px;
+    left: 64px;
+    font-size: 13;
+    color: #45FF73;
+}
+
+.confirmar-depositar{
+    position: absolute;
+    width: 162px;
+    height: 30px;
+    top: 31px;
+    left: 25px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.confirmar-depositar:hover{
+    transform: scale(1.1);
+}
+
+.text-confirmar-depositar{
+    position: absolute;
+    top: 7px;
+    left: 52px;
+    font-size: 13;
+    color: #2C2F33;
+}
+
+/*######################################################*/
+/* ###############     PAGAR      ######################*/
+/*######################################################*/
+.cont-pagar{
+    position: absolute;
+    height: 600px;
+	width: 900px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.cont-form-pagar{
+    position: absolute;
+    height: 320px;
+    width: 400px;
+    margin-left: 250px;
+    margin-top: 96px;
+    background-color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.logo-pagar{
+    position: absolute;
+    width: 89px;
+    height: 49px;
+    top: 25px;
+    left: 146px;
+    background-image: url('imagens/logo-pagar.png');
+}
+
+input{
+    border: none;
+    width: 228px;
+    height: 30px;
+    color: #2C2F33;
+    font-size: 13;
+    text-decoration: none;
+    font-family: 'AvenirNextMed';
+}
+
+input:placeholder{
+    text-decoration: none;
+    color: #C5C5C5;
+}
+
+.saldo-multas {
+    position: absolute;
+    top: 125px;
+    left: 86px;
+    font-size: 13;
+    color: #C5C5C5;
+}
+
+.form-pagar{
+    position: absolute;
+    width: 228px;
+    top: 145px;
+    left: 85px;
+    border: none;
+    border-bottom: 2px solid #C5C5C5;
+    transition: all .2s ease-in-out;
+}
+
+.form-pagar:hover{
+    border: none;
+    border-bottom: 2px solid #45FF73;
+}
+
+.form-pagar:hover{
+    transform: scale(1.2);
+}
+
+.btns-pagar{
+    position: absolute;
+    height: 92px;
+    width: 400px;
+    bottom: 65px;
+    left: 250px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+}
+
+.botao-retornar-pagar{
+    position: absolute;
+    width: 158px;
+    height: 26px;
+    top: 31px;
+    right: 25px;
+    border-radius: 12px;
+    border-color: #45FF73;
+    border-style: solid;
+    border-width: 2px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-retornar-pagar:hover{
+    transform: scale(1.1);
+}
+
+.text-retornar-pagar{
+    position: absolute;
+    top: 4px;
+    left: 64px;
+    font-size: 13;
+    color: #45FF73;
+}
+
+.confirmar-pagar{
+    position: absolute;
+    width: 162px;
+    height: 30px;
+    top: 31px;
+    left: 25px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.confirmar-pagar:hover{
+    transform: scale(1.1);
+}
+
+.text-confirmar-pagar{
+    position: absolute;
+    top: 7px;
+    left: 52px;
+    font-size: 13;
+    color: #2C2F33;
+}
+
+
+/*######################################################*/
+/* ###############     SACAR      ######################*/
+/*######################################################*/
+.cont-sacar{
+    position: absolute;
+    height: 600px;
+	width: 900px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.cont-form-sacar{
+    position: absolute;
+    height: 320px;
+    width: 400px;
+    margin-left: 250px;
+    margin-top: 96px;
+    background-color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.logo-sacar{
+    position: absolute;
+    width: 89px;
+    height: 49px;
+    top: 25px;
+    left: 146px;
+    background-image: url('imagens/logo-sacar.png');
+}
+
+input{
+    border: none;
+    width: 228px;
+    height: 30px;
+    color: #2C2F33;
+    font-size: 13;
+    text-decoration: none;
+    font-family: 'AvenirNextMed';
+}
+
+input:placeholder{
+    text-decoration: none;
+    color: #C5C5C5;
+}
+
+.form-sacar{
+    position: absolute;
+    width: 228px;
+    top: 145px;
+    left: 85px;
+    border: none;
+    border-bottom: 2px solid #C5C5C5;
+    transition: all .2s ease-in-out;
+}
+
+.form-sacar:hover{
+    border: none;
+    border-bottom: 2px solid #45FF73;
+}
+
+.form-sacar:hover{
+    transform: scale(1.2);
+}
+
+.btns-sacar{
+    position: absolute;
+    height: 92px;
+    width: 400px;
+    bottom: 65px;
+    left: 250px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+}
+
+.botao-retornar-sacar{
+    position: absolute;
+    width: 158px;
+    height: 26px;
+    top: 31px;
+    right: 25px;
+    border-radius: 12px;
+    border-color: #45FF73;
+    border-style: solid;
+    border-width: 2px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-retornar-sacar:hover{
+    transform: scale(1.1);
+}
+
+.text-retornar-sacar{
+    position: absolute;
+    top: 4px;
+    left: 64px;
+    font-size: 13;
+    color: #45FF73;
+}
+
+.confirmar-sacar{
+    position: absolute;
+    width: 162px;
+    height: 30px;
+    top: 31px;
+    left: 25px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.confirmar-sacar:hover{
+    transform: scale(1.1);
+}
+
+.text-confirmar-sacar{
+    position: absolute;
+    top: 7px;
+    left: 52px;
+    font-size: 13;
+    color: #2C2F33;
+}
+
+/*######################################################*/
+/* ###############     TRANSFERIR      #################*/
+/*######################################################*/
+.cont-transferir{
+    position: absolute;
+    height: 600px;
+	width: 900px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.cont-form-transferir{
+    position: absolute;
+    height: 320px;
+    width: 400px;
+    margin-left: 250px;
+    margin-top: 96px;
+    background-color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.logo-transferir{
+    position: absolute;
+    width: 108px;
+    height: 47px;
+    top: 25px;
+    left: 146px;
+    background-image: url('imagens/logo-transferir.png');
+}
+
+input{
+    border: none;
+    width: 228px;
+    height: 30px;
+    color: #2C2F33;
+    font-size: 13;
+    text-decoration: none;
+    font-family: 'AvenirNextMed';
+}
+
+input:placeholder{
+    text-decoration: none;
+    color: #C5C5C5;
+}
+
+.form-transferir{
+    position: absolute;
+    width: 228px;
+    top: 131px;
+    left: 85px;
+    border: none;
+    border-bottom: 2px solid #C5C5C5;
+    transition: all .2s ease-in-out;
+}
+
+.form-transferir-to{
+    position: absolute;
+    width: 228px;
+    left: 85px;
+    top: 203px;
+    border: none;
+    border-bottom: 2px solid #C5C5C5;
+    transition: all .2s ease-in-out;
+}
+
+.form-transferir:hover{
+    border: none;
+    border-bottom: 2px solid #45FF73;
+    transform: scale(1.2);
+}
+
+.form-transferir-to:hover{
+    border: none;
+    border-bottom: 2px solid #45FF73;
+    transform: scale(1.2);
+}
+
+.btns-transferir{
+    position: absolute;
+    height: 92px;
+    width: 400px;
+    bottom: 65px;
+    left: 250px;
+    background-color: #2C2F33;
+    border-radius: 12px;
+}
+
+.botao-retornar-transferir{
+    position: absolute;
+    width: 158px;
+    height: 26px;
+    top: 31px;
+    right: 25px;
+    border-radius: 12px;
+    border-color: #45FF73;
+    border-style: solid;
+    border-width: 2px;
+    transition: all .2s ease-in-out;
+}
+
+.botao-retornar-transferir:hover{
+    transform: scale(1.1);
+}
+
+.text-retornar-transferir{
+    position: absolute;
+    top: 4px;
+    left: 64px;
+    font-size: 13;
+    color: #45FF73;
+}
+
+.confirmar-transferir{
+    position: absolute;
+    width: 162px;
+    height: 30px;
+    top: 31px;
+    left: 25px;
+    background-color: #45FF73;
+    border-radius: 12px;
+    transition: all .2s ease-in-out;
+}
+
+.confirmar-transferir:hover{
+    transform: scale(1.1);
+}
+
+.text-confirmar-transferir{
+    position: absolute;
+    top: 7px;
+    left: 52px;
+    font-size: 13;
+    color: #2C2F33;
+}
+
+/*######################################################*/
+/* ###############        LOGIN        #################*/
+/*######################################################*/
+.cont-waiting{
+	height: 100%;
+	width: 100%;
+	position: relative;
+    overflow: hidden;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.logo-inicio{
+    position: absolute;
+    height: 75px;
+    width: 193px;
+    top: 195px;
+    left: 354px;
+    background-image: url('imagens/logo.png');
+}
+
+.login{
+    position: absolute;
+    width: 400px;
+    height: 150px;
+    left: 250px;
+    top: 309px;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.login h1{
+    position: absolute;
+    top: 20px;
+    left: 103px;
+    font-size: 18px;
+    color: #3c3f41;
+    font-family: 'AvenirNextDemi';
+}
+
+.botao-login{
+    position: absolute;
+    top: 71px;
+    left: 50px;
+    width: 300px;
+    height: 30px;
+    color: #fff;
+    text-align: center;
+    background-color: #3c3f41;
+
+    border-radius: 8px;
+    -webkit-box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.15);
+    box-shadow: -2px 2px 5px 0px rgba(0,0,0,0.15);
+
+    cursor: pointer;
+    transition: .5s;
+}
+
+.botao-login a{
+    position: absolute;
+    top: 5px;
+    left: 104px;
+    color: #fff;
+    outline: none;
+}
+
+.botao-login:hover{
+    color: #fff;
+    background-image: linear-gradient(120deg,#39D460,#45FF73);
+    transition: .10s;
+}
+
+.usuario-login{
+    position: absolute;
+    width: 177px;
+    height: 18px;
+    bottom: 17px;
+    right: 35px;
+    font-size: 14px;
+    color: #2C2F33;
+}
+
+.usuario-login img{
+    position: absolute;
+    margin-left: 8px;
+    top: 1px;
+}
+
+.bg-login{
+    position: absolute;
+    width: 900px;
+    height: 600px;
+}
+
+.marca-dagua{
+    position: absolute;
+    width: 900px;
+    height: 600px;
+    background-image: url('imagens/01.png');
+}
+
+.background-login{
+    position: absolute;
+    width: 900px;
+    height: 600px;
+    background-image: linear-gradient(to right,#39D460,#45FF73);
+    border-radius: 12px;
+}
+
+#result{
+    position: absolute;
+    top: 20px;
+    width: 820px;
+    padding: 25px 40px;
+    font-size: 16px;
+    color: white;
+}
+
+.alert-green{
+	background: #7cb732;
+}
+
+.alert-orange{
+	background: #e5873b;
+}

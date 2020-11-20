@@ -1,0 +1,92 @@
+html {
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
+	background-color: transparent !important;
+}
+
+body {
+	background-color: transparent !important;
+}
+
+#notifications {
+	right: 20px;
+	width: 400px;
+	top: 80px;
+	font-size: 12px;
+	color: rgba(255,255,255,0.6);
+	position: absolute !important;
+	font-family: Arial,Helvetica,sans-serif;
+	display: flex;
+	flex-flow: row-reverse wrap;
+}
+
+#notifications b {
+	color: rgba(255,255,255,0.8);
+}
+
+#sucesso {
+	min-width: 50%;
+	margin: 0 0 10px;
+	border-radius: 5px;
+	padding: 7px 15px;
+ 	line-height: 20px;
+	/* background-color: rgba(80,120,20,0.7); */
+	background-color: rgba(80,120,20,0.7);
+}
+
+#bom {
+	min-width: 50%;
+	margin: 0 0 10px;
+	border-radius: 5px;
+	padding: 7px 15px;
+ 	line-height: 20px;
+	/* background-color: rgba(80,120,20,0.7); */
+	background-color: rgba(80,120,20,0.7);
+}
+
+#negado {
+	min-width: 50%;
+	margin: 0 0 10px;
+	border-radius: 5px;
+	padding: 7px 15px;
+ 	line-height: 20px;
+	/* background-color: rgba(160,25,25,0.7); */
+	background-color: rgba(160,25,25,0.7);
+}
+
+#aviso {
+	min-width: 50%;
+	margin: 0 0 10px;
+	border-radius: 5px;
+	padding: 7px 15px;
+ 	line-height: 20px;
+	/* background-color: rgba(130,90,20,0.7); */
+	background-color: rgba(130,90,20,0.7);
+}
+
+#importante {
+	min-width: 50%;
+	 margin: 0 0 10px;
+	 border-radius: 5px;
+	padding: 7px 15px;
+ 	line-height: 20px;
+	/* background-color: rgba(20,70,120,0.7); */
+	background-color: rgba(20,70,120,0.7);
+}
+
+#retorno {
+	min-width: 50%;
+	 margin: 0 0 10px;
+	 border-radius: 5px;
+	padding: 7px 15px;
+ 	line-height: 20px;
+	background-color: rgba(255, 145, 0, 0.582);
+}
+
+code {
+	color: rgba(255,200,200,0.7);
+	background: rgba(255,0,0,0.8);
+	padding: 1px 4px;
+	border-radius: 3px;
+	margin-right: 4px;
+}
