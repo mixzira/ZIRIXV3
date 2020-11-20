@@ -1,0 +1,8 @@
+build/*
+build/**/*
+diamond-data/cache/**/*
+diamond-data/cache/*
+diamond-data/resources/[sistema]/[builders]/webpack/**/*
+diamond-data/resources/[sistema]/[builders]/webpack/*
+diamond-data/resources/[sistema]/[builders]/yarn/**/*
+diamond-data/resources/[sistema]/[builders]/yarn/*
