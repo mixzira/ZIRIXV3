@@ -1,6 +1,12 @@
+
+--[ THREADS ]-----------------------------------------------------------------------
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
+
+		drawTxt("ZIRIX (v3.0.1) | WORKING IN PROGRESS",4,0.5,0.92,0.35,255,255,255,180)
+
 		N_0xf4f2c0d4ee209e20()
 		N_0x4757f00bc6323cfe(GetHashKey("WEAPON_UNARMED"),1.6)
 		N_0x4757f00bc6323cfe(GetHashKey("WEAPON_KNIFE"),0.3)
@@ -98,3 +104,16 @@ Citizen.CreateThread(function()
 		DisablePlayerVehicleRewards(PlayerId())
 	end
 end)
+
+--[ FUNCTIONS ]---------------------------------------------------------------------
+
+function drawTxt(text,font,x,y,scale,r,g,b,a)
+	SetTextFont(font)
+	SetTextScale(scale,scale)
+	SetTextColour(r,g,b,a)
+	SetTextOutline()
+	SetTextCentre(1)
+	SetTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawText(x,y)
+end
