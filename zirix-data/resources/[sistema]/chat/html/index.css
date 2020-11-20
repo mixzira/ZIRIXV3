@@ -1,0 +1,98 @@
+.color-0 { color: #fff; } /** branco **/
+.color-1 { color: #8bcb00; } /** verde **/
+.color-2 { color: #DADADA; opacity: 0.50; font-size: 13px; } /** cinza opaco fraco **/
+.color-3 { color: #DADADA; opacity: 0.80; font-size: 13px; } /** cinza opaco forte **/
+.color-4 { color: #DADADA; opacity: 0.30; font-size: 13px; }
+.color-5 { color: #8bcb00; font-weight: 700; }
+.color-6 {}
+.color-7 {}
+.color-8 { color: #333; font-size: 18px; margin-left: 3px; } /** preto carta **/
+.color-9 { color: #ff0000; font-size: 18px; margin-left: 3px; } /** vermelho carta **/
+
+* {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	word-wrap: break-word;
+	color: #fff;
+	text-shadow: 1px 1px rgba(0,0,0,0.6);
+}
+
+.no-grow {
+	flex-grow: 0;
+}
+
+em {
+	font-style: normal;
+}
+
+#app {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.chat-window {
+	position: absolute;
+	margin: 40px 0 0 35px;
+	width: 40%;
+	height: 250px;
+}
+
+.chat-messages {
+	position: relative;
+	height: 95%;
+	overflow: hidden;
+}
+
+.chat-input {
+	position: absolute;
+	top: 270px;
+	left: 15px;
+	width: 40%;
+	box-sizing: border-box;
+}
+
+.prefix {
+	color: #fff;
+	position: absolute;
+	margin-top: 25px;
+	font-weight: 700;
+	left: 11px;
+}
+
+textarea {
+	background: transparent;
+	display: block;
+	box-sizing: border-box;
+	padding: 25px 0 0 65px;
+	color: #fff;
+	width: 100%;
+	border: 0;
+	overflow: hidden;
+}
+
+textarea:focus, input:focus {
+	outline: none;
+}
+
+.msg {
+	width: 100%;
+	line-height: 25px;
+}
+
+.multiline {
+	white-space: pre-line;
+}
+
+.help {
+  color: #b0bbbd;
+}
+
+.disabled {
+  color: #b0bbbd;
+}
+
+.hidden {
+  display: none;
+}
