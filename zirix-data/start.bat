@@ -1,7 +1,7 @@
 @echo off
 
 echo ===-------------------------------===
-echo     DIAMOND CITY (0.0.1)
+echo     ZIRIX V3 (3.0.1)
 echo     Developed by: ZIRAFLIX
 echo     Discord: discord.gg/ziraflix
 echo     Contact: contato@ziraflix.com
