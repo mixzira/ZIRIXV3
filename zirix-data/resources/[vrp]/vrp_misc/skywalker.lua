@@ -10,6 +10,11 @@ Tunnel.bindInterface("vrp_misc",misc)
 
 --[ VARIABLES ]-------------------------------------------------------------------------------------
 
+SetConvarServerInfo("tags", "zirix, ziraflix")
+SetConvarServerInfo("DevelopedBy", "ZIRAFLIX")
+SetConvarServerInfo("Discord", "discord.gg/ziraflix")
+SetConvarServerInfo("Website", "www.ziraflix.com")
+
 local cooldown = {}
 
 local damageItens = {
