@@ -69,6 +69,15 @@ function src.setEntityHeading(h)
 	SetEntityHeading(PlayerPedId(),h)
 end
 
+function src.inVehicle(source)
+	local ped = PlayerPedId(source)
+	if IsPedInAnyVehicle(ped) then
+		return true
+	else
+		return false
+	end
+end
+
 --[ TOGGLECARRY ]------------------------------------------------------------------------------------------------------------------------
 
 local uCarry = nil

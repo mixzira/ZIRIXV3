@@ -50,6 +50,14 @@ function tvRP.isInVehicle()
 	return IsPedSittingInAnyVehicle(PlayerPedId())
 end
 
+function tvRP.InVehicle()
+	local ped = GetPlayerPed(i)
+	if IsPedInAnyVehicle(ped) then
+		return true
+	end
+	return false
+end
+
 function tvRP.GetVehicleSeat()
     return GetPedInVehicleSeat(GetVehiclePedIsUsing(PlayerPedId()),-1) == PlayerPedId()
 end

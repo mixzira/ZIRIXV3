@@ -83,6 +83,8 @@ img {
     margin-top: 40px;
     float: left;
     overflow: auto;
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 3px;
 }
 
 #inventory-slots {
@@ -102,6 +104,8 @@ img {
     margin-top: 40px;
     float: left;
     overflow: auto;
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 3px;
 }
 
 #nuinventory-slots {

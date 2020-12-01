@@ -12,6 +12,7 @@ vCLIENT = Tunnel.getInterface('vrp_inspect')
 --[ VARIABLES ]-------------------------------------------------------------------------------------
 
 local opened = {}
+local plunder = false
 
 --[ INSPECT ]---------------------------------------------------------------------------------------
 
@@ -23,9 +24,9 @@ RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 		if vRPclient.getHealth(source) >= 102 then
 			local nplayer = vRPclient.getNearestPlayer(source,2)
 			if nplayer then
-				if vRPclient.getHealth(nplayer) >= 102 then
-					local nuser_id = vRP.getUserId(nplayer)
-					local identitynu = vRP.getUserIdentity(nuser_id)
+				local nuser_id = vRP.getUserId(nplayer)
+				local identitynu = vRP.getUserIdentity(nuser_id)
+				if vRPclient.getHealth(nplayer) >= 102 and not vCLIENT.inVehicle(nplayer) and not vCLIENT.inVehicle(source) then
 					if vRP.hasPermission(user_id,'policia.permissao') then
 						vRPclient._playAnim(source,true,{{config.inspectAnim[1],config.inspectAnim[2]}},true)
 						vRPclient._playAnim(nplayer,true,{{config.nuInspectAnim[1],config.nuInspectAnim[2]}},true)
@@ -37,6 +38,7 @@ RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 								vRP.giveInventoryItem(parseInt(nuser_id),'wammo|'..k,parseInt(v.ammo))
 							end
 						end
+						vCLIENT.toggleCarry(nplayer,source)
 						PerformHttpRequest(config.webhookInspect, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE REVISTAR:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀', thumbnail = {url = config.webhookIcon}, fields = {{name = '**QUEM ESTÁ REVISTANDO:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**QUEM ESTÁ SENDO REVISTADO:**', value = '**'..identitynu.name..' '..identitynu.firstname..'** [**'..nuser_id..'**]\n⠀⠀'}, {name = '**LOCAL: '..tD(x)..', '..tD(y)..', '..tD(z)..'**', value = '⠀'}}, footer = {text = config.webhookBottom..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 						opened[parseInt(user_id)] = parseInt(nuser_id)
 						vCLIENT.openInspect(source)
@@ -54,6 +56,7 @@ RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 									vRP.giveInventoryItem(parseInt(nuser_id),'wammo|'..k,parseInt(v.ammo))
 								end
 							end
+							vCLIENT.toggleCarry(nplayer,source)
 							PerformHttpRequest(config.webhookInspect, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE REVISTAR:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀', thumbnail = {url = config.webhookIcon}, fields = {{name = '**QUEM ESTÁ REVISTANDO:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**QUEM ESTÁ SENDO REVISTADO:**', value = '**'..identitynu.name..' '..identitynu.firstname..'** [**'..nuser_id..'**]\n⠀⠀'}, {name = '**LOCAL: '..tD(x)..', '..tD(y)..', '..tD(z)..'**', value = '⠀'}}, footer = {text = config.webhookBottom..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 							opened[parseInt(user_id)] = parseInt(nuser_id)
 							vCLIENT.openInspect(source)
@@ -74,7 +77,7 @@ RegisterCommand(config.plunderCommand,function(source,args,rawCommand)
 	local identity = vRP.getUserIdentity(user_id)
 	local x,y,z = vRPclient.getPosition(source)
 	if user_id then
-		if vRPclient.getHealth(source) >= 102 then
+		if vRPclient.getHealth(source) >= 102 and not vCLIENT.inVehicle(source) then
 			local nplayer = vRPclient.getNearestPlayer(source,2)
 			if nplayer then
 				local nuser_id = vRP.getUserId(nplayer)
@@ -92,6 +95,7 @@ RegisterCommand(config.plunderCommand,function(source,args,rawCommand)
 					PerformHttpRequest(config.webhookPlunder, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE SAQUEAR:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀', thumbnail = {url = config.webhookIcon}, fields = {{name = '**QUEM ESTÁ SAQUEANDO:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**QUEM ESTÁ SENDO SAQUEADO:**', value = '**'..identitynu.name..' '..identitynu.firstname..'** [**'..nuser_id..'**]\n⠀⠀'}, {name = '**LOCAL: '..tD(x)..', '..tD(y)..', '..tD(z)..'**', value = '⠀'}}, footer = {text = config.webhookBottom..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 					opened[parseInt(user_id)] = parseInt(nuser_id)
 					vCLIENT.openInspect(source)
+					plunder = true
 				else
 					TriggerClientEvent('Notify',source,'negado','Essa pessoa não está em coma.',5000)
 				end
@@ -139,6 +143,7 @@ function src.storeItem(itemName,amount)
 		local user_id = vRP.getUserId(source)
 		local nsource = vRP.getUserSource(parseInt(opened[user_id]))
 		local identity = vRP.getUserIdentity(user_id)
+		local nplayer = vRPclient.getNearestPlayer(source,2)
 		local nuser_id = vRP.getUserId(nsource)
 		local identitynu = vRP.getUserIdentity(nuser_id)
 		local x,y,z = vRPclient.getPosition(source)
@@ -148,6 +153,10 @@ function src.storeItem(itemName,amount)
 				if vRP.getInventoryWeight(parseInt(opened[user_id]))+vRP.getItemWeight(itemName)*parseInt(amount) <= vRP.getInventoryMaxWeight(parseInt(opened[user_id])) then
 					if vRP.tryGetInventoryItem(parseInt(user_id),itemName,parseInt(amount)) then
 						vRP.giveInventoryItem(parseInt(opened[user_id]),itemName,parseInt(amount))
+
+						TriggerClientEvent("itensNotify",source,"sucesso","Enviou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+						TriggerClientEvent("itensNotify",nplayer,"sucesso","Adicionou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+
 						PerformHttpRequest(config.webhookSend, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE ITEM ENVIADO VIA REVISTAR/SAQUEAR:⠀\n⠀', thumbnail = {url = config.webhookIcon}, fields = {{name = '**QUEM ENVIOU:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**ITEM ENVIADO:**', value = '[ **Item: '..itemName..'** ][ **Quantidade: '..vRP.format(parseInt(amount))..'** ]'}, {name = '**QUEM RECEBEU:**', value = '**'..identitynu.name..' '..identitynu.firstname..'** [**'..nuser_id..'**]\n⠀⠀'}, {name = '**LOCAL: '..tD(x)..', '..tD(y)..', '..tD(z)..'**', value = '⠀'}}, footer = {text = config.webhookBottom..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 						TriggerClientEvent('vrp_inspect:Update',source,'updateChest')
 					end
@@ -170,6 +179,7 @@ function src.takeItem(itemName,amount)
 		local user_id = vRP.getUserId(source)
 		local nsource = vRP.getUserSource(parseInt(opened[user_id]))
 		local identity = vRP.getUserIdentity(user_id)
+		local nplayer = vRPclient.getNearestPlayer(source,2)
 		local nuser_id = vRP.getUserId(nsource)
 		local identitynu = vRP.getUserIdentity(nuser_id)
 		local x,y,z = vRPclient.getPosition(source)
@@ -178,6 +188,10 @@ function src.takeItem(itemName,amount)
 				if vRP.getInventoryWeight(parseInt(user_id))+vRP.getItemWeight(itemName)*parseInt(amount) <= vRP.getInventoryMaxWeight(parseInt(user_id)) then
 					if vRP.tryGetInventoryItem(parseInt(opened[user_id]),itemName,parseInt(amount)) then
 						vRP.giveInventoryItem(parseInt(user_id),itemName,parseInt(amount))
+
+						TriggerClientEvent("itensNotify",source,"sucesso","Pegou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+						TriggerClientEvent("itensNotify",nplayer,"sucesso","Subtraiu",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+
 						PerformHttpRequest(config.webhookTake, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE ITEM PEGADO VIA REVISTAR/SAQUEAR:⠀⠀\n⠀', thumbnail = {url = config.webhookBottom}, fields = {{name = '**QUEM ENVIOU:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**ITEM ENVIADO:**', value = '[ **Item: '..itemName..'** ][ **Quantidade: '..vRP.format(parseInt(amount))..'** ]'}, { name = '**QUEM RECEBEU:**', value = '**'..identitynu.name..' '..identitynu.firstname..'** [**'..nuser_id..'**]\n⠀⠀'}, {name = '**LOCAL: '..tD(x)..', '..tD(y)..', '..tD(z)..'**', value = '⠀'}}, footer = {text = config.webhookBottom..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 						TriggerClientEvent('vrp_inspect:Update',source,'updateChest')
 					end
@@ -198,13 +212,23 @@ function src.resetInspect()
 	local user_id = vRP.getUserId(source)
 	if user_id and opened[parseInt(user_id)] then
 		local nplayer = vRP.getUserSource(parseInt(opened[parseInt(user_id)]))
-		
-		if nplayer then
-			TriggerClientEvent('cancelando',nplayer,false)
-		end
+		if plunder then
+			if nplayer then
+				TriggerClientEvent('cancelando',nplayer,false)
+			end
 
-		opened[parseInt(user_id)] = nil
-		vRPclient._stopAnim(source,false)
+			opened[parseInt(user_id)] = nil
+			vRPclient._stopAnim(source,false)
+		else
+			if nplayer then
+				vCLIENT.toggleCarry(nplayer,source)
+				TriggerClientEvent('cancelando',nplayer,false)
+			end
+
+			opened[parseInt(user_id)] = nil
+			vRPclient._stopAnim(source,false)
+			vRPclient._stopAnim(nplayer,false)
+		end
 	end
 end
 
