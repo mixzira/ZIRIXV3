@@ -1,25 +1,27 @@
 fx_version 'adamant'
 game 'gta5'
 
-ui_page "nui/index.html"
+ui_page 'nui/index.html'
 
 client_scripts {
-	"@vrp/lib/utils.lua",
-	"hansolo/*.lua"
+	'@vrp/lib/utils.lua',
+	'config/config.lua',
+	'hansolo/*.lua'
 }
 
 server_scripts {
-	"@vrp/lib/utils.lua",
-	"skywalker.lua"
+	'@vrp/lib/utils.lua',
+	'config/config.lua',
+	'skywalker.lua'
 }
 
 files {
-    "nui/*.html",
-	"nui/*.js",
-	"nui/*.png",
-	"nui/*.css",
-	"nui/*.js",
-    "nui/**/*.css",
-    "nui/**/*.png",
-    "nui/**/*"
+    'nui/*.html',
+	'nui/*.js',
+	'nui/*.png',
+	'nui/*.css',
+	'nui/*.js',
+    'nui/**/*.css',
+    'nui/**/*.png',
+    'nui/**/*'
 }

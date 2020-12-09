@@ -237,15 +237,16 @@
 		</div>
 
         <div class="inventory inv_right">
-            <!-- <div class="inventory_head">
+            <div class="inventory_head">
                 <div class="inventory_head_left">
                     <span>Identidade</span>
                     <div style="display: inline-flex;">
                         <input type="text" v-model="characterNome" @input="changeAppearance" placeholder="Nome" style="width:120px; text-align: center; border-radius: 15px; border: 0; padding: 5px; margin-bottom:5px; margin-right:2px;">
                         <input type="text" v-model="characterSobrenome" @input="changeAppearance" placeholder="Sobrenome" style="width:120px; text-align: center; border-radius: 15px; border: 0; padding: 5px; margin-bottom:5px; margin-right:2px;">
+                        <input type="text" v-model="characterIdade" @input="changeAppearance" placeholder="idade" style="width:60px; text-align: center; border-radius: 15px; border: 0; padding: 5px; margin-bottom:5px; margin-right:2px;">
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="inventory_head">
                 <div class="inventory_head_left">
                     <span>Personagem</span>
@@ -444,8 +445,9 @@ const app = new Vue({
 	el: '#app',
 	data: {
 		CharacterMode: false,
-		/* characterNome: "",
-		characterSobrenome: "", */
+		characterNome: "",
+        characterSobrenome: "",
+        characterIdade: 0,
 		gender: 0,
 		father: 0,
 		mother: 0,
@@ -507,8 +509,9 @@ const app = new Vue({
 		},
 		changeAppearance: function() {
 			const arr1 = {
-				/* characterNome: this.characterNome.trim(),
-				characterSobrenome: this.characterSobrenome.trim(), */
+				characterNome: this.characterNome.trim(),
+                characterSobrenome: this.characterSobrenome.trim(),
+                characterIdade: this.characterIdade,
 				fathersID: this.fathersID[this.father],
 				mothersID: this.mothersID[this.mother], 
 				skinColor: this.skinColor,
@@ -579,18 +582,22 @@ const app = new Vue({
             app.changeAppearance();
 
 			const arr = [
-				/* this.characterNome.trim(),
-				this.characterSobrenome.trim(), */
+				this.characterNome.trim(),
+                this.characterSobrenome.trim(),
+                this.characterIdade,
 				this.fathersID[this.father],
-				this.mothersID[this.mother], 
+				this.mothersID[this.mother],
 				this.skinColor,  
 				this.shapeMix,
-			];
-			/* if (this.characterNome.trim().length < 1) return;
-			if (this.characterSobrenome.trim().length < 1) return;
+            ];
+            
+			if (this.characterNome.trim().length < 1) return;
+            if (this.characterSobrenome.trim().length < 1) return;
+            if (this.characterIdade < 18) return;
+            if (this.characterIdade > 90) return;
 
 			if (checkName(this.characterNome.trim())) return;
-			if (checkName(this.characterSobrenome.trim())) return;*/
+            if (checkName(this.characterSobrenome.trim())) return;
 
 			$.post('http://character-creator/cDoneSave');
 		}

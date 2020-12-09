@@ -6,7 +6,13 @@ contact 'E-mail: mixzira@outlook.com.br - Discord: MixZira#0001'
 version '1.0.0'
 
 client_scripts {
+    '@vrp/lib/utils.lua',
     'hansolo/*'
+}
+
+server_scripts {
+    '@vrp/lib/utils.lua',
+    'skywalker.lua'
 }
 
 files {
