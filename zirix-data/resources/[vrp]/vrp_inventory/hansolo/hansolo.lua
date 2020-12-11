@@ -120,9 +120,9 @@ end)
 --[ INVENTORY ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestInventory",function(data,cb)
-	local inventario,peso,maxpeso = vRPNserver.Inventory()
+	local inventario,peso,maxpeso,slots = vRPNserver.Inventory()
 	if inventario then
-		cb({ inventario = inventario, peso = peso, maxpeso = maxpeso })
+		cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots })
 	end
 end)
 

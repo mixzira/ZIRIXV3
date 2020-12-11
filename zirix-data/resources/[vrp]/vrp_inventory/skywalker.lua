@@ -24,15 +24,68 @@ local blips = {}
 function vRPN.Inventory()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	local data = vRP.getUserDataTable(user_id)
-	local inventory = {}
-	if data and data.inventory then
-		for k,v in pairs(data.inventory) do
-			if vRP.itemBodyList(k) then
-				table.insert(inventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, type = vRP.itemTypeList(k), peso = vRP.getItemWeight(k) })
+
+	if user_id then
+		local data = vRP.getUserDataTable(user_id)
+		local inventory = {}
+
+		if data and data.inventory then
+			local tSlot = vRPN.verifySlots(user_id)
+			
+			if tSlot ~= nil then
+				tSlot = tSlot
+			else
+				tSlot = 11
 			end
+
+			for k,v in pairs(data.inventory) do
+				tSlot = tSlot - 1
+				if vRP.itemBodyList(k) then
+					if tSlot >= 0 then
+						table.insert(inventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, type = vRP.itemTypeList(k), peso = vRP.getItemWeight(k) })
+					end
+				end
+			end
+
+			return inventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id),tSlot
 		end
-		return inventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id)
+
+	end
+end
+
+function vRPN.verifySlots(user_id)
+	if vRP.getExp(user_id,"physical","strength") == 1900 then -- 90Kg
+		return 30
+	elseif vRP.getExp(user_id,"physical","strength") == 1320 then -- 75Kg
+		return 20
+	elseif vRP.getExp(user_id,"physical","strength") == 670 then -- 51Kg
+		return 12
+	elseif vRP.getExp(user_id,"physical","strength") == 20 then -- 6Kg
+		return 6
+	end
+end
+
+function vRPN.getRemaingSlots(user_id)
+	local tSlot = vRPN.verifySlots(user_id)
+
+	if tSlot ~= nil then
+		tSlot = tSlot
+	else
+		tSlot = 11
+	end
+
+	for k,v in pairs(vRP.getInventory(user_id)) do
+		tSlot = tSlot - 1
+	end
+
+	return tSlot
+end
+
+function vRPN.haveMoreSlots(user_id)
+	if vRPN.getRemaingSlots(user_id) > 0 then
+		return true
+	else
+		return false
 	end
 end
 

@@ -74,7 +74,6 @@ img {
     margin-top: 40px;
     float: left;
     overflow: auto;
-    background-color: rgba( 0, 0, 0, 0.15);
     border-radius: 3px;
     /* background-color: rgba(255, 0, 234, 0.5); */
 }

@@ -129,14 +129,24 @@ const updateInventory = () => {
 
 		$('#inventory-items').html(`
 			${nameList.map((item) => (`
-				<div class="item" data-item-key="${item.key}" data-item-type="${item.type}" data-name-key="${item.name}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.index}.png'></div>	
-					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
-					<div id="item-amount">${formatarNumero(item.amount)}x</div>
-					<div id="item-name">${item.name}</div>
-				</div>
+				<div class="slot">
+					<div class="item" data-item-key="${item.key}" data-item-type="${item.type}" data-name-key="${item.name}">
+						<div id="item-icon"><img src='http://192.99.251.232:3571/images/vrp_itens/${item.index}.png'></div>	
+						<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
+						<div id="item-amount">${formatarNumero(item.amount)}x</div>
+						<div id="item-name">${item.name}</div>
+					</div>
+				</div>	
 			`)).join('')}
 		`);
+
+		for (let i = 0; i < data.slots; i++) {
+			
+			$("#inventory-items").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 
         $('#inventory-amount').html(`
             <div class="amount-bar"><span id="amount-bar" style="width: ${(data.peso*100/data.maxpeso).toFixed(2)}%;"></span></div>
@@ -145,38 +155,3 @@ const updateInventory = () => {
 		updateDrag();
 	});
 }
-
-/* const updateInventory = () => {
-    document.getElementById("amount").value = "";
-    $.post("http://vrp_inventory/requestInventory",JSON.stringify({}),(data) => {
-        const nameList = data.inventario.sort((a,b) => (a.name > b.name) ? 1: -1);
-
-
-        $('#inventory-items').html(`
-        ${nameList.forEach((obj, i) => {$(".slot").eq(i).remove();})}
-            ${    
-            nameList.map((item) => {
-            return (`
-                <div class="item" data-item-key="${item.key}" data-item-type="${item.type}" data-name-key="${item.name}">
-                    <div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.index}.png'></div>    
-                    <div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
-                    <div id="item-amount">${formatarNumero(item.amount)}x</div>
-                    <div id="item-name">${item.name}</div>
-                </div>
-            `)
-              
-            }).join('')
-        }
-            
-        `);
-
-
-
-        $('#inventory-amount').html(`
-            <div class="amount-bar"><span id="amount-bar" style="width: ${(data.peso*100/data.maxpeso).toFixed(2)}%;"></span></div>
-            <div class="amount-text"><b>${(data.peso).toFixed(2)}</b>Kg de <b>${(data.maxpeso).toFixed(2)}</b>Kg</div>
-        `);
-
-        updateDrag();
-    });
-} */
