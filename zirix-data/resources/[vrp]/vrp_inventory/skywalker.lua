@@ -55,9 +55,9 @@ end
 
 function vRPN.verifySlots(user_id)
 	if vRP.getExp(user_id,"physical","strength") == 1900 then -- 90Kg
-		return 30
+		return 24
 	elseif vRP.getExp(user_id,"physical","strength") == 1320 then -- 75Kg
-		return 20
+		return 18
 	elseif vRP.getExp(user_id,"physical","strength") == 670 then -- 51Kg
 		return 12
 	elseif vRP.getExp(user_id,"physical","strength") == 20 then -- 6Kg
