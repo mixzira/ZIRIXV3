@@ -152,22 +152,36 @@ function vRPN.useItem(itemName,type,ramount)
 	local user_id = vRP.getUserId(source)
 	if user_id and ramount ~= nil and parseInt(ramount) >= 0 and not actived[user_id] and actived[user_id] == nil then
 		if type == "usar" then
-			if itemName == "mochila" then
-				if vRP.getInventoryMaxWeight(user_id) >= 90 then
+			if itemName == "mochilap" then
+				if vRP.getInventoryMaxWeight(user_id) >= 51 then
 					TriggerClientEvent("Notify",source,"negado","Você não pode equipar mais mochilas.",8000)
 				else
-					if vRP.tryGetInventoryItem(user_id,"mochila",1) then
+					if vRP.tryGetInventoryItem(user_id,"mochilap",1) then
 						TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 						vRP.varyExp(user_id,"physical","strength",650)
-
-						if vRP.getExp(user_id,"physical","strength") <= 660 then
-							TriggerClientEvent("inventory:mochilaoff",source)
-						elseif vRP.getExp(user_id,"physical","strength") >= 680 then
-							
-						else
+						TriggerClientEvent("inventory:mochilaon",source)
+						TriggerClientEvent("itensNotify",source,"usar","Equipou",""..itemName.."")
+					end
+				end
+			elseif itemName == "mochilam" then
+					if vRP.getInventoryMaxWeight(user_id) >= 51 then
+						TriggerClientEvent("Notify",source,"negado","Você não pode equipar mais mochilas.",8000)
+					else
+						if vRP.tryGetInventoryItem(user_id,"mochilam",1) then
+							TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
+							vRP.varyExp(user_id,"physical","strength",1300)
 							TriggerClientEvent("inventory:mochilaon",source)
+							TriggerClientEvent("itensNotify",source,"usar","Equipou",""..itemName.."")
 						end
-
+					end
+			elseif itemName == "mochilag" then
+				if vRP.getInventoryMaxWeight(user_id) >= 51 then
+					TriggerClientEvent("Notify",source,"negado","Você não pode equipar mais mochilas.",8000)
+				else
+					if vRP.tryGetInventoryItem(user_id,"mochilag",1) then
+						TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
+						vRP.varyExp(user_id,"physical","strength",1900)
+						TriggerClientEvent("inventory:mochilaon",source)
 						TriggerClientEvent("itensNotify",source,"usar","Equipou",""..itemName.."")
 					end
 				end
@@ -1223,8 +1237,8 @@ RegisterCommand('gmochila',function(source,args,rawCommand)
 				TriggerClientEvent("progress",source,10000,"guardando")
 				TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando sua mochila.",9000)
 				SetTimeout(1000*rtime,function()
-					vRP.varyExp(user_id,"physical","strength",-580)
-					vRP.giveInventoryItem(user_id,"mochila",1)
+					vRP.varyExp(user_id,"physical","strength",-1880)
+					vRP.giveInventoryItem(user_id,"mochilag",1)
 					TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 				end)
 				SetTimeout(10000,function()
@@ -1238,8 +1252,8 @@ RegisterCommand('gmochila',function(source,args,rawCommand)
 				TriggerClientEvent("progress",source,10000,"guardando")
 				TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando sua mochila.",9000)
 				SetTimeout(1000*rtime,function()
-					vRP.varyExp(user_id,"physical","strength",-650)
-					vRP.giveInventoryItem(user_id,"mochila",1)
+					vRP.varyExp(user_id,"physical","strength",-1300)
+					vRP.giveInventoryItem(user_id,"mochilam",1)
 					TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 				end)
 				SetTimeout(10000,function()
@@ -1254,7 +1268,7 @@ RegisterCommand('gmochila',function(source,args,rawCommand)
 				TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando sua mochila.",9000)
 				SetTimeout(1000*rtime,function()
 					vRP.varyExp(user_id,"physical","strength",-650)
-					vRP.giveInventoryItem(user_id,"mochila",1)
+					vRP.giveInventoryItem(user_id,"mochilap",1)
 					TriggerClientEvent("inventory:mochilaoff",source)
 					TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 				end)

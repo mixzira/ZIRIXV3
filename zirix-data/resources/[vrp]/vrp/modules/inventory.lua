@@ -1,5 +1,8 @@
 local itemlist = {
-	["mochila"] = { index = "mochila", nome = "Mochila", type = "usar" },
+	["mochilap"] = { index = "mochilap", nome = "Mochila P", type = "usar" },
+	["mochilam"] = { index = "mochilam", nome = "Mochila M", type = "usar" },
+	["mochilag"] = { index = "mochilag", nome = "Mochila G", type = "usar" },
+
 	["celular"] = { index = "celular", nome = "iFruit XI", type = "usar" },
 	["celular-pro"] = { index = "celular-pro", nome = "iFruit XII", type = "usar" },
 	["jbl"] = { index = "jbl", nome = "JBL", type = "usar" },
@@ -22,14 +25,6 @@ local itemlist = {
 	["cartao-debito"] = { index = "cartao-debito", nome = "Cartão de débito", type = "usar" },
 	["maquininha"] = { index = "maquininha", nome = "Maquininha", type = "usar" },
 	["paninho"] = { index = "paninho", nome = "Pano de Microfibra", type = "usar" },
-
-	["drone-basic1"] = { index = "drone-basic1", nome = "Drone Basico", type = "usar" },
-	["drone-basic2"] = { index = "drone-basic2", nome = "Drone Basico", type = "usar" },
-	["drone-basic3"] = { index = "drone-basic3", nome = "Drone Basico", type = "usar" },
-	["drone-advanced1"] = { index = "drone-advanced1", nome = "Drone Avancado", type = "usar" },
-	["drone-advanced2"] = { index = "drone-advanced2", nome = "Drone Avancado", type = "usar" },
-	["drone-advanced3"] = { index = "drone-advanced3", nome = "Drone Avancado", type = "usar" },
-	["drone-police"] = { index = "drone-police", nome = "Drone da Policia", type = "usar" },
 	["carrinho"] = { index = "carrinho", nome = "Carrinho", type = "usar" },
 
 	["camisinha"] = { index = "camisinha", nome = "Camisinha", type = "usar" },
