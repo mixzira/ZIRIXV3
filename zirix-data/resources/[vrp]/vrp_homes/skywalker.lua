@@ -41,12 +41,12 @@ vRP._prepare("homes/get_allvehs","SELECT * FROM vrp_vehicles")
 
 local actived = {}
 local blipHomes = {}
+
 local auth = false
 local customer = 'N/A'
 local customerid = 'N/A'
 local customeremail = 'N/A'
 local customerdiscord = '<@N/A>'
-local customerip = 'N/A'
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
 
 --[ BLIPHOMES ]--------------------------------------------------------------------------------------------------------------------------
@@ -410,19 +410,54 @@ function src.openChest(homeName)
 		local myinventory = {}
 		local data = vRP.getSData("chest:"..tostring(homeName))
 		local result = json.decode(data) or {}
+		local tcSlot = src.verifyChestSlots(homeName)
+		local tSlot = vRP.verifySlots(user_id)
+
 		if result then
+			if tcSlot ~= nil then
+				tcSlot = tcSlot
+			else
+				tcSlot = 11
+			end
+
+			if tSlot ~= nil then
+				tSlot = tSlot
+			else
+				tSlot = 11
+			end
+
 			for k,v in pairs(result) do
-				table.insert(hsinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
+				if vRP.itemBodyList(k) then
+					tcSlot = tcSlot - 1
+					table.insert(hsinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
+				end
 			end
 
 			local inv = vRP.getInventory(parseInt(user_id))
+
 			for k,v in pairs(inv) do
-				table.insert(myinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
+				if vRP.itemBodyList(k) then
+					tSlot = tSlot - 1
+					table.insert(myinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
+				end
 			end
 		end
-		return hsinventory,myinventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id),vRP.computeItemsWeight(result),parseInt(config.homesP[tostring(homeName)][3])
+		return hsinventory,myinventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id),vRP.computeItemsWeight(result),parseInt(config.homesP[tostring(homeName)][3]),parseInt(tSlot),parseInt(tcSlot)
 	end
 	return false
+end
+
+function src.verifyChestSlots(homeName)
+	return config.homesP[tostring(homeName)][4]
+end
+
+function src.haveMoreChestSlots(homeName)
+	local chestData = "chest:"..tostring(homeName)
+	if vRP.getRemaingChestSlots(chestData,src.verifyChestSlots(homeName)) > 0 then
+		return true
+	else
+		return false
+	end
 end
 
 --[ STOREITEM ]--------------------------------------------------------------------------------------------------------------------------
@@ -433,16 +468,15 @@ function src.storeItem(homeName,itemName,amount)
 		local user_id = vRP.getUserId(source)
 		if user_id then
 			local identity = vRP.getUserIdentity(user_id)
-			if itemName ~= "passaporte" then
-				if vRP.storeChestItem(user_id,"chest:"..tostring(homeName),itemName,amount,config.homesP[tostring(homeName)][1]) then
-					TriggerClientEvent("vrp_homes:Update",source,"updateVault")
-					TriggerClientEvent("itensNotify",source,"sucesso","Guardou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
-					PerformHttpRequest(config.webhookSend, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE BAÚ:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**CASA:**", value = "**"..tostring(homeName)..""}, {name = "**QUEM GUARDOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM GUARDADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ][ **Quantidade: "..parseInt(amount).."** ]\n⠀⠀"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
-				end
+			if vRP.storeChestItem(user_id,"chest:"..tostring(homeName),itemName,amount,config.homesP[tostring(homeName)][1],config.homesP[tostring(homeName)][4]) then
+				TriggerClientEvent("vrp_homes:Update",source,"updateVault")
+				TriggerClientEvent("itensNotify",source,"sucesso","Guardou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+				PerformHttpRequest(config.webhookSend, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE BAÚ:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**CASA:**", value = "**"..tostring(homeName)..""}, {name = "**QUEM GUARDOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM GUARDADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ][ **Quantidade: "..parseInt(amount).."** ]\n⠀⠀"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 			end
         end
     end
 end
+
 --[ TAKEITEM ]---------------------------------------------------------------------------------------------------------------------------
 
 function src.takeItem(homeName,itemName,amount)
@@ -489,7 +523,7 @@ AddEventHandler("onResourceStart",function(resourceName)
                         end
                     end            
 				end
-				PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = "**Atenção:** <@&748720506169196675>**!**", embeds = {{title = "PRODUTO NÃO AUTENTICADO:\n⠀", thumbnail = {url = 'https://i.imgur.com/Y5Zktwm.png'}, fields = {{ name = "**Produto:**", value = ""..GetCurrentResourceName().."\n⠀"}, {name = "**• DADOS DO PROPRIETÁRIO:**", value = "⠀"}, {name = "**Nome completo:**", value = ""..customer..""}, {name = "**Nº contrato:**", value = ""..customerid..""}, {name = "**E-mail:**", value = ""..customeremail..""}, {name = "**Discord:**", value = ""..customerdiscord.."\n⠀"}, {name = "**• DADOS DE REDE:**", value = "⠀"}, {name = "**IP autorizado:**", value = "` "..customerip.." `"}, {name = "**IP não autorizado:**", value = "` "..resultData.." `\n⠀"}}, footer = {text = 'ZIRAFLIX Inc. Todos os direitos reservados | '..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = 'https://i.imgur.com/Y5Zktwm.png'}, color = 1975079}}}), {['Content-Type'] = 'application/json'})                    
+				PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = "**Atenção:** <@&748720506169196675>**!**", embeds = {{title = "PRODUTO NÃO AUTENTICADO:\n⠀", thumbnail = {url = 'https://i.imgur.com/Y5Zktwm.png'}, fields = {{ name = "**Produto:**", value = ""..GetCurrentResourceName().."\n⠀"}, {name = "**• DADOS DO PROPRIETÁRIO:**", value = "⠀"}, {name = "**Nome completo:**", value = ""..customer..""}, {name = "**Nº contrato:**", value = ""..customerid..""}, {name = "**E-mail:**", value = ""..customeremail..""}, {name = "**Discord:**", value = ""..customerdiscord.."\n⠀"}, {name = "**• DADOS DE REDE:**", value = "⠀"}, {name = "**IP não autorizado:**", value = "` "..resultData.." `\n⠀"}}, footer = {text = 'ZIRAFLIX Inc. Todos os direitos reservados | '..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = 'https://i.imgur.com/Y5Zktwm.png'}, color = 1975079}}}), {['Content-Type'] = 'application/json'})                    
                 print("\27[31m["..GetCurrentResourceName().."] Não autenticado! Adquira já o seu em www.ziraflix.com;")
             end)
         end)

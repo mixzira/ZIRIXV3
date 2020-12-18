@@ -44,7 +44,7 @@ end)
 --[ REQUESTCHEST ]-----------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestChest",function(data,cb)
-	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight = vSERVER.openChest()
+	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight, slots, nuslots = vSERVER.openChest()
 	local ip = config.imageServer
 	if ip == '' then
 		if vSERVER.checkAuth() then
@@ -52,7 +52,7 @@ RegisterNUICallback("requestChest",function(data,cb)
 		end
 	end
 	if inventory then
-		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, ip = ip })
+		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, slots = slots, nuslots = nuslots, ip = ip })
 	end
 end)
 

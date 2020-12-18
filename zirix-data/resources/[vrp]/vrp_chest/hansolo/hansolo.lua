@@ -72,15 +72,19 @@ AddEventHandler("vrp_chest:use",function()
 		local distance = GetDistanceBetweenCoords(x,y,z,v[2],v[3],v[4],true)
 		local nuser_id = vRP.getNearestPlayer(3)
 		if distance < 0.8 and not nuser_id then
-			if vSERVER.checkIntPermissions(v[1]) and vSERVER.checkAuth() and not chestTimer then
-				chestTimer = true
-				TransitionToBlurred(1000)
-				SetNuiFocus(true,true)
-				SendNUIMessage({ action = "showMenu" })
-				chestOpen = tostring(v[1])
-				SetTimeout(3000,function()
-					chestTimer = false
-				end)
+			if vSERVER.checkIntPermissions(v[1]) and not chestTimer then
+				if vSERVER.checkAuth() then
+					chestTimer = true
+					TransitionToBlurred(1000)
+					SetNuiFocus(true,true)
+					SendNUIMessage({ action = "showMenu" })
+					chestOpen = tostring(v[1])
+					SetTimeout(3000,function()
+						chestTimer = false
+					end)
+				else
+					TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+				end
 			end
 		end
 	end

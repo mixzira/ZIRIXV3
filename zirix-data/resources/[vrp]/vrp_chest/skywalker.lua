@@ -131,8 +131,6 @@ function src.storeItem(chestName,itemName,amount)
 				TriggerClientEvent("Chest:UpdateChest",source,"updateChest")
 				TriggerClientEvent("itensNotify",source,"sucesso","Guardou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
 				PerformHttpRequest(config.webhooks[chestName][1], function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE BAÚ:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM GUARDOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM GUARDADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ][ **Quantidade: "..parseInt(amount).."** ]\n⠀⠀"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
-			else
-				TriggerClientEvent("Notify",source,"negado","Você precisa especificar a quantidade.",10000)
             end
         end
     end
@@ -150,8 +148,6 @@ function src.takeItem(chestName,itemName,amount)
 				TriggerClientEvent("Chest:UpdateChest",source,"updateChest")
 				TriggerClientEvent("itensNotify",source,"sucesso","Pegou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
 				PerformHttpRequest(config.webhooks[chestName][1], function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE BAÚ:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM RETIROU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM RETIRADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ][ **Quantidade: "..parseInt(amount).."** ]\n⠀⠀"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
-			else
-				TriggerClientEvent("Notify",source,"negado","Você precisa especificar a quantidade.",10000)
             end
         end
     end

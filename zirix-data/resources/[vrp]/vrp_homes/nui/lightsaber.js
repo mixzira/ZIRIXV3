@@ -174,24 +174,40 @@ const updateVault = () => {
 		const nameList2 = data.chest.sort((a,b) => (a.name > b.name) ? 1: -1);
 		$('#inventory-items').html(`
 			${nameList2.map((item) => (`
-				<div class="item" data-item-key="${item.key}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
-					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
-					<div id="item-amount">${formatarNumero(item.amount)}x</div>
-					<div id="item-name">${item.name}</div>
+				<div class="slot">
+					<div class="item" data-item-key="${item.key}">
+						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
+						<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
+						<div id="item-amount">${formatarNumero(item.amount)}x</div>
+						<div id="item-name">${item.name}</div>
+					</div>
 				</div>
 			`)).join('')}
 		`);
+		for (let i = 0; i < data.slots; i++) {
+			$("#inventory-items").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#chest-items').html(`
 			${nameList.map((item) => (`
-				<div class="chest-item" data-item-key="${item.key}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
-					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
-					<div id="item-amount">${formatarNumero(item.amount)}x</div>
-					<div id="item-name">${item.name}</div>
+				<div class="slot">
+					<div class="chest-item" data-item-key="${item.key}">
+						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
+						<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
+						<div id="item-amount">${formatarNumero(item.amount)}x</div>
+						<div id="item-name">${item.name}</div>
+					</div>
 				</div>
 			`)).join('')}
 		`);
+		for (let i = 0; i < data.slotschest; i++) {
+			$("#chest-items").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#inventory-bottom').html(`
 			<input id="amount" class="qtd" maxlength="9" spellcheck="false" value="" placeholder="QUANTIDADE">
 			<div class="inventory-amount-bar"><span id="amount-bar" style="width: ${(data.weight*100/data.maxweight).toFixed(2)}%;"></span></div>
