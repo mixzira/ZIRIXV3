@@ -672,7 +672,9 @@ cfg.list = {
 	[430] = { text = false, hash = 1398355146, ['x'] = -1002.84, ['y'] = -745.8, ['z'] = 71.66  , lock = true, perm = "ems1.permissao", perm2 = "paisana1-ems1.permissao", public = false },
 	[431] = { text = false, hash = 1398355146, ['x'] = -1002.87, ['y'] = -738.47, ['z'] = 71.66  , lock = true, perm = "ems1.permissao", perm2 = "paisana1-ems1.permissao", public = false },
 	[432] = { text = false, hash = 1398355146, ['x'] = -1002.86, ['y'] = -731.06, ['z'] = 71.66  , lock = true, perm = "ems1.permissao", perm2 = "paisana1-ems1.permissao", public = false },
-	[433] = { text = false, hash = 1398355146, ['x'] = -1002.89, ['y'] = -760.65, ['z'] = 71.66  , lock = true, perm = "ems1.permissao", perm2 = "paisana1-ems1.permissao", public = false }
+	[433] = { text = false, hash = 1398355146, ['x'] = -1002.89, ['y'] = -760.65, ['z'] = 71.66  , lock = true, perm = "ems1.permissao", perm2 = "paisana1-ems1.permissao", public = false },
+
+	[434] = { text = true, hash = 1557126584, ['x'] = 449.86, ['y'] = -986.31, ['z'] = 30.69, lock = true, perm = "ems1.permissao", perm2 = "paisana1-ems1.permissao", public = false }
 }
 
 return cfg	

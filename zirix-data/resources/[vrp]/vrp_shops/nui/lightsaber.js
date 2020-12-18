@@ -220,7 +220,7 @@ const updateShop = () => {
 		$('#inventory-items').html(`
 			${inventoryItems.map((item) => (`
 				<div class="item">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.index}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
 					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 					<div id="item-amount">${formatarNumero(item.amount)}x</div>
 					<div id="item-name">${item.name}</div>
@@ -231,7 +231,7 @@ const updateShop = () => {
 		$('#accessories').html(`
 			${accessoriesItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -242,7 +242,7 @@ const updateShop = () => {
 		$('#ammunation').html(`
 			${ammunationItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -253,7 +253,7 @@ const updateShop = () => {
 		$('#pub').html(`
 			${pubItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -264,7 +264,7 @@ const updateShop = () => {
 		$('#coffeeshop').html(`
 			${coffeeshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -275,7 +275,7 @@ const updateShop = () => {
 		$('#convenienceshop').html(`
 			${convenienceshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -286,7 +286,7 @@ const updateShop = () => {
 		$('#digitalshop').html(`
 			${digitalshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -297,7 +297,7 @@ const updateShop = () => {
 		$('#drugshop').html(`
 			${drugshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>
@@ -308,7 +308,7 @@ const updateShop = () => {
 		$('#toolshop').html(`
 			${toolshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.itemIndex}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
 					<div id="item-weight">$${item.itemPrice}</div>
 					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 					<div id="item-name">${item.itemName}</div>

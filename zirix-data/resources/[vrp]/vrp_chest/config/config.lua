@@ -1,12 +1,10 @@
 config = {}
 
-config.OpenKey = 38
-config.MarkerInfo = { 23, 66, 236, 134, 280 }
+config.webhookBottomText = 'CLEAN TWO - '
+config.webhookIcon = 'https://i.imgur.com/CtQB816.png'
+config.webhookColor = 16431885
 
-config.WebhookBottomText = 'DIAMOND CITY - '
-config.WebhookIcon = 'https://i.imgur.com/CtQB816.png'
-config.WebhookColor = 16431885
-config.Webhooks = {
+config.webhooks = {
 	['ems'] = { '' },
 	['policia-arsenal'] = { '' },
 	['policia-evidencias'] = { '' },
@@ -27,7 +25,7 @@ config.Webhooks = {
 	['imobiliaria-cofre'] = { '' }
 }
 
-config.Chest = {
+config.chest = {
     { 'ems', -453.53, -308.39, 34.92 },
 	{ 'policia-arsenal', -1098.8, -825.99, 14.29 },
 	{ 'policia-evidencias', -1074.87, -821.42, 11.04 },
@@ -48,23 +46,25 @@ config.Chest = {
 	{ 'imobiliaria-cofre', -1372.89, -462.17, 72.05 }
 }
 
-config.ChestInfos = {
-	['ems'] = { 5000,'ems.permissao' },
-	['policia-arsenal'] = { 5000,'policia.permissao' },
-	['policia-evidencias'] = { 5000,'policia.permissao' },
-	['orgdone-factory'] = { 1000,'orgdone.permissao' },
-	['orgdtwo-factory'] = { 1000,'orgdtwo.permissao' },
-	['orgdthree-factory'] = { 1000,'orgdthree.permissao' },
-	['orgdfour-factory'] = { 1000,'orgdfour.permissao' },
-	['orgdfive-factory'] = { 1000,'orgdfive.permissao' },
-	['orgdsix-factory'] = { 1000,'orgdsix.permissao' },
-	['orggone-factory'] = { 1000,'orggone.permissao' },
-	['orggone-base'] = { 2000,'orggone.permissao' },
-	['orggtwo-factory'] = { 1000,'orggtwo.permissao' },
-	['orgmone-base'] = { 3000,'orgmone.permissao' },
-	['orgmtwo-base'] = { 3000,'orgmtwo.permissao' },
-	['orgmthree-base'] = { 3000,'orgmthree.permissao' },
-	['lscustoms-cofre'] = { 1,'lider-mecanico.permissao' },
-	['lscustoms-bau'] = { 2000,'mecanico.permissao' },
-	['imobiliaria-cofre'] = { 1,'lider-corretor.permissao' }
+config.chestInfos = {
+	['ems'] = { 5000, 500, 'ems.permissao' },
+	['policia-arsenal'] = { 5000, 500, 'policia.permissao' },
+	['policia-evidencias'] = { 5000, 500, 'policia.permissao' },
+	['orgdone-factory'] = { 1000, 100, 'orgdone.permissao' },
+	['orgdtwo-factory'] = { 1000, 100, 'orgdtwo.permissao' },
+	['orgdthree-factory'] = { 1000, 100, 'orgdthree.permissao' },
+	['orgdfour-factory'] = { 1000, 100, 'orgdfour.permissao' },
+	['orgdfive-factory'] = { 1000, 100, 'orgdfive.permissao' },
+	['orgdsix-factory'] = { 1000, 100, 'orgdsix.permissao' },
+	['orggone-factory'] = { 1000, 100, 'orggone.permissao' },
+	['orggone-base'] = { 2000, 200, 'orggone.permissao' },
+	['orggtwo-factory'] = { 1000, 100, 'orggtwo.permissao' },
+	['orgmone-base'] = { 3000, 300, 'orgmone.permissao' },
+	['orgmtwo-base'] = { 3000, 300, 'orgmtwo.permissao' },
+	['orgmthree-base'] = { 3000, 300, 'orgmthree.permissao' },
+	['lscustoms-cofre'] = { 1, 1, 'lider-mecanico.permissao' },
+	['lscustoms-bau'] = { 2000, 200, 'mecanico.permissao' },
+	['imobiliaria-cofre'] = { 1, 1, 'lider-corretor.permissao' }
 }
+
+config.imageServer = '' -- Deixe vazio caso use o serviço de straming de imagens da ZIRAFLIX;

@@ -168,7 +168,7 @@ const updateChest = () => {
 		$('#inventory-items').html(`
 			${nameList2.map((item) => (`
 				<div class="item" data-item-key="${item.key}" data-vehname-key="${item.vehname}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.index}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
 					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 					<div id="item-amount">${formatarNumero(item.amount)}x</div>
 					<div id="item-name">${item.name}</div>
@@ -178,7 +178,7 @@ const updateChest = () => {
 		$('#nuinventory-items').html(`
 			${nameList.map((item) => (`
 				<div class="nuinventory-item" data-item-key="${item.key}" data-vehname-key="${item.vehname}">
-					<div id="item-icon"><img src='http://192.99.251.232:3555/images/vrp_itens/${item.index}.png'></div>
+					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
 					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 					<div id="item-amount">${formatarNumero(item.amount)}x</div>
 					<div id="item-name">${item.name}</div>

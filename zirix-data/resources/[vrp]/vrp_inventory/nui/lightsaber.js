@@ -23,6 +23,28 @@ $(document).ready(function(){
 			$.post("http://vrp_inventory/invClose");
 		}
 	};
+
+	$(".use").each(function(i,obj){
+		$(this).click(function(){
+			$.post("http://vrp_inventory/useClick", JSON.stringify({
+			
+			}))
+		})
+	});
+
+	$(".close").each(function(i,obj){
+		$(this).click(function(){
+			$.post("http://vrp_inventory/invClose");
+		})
+	});
+
+	$(".unequip").each(function(i,obj){
+		$(this).click(function(){
+			$.post("http://vrp_inventory/unEquip", JSON.stringify({
+
+			}))
+		})
+	});
 });
 
 const updateDrag = () => {
@@ -101,16 +123,6 @@ const updateDrag = () => {
 	})
 }
 
-function init() {
-	$(".use").each(function(i,obj){
-		$(this).click(function(){
-			$.post("http://vrp_inventory/useClick", JSON.stringify({
-			
-			}))
-		})
-	});
-}
-
 const formatarNumero = (n) => {
 	var n = n.toString();
 	var r = '';
@@ -131,7 +143,7 @@ const updateInventory = () => {
 			${nameList.map((item) => (`
 				<div class="slot">
 					<div class="item" data-item-key="${item.key}" data-item-type="${item.type}" data-name-key="${item.name}">
-						<div id="item-icon"><img src='http://192.99.251.232:3571/images/vrp_itens/${item.index}.png'></div>	
+						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>	
 						<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 						<div id="item-amount">${formatarNumero(item.amount)}x</div>
 						<div id="item-name">${item.name}</div>
@@ -139,19 +151,20 @@ const updateInventory = () => {
 				</div>	
 			`)).join('')}
 		`);
-
 		for (let i = 0; i < data.slots; i++) {
-			
 			$("#inventory-items").append(`
 				<div class="slot">
 				</div>
 			`)
 		}
-
         $('#inventory-amount').html(`
             <div class="amount-bar"><span id="amount-bar" style="width: ${(data.peso*100/data.maxpeso).toFixed(2)}%;"></span></div>
             <div class="amount-text"><b>${(data.peso).toFixed(2)}</b>Kg de <b>${(data.maxpeso).toFixed(2)}</b>Kg</div>
 		`);
 		updateDrag();
 	});
+}
+
+function init() {
+	
 }

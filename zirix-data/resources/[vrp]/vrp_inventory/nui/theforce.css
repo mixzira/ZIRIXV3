@@ -374,6 +374,52 @@ input {
     color: rgba(66, 236, 134, 1.0);
 }
 
+.close {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.close img {
+    width: 50%;
+    height: 50%;
+}
+
+.close:hover {
+    background-color: rgba(255, 0, 0, 0.60);
+}
+
+.unequip {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    top: 5px;
+    right: 30px;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.unequip:hover {
+    background-color: rgba(66, 236, 134, 1.0);
+}
+
+.unequip img {
+    width: 60%;
+    height: 60%;
+}
+
 /*=[ SCROLL ]======================================*/
 
 ::-webkit-scrollbar {

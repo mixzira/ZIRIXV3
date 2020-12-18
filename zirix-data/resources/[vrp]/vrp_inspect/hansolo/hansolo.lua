@@ -45,8 +45,14 @@ end)
 
 RegisterNUICallback("requestChest",function(data,cb)
 	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight = vSERVER.openChest()
+	local ip = config.imageServer
+	if ip == '' then
+		if vSERVER.checkAuth() then
+			ip = '192.99.251.232:3501'
+		end
+	end
 	if inventory then
-		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight })
+		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, ip = ip })
 	end
 end)
 

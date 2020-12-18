@@ -13,6 +13,7 @@ Proxy.addInterface("vrp_inventory",vRPC)
 --[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
 local invOpen = false
+local usandoRemedios = false
 
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
 
@@ -36,12 +37,26 @@ RegisterKeyMapping('vrp_inventory:useClick', 'Interação', 'keyboard','E')
 RegisterCommand('vrp_inventory:useClick', function()
     TriggerEvent('vrp_trash:use')
     TriggerEvent('vrp_machines:use')
+    TriggerEvent('vrp_chest:use')
+    TriggerEvent('vrp_homes:join')
+    TriggerEvent('vrp_homes:exit')
+    TriggerEvent('vrp_homes:chest')
+    TriggerEvent('vrp_homes:invade')
 end, false)
 
 
 RegisterNUICallback("useClick",function(cb)
     TriggerEvent('vrp_trash:use')
     TriggerEvent('vrp_machines:use')
+    TriggerEvent('vrp_chest:use')
+    TriggerEvent('vrp_homes:join')
+    TriggerEvent('vrp_homes:exit')
+    TriggerEvent('vrp_homes:chest')
+    TriggerEvent('vrp_homes:invade')
+end)
+
+RegisterNUICallback("unEquip",function(cb)
+    vRPNserver.unEquip()
 end)
 
 --[ INVOPEN ]----------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +65,7 @@ RegisterKeyMapping('vrp_inventory:openInv', 'Inventário', 'keyboard', config.op
 
 RegisterCommand('vrp_inventory:openInv', function()
     local ped = PlayerPedId()
-    if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) then
+    if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) and vRPNserver.checkAuth() then
         if not invOpen then
             StartScreenEffect("MenuMGSelectionIn", 0, true)
             invOpen = true
@@ -120,9 +135,15 @@ end)
 --[ INVENTORY ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestInventory",function(data,cb)
-	local inventario,peso,maxpeso,slots = vRPNserver.Inventory()
+    local inventario, peso, maxpeso, slots = vRPNserver.Inventory()
+    local ip = config.imageServer
+    if ip == '' then
+        if vRPNserver.checkAuth() then
+            ip = '192.99.251.232:3501'
+        end
+    end
 	if inventario then
-		cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots })
+		cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, ip = ip })
 	end
 end)
 
@@ -144,7 +165,6 @@ end)
 
 --[ USO REMÉDIO ]------------------------------------------------------------------------------------------------------------------------
 
-local usandoRemedios = false
 RegisterNetEvent("remedios")
 AddEventHandler("remedios",function()
     local ped = PlayerPedId()

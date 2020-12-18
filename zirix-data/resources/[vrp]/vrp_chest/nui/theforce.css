@@ -104,7 +104,7 @@ img {
     overflow: auto;
 }
 
-#chest-slots {
+.chest-slots {
     position: absolute;
     width: 365px;
     height: 350px;

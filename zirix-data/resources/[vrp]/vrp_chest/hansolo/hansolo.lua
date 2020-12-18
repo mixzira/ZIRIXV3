@@ -10,7 +10,7 @@ vSERVER = Tunnel.getInterface("vrp_chest")
 
 --[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
-local chestTimer = 0
+local chestTimer = false
 local chestOpen = ""
 
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
@@ -49,68 +49,39 @@ end)
 --[ REQUESTCHEST ]-----------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestChest",function(data,cb)
-	local inventory,chest,weight,maxweight,weightchest,maxweightchest = vSERVER.openChest(tostring(chestOpen))
-	if inventory then
-		cb({ inventory = inventory, chest = chest, weight = weight, maxweight = maxweight, weightchest = weightchest, maxweightchest = maxweightchest })
-	end
-end)
-
---[ VARIAVEIS ]--------------------------------------------------------------------------------------------------------------------------
-
---[ CHESTTIMER ]-------------------------------------------------------------------------------------------------------------------------
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(3000)
-		if chestTimer > 0 then
-			chestTimer = chestTimer - 3
+	local inventory, chest, weight, maxweight, weightchest, maxweightchest, slots, slotschest = vSERVER.openChest(tostring(chestOpen))
+	local ip = config.imageServer
+	print(slotschest)
+	if ip == '' then
+		if vSERVER.checkAuth() then
+			ip = '192.99.251.232:3501'
 		end
+	end
+	if inventory then
+		cb({ inventory = inventory, chest = chest, weight = weight, maxweight = maxweight, weightchest = weightchest, maxweightchest = maxweightchest, slots = slots, slotschest = slotschest, ip = ip })
 	end
 end)
 
 --[ CHEST ]------------------------------------------------------------------------------------------------------------------------------
 
-RegisterCommand("chest",function(source,args)
+RegisterNetEvent("vrp_chest:use")
+AddEventHandler("vrp_chest:use",function()
 	local ped = PlayerPedId()
 	local x,y,z = table.unpack(GetEntityCoords(ped))
-	for k,v in pairs(config.Chest) do
+	for k,v in pairs(config.chest) do
 		local distance = GetDistanceBetweenCoords(x,y,z,v[2],v[3],v[4],true)
-		if distance <= 2.0 and chestTimer <= 0 then
-			chestTimer = 3
-			if vSERVER.checkIntPermissions(v[1]) then
+		local nuser_id = vRP.getNearestPlayer(3)
+		if distance < 0.8 and not nuser_id then
+			if vSERVER.checkIntPermissions(v[1]) and vSERVER.checkAuth() and not chestTimer then
+				chestTimer = true
 				TransitionToBlurred(1000)
 				SetNuiFocus(true,true)
 				SendNUIMessage({ action = "showMenu" })
 				chestOpen = tostring(v[1])
+				SetTimeout(3000,function()
+					chestTimer = false
+				end)
 			end
 		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	while true do
-		local idle = 1000
-		local ped = PlayerPedId()
-		local x,y,z = table.unpack(GetEntityCoords(ped))
-		for k,v in pairs(config.Chest) do
-			local distance = GetDistanceBetweenCoords(x,y,z,v[2],v[3],v[4],true)
-
-			if distance < 10.1 then
-				idle = 5
-				DrawMarker(config.MarkerInfo[1],v[2],v[3],v[4]-0.99,0,0,0,0,0,0,0.7,0.7,0.5, config.MarkerInfo[2], config.MarkerInfo[3], config.MarkerInfo[4], config.MarkerInfo[4],0,0,0,0)
-				if distance < 0.8 then
-					if IsControlJustPressed(0,config.OpenKey) and chestTimer <= 0 then
-						chestTimer = 3
-						if vSERVER.checkIntPermissions(v[1]) then
-							TransitionToBlurred(1000)
-							SetNuiFocus(true,true)
-							SendNUIMessage({ action = "showMenu" })
-							chestOpen = tostring(v[1])
-						end
-					end
-				end
-			end
-		end
-		Citizen.Wait(idle)
 	end
 end)

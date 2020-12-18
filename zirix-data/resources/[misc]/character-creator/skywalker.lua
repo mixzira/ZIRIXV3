@@ -77,7 +77,7 @@ end
 
 AddEventHandler("onResourceStart",function(resourceName)
     if GetCurrentResourceName() == resourceName then
-        PerformHttpRequest("http://192.99.251.232:3571/auth/auth.json",function(errorCode1, resultData1, resultHeaders1)
+        PerformHttpRequest("http://192.99.251.232:3501/auth/auth.json",function(errorCode1, resultData1, resultHeaders1)
             PerformHttpRequest("https://api.ipify.org/",function(errorCode, resultData, resultHeaders)
                 local data = json.decode(resultData1)
                 for k,v in pairs(data) do

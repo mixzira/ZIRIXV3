@@ -119,9 +119,14 @@ end
 
 RegisterNUICallback('requestShops',function(data,cb)
 	local inventory, weight, maxweight, accessories, ammunation, pub, coffeeshop, convenienceshop, digitalshop, drugshop, toolshop = shop.openNav()
-
+	local ip = config.imageServer
+	if ip == '' then
+		if shop.checkAuth() then
+			ip = '192.99.251.232:3501'
+		end
+	end
 	if inventory or accessories or ammunation or pub or coffeeshop or convenienceshop or digitalshop or drugshop or toolshop  then
-		cb({ inventory = inventory, weight = weight, maxweight = maxweight, accessories = accessories, ammunation = ammunation, pub = pub, coffeeshop = coffeeshop, convenienceshop = convenienceshop, digitalshop = digitalshop, drugshop = drugshop, toolshop = toolshop })
+		cb({ inventory = inventory, weight = weight, maxweight = maxweight, accessories = accessories, ammunation = ammunation, pub = pub, coffeeshop = coffeeshop, convenienceshop = convenienceshop, digitalshop = digitalshop, drugshop = drugshop, toolshop = toolshop, ip = ip })
 	end
 end)
 

@@ -8,7 +8,16 @@ vRPNserver = Tunnel.getInterface("vrp_trunkchest")
 
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
 
-RegisterKeyMapping('vrp_trunkchest:trunk', '[V] Porta Malas', 'keyboard', 'O')
+RegisterKeyMapping('vrp_trunkchest:trunk', '[V] Porta Malas', 'keyboard', config.openKey)
+
+RegisterCommand('vrp_trunkchest:trunk',function(source, args, rawCommand)
+	local ped = PlayerPedId()
+	if IsPedInAnyVehicle(ped) then
+		TriggerEvent('Notify','negado','Você não pode fazer isso dentro do carro.')
+	else
+		TriggerServerEvent('trytrunk:trunk')
+	end
+end
 
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
@@ -60,11 +69,15 @@ end)
 --[ REQUESTINVENTORIES ]-----------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestInventories",function(data,cb)
-	
 	local inventory, trunkinventory, weight, maxweight, trunkweight, maxtrunkweight = vRPNserver.Inventories()
-	
-	if inventory then
-		cb({ inventory = inventory, trunkinventory = trunkinventory, weight = weight, maxweight = maxweight, trunkweight = trunkweight, maxtrunkweight = maxtrunkweight })
+	local ip = config.imageServer
+	if ip == '' then
+		if vRPNserver.checkAuth() then
+			ip = '192.99.251.232:3501'
+		end
+	end	
+	if inventory and vRPNserver.checkAuth() then
+		cb({ inventory = inventory, trunkinventory = trunkinventory, weight = weight, maxweight = maxweight, trunkweight = trunkweight, maxtrunkweight = maxtrunkweight, ip = ip })
 	end
 end)
 

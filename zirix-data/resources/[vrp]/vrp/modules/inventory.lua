@@ -1103,9 +1103,68 @@ Citizen.CreateThread(function()
 	end
 end)
 
+--[ SLOT INVENTORY ]------------------------------------------------------------------------------------------------------------------------------------
+
+function vRP.verifySlots(user_id)
+	if vRP.getExp(user_id,"physical","strength") == 1900 then -- 90Kg
+		return 24
+	elseif vRP.getExp(user_id,"physical","strength") == 1320 then -- 75Kg
+		return 18
+	elseif vRP.getExp(user_id,"physical","strength") == 670 then -- 51Kg
+		return 12
+	elseif vRP.getExp(user_id,"physical","strength") == 20 then -- 6Kg
+		return 6
+	end
+end
+
+function vRP.getRemaingSlots(user_id)
+	local tSlot = vRP.verifySlots(user_id)
+
+	if tSlot ~= nil then
+		tSlot = tSlot
+	else
+		tSlot = 11
+	end
+
+	for k,v in pairs(vRP.getInventory(user_id)) do
+		tSlot = tSlot - 1
+	end
+
+	return tSlot
+end
+
+function vRP.haveMoreSlots(user_id)
+	if vRP.getRemaingSlots(user_id) > 0 then
+		return true
+	else
+		return false
+	end
+end
+
+--[ SLOT CHEST ]----------------------------------------------------------------------------------------------------------------------------------------
+
+function vRP.getRemaingChestSlots(chestData,chestSlots)
+	local tcSlot = chestSlots
+
+	if tcSlot ~= nil then
+		tcSlot = tcSlot
+	else
+		tcSlot = 11
+	end
+
+	local data = vRP.getSData(chestData)
+	local result = json.decode(data) or {}
+
+	for k,v in pairs(result) do
+		tcSlot = tcSlot - 1
+	end
+
+	return tcSlot
+end
+
 --[ STORE CHEST ]---------------------------------------------------------------------------------------------------------------------------------------
 
-function vRP.storeChestItem(user_id,chestData,itemName,amount,chestWeight)
+function vRP.storeChestItem(user_id,chestData,itemName,amount,chestWeight,chestSlots)
 	if actived[user_id] == nil then
 		actived[user_id] = 1
 		local data = vRP.getSData(chestData)
@@ -1119,7 +1178,8 @@ function vRP.storeChestItem(user_id,chestData,itemName,amount,chestWeight)
 			end
 
 			local new_weight = vRP.computeItemsWeight(items) + vRP.getItemWeight(itemName) * parseInt(activedAmount[user_id])
-			if new_weight <= parseInt(chestWeight) then
+
+			if new_weight <= parseInt(chestWeight) and vRP.getRemaingChestSlots(chestData,chestSlots) >= 1 then
 				if vRP.tryGetInventoryItem(parseInt(user_id),itemName,parseInt(activedAmount[user_id])) then
 					if items[itemName] ~= nil then
 						items[itemName].amount = parseInt(items[itemName].amount) + parseInt(activedAmount[user_id])
@@ -1153,7 +1213,7 @@ function vRP.tryChestItem(user_id,chestData,itemName,amount)
 				end
 
 				local new_weight = vRP.getInventoryWeight(parseInt(user_id)) + vRP.getItemWeight(itemName) * parseInt(activedAmount[user_id])
-				if new_weight <= vRP.getInventoryMaxWeight(parseInt(user_id)) then
+				if new_weight <= vRP.getInventoryMaxWeight(parseInt(user_id)) and vRP.getRemaingSlots(parseInt(user_id)) >= 1 then
 					vRP.giveInventoryItem(parseInt(user_id),itemName,parseInt(activedAmount[user_id]))
 
 					items[itemName].amount = parseInt(items[itemName].amount) - parseInt(activedAmount[user_id])
