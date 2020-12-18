@@ -118,63 +118,78 @@ function ToggleActionMenu(type)
 end
 
 RegisterNUICallback('requestShops',function(data,cb)
-	local inventory, weight, maxweight, accessories, ammunation, pub, coffeeshop, convenienceshop, digitalshop, drugshop, toolshop = shop.openNav()
+	local inventory, weight, maxweight, accessories, ammunation, pub, coffeeshop, convenienceshop, digitalshop, drugshop, toolshop, tSlot = shop.openNav()
 	local ip = config.imageServer
 	if ip == '' then
 		if shop.checkAuth() then
 			ip = '192.99.251.232:3501'
 		end
 	end
-	if inventory or accessories or ammunation or pub or coffeeshop or convenienceshop or digitalshop or drugshop or toolshop  then
-		cb({ inventory = inventory, weight = weight, maxweight = maxweight, accessories = accessories, ammunation = ammunation, pub = pub, coffeeshop = coffeeshop, convenienceshop = convenienceshop, digitalshop = digitalshop, drugshop = drugshop, toolshop = toolshop, ip = ip })
+	if shop.checkAuth() then
+		if inventory or accessories or ammunation or pub or coffeeshop or convenienceshop or digitalshop or drugshop or toolshop then
+			cb({ inventory = inventory, weight = weight, maxweight = maxweight, accessories = accessories, ammunation = ammunation, pub = pub, coffeeshop = coffeeshop, convenienceshop = convenienceshop, digitalshop = digitalshop, drugshop = drugshop, toolshop = toolshop, tSlot = tSlot, ip = ip })
+		end
+	else
+		TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
 	end
 end)
 
---[ LOCAL ACTION | THREAD ]-----------------------------------------------------------------------------------------------------
+--[ KEYMAPPING | OPEN ]-----------------------------------------------------------------------------------------------------
+
+RegisterNetEvent("vrp_shops:open")
+AddEventHandler("vrp_shops:open",function()
+	local ped = PlayerPedId()
+	local x,y,z = table.unpack(GetEntityCoords(ped))
+	for k,v in pairs(shops) do		
+		local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
+		local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
+		local shop = shops[k]
+		if distance < 1.2 then
+			if IsControlJustPressed(0,38) then
+				if shop.type == 'accessories' then
+					ToggleActionMenu('accessories')
+					
+				elseif shop.type == 'ammunation' then
+					ToggleActionMenu('ammunation')
+
+				elseif shop.type == 'pub' then
+					ToggleActionMenu('pub')
+
+				elseif shop.type == 'coffeeshop' then
+					ToggleActionMenu('coffeeshop')
+					
+				elseif shop.type == 'convenienceshop' then
+					ToggleActionMenu('convenienceshop')
+
+				elseif shop.type == 'digitalshop' then
+					ToggleActionMenu('digitalshop')
+
+				elseif shop.type == 'drugshop' then
+					ToggleActionMenu('drugshop')
+
+				elseif shop.type == 'toolshop' then
+					ToggleActionMenu('toolshop')
+
+				end
+			end
+		end
+	end
+end)
+
+--[ BLIP| THREAD ]-----------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000
-
 		for k,v in pairs(shops) do
 			local ped = PlayerPedId()
 			local x,y,z = table.unpack(GetEntityCoords(ped))
 			local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
 			local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
 			local shop = shops[k]
-            
 			if distance < 5.1 then
-				DrawMarker(23, shop.x, shop.y, shop.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5,214,29,0,100,0,0,0,0)
 				idle = 5
-				if distance < 1.2 then
-					if IsControlJustPressed(0,38) then
-						if shop.type == 'accessories' then
-							ToggleActionMenu('accessories')
-							
-						elseif shop.type == 'ammunation' then
-							ToggleActionMenu('ammunation')
-
-						elseif shop.type == 'pub' then
-							ToggleActionMenu('pub')
-
-						elseif shop.type == 'coffeeshop' then
-							ToggleActionMenu('coffeeshop')
-
-						elseif shop.type == 'convenienceshop' then
-							ToggleActionMenu('convenienceshop')
-
-						elseif shop.type == 'digitalshop' then
-							ToggleActionMenu('digitalshop')
-
-						elseif shop.type == 'drugshop' then
-							ToggleActionMenu('drugshop')
-
-						elseif shop.type == 'toolshop' then
-							ToggleActionMenu('toolshop')
-
-						end
-					end
-				end
+				DrawMarker(23, shop.x, shop.y, shop.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5,214,29,0,100,0,0,0,0)	
 			end
 		end
 		Citizen.Wait(idle)

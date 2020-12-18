@@ -18,10 +18,13 @@ local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
+slotsinv = 0
+
 function shop.openNav()
 	local source = source
     local user_id = vRP.getUserId(source)
     local data = vRP.getUserDataTable(user_id)
+    local tSlot = vRP.verifySlots(user_id)
 
 	local inventory = {}
     local accessories = {}
@@ -32,8 +35,21 @@ function shop.openNav()
     local digitalshop = {}
     local drugshop = {}
     local toolshop = {}
+    local myinventory = {}
 
     if user_id then
+
+        local inv = vRP.getInventory(parseInt(user_id))
+
+        for k,v in pairs(inv) do
+            if vRP.itemBodyList(k) then
+                tSlot = tSlot - 1
+                table.insert(myinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
+            end
+        end
+
+        slotsinv = tSlot
+
         if data and data.inventory then
             for k,v in pairs(data.inventory) do
                 if vRP.itemBodyList(k) then
@@ -74,42 +90,170 @@ function shop.openNav()
             table.insert(toolshop, { itemBody = v.itemName, itemIndex = vRP.itemIndexList(v.itemName), itemName = vRP.itemNameList(v.itemName), itemPrice = parseInt(v.itemPrice), itemAmount = parseInt(v.itemAmount) })
         end
 
-        return inventory, vRP.getInventoryWeight(user_id), vRP.getInventoryMaxWeight(user_id), accessories, ammunation, pub, coffeeshop, convenienceshop, digitalshop, drugshop, toolshop
+        return inventory, vRP.getInventoryWeight(user_id), vRP.getInventoryMaxWeight(user_id), accessories, ammunation, pub, coffeeshop, convenienceshop, digitalshop, drugshop, toolshop, tSlot
 	end
 end
 
 function shop.buyItem(itemName,itemAmount)
     local source = source
     local user_id = vRP.getUserId(source)
-    if itemAmount and itemAmount >= 1 then
-        for k,v in pairs(accessoriesList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                            if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+    if itemAmount and itemAmount >= 1  then
+        if slotsinv > 0 then
+            for k,v in pairs(config.accessoriesList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                    vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                    TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                end
                             else
-                                TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
                             end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
                         end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
                     end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
                 end
             end
-        end
 
-        for k,v in pairs(ammunationList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if itemName == 'wbody|WEAPON_PISTOL' or itemName == 'wammo|WEAPON_PISTOL' then
-                            local identity = vRP.getUserIdentity(user_id)
-                            if identity.gunlicense == 1 and vRP.getInventoryItemAmount(user_id,"portearmas") >= 1 then
+            for k,v in pairs(config.ammunationList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if itemName == 'wbody|WEAPON_PISTOL' or itemName == 'wammo|WEAPON_PISTOL' then
+                                local identity = vRP.getUserIdentity(user_id)
+                                if identity.gunlicense == 1 and vRP.getInventoryItemAmount(user_id,"portearmas") >= 1 then
+                                    if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                        if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                            vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                            TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                            TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
+                                        else
+                                            TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                        end
+                                    else
+                                        TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
+                                    end
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Você precisar ter <b>porte de armas</b>.")
+                                end
+                            else
+                                if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                    if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                        vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                        TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                        TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
+                                    else
+                                        TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                    end
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
+                                end
+                            end
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
+                    end
+                end
+            end
+
+            for k,v in pairs(config.pubList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                    vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                    TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                    TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                end
+                            else
+                                TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
+                            end
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
+                    end
+                end
+            end
+
+            for k,v in pairs(config.coffeeshopList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                    vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                    TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                    TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                end
+                            else
+                                TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
+                            end
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
+                    end
+                end
+            end
+
+            for k,v in pairs(config.convenienceshopList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                    vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                    TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                    TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                end
+                            else
+                                TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
+                            end
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
+                    end
+                end
+            end
+
+            for k,v in pairs(config.digitalshopList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
+                                if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
+                                    vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
+                                    TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
+                                    TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
+                                else
+                                    TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
+                                end
+                            else
+                                TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
+                            end
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
+                    end
+                end
+            end
+
+            for k,v in pairs(config.drugshopList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
+                            if vRP.tryGetInventoryItem(user_id,v.itemRequire,itemAmount) then
                                 if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
                                     if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
                                         vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
@@ -122,9 +266,19 @@ function shop.buyItem(itemName,itemAmount)
                                     TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
                                 end
                             else
-                                TriggerClientEvent("Notify",source,"negado","Você precisar ter <b>porte de armas</b>.")
+                                TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..itemAmount.."x "..vRP.itemNameList(v.itemRequire).."</b>.")
                             end
-                        else
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
+                    end
+                end
+            end
+
+            for k,v in pairs(config.toolshopList) do
+                if itemName == v.itemName then
+                    if itemAmount then
+                        if user_id then
                             if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
                                 if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
                                     vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
@@ -137,147 +291,13 @@ function shop.buyItem(itemName,itemAmount)
                                 TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
                             end
                         end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
                     end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
                 end
             end
-        end
-
-        for k,v in pairs(pubList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                            if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
-                                TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
-                        end
-                    end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
-                end
-            end
-        end
-
-        for k,v in pairs(coffeeshopList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                            if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
-                                TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
-                        end
-                    end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
-                end
-            end
-        end
-
-        for k,v in pairs(convenienceshopList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                            if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
-                                TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
-                        end
-                    end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
-                end
-            end
-        end
-
-        for k,v in pairs(digitalshopList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                            if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
-                                TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
-                        end
-                    end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
-                end
-            end
-        end
-
-        for k,v in pairs(drugshopList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.tryGetInventoryItem(user_id,v.itemRequire,itemAmount) then
-                            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                                if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                    vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                    TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
-                                    TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
-                                else
-                                    TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
-                                end
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..itemAmount.."x "..vRP.itemNameList(v.itemRequire).."</b>.")
-                        end
-                    end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
-                end
-            end
-        end
-
-        for k,v in pairs(toolshopList) do
-            if itemName == v.itemName then
-                if itemAmount then
-                    if user_id then
-                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v.itemName)*v.itemAmount*itemAmount <= vRP.getInventoryMaxWeight(user_id) then
-                            if vRP.tryPayment(user_id,parseInt(v.itemPrice*itemAmount)) then
-                                vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*itemAmount))
-                                TriggerClientEvent("itensNotify",source,"sucesso","Comprou",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(itemAmount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(itemAmount)).."")
-                                TriggerClientEvent("Shops:UpdateInventory",source,"updateShop")
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Mochila <b>cheia</b>.")
-                        end
-                    end
-                else
-                    TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
-                end
-            end
+        else
+            TriggerClientEvent("Notify",source,"negado","Espaço <b>insuficiente</b>.")
         end
     else
         TriggerClientEvent("Notify",source,"negado","Quantidade <b>inválida</b>.")
@@ -299,7 +319,7 @@ AddEventHandler("onResourceStart",function(resourceName)
                             end
                         end
                     end            
-				end
+                end
 				PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = "**Atenção:** <@&748720506169196675>**!**", embeds = {{title = "PRODUTO NÃO AUTENTICADO:\n⠀", thumbnail = {url = 'https://i.imgur.com/Y5Zktwm.png'}, fields = {{ name = "**Produto:**", value = ""..GetCurrentResourceName().."\n⠀"}, {name = "**• DADOS DO PROPRIETÁRIO:**", value = "⠀"}, {name = "**Nome completo:**", value = ""..customer..""}, {name = "**Nº contrato:**", value = ""..customerid..""}, {name = "**E-mail:**", value = ""..customeremail..""}, {name = "**Discord:**", value = ""..customerdiscord.."\n⠀"}, {name = "**• DADOS DE REDE:**", value = "⠀"}, {name = "**IP autorizado:**", value = "` "..customerip.." `"}, {name = "**IP não autorizado:**", value = "` "..resultData.." `\n⠀"}}, footer = {text = 'ZIRAFLIX Inc. Todos os direitos reservados | '..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = 'https://i.imgur.com/Y5Zktwm.png'}, color = 1975079}}}), {['Content-Type'] = 'application/json'})                    
                 print("\27[31m["..GetCurrentResourceName().."] Não autenticado! Adquira já o seu em www.ziraflix.com;")
             end)

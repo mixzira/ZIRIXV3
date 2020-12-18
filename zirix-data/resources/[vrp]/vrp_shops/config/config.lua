@@ -1,5 +1,7 @@
 config = {}
 
+config.imageServer = ''
+
 config.accessoriesList = {
     { itemName = 'mascara', itemPrice = 130, itemAmount = 1 },
     { itemName = 'mochila', itemPrice = 1000, itemAmount = 1 },

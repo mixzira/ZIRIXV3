@@ -42,6 +42,7 @@ RegisterCommand('vrp_inventory:useClick', function()
     TriggerEvent('vrp_homes:exit')
     TriggerEvent('vrp_homes:chest')
     TriggerEvent('vrp_homes:invade')
+    TriggerEvent('vrp_shops:open')
 end, false)
 
 
@@ -142,9 +143,13 @@ RegisterNUICallback("requestInventory",function(data,cb)
             ip = '192.99.251.232:3501'
         end
     end
-	if inventario then
-		cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, ip = ip })
-	end
+    if vRPNserver.checkAuth() then
+        if inventario then
+            cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, ip = ip })
+        end
+    else
+        TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+    end
 end)
 
 --[ AUTO-UPDATE ]------------------------------------------------------------------------------------------------------------------------

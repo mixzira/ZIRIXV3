@@ -227,7 +227,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < data.tSlot; i++) {
+			$("#inventory-items").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#accessories').html(`
 			${accessoriesItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -238,7 +243,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 6; i++) {
+			$("#accessories").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#ammunation').html(`
 			${ammunationItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -249,7 +259,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 5; i++) {
+			$("#ammunation").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#pub').html(`
 			${pubItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -260,7 +275,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 3; i++) {
+			$("#pub").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#coffeeshop').html(`
 			${coffeeshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -271,7 +291,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 3; i++) {
+			$("#coffeeshop").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#convenienceshop').html(`
 			${convenienceshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -282,7 +307,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 5; i++) {
+			$("#convenienceshop").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#digitalshop').html(`
 			${digitalshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -293,7 +323,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 4; i++) {
+			$("#digitalshop").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#drugshop').html(`
 			${drugshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -304,7 +339,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 4; i++) {
+			$("#drugshop").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#toolshop').html(`
 			${toolshopItems.map((item) => (`
 				<div class="shop-item" data-item-key="${item.itemBody}">
@@ -315,7 +355,12 @@ const updateShop = () => {
 				</div>
 			`)).join('')}
 		`);
-
+		for (let i = 0; i < 5; i++) {
+			$("#toolshop").append(`
+				<div class="slot">
+				</div>
+			`)
+		}
 		$('#inventory-bottom').html(`
 			<input id="amount" class="qtd" maxlength="9" spellcheck="false" value="" placeholder="QUANTIDADE">
 			<div class="inventory-amount-bar"><span id="amount-bar" style="width: ${(data.weight*100/data.maxweight).toFixed(2)}%;"></span></div>

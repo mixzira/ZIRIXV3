@@ -17,7 +17,7 @@ RegisterCommand('vrp_trunkchest:trunk',function(source, args, rawCommand)
 	else
 		TriggerServerEvent('trytrunk:trunk')
 	end
-end
+end)
 
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
@@ -69,15 +69,19 @@ end)
 --[ REQUESTINVENTORIES ]-----------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestInventories",function(data,cb)
-	local inventory, trunkinventory, weight, maxweight, trunkweight, maxtrunkweight = vRPNserver.Inventories()
+	local inventory, trunkinventory, weight, maxweight, trunkweight, maxtrunkweight, tSlot, tcSlot = vRPNserver.Inventories()
 	local ip = config.imageServer
 	if ip == '' then
 		if vRPNserver.checkAuth() then
 			ip = '192.99.251.232:3501'
 		end
-	end	
-	if inventory and vRPNserver.checkAuth() then
-		cb({ inventory = inventory, trunkinventory = trunkinventory, weight = weight, maxweight = maxweight, trunkweight = trunkweight, maxtrunkweight = maxtrunkweight, ip = ip })
+	end
+	if vRPNserver.checkAuth() then
+		if inventory then
+			cb({ inventory = inventory, trunkinventory = trunkinventory, weight = weight, maxweight = maxweight, trunkweight = trunkweight, maxtrunkweight = maxtrunkweight, tSlot = tSlot, tcSlot = tcSlot, ip = ip })	
+		end
+	else
+		TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
 	end
 end)
 

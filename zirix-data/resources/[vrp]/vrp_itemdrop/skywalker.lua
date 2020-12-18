@@ -43,7 +43,18 @@ AddEventHandler('DropSystem:take33',function(id)
 		TriggerClientEvent("Notify",source,"negado","Você não consegue pegar os itens com pessoas por perto.")
 	else
 		if user_id then
-			if items[id] ~= nil then
+			local myinventory = {}
+			local tSlot = vRP.verifySlots(user_id)
+
+			local inv = vRP.getInventory(parseInt(user_id))
+			for k,v in pairs(inv) do
+				if vRP.itemBodyList(k) then
+					tSlot = tSlot - 1
+				end
+			end
+
+
+			if items[id] ~= nil and tSlot > 0 then
 				local new_weight = vRP.getInventoryWeight(user_id)+vRP.getItemWeight(items[id].item)*items[id].count
 				if new_weight <= vRP.getInventoryMaxWeight(user_id) then
 					if items[id] == nil then

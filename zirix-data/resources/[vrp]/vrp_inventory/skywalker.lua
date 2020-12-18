@@ -107,7 +107,34 @@ function vRPN.sendItem(itemName,type,amount)
 		local nuser_id = vRP.getUserId(nplayer)
 		local identity = vRP.getUserIdentity(user_id)
 		local identitynu = vRP.getUserIdentity(nuser_id)
-		if nuser_id and vRP.itemIndexList(itemName) then
+		local tnSlot = 0
+
+		if nuser_id then
+			local data = vRP.getUserDataTable(nuser_id)
+			local inventory = {}
+			if data and data.inventory then
+				local tnSlot = vRPN.verifySlots(nuser_id)
+				
+				if tnSlot ~= nil then
+					tnSlot = tnSlot
+				else
+					tnSlot = 11
+				end
+	
+				for k,v in pairs(data.inventory) do
+					tnSlot = tnSlot - 1
+					if vRP.itemBodyList(k) then
+						if tnSlot >= 0 then
+							table.insert(inventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, type = vRP.itemTypeList(k), peso = vRP.getItemWeight(k) })
+						end
+					end
+				end
+	
+				return tnSlot
+			end
+		end
+
+		if nuser_id and tnSlot > 0 and vRP.itemIndexList(itemName) then
 			local x,y,z = vRPclient.getPosition(source)
 			if parseInt(amount) > 0 then
 				if vRP.getInventoryWeight(nuser_id) + vRP.getItemWeight(itemName) * amount <= vRP.getInventoryMaxWeight(nuser_id) then

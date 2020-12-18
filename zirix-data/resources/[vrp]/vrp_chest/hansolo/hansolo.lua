@@ -57,9 +57,9 @@ RegisterNUICallback("requestChest",function(data,cb)
 			ip = '192.99.251.232:3501'
 		end
 	end
-	if inventory then
-		cb({ inventory = inventory, chest = chest, weight = weight, maxweight = maxweight, weightchest = weightchest, maxweightchest = maxweightchest, slots = slots, slotschest = slotschest, ip = ip })
-	end
+		if inventory then
+			cb({ inventory = inventory, chest = chest, weight = weight, maxweight = maxweight, weightchest = weightchest, maxweightchest = maxweightchest, slots = slots, slotschest = slotschest, ip = ip })
+		end
 end)
 
 --[ CHEST ]------------------------------------------------------------------------------------------------------------------------------

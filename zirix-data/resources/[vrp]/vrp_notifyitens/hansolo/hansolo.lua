@@ -13,5 +13,9 @@ AddEventHandler("itensNotify",function(mode,mensagem,item,quantidade,peso)
             ip = '192.99.251.232:3501'
         end
     end
-	SendNUIMessage({ mode = mode, mensagem = mensagem, item = item, quantidade = quantidade, peso = peso, ip = ip })
+    if vSERVER.checkAuth() then
+        SendNUIMessage({ mode = mode, mensagem = mensagem, item = item, quantidade = quantidade, peso = peso, ip = ip })
+    else
+        TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+    end
 end)
