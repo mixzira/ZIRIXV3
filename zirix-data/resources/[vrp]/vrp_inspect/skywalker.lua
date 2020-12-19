@@ -119,8 +119,8 @@ function src.openChest()
 	if user_id then
 		local ninventory = {}
 		local uinventory = {}
-		local tcSlot = vRP.verifySlots(parseInt(opened[user_id]))
-		local tSlot = vRP.verifySlots(user_id)
+		local tcSlot = vRP.verifySlots(user_id)
+		local tSlot = vRP.verifySlots(parseInt(opened[user_id]))
 		
 		if tcSlot ~= nil then
 			tcSlot = tcSlot
