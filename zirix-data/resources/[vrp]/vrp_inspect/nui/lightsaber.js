@@ -129,6 +129,12 @@ const updateDrag = () => {
 			document.getElementById("amount").value = "";
 		}
 	})
+	for (let i = 0; i < data.slots; i++) {
+		$("#inventory-items").append(`
+			<div class="slot">
+			</div>
+		`)
+	}
 
 	$('#nuinventory-items').droppable({
 		hoverClass: 'hoverControl',
@@ -146,6 +152,13 @@ const updateDrag = () => {
 			document.getElementById("amount").value = "";
 		}
 	})
+	for (let i = 0; i < data.slots; i++) {
+		$("#nuinventory-items").append(`
+			<div class="slot">
+			</div>
+		`)
+	}
+
 }
 
 const formatarNumero = (n) => {
