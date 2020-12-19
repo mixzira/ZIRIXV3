@@ -120,7 +120,9 @@ function src.openChest()
 		local ninventory = {}
 		local uinventory = {}
 		local tcSlot = vRP.verifySlots(user_id)
+		print("Me: "..tcSlot)
 		local tSlot = vRP.verifySlots(parseInt(opened[user_id]))
+		print("Nu: "..tSlot)
 		
 		if tcSlot ~= nil then
 			tcSlot = tcSlot
@@ -138,7 +140,7 @@ function src.openChest()
 		if inv then
 			for k,v in pairs(inv) do
 				if vRP.itemBodyList(k) then
-					tcSlot = tcSlot - 1
+					tSlot = tSlot - 1
 					table.insert(ninventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
 				end
 			end
@@ -148,14 +150,12 @@ function src.openChest()
 		if inv2 then
 			for k,v in pairs(inv2) do
 				if vRP.itemBodyList(k) then
-					tSlot = tSlot - 1
+					tcSlot = tcSlot - 1
 					table.insert(uinventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, peso = vRP.getItemWeight(k) })
 				end
 			end
 		end
 
-		print(tcSlot)
-		print(tSlot)
 		return ninventory,uinventory,vRP.getInventoryWeight(parseInt(user_id)),vRP.getInventoryMaxWeight(parseInt(user_id)),vRP.getInventoryWeight(parseInt(opened[user_id])),vRP.getInventoryMaxWeight(parseInt(opened[user_id])),parseInt(tSlot),parseInt(tcSlot)
 	end
 end
