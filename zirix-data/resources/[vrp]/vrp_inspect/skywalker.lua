@@ -120,9 +120,7 @@ function src.openChest()
 		local ninventory = {}
 		local uinventory = {}
 		local tcSlot = vRP.verifySlots(user_id)
-		print("Me: "..tcSlot)
 		local tSlot = vRP.verifySlots(parseInt(opened[user_id]))
-		print("Nu: "..tSlot)
 		
 		if tcSlot ~= nil then
 			tcSlot = tcSlot
