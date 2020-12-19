@@ -101,6 +101,7 @@ end
 
 function vRPN.sendItem(itemName,type,amount)
 	local source = source
+
 	if itemName then
 		local user_id = vRP.getUserId(source)
 		local nplayer = vRPclient.getNearestPlayer(source,2)
@@ -113,14 +114,12 @@ function vRPN.sendItem(itemName,type,amount)
 			local data = vRP.getUserDataTable(nuser_id)
 			local inventory = {}
 			if data and data.inventory then
-				local tnSlot = vRPN.verifySlots(nuser_id)
-				
+				tnSlot = vRPN.verifySlots(nuser_id)
 				if tnSlot ~= nil then
 					tnSlot = tnSlot
 				else
 					tnSlot = 11
 				end
-	
 				for k,v in pairs(data.inventory) do
 					tnSlot = tnSlot - 1
 					if vRP.itemBodyList(k) then
@@ -129,8 +128,6 @@ function vRPN.sendItem(itemName,type,amount)
 						end
 					end
 				end
-	
-				return tnSlot
 			end
 		end
 

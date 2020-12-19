@@ -999,11 +999,7 @@ local vehglobal = {
 	["maverick"] = { ['name'] = "Maverick", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
 	["tanker2"] = { ['name'] = "Gas", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
 	["armytanker"] = { ['name'] = "Diesel", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
-<<<<<<< HEAD
 	["tvtrailer"] = { ['name'] = "Show", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
-=======
-	["tvtrailer"] = { ['name'] = "Show", ['price'] = 1000, ['tipo'] = "work", ["mala "] = 10, ["slots"] = 10 },
->>>>>>> 115e0f28f9fba3e548c99cb4338b910f0606c6aa
 	["trailerlogs"] = { ['name'] = "Woods", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
 	["tr4"] = { ['name'] = "Cars", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
 	["speedo"] = { ['name'] = "Speedo", ['price'] = 200000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
@@ -1025,11 +1021,7 @@ local vehglobal = {
 	["volatus"] = { ['name'] = "Volatus", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
 	["cargobob2"] = { ['name'] = "Cargo Bob", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
 	["pounder"] = { ['name'] = "Pounder", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
-<<<<<<< HEAD
 	["youga2"] = { ['name'] = "Youga XL", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10 },
-=======
-	["youga2"] = { ['name'] = "Youga XL", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10 },
->>>>>>> 115e0f28f9fba3e548c99cb4338b910f0606c6aa
 
 	--[ PASS ]----------------
 
@@ -1082,6 +1074,9 @@ function vRP.vehicleChest(vname)
 end
 
 function vRP.vehicleSlot(vname)
+	if vehglobal[vname].slots == nil then
+		return 5
+	end
 	return vehglobal[vname].slots
 end
 

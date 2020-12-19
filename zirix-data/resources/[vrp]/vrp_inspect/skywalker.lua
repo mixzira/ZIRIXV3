@@ -112,6 +112,8 @@ RegisterCommand(config.plunderCommand,function(source,args,rawCommand)
 end)
 
 --[ OPENINVENTORY ]---------------------------------------------------------------------------------
+slotsuser = 0
+slotsnuser = 0
 
 function src.openChest()
 	local source = source
@@ -144,6 +146,8 @@ function src.openChest()
 			end
 		end
 
+		slotsuser = tSlot
+
 		local inv2 = vRP.getInventory(parseInt(user_id))
 		if inv2 then
 			for k,v in pairs(inv2) do
@@ -153,6 +157,7 @@ function src.openChest()
 				end
 			end
 		end
+		slotsnuser = tcSlot
 
 		return ninventory,uinventory,vRP.getInventoryWeight(parseInt(user_id)),vRP.getInventoryMaxWeight(parseInt(user_id)),vRP.getInventoryWeight(parseInt(opened[user_id])),vRP.getInventoryMaxWeight(parseInt(opened[user_id])),parseInt(tSlot),parseInt(tcSlot)
 	end
@@ -171,7 +176,7 @@ function src.storeItem(itemName,amount)
 		local identitynu = vRP.getUserIdentity(nuser_id)
 		local x,y,z = vRPclient.getPosition(source)
 
-		if user_id and nsource then
+		if user_id and nsource and slotsuser > 0 then
 			if parseInt(amount) > 0 then
 				if vRP.getInventoryWeight(parseInt(opened[user_id]))+vRP.getItemWeight(itemName)*parseInt(amount) <= vRP.getInventoryMaxWeight(parseInt(opened[user_id])) then
 					if vRP.tryGetInventoryItem(parseInt(user_id),itemName,parseInt(amount)) then
@@ -206,7 +211,7 @@ function src.takeItem(itemName,amount)
 		local nuser_id = vRP.getUserId(nsource)
 		local identitynu = vRP.getUserIdentity(nuser_id)
 		local x,y,z = vRPclient.getPosition(source)
-		if user_id and nsource then
+		if user_id and nsource and slotsnuser > 0 then
 			if parseInt(amount) > 0 then
 				if vRP.getInventoryWeight(parseInt(user_id))+vRP.getItemWeight(itemName)*parseInt(amount) <= vRP.getInventoryMaxWeight(parseInt(user_id)) then
 					if vRP.tryGetInventoryItem(parseInt(opened[user_id]),itemName,parseInt(amount)) then

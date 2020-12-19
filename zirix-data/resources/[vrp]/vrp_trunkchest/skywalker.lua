@@ -48,9 +48,6 @@ function vRPN.Inventories()
 		local vehicle,vnetid,placa,vname,lock,banned = vRPclient.vehList(source,7)
 		local tSlot = vRP.verifySlots(user_id)
 		local tcSlot = vRP.vehicleSlot(vname)
-		if tcSlot == nil then
-			tcSlot = 5
-		end
 		
 		if vehicle then
 			local placa_user_id = vRP.getUserByRegistration(placa)
