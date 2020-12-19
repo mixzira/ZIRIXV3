@@ -179,7 +179,7 @@ const updateChest = () => {
 		const nameList = data.inventory.sort((a,b) => (a.name > b.name) ? 1: -1);
 		const nameList2 = data.nuinventory.sort((a,b) => (a.name > b.name) ? 1: -1);
 		$('#inventory-items').html(`
-			${nameList.map((item) => (`
+			${nameList2.map((item) => (`
 				<div class="slot">
 					<div class="item" data-item-key="${item.key}" data-vehname-key="${item.vehname}">
 						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
@@ -190,14 +190,14 @@ const updateChest = () => {
 				</div>
 			`)).join('')}
 		`);
-		for (let i = 0; i < data.slots; i++) {
+		for (let i = 0; i < data.nuslots; i++) {
 			$("#inventory-items").append(`
 				<div class="slot">
 				</div>
 			`)
 		}
 		$('#nuinventory-items').html(`
-			${nameList2.map((item) => (`
+			${nameList.map((item) => (`
 				<div class="slot">
 					<div class="nuinventory-item" data-item-key="${item.key}" data-vehname-key="${item.vehname}">
 						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
@@ -208,7 +208,7 @@ const updateChest = () => {
 				</div>
 			`)).join('')}
 		`);
-		for (let i = 0; i < data.nuslots; i++) {
+		for (let i = 0; i < data.slots; i++) {
 			$("#nuinventory-items").append(`
 				<div class="slot">
 				</div>
