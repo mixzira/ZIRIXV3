@@ -154,6 +154,8 @@ function src.openChest()
 			end
 		end
 
+		print(tcSlot)
+		print(tSlot)
 		return ninventory,uinventory,vRP.getInventoryWeight(parseInt(user_id)),vRP.getInventoryMaxWeight(parseInt(user_id)),vRP.getInventoryWeight(parseInt(opened[user_id])),vRP.getInventoryMaxWeight(parseInt(opened[user_id])),parseInt(tSlot),parseInt(tcSlot)
 	end
 end
