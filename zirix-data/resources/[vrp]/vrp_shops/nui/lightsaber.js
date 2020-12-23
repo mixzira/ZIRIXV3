@@ -39,98 +39,25 @@ const disableInventory = ms => {
 
 $(document).ready(function(){
 	let actionShop = $("#actionmenu");
-
 	window.addEventListener("message",function(event){
 		let item = event.data;
 		switch(item.action){
 			case "showMenu":
-				if (item.type == 'accessories' ) {
-					$('#accessories').css('display', 'block');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'ammunation') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'block');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'pub') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'block');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'coffeeshop') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'block');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'convenienceshop') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'block');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'digitalshop') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'block');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'drugshop') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'block');
-					$('#toolshop').css('display', 'none');
-				}
-				if (item.type == 'toolshop') {
-					$('#accessories').css('display', 'none');
-					$('#ammunation').css('display', 'none');
-					$('#pub').css('display', 'none');
-					$('#coffeeshop').css('display', 'none');
-					$('#convenienceshop').css('display', 'none');
-					$('#digitalshop').css('display', 'none');
-					$('#drugshop').css('display', 'none');
-					$('#toolshop').css('display', 'block');
-				}
-
+				$(`#${item.type}`).css('display', 'block');
+				$(`#${item.type}`).css('position', 'absolute');
+				$(`#${item.type}`).css('width', '365px');
+				$(`#${item.type}`).css('height', '350px');
+				$(`#${item.type}`).css('right', '0px');
+				$(`#${item.type}`).css('margin-top', '40px');
+				$(`#${item.type}`).css('float', 'left');
+				$(`#${item.type}`).css('overflow', 'auto');
 				updateShop();
 				actionShop.fadeIn(500);
 			break;
 
 			case "hideMenu":
 				actionShop.fadeOut(500);
+				$(`#${item.type}`).css('display', 'none');
 			break;
 
 			case "updateShop":
@@ -138,7 +65,6 @@ $(document).ready(function(){
 			break;
 		}
 	});
-
 	document.onkeyup = function(data){
 		if (data.which == 27){
 			$.post("http://vrp_shops/shopClose");
@@ -208,156 +134,51 @@ const formatarNumero = (n) => {
 const updateShop = () => {
 	$.post("http://vrp_shops/requestShops",JSON.stringify({}),(data) => {
 		const inventoryItems = data.inventory.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const accessoriesItems = data.accessories.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const ammunationItems = data.ammunation.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const pubItems = data.pub.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const coffeeshopItems = data.coffeeshop.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const convenienceshopItems = data.convenienceshop.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const digitalshopItems = data.digitalshop.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const drugshopItems = data.drugshop.sort((a,b) => (a.name > b.name) ? 1: -1);
-		const toolshopItems = data.toolshop.sort((a,b) => (a.name > b.name) ? 1: -1);
+		const shopItems = data.itemsshop.sort((a,b) => (a.name > b.name) ? 1: -1);
 
 		$('#inventory-items').html(`
 			${inventoryItems.map((item) => (`
-				<div class="item">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
-					<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
-					<div id="item-amount">${formatarNumero(item.amount)}x</div>
-					<div id="item-name">${item.name}</div>
+				<div class="fake-slot">
+					<div class="slot">
+						<div class="item">
+							<div id="item-icon"><img src='http://${data.ip}/image-streaming/08070605/vrp_itens/${item.index}.png'></div>
+							<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
+							<div id="item-amount">${formatarNumero(item.amount)}x</div>
+							<div id="item-name">${item.name}</div>
+						</div>
+					</div>
 				</div>
 			`)).join('')}
 		`);
-		for (let i = 0; i < data.tSlot; i++) {
+		for (let i = 0; i < data.slots; i++) {
 			$("#inventory-items").append(`
 				<div class="slot">
 				</div>
 			`)
 		}
-		$('#accessories').html(`
-			${accessoriesItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 6; i++) {
-			$("#accessories").append(`
-				<div class="slot">
+		for (let i = 0; i < data.fslots; i++) {
+			$("#inventory-items").append(`
+				<div class="fake-slot">
 				</div>
 			`)
 		}
-		$('#ammunation').html(`
-			${ammunationItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
+		$('.shop').html(`
+			${shopItems.map((item) => (`
+				<div class="fake-slot">
+					<div id="${data.shopName}">
+						<div class="shop-item" data-item-key="${item.itemBody}">
+							<div id="item-icon"><img src='http://${data.ip}/image-streaming/08070605/vrp_itens/${item.itemIndex}.png'></div>
+							<div id="item-weight">$${item.itemPrice}</div>
+							<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
+							<div id="item-name">${item.itemName}</div>
+						</div>
+					</div>
 				</div>
 			`)).join('')}
 		`);
-		for (let i = 0; i < 5; i++) {
-			$("#ammunation").append(`
-				<div class="slot">
-				</div>
-			`)
-		}
-		$('#pub').html(`
-			${pubItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 3; i++) {
-			$("#pub").append(`
-				<div class="slot">
-				</div>
-			`)
-		}
-		$('#coffeeshop').html(`
-			${coffeeshopItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 3; i++) {
-			$("#coffeeshop").append(`
-				<div class="slot">
-				</div>
-			`)
-		}
-		$('#convenienceshop').html(`
-			${convenienceshopItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 5; i++) {
-			$("#convenienceshop").append(`
-				<div class="slot">
-				</div>
-			`)
-		}
-		$('#digitalshop').html(`
-			${digitalshopItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 4; i++) {
-			$("#digitalshop").append(`
-				<div class="slot">
-				</div>
-			`)
-		}
-		$('#drugshop').html(`
-			${drugshopItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 4; i++) {
-			$("#drugshop").append(`
-				<div class="slot">
-				</div>
-			`)
-		}
-		$('#toolshop').html(`
-			${toolshopItems.map((item) => (`
-				<div class="shop-item" data-item-key="${item.itemBody}">
-					<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.itemIndex}.png'></div>
-					<div id="item-weight">$${item.itemPrice}</div>
-					<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
-					<div id="item-name">${item.itemName}</div>
-				</div>
-			`)).join('')}
-		`);
-		for (let i = 0; i < 5; i++) {
-			$("#toolshop").append(`
-				<div class="slot">
+		for (let i = 0; i < data.fshopslots; i++) {
+			$(".shop").append(`
+				<div class="fake-slot">
 				</div>
 			`)
 		}

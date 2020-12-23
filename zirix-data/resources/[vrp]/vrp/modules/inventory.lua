@@ -1073,6 +1073,8 @@ function vRP.vehicleChest(vname)
 	return vehglobal[vname].mala
 end
 
+--[ VEHICLESLOT ]---------------------------------------------------------------------------------------------------------------------------------------
+
 function vRP.vehicleSlot(vname)
 	if vehglobal[vname].slots == nil then
 		return 5
