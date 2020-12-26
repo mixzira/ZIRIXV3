@@ -6,6 +6,8 @@ ui_page 'gui/index.html'
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',
 	'lib/utils.lua',
+	'zirix/binds.lua',
+	'zirix/vehicles.lua',
 	'base.lua',
 	'queue.lua',
 	'modules/gui.lua',
@@ -25,6 +27,8 @@ server_scripts {
 
 client_scripts {
 	'lib/utils.lua',
+	'zirix/binds.lua',
+	'zirix/vehicles.lua',
 	'client/base.lua',
 	'client/basic_garage.lua',
 	'client/iplloader.lua',

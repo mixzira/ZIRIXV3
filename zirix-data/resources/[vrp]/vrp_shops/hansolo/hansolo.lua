@@ -112,7 +112,7 @@ Citizen.CreateThread(function()
 				local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
 				if distance < 5.1 then
 					idle = 5
-					DrawMarker(23, v.x, v.y, v.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5,66, 236, 134, 150,0,0,0,0)
+					DrawMarker(23, v.x, v.y, v.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
 				end
 			end
 		end

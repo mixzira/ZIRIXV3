@@ -1,4 +1,5 @@
 local Config = {}
+
 vRP.prepare("vRP/get_priority","SELECT * FROM vrp_priority")
 
 Config.RequireSteam = true

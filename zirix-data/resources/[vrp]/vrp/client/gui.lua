@@ -236,13 +236,13 @@ end)
 
 --[  ]-----------------------------------------------------------------------------
 
-RegisterKeyMapping ( 'vrp:accept' , 'Aceitar' , 'keyboard' , 'y' )
+RegisterKeyMapping ( 'vrp:accept' , 'Aceitar' , 'keyboard' , binds.accept )
 
 RegisterCommand('vrp:accept', function()
     SendNUIMessage({ act = "event", event = "Y" })
 end, false)
 
-RegisterKeyMapping ( 'vrp:decline' , 'Negar' , 'keyboard' , 'n' )
+RegisterKeyMapping ( 'vrp:decline' , 'Negar' , 'keyboard' , binds.decline )
 
 RegisterCommand('vrp:decline', function()
     SendNUIMessage({ act = "event", event = "U" })
@@ -250,43 +250,63 @@ end, false)
 
 --[  ]-----------------------------------------------------------------------------
 
-RegisterKeyMapping ( 'vrp:up' , 'Cima' , 'keyboard' , 'UP' )
+RegisterKeyMapping ( 'vrp:up' , 'Cima | [A] Beleza' , 'keyboard' , binds.up )
 
 RegisterCommand('vrp:up', function()
 	if menu_state.opened then
 		SendNUIMessage({ act = "event", event = "UP" }) 
-        tvRP.playSound("NAV_UP_DOWN","HUD_FRONTEND_DEFAULT_SOUNDSET") 
+		tvRP.playSound("NAV_UP_DOWN","HUD_FRONTEND_DEFAULT_SOUNDSET") 
+	else
+		local ped = PlayerPedId()
+		if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
+			tvRP.playAnim(true,{{"anim@mp_player_intincarthumbs_upbodhi@ps@","enter"}},false)
+		end
 	end
 end, false)
 
-RegisterKeyMapping ( 'vrp:down' , 'Baixo' , 'keyboard' , 'DOWN' )
+RegisterKeyMapping ( 'vrp:down' , 'Baixo | [A] Saudação' , 'keyboard' , binds.down )
 
 RegisterCommand('vrp:down', function()
 	if menu_state.opened then
 		SendNUIMessage({ act = "event", event = "DOWN" })
-        tvRP.playSound("NAV_UP_DOWN","HUD_FRONTEND_DEFAULT_SOUNDSET")
+		tvRP.playSound("NAV_UP_DOWN","HUD_FRONTEND_DEFAULT_SOUNDSET")
+	else
+		local ped = PlayerPedId()
+		if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
+			tvRP.playAnim(true,{{"anim@mp_player_intcelebrationmale@salute","salute"}},false)
+		end
 	end
 end, false)
 
-RegisterKeyMapping ( 'vrp:left' , 'Esquerda' , 'keyboard' , 'LEFT' )
+RegisterKeyMapping ( 'vrp:left' , 'Esquerda | [A] Assobiar' , 'keyboard' , binds.left )
 
 RegisterCommand('vrp:left', function()
 	if menu_state.opened then
 		SendNUIMessage({ act = "event", event = "LEFT" })
-        tvRP.playSound("NAV_LEFT_RIGHT","HUD_FRONTEND_DEFAULT_SOUNDSET")
+		tvRP.playSound("NAV_LEFT_RIGHT","HUD_FRONTEND_DEFAULT_SOUNDSET")
+	else
+		local ped = PlayerPedId()
+		if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
+			tvRP.playAnim(true,{{"rcmnigel1c","hailing_whistle_waive_a"}},false)
+		end
 	end
 end, false)
 
-RegisterKeyMapping ( 'vrp:right' , 'Direita' , 'keyboard' , 'RIGHT' )
+RegisterKeyMapping ( 'vrp:right' , 'Direita | [A] Vergonha!' , 'keyboard' , binds.right )
 
 RegisterCommand('vrp:right', function()
 	if menu_state.opened then
 		SendNUIMessage({ act = "event", event = "RIGHT" }) 
-        tvRP.playSound("NAV_LEFT_RIGHT","HUD_FRONTEND_DEFAULT_SOUNDSET")
+		tvRP.playSound("NAV_LEFT_RIGHT","HUD_FRONTEND_DEFAULT_SOUNDSET")
+	else
+		local ped = PlayerPedId()
+		if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
+			tvRP.playAnim(true,{{"anim@mp_player_intcelebrationmale@face_palm","face_palm"}},false)
+		end
 	end
 end, false)
 
-RegisterKeyMapping ( 'vrp:select' , 'Selecionar' , 'keyboard' , 'RETURN' )
+RegisterKeyMapping ( 'vrp:select' , 'Selecionar' , 'keyboard' , binds.select )
 
 RegisterCommand('vrp:select', function()
 	if menu_state.opened then
@@ -295,7 +315,7 @@ RegisterCommand('vrp:select', function()
 	end
 end, false)
 
-RegisterKeyMapping ( 'vrp:cancel' , 'Cancelar' , 'keyboard' , 'BACK' )
+RegisterKeyMapping ( 'vrp:cancel' , 'Cancelar' , 'keyboard' , binds.cancel )
 
 RegisterCommand('vrp:cancel', function()
 	SendNUIMessage({ act = "event", event = "CANCEL" })
@@ -307,7 +327,7 @@ RegisterKeyMapping ( 'vrp:anim01' , '[A] Cruzar os braços' , 'keyboard' , 'F1' 
 
 RegisterCommand('vrp:anim01', function()
 	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
+	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
 		if IsEntityPlayingAnim(ped,"anim@heists@heist_corona@single_team","single_team_loop_boss",3) then
 			tvRP.DeletarObjeto()
 		else
@@ -320,7 +340,7 @@ RegisterKeyMapping ( 'vrp:anim02' , '[A] Aguardar' , 'keyboard' , 'F2' )
 
 RegisterCommand('vrp:anim02', function()
 	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
+	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
 		if IsEntityPlayingAnim(ped,"mini@strip_club@idles@bouncer@base","base",3) then
 			tvRP.DeletarObjeto()
 		else
@@ -333,7 +353,7 @@ RegisterKeyMapping ( 'vrp:anim03' , '[A] Dedo do meio' , 'keyboard' , 'F3' )
 
 RegisterCommand('vrp:anim03', function()
 	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
+	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
 		if IsEntityPlayingAnim(ped,"anim@mp_player_intupperfinger","idle_a_fp",3) then
 			tvRP.DeletarObjeto()
 		else
@@ -346,7 +366,7 @@ RegisterKeyMapping ( 'vrp:anim05' , '[A] Puto' , 'keyboard' , 'F5' )
 
 RegisterCommand('vrp:anim05', function()
 	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
+	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
 		tvRP.playAnim(true,{{"misscarsteal4@actor","actor_berating_loop"}},false)
 	end
 end, false)
@@ -370,7 +390,7 @@ RegisterKeyMapping ( 'vrp:anim10' , '[A] Mãos na cabeça' , 'keyboard' , 'F10' 
 
 RegisterCommand('vrp:anim10', function()
 	local ped = PlayerPedId()
-	if GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
+	if GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando and not IsPauseMenuActive() then
 		if IsEntityPlayingAnim(ped,"random@arrests@busted","idle_a",3) then
 			tvRP.DeletarObjeto()
 		else
@@ -384,7 +404,7 @@ RegisterKeyMapping ( 'vrp:animX' , '[A] Levantar as mãos' , 'keyboard' , 'X' )
 
 RegisterCommand('vrp:animX', function()
 	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_celular and not cancelando then
+	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_celular and not cancelando and not IsPauseMenuActive() then
 		SetCurrentPedWeapon(ped,GetHashKey("WEAPON_UNARMED"),true)
 		if IsEntityPlayingAnim(ped,"random@mugging3","handsup_standing_base",3) then
 			tvRP.DeletarObjeto()
@@ -410,42 +430,6 @@ RegisterCommand('vrp:vehicleZ', function()
 				SetVehicleUndriveable(vehicle,false)
 			end
 		end
-	end
-end, false)
-
-RegisterKeyMapping ( 'vrp:animp3' , '[A] Beleza' , 'keyboard' , '3' )
-
-RegisterCommand('vrp:animp3', function()
-	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
-		tvRP.playAnim(true,{{"anim@mp_player_intincarthumbs_upbodhi@ps@","enter"}},false)
-	end
-end, false)
-
-RegisterKeyMapping ( 'vrp:animp4' , '[A] Saudação' , 'keyboard' , '4' )
-
-RegisterCommand('vrp:animp4', function()
-	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
-		tvRP.playAnim(true,{{"anim@mp_player_intcelebrationmale@salute","salute"}},false)
-	end
-end, false)
-
-RegisterKeyMapping ( 'vrp:animp5' , '[A] Assobiar' , 'keyboard' , '5' )
-
-RegisterCommand('vrp:animp5', function()
-	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
-		tvRP.playAnim(true,{{"rcmnigel1c","hailing_whistle_waive_a"}},false)
-	end
-end, false)
-
-RegisterKeyMapping ( 'vrp:animp6' , '[A] Vergonha!' , 'keyboard' , '6' )
-
-RegisterCommand('vrp:animp6', function()
-	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and not menu_state.opened and not menu_celular and not cancelando then
-		tvRP.playAnim(true,{{"anim@mp_player_intcelebrationmale@face_palm","face_palm"}},false)
 	end
 end, false)
 
