@@ -62,10 +62,9 @@ function tvRP.leaveArea(name)
 	end
 end
 
-local cfg = module("cfg/blips_markers")
 AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
 	if first_spawn then
-		for k,v in pairs(cfg.blips) do
+		for k,v in pairs(blips.list) do
 			vRPclient._addBlip(source,v[1],v[2],v[3],v[4],v[5],v[6],v[7],v[8])
 		end
 	end

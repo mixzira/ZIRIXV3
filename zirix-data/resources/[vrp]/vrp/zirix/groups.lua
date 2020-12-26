@@ -1,8 +1,8 @@
-local cfg = {}
+groups = {}
 
-cfg.groups = {
-	--[	Departamento Executivo ]-------------------------------------------------
+groups.masterGroup = 'manager'
 
+groups.list = {
 	['prefeitura'] = {
 		_config = {
 			title = 'prefeitura',
@@ -25,8 +25,7 @@ cfg.groups = {
 		},
 		'colaborador.permissao',
 	},
-
-	--[	Departamento de Justiça ]------------------------------------------------
+	
 	
 	['justica'] = {
 		_config = {
@@ -72,7 +71,6 @@ cfg.groups = {
 		'advogado.permissao'
 	},
 
-	--[	Departamento de Justiça ][ Secundário ]----------------------------------
 	
 	['defensor-secundario'] = {
 		_config = {
@@ -82,7 +80,6 @@ cfg.groups = {
 		'defensor.permissao',
 	},
 
-	--[	Departamento de Policia ]------------------------------------------------
 	
 	['policia'] = {
 		_config = {
@@ -107,7 +104,6 @@ cfg.groups = {
 		'policia-patrulha.permissao',
 	},
 
-	--[	Departamento de Policia ]------------------------------------------------
 
 	['chefe-policia'] = {
 		_config = {
@@ -180,7 +176,6 @@ cfg.groups = {
 		'recruta-policia.permissao'
 	},
 	
-	--[	Departamento Médico ]----------------------------------------------------
 	
 	['ems'] = {
 		_config = {
@@ -197,7 +192,6 @@ cfg.groups = {
 		'paisana-ems.permissao'
 	},
 
-	--[	Departamento Médico ][ Secundário ]--------------------------------------
 	
 	['ems-secundario'] = {
 		_config = {
@@ -285,7 +279,6 @@ cfg.groups = {
 		'estagiario.permissao'
 	},
 
-	--[	Imobiliaria ]------------------------------------------------------------
 	
 	['lider-corretor'] = {
 		_config = {
@@ -307,9 +300,8 @@ cfg.groups = {
 			gtype = 'imobiliaria'
 		},
 		'visitante.permissao'
-	},
-
-	--[	Taxista ]----------------------------------------------------------------
+    },
+    
 
 	['lider-taxista'] = {
 		_config = {
@@ -333,7 +325,6 @@ cfg.groups = {
 		'paisana-taxista.permissao'
 	},
 	
-	--[	Mecânico ]---------------------------------------------------------------
 	
 	['lider-mecanico'] = {
 		_config = {
@@ -355,9 +346,8 @@ cfg.groups = {
 			gtype = 'primario'
 		},
 		'paisana-mecanico.permissao'
-	},
-
-	--[	Hotel ]------------------------------------------------------------------
+    },
+    
 	
 	['hotel'] = {
 		_config = {
@@ -367,7 +357,6 @@ cfg.groups = {
 		'hotel.permissao'
 	},
 	
-	--[	Bennys ]-----------------------------------------------------------------
 
 	['bennys'] = {
 		_config = {
@@ -382,9 +371,8 @@ cfg.groups = {
 			gtype = 'hie'
 		},
 		'lider-bennys.permissao'
-	},
-	
-	--[	Organização de produção e venda de drogas ][ Cocaina ]-------------------
+    },
+    
 
 	['orgdone'] = {
 		_config = {
@@ -401,7 +389,6 @@ cfg.groups = {
 		'lider-orgdone.permissao'
 	},
 	
-	--[	Organização de produção e venda de drogas ][ Cocaina ]-------------------
 	
 	['orgdtwo'] = {
 		_config = {
@@ -416,9 +403,8 @@ cfg.groups = {
 			gtype = 'hie'
 		},
 		'lider-orgdtwo.permissao'
-	},
-	
-	--[	Organização de produção e venda de drogas ][ Meta ]----------------------
+    },
+    
 	
 	['orgdthree'] = {
 		_config = {
@@ -434,8 +420,7 @@ cfg.groups = {
 		},
 		'lider-orgdthree.permissao'
 	},
-	
-	--[	Organização de produção e venda de drogas ][ Meta ]----------------------
+
 
 	['orgdfour'] = {
 		_config = {
@@ -452,7 +437,6 @@ cfg.groups = {
 		'lider-orgdfour.permissao'
 	},
 
-	--[	Organização de produção e venda de drogas ][ LSD ]-----------------------
 
 	['orgdfive'] = {
 		_config = {
@@ -469,7 +453,6 @@ cfg.groups = {
 		'lider-orgdfive.permissao'
 	},
 
-	--[	Organização de produção e venda de drogas ][ LSD ]-----------------------
 
 	['orgdsix'] = {
 		_config = {
@@ -486,7 +469,6 @@ cfg.groups = {
 		'lider-orgdsix.permissao'
 	},
 
-	--[	Organização de produção e vendas de armas ]------------------------------
 
 	['orggone'] = {
 		_config = {
@@ -502,8 +484,7 @@ cfg.groups = {
 		},
 		'lider-orggone.permissao'
 	},
-	
-	--[	Organização de produção e vendas de armas ]------------------------------
+
 	
 	['orggtwo'] = {
 		_config = {
@@ -519,8 +500,7 @@ cfg.groups = {
 		},
 		'lider-orggtwo.permissao'
 	},
-	
-	--[	Organização de lavagem de dinheiro ]-------------------------------------
+
 	
 	['orgmone'] = {
 		_config = {
@@ -537,7 +517,6 @@ cfg.groups = {
 		'lider-orgmone.permissao'
 	},
 
-	--[	Organização de lavagem de dinheiro ]-------------------------------------
 	
 	['orgmtwo'] = {
 		_config = {
@@ -554,7 +533,6 @@ cfg.groups = {
 		'lider-orgmtwo.permissao'
 	},
 
-	--[	Organização de lavagem de dinheiro ]-------------------------------------
 	
 	['orgmthree'] = {
 		_config = {
@@ -571,7 +549,6 @@ cfg.groups = {
 		'lider-orgmthree.permissao'
 	},
 
-	--[	Organização de Produção de coletes e acessórios ]------------------------
 
 	['orgcone'] = {
 		_config = {
@@ -588,8 +565,7 @@ cfg.groups = {
 		'lider-orgcone.permissao'
 	},
 
-	--[	Organização de Produção de coletes e acessórios ]------------------------
-	
+
 	['orgctwo'] = {
 		_config = {
 			title = 'Membro NOME',
@@ -605,7 +581,6 @@ cfg.groups = {
 		'lider-orgctwo.permissao'
 	},
 
-	--[	Staff ]------------------------------------------------------------------
 
 	['manager'] = {
 		_config = {
@@ -721,7 +696,6 @@ cfg.groups = {
 		'aprovador-wl.permissao'
 	},
 
-	--[	Pass ]-------------------------------------------------------------------
 
 	['ultimate'] = {
 		_config = {
@@ -759,11 +733,3 @@ cfg.groups = {
 		'booster.permissao'
 	}
 }
-
-cfg.users = {
-	[1] = { 'manager' }
-}
-
-cfg.selectors = {}
-
-return cfg

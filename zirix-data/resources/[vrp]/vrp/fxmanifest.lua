@@ -6,9 +6,13 @@ ui_page 'gui/index.html'
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',
 	'lib/utils.lua',
+
 	'zirix/binds.lua',
+	'zirix/blips.lua',
+	'zirix/groups.lua',
 	'zirix/items.lua',
 	'zirix/vehicles.lua',
+
 	'base.lua',
 	'queue.lua',
 	'modules/gui.lua',
@@ -20,16 +24,19 @@ server_scripts {
 	'modules/identity.lua',
 	'modules/aptitude.lua',
 	'modules/basic_items.lua',
-	'modules/basic_skinshop.lua',
 	'modules/survival.lua',
-	'modules/cloakroom.lua',
 	'modules/pass.lua'
 }
 
 client_scripts {
 	'lib/utils.lua',
+
 	'zirix/binds.lua',
+	'zirix/blips.lua',
+	'zirix/groups.lua',
+	'zirix/items.lua',
 	'zirix/vehicles.lua',
+
 	'client/base.lua',
 	'client/basic_garage.lua',
 	'client/iplloader.lua',

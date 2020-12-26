@@ -29,7 +29,7 @@ config.shops = {
         },
         ['itens'] = {
             { itemName = 'mascara', itemPrice = 130, itemAmount = 1 },
-            { itemName = 'mochila', itemPrice = 1000, itemAmount = 1 },
+            { itemName = 'mochilap', itemPrice = 1000, itemAmount = 1 },
             { itemName = 'oculos', itemPrice = 90, itemAmount = 1 }
         }
     },

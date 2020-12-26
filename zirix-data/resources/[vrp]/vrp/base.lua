@@ -1,7 +1,7 @@
 local Proxy = module("lib/Proxy")
 local Tunnel = module("lib/Tunnel")
 
-local config = module("cfg/base")
+local config = module("zirix/others")
 
 vRP = {}
 Proxy.addInterface("vRP",vRP)

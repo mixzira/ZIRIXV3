@@ -1,6 +1,6 @@
-local cfg = {}
+blips = {}
 
-cfg.blips = {
+blips.list = {
 	{ 53.98,-878.09,30.38,357,4,"Garagem",0.4 },
 	{ 1991.13,3778.13,32.19,357,4,"Garagem",0.4 },
 	{ 154.55,6643.45,31.61,357,4,"Garagem",0.4 },
@@ -154,5 +154,3 @@ cfg.blips = {
 
 	{ -341.98,-1541.32,36.35,467,4,"Central de Reciclagem",0.5 }
 }
-
-return cfg

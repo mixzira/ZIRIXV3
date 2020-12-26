@@ -23,8 +23,8 @@ items.list = {
 	['cnh'] = { ['index'] = 'cnh', ['name'] = 'CNH', ['type'] = 'use', ['weight'] = 0.5 },
 	['colete'] = { ['index'] = 'colete', ['name'] = 'Colete Balístico', ['type'] = 'use', ['weight'] = 0.5 },
 	['repairkit'] = { ['index'] = 'repairkit', ['name'] = 'Kit de Reparos', ['type'] = 'use', ['weight'] = 0.5 },
-	['dinheiro'] = { ['index'] = 'dinheiro', ['name'] = 'Dinheiro', ['type'] = 'use', ['weight'] = 0.5 },
-	['cartao-debito'] = { ['index'] = 'cartao-debito', ['name'] = 'Cartão de débito', ['type'] = 'use', ['weight'] = 0.5 },
+	['dinheiro'] = { ['index'] = 'dinheiro', ['name'] = 'Dinheiro', ['type'] = 'use', ['weight'] = 0.001 },
+	['cartao-debito'] = { ['index'] = 'cartao-debito', ['name'] = 'Cartão de débito', ['type'] = 'use', ['weight'] = 0.05 },
 	['maquininha'] = { ['index'] = 'maquininha', ['name'] = 'Maquininha', ['type'] = 'use', ['weight'] = 0.5 },
 	['paninho'] = { ['index'] = 'paninho', ['name'] = 'Pano de Microfibra', ['type'] = 'use', ['weight'] = 0.5 },
 	['carrinho'] = { ['index'] = 'carrinho', ['name'] = 'Carrinho', ['type'] = 'use', ['weight'] = 0.5 },
@@ -35,7 +35,7 @@ items.list = {
 
 	--[ Illegal Utilities ]--------------------------------------------------------------------------------------------
 
-	['dinheiro-sujo'] = { ['index'] = 'dinheiro-sujo', ['name'] = 'Dinheiro', ['type'] = 'use', ['weight'] = 0.5 },
+	['dinheiro-sujo'] = { ['index'] = 'dinheiro-sujo', ['name'] = 'Dinheiro', ['type'] = 'use', ['weight'] = 0.01 },
 	['algema'] = { ['index'] = 'algema', ['name'] = 'Algema', ['type'] = 'use', ['weight'] = 0.5 },
 	['lockpick'] = { ['index'] = 'lockpick', ['name'] = 'Lockpick', ['type'] = 'use', ['weight'] = 0.5 },
 	['capuz'] = { ['index'] = 'capuz', ['name'] = 'Capuz', ['type'] = 'use', ['weight'] = 0.5 },

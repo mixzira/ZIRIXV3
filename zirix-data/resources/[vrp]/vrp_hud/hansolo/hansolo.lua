@@ -153,19 +153,23 @@ end
 RegisterKeyMapping ( 'vrp:g' , 'Cinto de segurança' , 'keyboard' , 'G' )
 
 RegisterCommand('vrp:g', function()
-  TriggerEvent("cancelando",true)
-  if cintoseg then
-    TriggerEvent("vrp_sound:source",'unbelt',0.5)
-    SetTimeout(2000,function()
-      cintoseg = false
-      TriggerEvent("cancelando",false)
-    end)
-  else
-    TriggerEvent("vrp_sound:source",'belt',0.5)
-    SetTimeout(3000,function()
-      cintoseg = true
-      TriggerEvent("cancelando",false)
-    end)
+  local ped = PlayerPedId()
+  local car = GetVehiclePedIsIn(ped)
+  if car ~= 0 and (ExNoCarro or IsCar(car)) then
+    TriggerEvent("cancelando",true)
+    if cintoseg then
+      TriggerEvent("vrp_sound:source",'unbelt',0.5)
+      SetTimeout(2000,function()
+        cintoseg = false
+        TriggerEvent("cancelando",false)
+      end)
+    else
+      TriggerEvent("vrp_sound:source",'belt',0.5)
+      SetTimeout(3000,function()
+        cintoseg = true
+        TriggerEvent("cancelando",false)
+      end)
+    end
   end
 end, false)
 

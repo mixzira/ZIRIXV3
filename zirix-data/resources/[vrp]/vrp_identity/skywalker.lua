@@ -7,9 +7,6 @@ vRPN = {}
 Tunnel.bindInterface('vrp_identity',vRPN)
 Proxy.addInterface('vrp_identity',vRPN)
 
-local cfg = module('vrp','cfg/groups')
-local groups = cfg.groups
-
 local identidade = false
 
 --[ FUNÇÕES ]----------------------------------------------------------------------------------------------------------------------------
@@ -32,9 +29,9 @@ function vRPN.Identidade()
 	if user_id then
 		local identity = vRP.getUserIdentity(user_id)
 
-		local groupv = vRPN.getUserGroupByType(user_id,'primario')
-		local groups = vRPN.getUserGroupByType(user_id,'secundario')
-		local cargo = vRPN.getUserGroupByType(user_id,'hie')
+		local groupv = vRP.getUserGroupByType(user_id,'primario')
+		local groups = vRP.getUserGroupByType(user_id,'secundario')
+		local cargo = vRP.getUserGroupByType(user_id,'hie')
 
 		if groupv == '' and groups == '' and cargo == '' then
 			groupv = 'Desempregado'
@@ -230,17 +227,4 @@ function vRPN.giveIdentidade()
 	else
 		TriggerClientEvent("Notify",source,"negado","Sua mochila está cheia.")
 	end
-end
-
-function vRPN.getUserGroupByType(user_id,gtype)
-	local user_groups = vRP.getUserGroups(user_id)
-	for k,v in pairs(user_groups) do
-		local kgroup = groups[k]
-		if kgroup then
-			if kgroup._config and kgroup._config.gtype and kgroup._config.gtype == gtype then
-				return kgroup._config.title
-			end
-		end
-	end
-	return ''
 end

@@ -1,4 +1,4 @@
-local cfg = module("cfg/player_state")
+local cfg = module("zirix/others")
 
 AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
 	local source = source

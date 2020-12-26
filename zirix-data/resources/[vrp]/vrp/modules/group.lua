@@ -1,7 +1,5 @@
-local cfg = module("cfg/groups")
-local groups = cfg.groups
-local users = cfg.users
-local selectors = cfg.selectors
+local groups = groups.list
+local users = groups.users
 
 function vRP.getGroupTitle(group)
 	local g = groups[group]
@@ -238,77 +236,15 @@ function vRP.hasPermissions(user_id, perms)
 	return true
 end
 
-local selector_menus = {}
-for k,v in pairs(selectors) do
-	local kgroups = {}
-
-	local function ch_select(player,choice)
-		local user_id = vRP.getUserId(player)
-		if user_id then
-			local gname = kgroups[choice]
-			if gname then
-				vRP.addUserGroup(user_id,gname)
-				vRP.closeMenu(player)
-			end
-		end
-	end
-
-	local menu = { name = k }
-	for l,w in pairs(v) do
-		if l ~= "_config" then
-			local title = vRP.getGroupTitle(w)
-			kgroups[title] = w
-			menu[title] = {ch_select}
-		end
-	end
-
-	selector_menus[k] = menu
-end
-
-local function build_client_selectors(source)
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		for k,v in pairs(selectors) do
-			local gcfg = v._config
-			local menu = selector_menus[k]
-
-			if gcfg and menu then
-				local x = gcfg.x
-				local y = gcfg.y
-				local z = gcfg.z
-
-				local function selector_enter(source)
-					local user_id = vRP.getUserId(source)
-					if user_id and vRP.hasPermissions(user_id,gcfg.permissions or {}) then
-						vRP.openMenu(source,menu) 
-					end
-				end
-
-				local function selector_leave(source)
-					vRP.closeMenu(source)
-				end
-
-				vRPclient._addMarker(source,23,x,y,z-0.95,1,1,0.5,255,0,0,50,100)
-				vRP.setArea(source,"vRP:gselector:"..k,x,y,z,1,1,selector_enter,selector_leave)
-			end
-		end
-	end
-end
-
 AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
 	if first_spawn then
-		build_client_selectors(source)
-		local user = users[user_id]
-		if user then
-			for k,v in pairs(user) do
-				vRP.addUserGroup(user_id,v)
-			end
+		if user_id == 1 then
+			vRP.addUserGroup(user_id, groups.masterGroup)
 		end
-
-		vRP.addUserGroup(user_id,"user")
 	end
 
 	local user_groups = vRP.getUserGroups(user_id)
+
 	for k,v in pairs(user_groups) do
 		local group = groups[k]
 		if group and group._config and group._config.onspawn then

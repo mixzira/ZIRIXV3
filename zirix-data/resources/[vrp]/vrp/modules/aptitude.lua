@@ -1,4 +1,4 @@
-local cfg = module("cfg/aptitudes")
+local cfg = module("zirix/others")
 local exp_step = 4
 
 local gaptitudes = {}

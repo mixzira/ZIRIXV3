@@ -1,6 +1,6 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
-local sanitizes = module("cfg/sanitizes")
+local sanitizes = module("zirix/others")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
