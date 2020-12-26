@@ -7,6 +7,7 @@ server_scripts {
 	'@mysql-async/lib/MySQL.lua',
 	'lib/utils.lua',
 	'zirix/binds.lua',
+	'zirix/items.lua',
 	'zirix/vehicles.lua',
 	'base.lua',
 	'queue.lua',

@@ -62,13 +62,6 @@ function src.checkOculos()
 	end
 end
 
-RegisterCommand('teste',function(source,args,rawCommand)
-    local source = source
-	local user_id = vRP.getUserId(source)
-
-    TriggerClientEvent('Notify',source,'negado','<b>'..vRP.itemNameList('wbody|GADGET_PARACHUTE')..'</b> faltando.')
-end)
-
 --[ ITEM ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('item',function(source,args,rawCommand)

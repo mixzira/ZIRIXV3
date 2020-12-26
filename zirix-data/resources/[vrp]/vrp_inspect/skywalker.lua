@@ -40,9 +40,9 @@ RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 						TriggerClientEvent('cancelando',nplayer,true)
 						local weapons = vRPclient.replaceWeapons(nplayer,{})
 						for k,v in pairs(weapons) do
-							vRP.giveInventoryItem(parseInt(nuser_id),'wbody|'..k,1)
+							vRP.giveInventoryItem(parseInt(nuser_id),'wbody'..k,1)
 							if parseInt(v.ammo) > 0 then
-								vRP.giveInventoryItem(parseInt(nuser_id),'wammo|'..k,parseInt(v.ammo))
+								vRP.giveInventoryItem(parseInt(nuser_id),'wammo'..k,parseInt(v.ammo))
 							end
 						end
 						vCLIENT.toggleCarry(nplayer,source)
@@ -58,9 +58,9 @@ RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 							TriggerClientEvent('cancelando',nplayer,true)
 							local weapons = vRPclient.replaceWeapons(nplayer,{})
 							for k,v in pairs(weapons) do
-								vRP.giveInventoryItem(parseInt(nuser_id),'wbody|'..k,1)
+								vRP.giveInventoryItem(parseInt(nuser_id),'wbody'..k,1)
 								if parseInt(v.ammo) > 0 then
-									vRP.giveInventoryItem(parseInt(nuser_id),'wammo|'..k,parseInt(v.ammo))
+									vRP.giveInventoryItem(parseInt(nuser_id),'wammo'..k,parseInt(v.ammo))
 								end
 							end
 							vCLIENT.toggleCarry(nplayer,source)
@@ -93,9 +93,9 @@ RegisterCommand(config.plunderCommand,function(source,args,rawCommand)
 					local weapons = vRPclient.replaceWeapons(nplayer,{})
 					TriggerClientEvent('cancelando',nplayer,true)
 					for k,v in pairs(weapons) do
-						vRP.giveInventoryItem(parseInt(nuser_id),'wbody|'..k,1)
+						vRP.giveInventoryItem(parseInt(nuser_id),'wbody'..k,1)
 						if parseInt(v.ammo) > 0 then
-							vRP.giveInventoryItem(parseInt(nuser_id),'wammo|'..k,parseInt(v.ammo))
+							vRP.giveInventoryItem(parseInt(nuser_id),'wammo'..k,parseInt(v.ammo))
 						end
 					end
 					vRPclient._playAnim(source,false,{{config.plunderAnim[1],config.plunderAnim[2]}},true)

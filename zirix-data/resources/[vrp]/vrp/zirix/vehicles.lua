@@ -301,9 +301,9 @@ vehs.vehList = {
 	{ ['name'] = "diablous", ['hash'] = -239841468, ['banned'] = false },
 	{ ['name'] = "diablous2", ['hash'] = 1790834270, ['banned'] = false },
 	{ ['name'] = "double", ['hash'] = -1670998136, ['banned'] = false },
-	{ ['name'] = "enduro", ['hash'] = 1753414259, ['banned'] = false }, -- Preço: 18.000,00 | Porta-Malas: 5;
+	{ ['name'] = "enduro", ['hash'] = 1753414259, ['banned'] = false },
 	{ ['name'] = "esskey", ['hash'] = 2035069708, ['banned'] = false },
-	{ ['name'] = "faggio", ['hash'] = -1842748181, ['banned'] = false }, -- Preço: 5.000,00 | Porta-Malas: 5;
+	{ ['name'] = "faggio", ['hash'] = -1842748181, ['banned'] = false },
 	{ ['name'] = "faggio2", ['hash'] = 55628203, ['banned'] = false },
 	{ ['name'] = "faggio3", ['hash'] = -1289178744, ['banned'] = false },
 	{ ['name'] = "fcr", ['hash'] = 627535535, ['banned'] = false },
@@ -317,7 +317,7 @@ vehs.vehList = {
 	{ ['name'] = "manchez", ['hash'] = -1523428744, ['banned'] = false },
 	{ ['name'] = "nemesis", ['hash'] = -634879114, ['banned'] = false },
 	{ ['name'] = "nightblade", ['hash'] = -1606187161, ['banned'] = false },
-	{ ['name'] = "pcj", ['hash'] = -909201658, ['banned'] = false }, -- Preço: 32.000,00 | Porta-Malas: 5;
+	{ ['name'] = "pcj", ['hash'] = -909201658, ['banned'] = false },
 	{ ['name'] = "ruffian", ['hash'] = -893578776, ['banned'] = false },
 	{ ['name'] = "sanchez", ['hash'] = 788045382, ['banned'] = false },
 	{ ['name'] = "sanchez2", ['hash'] = -1453280962, ['banned'] = false },

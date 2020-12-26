@@ -8,7 +8,7 @@ config.webhookBottomText = 'ZIRIX V3 BY ZIRAFLIX - '
 config.webhookIcon = 'https://i.imgur.com/Y5Zktwm.png'
 config.webhookColor = 16431885
 
-config.shops = {
+config.shops = { 
     ['acessories'] = {
         ['name'] = 'acessories',
         ['coords'] = {
@@ -49,10 +49,10 @@ config.shops = {
             { ['x'] = -3172.03, ['y'] = 1088.45, ['z'] = 20.84 }
         },
         ['itens'] = {
-            { itemName = 'wbody|WEAPON_SWITCHBLADE', itemPrice = 950, itemAmount = 1, gunlicense = false },
-            { itemName = 'wbody|WEAPON_KNIFE', itemPrice = 950, itemAmount = 1, gunlicense = false },
-            { itemName = 'wbody|WEAPON_PISTOL', itemPrice = 50000, itemAmount = 1, gunlicense = true },
-            { itemName = 'wammo|WEAPON_PISTOL', itemPrice = 1200, itemAmount = 30, gunlicense = true }
+            { itemName = 'wbodyWEAPON_SWITCHBLADE', itemPrice = 950, itemAmount = 1, gunlicense = false },
+            { itemName = 'wbodyWEAPON_KNIFE', itemPrice = 950, itemAmount = 1, gunlicense = false },
+            { itemName = 'wbodyWEAPON_PISTOL', itemPrice = 50000, itemAmount = 1, gunlicense = true },
+            { itemName = 'wammoWEAPON_PISTOL', itemPrice = 1200, itemAmount = 30, gunlicense = true }
         }
     },
     ['pub'] = {
