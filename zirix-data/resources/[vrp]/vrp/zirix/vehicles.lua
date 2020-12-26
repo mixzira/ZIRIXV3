@@ -1,7 +1,6 @@
 vehs = {}
 
 vehs.vehList = {
-	{ ['name'] = "brioso", ['hash'] = 1549126457, ['banned'] = false },
 	{ ['name'] = "dilettante", ['hash'] = -1130810103, ['banned'] = false }, -- Preço: 17.000,00 | Porta-Malas: 25;
 	{ ['name'] = "issi2", ['hash'] = -1177863319, ['banned'] = false },
 	{ ['name'] = "panto", ['hash'] = -431692672, ['banned'] = false }, -- Preço: 12.000,00 | Porta-Malas: 10;
@@ -336,7 +335,7 @@ vehs.vehList = {
 	{ ['name'] = "shotaro", ['hash'] = -405626514, ['banned'] = false },
 	{ ['name'] = "ratbike", ['hash'] = 1873600305, ['banned'] = false },
 	
-	{ ['name'] = "policiacharger2018", ['hash'] = 1743739647, ['banned'] = true },
+	--[[{ ['name'] = "policiacharger2018", ['hash'] = 1743739647, ['banned'] = true },
 	{ ['name'] = "policiasilverado", ['hash'] = 1884511084, ['banned'] = true },
 	{ ['name'] = "policiatahoe", ['hash'] = 1865641415, ['banned'] = true },
 	{ ['name'] = "policiataurus", ['hash'] = 112218935, ['banned'] = true },
@@ -345,7 +344,7 @@ vehs.vehList = {
 	{ ['name'] = "policiabearcat", ['hash'] = -1748002214, ['banned'] = true },
 
 	{ ['name'] = "ambulance", ['hash'] = 1171614426, ['banned'] = true },
-	{ ['name'] = "paramedicoheli", ['hash'] = 2020690903, ['banned'] = false },
+	{ ['name'] = "paramedicoheli", ['hash'] = 2020690903, ['banned'] = false },]]
 
 	{ ['name'] = "pbus", ['hash'] = -2007026063, ['banned'] = true },
 	{ ['name'] = "mule4", ['hash'] = 1945374990, ['banned'] = false },
@@ -402,7 +401,7 @@ vehs.vehList = {
 	{ ['name'] = "tr4", ['hash'] = 2091594960, ['banned'] = true },
 	{ ['name'] = "pounder", ['hash'] = 2112052861, ['banned'] = false },
 
-	{ ['name'] = "audirs6", ['hash'] = 1676738519, ['banned'] = false },
+	--[[{ ['name'] = "audirs6", ['hash'] = 1676738519, ['banned'] = false },
 	{ ['name'] = "bmwm3f80", ['hash'] = -157095615, ['banned'] = false },
 	{ ['name'] = "bmwm4gts", ['hash'] = -13524981, ['banned'] = false },
 	{ ['name'] = "dodgechargersrt", ['hash'] = 1601422646, ['banned'] = false },
@@ -416,7 +415,7 @@ vehs.vehList = {
 	{ ['name'] = "panamera17turbo", ['hash'] = 194366558, ['banned'] = false },
 	{ ['name'] = "pm19", ['hash'] = -1560751994, ['banned'] = false },
 	{ ['name'] = "teslaprior", ['hash'] = 351980252, ['banned'] = false },
-	{ ['name'] = "toyotasupra", ['hash'] = 723779872, ['banned'] = false },
+	{ ['name'] = "toyotasupra", ['hash'] = 723779872, ['banned'] = false },]]
 
 	{ ['name'] = "bmwm8", ['hash'] = -1404319008, ['banned'] = false },
 	{ ['name'] = "urus", ['hash'] = -520214134, ['banned'] = false },
@@ -426,11 +425,10 @@ vehs.vehList = {
 vehs.vehglobal = {
 	-- Compacts
 	["blista"] = { ['name'] = "Blista", ['price'] = 32000, ['tipo'] = "carros", ['mala'] = 20, ["slots"] = 10, ['hash'] = -344943009, ['banned'] = false },
+	["brioso"] = { ['name'] = "Brioso", ['price'] = 35000, ['tipo'] = "carros", ['mala'] = 30, ["slots"] = 10, ['hash'] = 1549126457, ['banned'] = false },
 
 
 
-	
-	["brioso"] = { ['name'] = "Brioso", ['price'] = 35000, ['tipo'] = "carros", ['mala'] = 30, ["slots"] = 10 },
 	["emperor"] = { ['name'] = "Emperor", ['price'] = 7000, ['tipo'] = "carros", ["mala"] = 50, ["slots"] = 10 },
 	["emperor2"] = { ['name'] = "Emperor 2", ['price'] = 50000, ['tipo'] = "carros", ["mala"] = 50, ["slots"] = 10 },
 	["dilettante"] = { ['name'] = "Dilettante", ['price'] = 17000, ['tipo'] = "carros", ["mala"] = 50, ["slots"] = 10 },
