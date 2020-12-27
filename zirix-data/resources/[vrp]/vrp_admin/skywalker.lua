@@ -22,6 +22,7 @@ local logAdminAnuncio = "https://discordapp.com/api/webhooks/762556537042108426/
 local logAdminAddcar = "https://discordapp.com/api/webhooks/762556674678063115/JyU18FJLY06xljzNDj9pslJDfnPxkxWaNn-ytgpR66sbVQSkLNrJcOXyUsn5HH04LOGz"
 local logAdminRemcar = "https://discordapp.com/api/webhooks/762555827633782805/JY8rxRrARUTtacvf04eeRb_dTNJDH1VuRbq4VUuyIXBpwMnXwPsYWLQXgUrtVzBYgHIq"
 local logAdminGroup = "https://discordapp.com/api/webhooks/762556111949660183/ZzZ2DrsVT495B8X3cnErx_UxGdIrXDp6115L-0wKd7O2KxlsfffpnJDyx0gbNUebRkOi"
+local logAdminUnGroup = "https://discordapp.com/api/webhooks/792849847300522014/Va1zP-AzQ3rvpuEQ_5J8c90Ln_vI5a4PWbWaM0qRtBh5NADGQAIjQtj9npXJ6WOCHT8x"
 local logAdminReviver = "https://discordapp.com/api/webhooks/762556783243690051/XhWqRHss1Rvz9HxQFsr7-PWwT4csGfuxeZ_x-sLmYj2tT-5oyqq9NL5FbdiWSiNgQq2c"
 local logAdminKick = "https://discordapp.com/api/webhooks/762556262021726209/WODOaaVYl3tnFOijR3Gd_PtBBpyk-aEmxiye9tsdsEgMewFDeY2cWrvVIX7QUtUUHqtd"
 local logAdminFix = "https://discordapp.com/api/webhooks/762557436930031616/MWcoTnEFRBurJ0WdXflVY5dReJWhcaF7H3NZ4AVJmgv6dZa2MfZqNuvtvI2or8O9VBEv"
@@ -875,7 +876,36 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		if args[1] and args[2] then
 			vRP.removeUserGroup(parseInt(args[1]),args[2])
+
 			TriggerClientEvent("Notify",source,"sucesso","Voce removeu o passaporte <b>"..parseInt(args[1]).."</b> do grupo <b>"..args[2].."</b>.")
+
+			PerformHttpRequest(logAdminUnGroup, function(err, text, headers) end, 'POST', json.encode({
+				embeds = {
+					{ 
+						title = "REGISTRO DE GROUP:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
+						thumbnail = {
+							url = "https://i.imgur.com/CtQB816.png"
+						}, 
+						fields = {
+							{ 
+								name = "**COLABORADOR DA EQUIPE:**",
+								value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"
+							},
+							{
+								name = "**ID & GROUP: **",
+								value = "**"..args[1].." retirou o grupo: "..args[2].."**"
+							}
+						}, 
+						footer = { 
+							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = "https://i.imgur.com/CtQB816.png"
+						},
+						color = 4402032 
+					}
+				}
+			}), { ['Content-Type'] = 'application/json' })
+
+			TriggerClientEvent("oc_gps:coords", nplayer)
 		end
 	end
 end)
