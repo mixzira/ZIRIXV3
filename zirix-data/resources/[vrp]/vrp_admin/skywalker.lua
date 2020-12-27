@@ -882,7 +882,7 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
 			PerformHttpRequest(logAdminUnGroup, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 
-						title = "REGISTRO DE GROUP:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
+						title = "REGISTRO DE UNGROUP:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
 							url = "https://i.imgur.com/CtQB816.png"
 						}, 
