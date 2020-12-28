@@ -1176,8 +1176,8 @@ function src.spawnVehicle(vehname,vehengine,vehbody,vehfuel,custom)
 				
 				local v = VehToNet(nveh)
 
-				SetVehicleDoorsLocked(v,false)
-				SetVehicleDoorsLockedForAllPlayers(v,false)
+				SetVehicleDoorsLocked(nveh,true)
+				SetVehicleDoorsLockedForAllPlayers(nveh,true)
 
 				return true,VehToNet(nveh)
 			end
