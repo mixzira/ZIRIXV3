@@ -11,51 +11,21 @@ Proxy.addInterface("vrp_banco",banK)
 
 --[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
-local recompensa = 0
+local reward = 0
 local andamento = false
 local dinheirosujo = {}
-
-
-local logBankSacar = "https://discordapp.com/api/webhooks/762559292745711616/yg1i1Nstvg0knDYKWVYrPlhWdNl4FRVQMHLnF5LUaGQxMpwn6g0VbA9Jg_5uDfTohnR1"
-local logBankDepositar = "https://discordapp.com/api/webhooks/762559391509250048/-TUtXDvaCXHX9sb3cIwrEODTFxsFGVJFoswh9keswtCEjD-cFva5hyOoFf9aPG5gVs_w"
-local logBankTransferencia = "https://discordapp.com/api/webhooks/762559610002866196/7-PjG811yekbIMM65UXMMbHNM2eVyakH3PsaCRLMjowEvTiEssHLxiQo4iDdKTbhaVCn"
-
---[ LOCAIS ]-----------------------------------------------------------------------------------------------------------------------------
-
-local caixas = {
-	[1] = { ['seconds'] = 25 },
-	[2] = { ['seconds'] = 39 },
-	[3] = { ['seconds'] = 39 },
-	[4] = { ['seconds'] = 35 },
-	[5] = { ['seconds'] = 33 },
-	[6] = { ['seconds'] = 33 },
-	[7] = { ['seconds'] = 55 },
-	[8] = { ['seconds'] = 39 },
-	[9] = { ['seconds'] = 35 },
-	[10] = { ['seconds'] = 60 },
-	[11] = { ['seconds'] = 43 },
-	[12] = { ['seconds'] = 27 },
-	[13] = { ['seconds'] = 45 },
-	[14] = { ['seconds'] = 120 }
-}
-
---[ WEBHOOKS ]---------------------------------------------------------------------------------------------------------------------------
-
-local webhookDepositar = ""
-local webhookSacar = ""
-local webhookPTrans = ""
-local webhookPSacar = ""
-local webhookRCaixaEletronico = ""
+local recebimentofinal = 0
 
 --[ PAGAR MULTAS ]-----------------------------------------------------------------------------------------------------------------------
 
-RegisterCommand('multas',function(source,args,rawCommand)
+RegisterCommand(config.fines,function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
+	local identity = vRP.getUserIdentity(user_id)
 
 	local value = vRP.getUData(parseInt(user_id),"vRP:multas")
 	local multas = json.decode(value) or 0
-	local banco = vRP.getBankMoney(user_id)
+	local bank = vRP.getBankMoney(user_id)
 	
 	if user_id then
 		if args[1] == nil then
@@ -64,13 +34,40 @@ RegisterCommand('multas',function(source,args,rawCommand)
 			else
 				TriggerClientEvent("Notify",source,"aviso","Você <b>não possuí</b> multas para pagar.",8000)
 			end
-		elseif args[1] == "pagar" then
+		elseif args[1] == config.pay then
 			local valorpay = vRP.prompt(source,"Saldo de multas: $"..multas.." - Valor de multas a pagar:","")
-			if banco >= parseInt(valorpay) then
+			if bank >= parseInt(valorpay) then
 				if parseInt(valorpay) <= parseInt(multas) then
-					vRP.setBankMoney(user_id,parseInt(banco-valorpay))
+					vRP.setBankMoney(user_id,parseInt(bank-valorpay))
 					vRP.setUData(user_id,"vRP:multas",json.encode(parseInt(multas)-parseInt(valorpay)))
 					TriggerClientEvent("Notify",source,"sucesso","Você pagou <b>$"..valorpay.." dólares</b> em multas.",8000)
+
+					PerformHttpRequest(config.logBankFines, function(err, text, headers) end, 'POST', json.encode({
+						embeds = {
+							{ 	------------------------------------------------------------
+								title = "REGISTRO DE MULTAS:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
+								thumbnail = {
+									url = "https://i.imgur.com/CtQB816.png"
+								}, 
+								fields = {
+									{ 
+										name = "**IDENTIFICAÇÃO:**",
+										value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"
+									},
+									{ 
+										name = "**PAGOU: $"..valorpay.."**",
+										value = "\n⠀"
+									}
+								}, 
+								footer = { 
+									text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
+									icon_url = "https://i.imgur.com/CtQB816.png"
+								},
+								color = 4402032 
+							}
+						}
+					}), { ['Content-Type'] = 'application/json' })
+
 				else
 					TriggerClientEvent("Notify",source,"negado","Você não pode pagar mais multas do que deve.",8000)
 				end
@@ -83,8 +80,8 @@ end)
 
 --[ DEPOSITAR ]--------------------------------------------------------------------------------------------------------------------------
 
-RegisterServerEvent('banco:depositar')
-AddEventHandler('banco:depositar', function(amount)
+RegisterServerEvent('bank:depositar')
+AddEventHandler('bank:depositar', function(amount)
 	local _source = source
 	local user_id = vRP.getUserId(_source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -94,7 +91,7 @@ AddEventHandler('banco:depositar', function(amount)
 	else
 		vRP.tryDeposit(user_id, tonumber(amount))
 
-		PerformHttpRequest(logBankDepositar, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.logBankDepositar, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	------------------------------------------------------------
 					title = "REGISTRO DE DEPOSITOS:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
@@ -126,8 +123,8 @@ end)
 
 --[ SACAR ]------------------------------------------------------------------------------------------------------------------------------
 
-RegisterServerEvent('banco:sacar')
-AddEventHandler('banco:sacar', function(amount)
+RegisterServerEvent('bank:sacar')
+AddEventHandler('bank:sacar', function(amount)
 	local _source = source
 	local user_id = vRP.getUserId(_source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -140,7 +137,7 @@ AddEventHandler('banco:sacar', function(amount)
 	else
 		vRP.tryWithdraw(user_id,amount)
 
-		PerformHttpRequest(logBankSacar, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.logBankSacar, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	------------------------------------------------------------
 					title = "REGISTRO DE SAQUES:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
@@ -172,15 +169,16 @@ end)
 
 --[ PAGAR ]------------------------------------------------------------------------------------------------------------------------------
 
-RegisterServerEvent('banco:pagar')
-AddEventHandler('banco:pagar', function(amount)
+RegisterServerEvent('bank:pagar')
+AddEventHandler('bank:pagar', function(amount)
 	local _source = source
 	local user_id = vRP.getUserId(_source)
-	local banco = vRP.getBankMoney(user_id)
+	local bank = vRP.getBankMoney(user_id)
+	local identity = vRP.getUserIdentity(user_id)
 
 	local valor = tonumber(amount)
 
-	if banco >= tonumber(amount) then
+	if bank >= tonumber(amount) then
 		local multas = vRP.getUData(user_id,"vRP:multas")
 		local int = parseInt(multas)
 		if int >= valor then
@@ -188,9 +186,36 @@ AddEventHandler('banco:pagar', function(amount)
 				local rounded = math.ceil(valor)
 				local novamulta = int - rounded
 				vRP.setUData(user_id,"vRP:multas",json.encode(novamulta))
-				vRP.setBankMoney(user_id,banco-tonumber(valor))
+				vRP.setBankMoney(user_id,bank-tonumber(valor))
 				TriggerClientEvent("Notify",_source,"sucesso","Você pagou $"..valor.." em multas.")
 				TriggerClientEvent("currentbalance2",_source)
+
+				PerformHttpRequest(config.logBankFines1, function(err, text, headers) end, 'POST', json.encode({
+					embeds = {
+						{ 	------------------------------------------------------------
+							title = "REGISTRO DE MULTAS:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
+							thumbnail = {
+								url = "https://i.imgur.com/CtQB816.png"
+							}, 
+							fields = {
+								{ 
+									name = "**IDENTIFICAÇÃO:**",
+									value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"
+								},
+								{ 
+									name = "**PAGOU: $"..amount.."**",
+									value = "\n⠀"
+								}
+							}, 
+							footer = { 
+								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
+								icon_url = "https://i.imgur.com/CtQB816.png"
+							},
+							color = 4402032 
+						}
+					}
+				}), { ['Content-Type'] = 'application/json' })
+
 			else
 				TriggerClientEvent("Notify",_source,"negado","Você só pode pagar multas acima de <b>$1.000</b> dólares")
 			end
@@ -204,8 +229,8 @@ end)
 
 --[ SALDO ]------------------------------------------------------------------------------------------------------------------------------
 
-RegisterServerEvent('banco:balance')
-AddEventHandler('banco:balance', function()
+RegisterServerEvent('bank:balance')
+AddEventHandler('bank:balance', function()
 	local _source = source
 	local user_id = vRP.getUserId(_source)
 	local getbankmoney = vRP.getBankMoney(user_id)
@@ -217,8 +242,8 @@ end)
 
 --[ TRANSFERENCIAS ]---------------------------------------------------------------------------------------------------------------------
 
-RegisterServerEvent('banco:transferir')
-AddEventHandler('banco:transferir', function(to,amountt)
+RegisterServerEvent('bank:transferir')
+AddEventHandler('bank:transferir', function(to,amountt)
 	local _source = source
 	local user_id = vRP.getUserId(_source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -226,7 +251,7 @@ AddEventHandler('banco:transferir', function(to,amountt)
 	local _nplayer = vRP.getUserSource(parseInt(to))
 	local nuser_id = vRP.getUserId(_nplayer)
 	local identitynu = vRP.getUserIdentity(nuser_id)
-	local banco = 0
+	local bank = 0
 
 	if nuser_id == nil then
 		TriggerClientEvent("Notify",_source,"negado","Passaporte inválido ou indisponível.")
@@ -234,16 +259,16 @@ AddEventHandler('banco:transferir', function(to,amountt)
 		if nuser_id == user_id then
 			TriggerClientEvent("Notify",_source,"negado","Você não pode transferir dinheiro para sí mesmo.")	
 		else
-			local banco = vRP.getBankMoney(user_id)
-			local banconu = vRP.getBankMoney(nuser_id)
+			local bank = vRP.getBankMoney(user_id)
+			local banknu = vRP.getBankMoney(nuser_id)
 			
-			if banco <= 0 or banco < tonumber(amountt) or tonumber(amountt) <= 0 then
+			if bank <= 0 or bank < tonumber(amountt) or tonumber(amountt) <= 0 then
 				TriggerClientEvent("Notify",_source,"negado","Dinheiro Insuficiente")
 			else
-				vRP.setBankMoney(user_id,banco-tonumber(amountt))
-				vRP.setBankMoney(nuser_id,banconu+tonumber(amountt))
+				vRP.setBankMoney(user_id,bank-tonumber(amountt))
+				vRP.setBankMoney(nuser_id,banknu+tonumber(amountt))
 
-				PerformHttpRequest(logBankTransferencia, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.logBankTransferencia, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 	------------------------------------------------------------
 							title = "REGISTRO DE TRANSFERENCIAS:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
@@ -294,25 +319,35 @@ Citizen.CreateThread(function()
 	end
 end)
 
+
+
 --[ CHECKROBBERY ]-----------------------------------------------------------------------------------------------------------------------
 
 function banK.checkRobbery(id,x,y,z,head)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	local policia = vRP.getUsersByPermission("policia-ptr.permissao")
+	local policia = vRP.getUsersByPermission(config.permissao)
 	local identity = vRP.getUserIdentity(user_id)
 	if user_id then
-		if #policia <= 2 then
+		if #policia >= config.qtdpolicia then
 			TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais em patrulha no momento.",8000)
 		else
 			if timers[id] == 0 or not timers[id] then
 				timers[id] = 600
 				andamento = true
 				dinheirosujo = {}
-				dinheirosujo[user_id] = caixas[id].seconds
+				dinheirosujo[user_id] = config.atmrobbery[id].seconds
 				vRPclient.setStandBY(source,parseInt(800))
-				recompensa = parseInt(math.random(2000,8000)/caixas[id].seconds)
-				TriggerClientEvent('iniciandocaixaeletronico',source,x,y,z,caixas[id].seconds,head)
+				if config.randomreward == nil then
+					if config.reward == nil then
+						reward = parseInt(500/config.atmrobbery[id].seconds)					
+					else
+						reward = parseInt(config.reward/config.atmrobbery[id].seconds)
+					end
+				else
+					reward = parseInt(math.random(config.randomreward[1],config.randomreward[2])/config.atmrobbery[id].seconds)
+				end
+				TriggerClientEvent('iniciandocaixaeletronico',source,x,y,z,config.atmrobbery[id].seconds,head)
 				vRPclient._playAnim(source,false,{{"anim@heists@ornate_bank@grab_cash_heels","grab"}},true)
 				for l,w in pairs(policia) do
 					local player = vRP.getUserSource(parseInt(w))
@@ -325,34 +360,8 @@ function banK.checkRobbery(id,x,y,z,head)
 					end
 				end
 				
-				PerformHttpRequest(webhookRCaixaEletronico, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 
-							title = "REGISTRO DE ASSALTO:",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							}, 
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO DO PLAYER:**",
-									value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**] \n⠀"
-								},
-								{ 
-									name = "**LUCRO DO ASSALTO:**",
-									value = "**$"..parseInt(recompensa).." dólares**\n⠀"
-								},
-
-							}, 
-							footer = { 
-								text = os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 15906321 
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
 				
-				SetTimeout(caixas[id].seconds*1000,function()
+				SetTimeout(config.atmrobbery[id].seconds*1000,function()
 					if andamento then
 						andamento = false
 						for l,w in pairs(policia) do
@@ -377,8 +386,8 @@ end
 
 function banK.cancelRobbery()
 	if andamento then
-		andamento = false
-		local policia = vRP.getUsersByPermission("dpla-ptr.permissao")
+		andamento = false 
+		local policia = vRP.getUsersByPermission(config.permissao)
 		for l,w in pairs(policia) do
 			local player = vRP.getUserSource(parseInt(w))
 			if player then
@@ -391,28 +400,64 @@ function banK.cancelRobbery()
 	end
 end
 
+
 --[ PAYMENTROBBERY ]---------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(1000)
+		idle = 1000
 		if andamento then
 			for k,v in pairs(dinheirosujo) do
 				if v > 0 then
 					dinheirosujo[k] = v - 1
-					vRP._giveInventoryItem(k,"dinheiro-sujo",recompensa)
+					vRP._giveInventoryItem(k,config.itemreward,reward)
+					recebimentofinal = recebimentofinal + reward
 				end
 			end
 		end
+		Citizen.Wait(idle)
 	end
 end)
 
---[ CHECK PERMISSIONS ]------------------------------------------------------------------------------------------------------------------
+function banK.robberywebwook()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	local identity = vRP.getUserIdentity(user_id)
+
+	PerformHttpRequest(config.webhookRCaixaEletronico, function(err, text, headers) end, 'POST', json.encode({
+		embeds = {
+			{ 
+				title = "REGISTRO DE ASSALTO A ATM:",
+				thumbnail = {
+					url = "https://i.imgur.com/CtQB816.png"
+				}, 
+				fields = {
+					{ 
+						name = "**IDENTIFICAÇÃO DO PLAYER:**",
+						value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**] \n⠀"
+					},
+					{ 
+						name = "**LUCRO DO ASSALTO:**",
+						value = "**$"..parseInt(recebimentofinal).." dólares**\n⠀"
+					},
+
+				}, 
+				footer = { 
+					text = os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),
+					icon_url = "https://i.imgur.com/CtQB816.png"
+				},
+				color = 15906321 
+			}
+		}
+	}), { ['Content-Type'] = 'application/json' })
+end
+
+---[ CHECK PERMISSIONS ]------------------------------------------------------------------------------------------------------------------
 
 function banK.checkPermission()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	return not (vRP.hasPermission(user_id,"policia-ptr.permissao") or vRP.hasPermission(user_id,"policia.permissao") or vRP.hasPermission(user_id,"ems.permissao") or vRP.hasPermission(user_id,"paisana-ems.permissao"))
+	return not (vRP.hasPermission(user_id,config.permissao))
 end
 
 
@@ -427,7 +472,7 @@ function banK.giveDebitCard()
 			local bank = vRP.getBankMoney(user_id)
 			if bank >= 170 then
 				vRP.setBankMoney(user_id,bank-170)
-				vRP.giveInventoryItem(user_id,"cartao-debito",1)
+				vRP.giveInventoryItem(user_id,config.cartaodebito,1)
 				TriggerClientEvent("Notify",source,"sucesso","Sucesso, você adquiriu o seu cartão de débito por <b>$170 dólares</b>.")
 			else
 				TriggerClientEvent("Notify",source,"negado","Saldo insuficiente para contratar o seu cartão de débito.")
