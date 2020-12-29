@@ -1,0 +1,311 @@
+<html>
+    <head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width">
+        <link href="theforce.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+        <style>
+			#depositarUI, #sacarUI, #transferirUI, #pagarUI, #general, #waiting
+			{display: none;}
+		</style>
+		<!-- #depositarUI, #sacarUI, #transferirUI, #pagarUI, #general, #waiting
+			{display: none;} -->
+	</head>
+    <body>
+    	<div class="container">	
+    		<div class="cont-content" id="general">
+				<div class="geral">
+					<div class="m-agua"></div>
+					<div class="top">
+						<div class="logo-top"></div>
+						<div class="profile">
+							<div class="btn-sair"></div>
+							<div class="btn-profile"></div>
+							<div class="txt-profile">minha conta</div>
+						</div>
+					</div>
+					<div class="publicidade">
+						<div class="publi-one">
+							<div class="tag-publi-one"></div>
+							<div class="ti-publi-one">Investimentos</div>
+							<div class="txt-publi-one">Só o banco Fleeca te possibilita</br>fazer investimentos de uma forma</br>simples e rápida.</div>
+							<div class="icone-publi-one"></div>
+						</div>
+						<div class="publi-two">
+							<div class="tag-publi-two"></div>
+							<div class="ti-publi-two">Segurança</div>
+							<div class="txt-publi-two">Segurança é o nosso lema!</br>No Fleeca seu querido dinheirinho</br>está muito bem seguro!</div>
+							<div class="icone-publi-two"></div>
+						</div>
+					</div>			
+					<div class="saldo">
+						<div class="txt-saldo">Saldo disponível:</div>
+						<div class="balance"></div>
+						<div class="ma-saldo"></div>
+					</div>
+					<div class="acoes">
+						<div class="botao-pagar">
+							<div class="img-pagar"></div>
+							<div class="txt-pagar">Pagar</div>
+						</div>
+						<div class="botao-depositar">
+							<div class="img-depositar"></div>
+							<div class="txt-depositar">Depositar</div>
+						</div>
+						<div class="botao-sacar">
+							<div class="img-sacar"></div>
+							<div class="txt-sacar">Sacar</div>		
+						</div>
+						<div class="botao-transferir">
+							<div class="img-transferir"></div>
+							<div class="txt-transferir">Transferir</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+
+	    	<div class="cont-content" id="depositarUI">
+				<div class="cont-depositar">
+					<div class="m-agua"></div>
+					<form id="depositar1">
+						<div class="cont-form-depositar">
+							<div class="logo-depositar"></div>
+							<div class="form-depositar">
+								<input id="amount" type="number" placeholder="$0">
+							</div>
+						</div>						
+						<div class="btns-depositar">
+							<button class="btn-confirmar-deposito" type="submit">
+								<div class="confirmar-depositar">
+									<div class="text-confirmar-depositar">Confirmar</div>
+								</div>
+							</button>
+							<div class="botao-retornar-depositar" id="back">
+								<div class="text-retornar-depositar">Voltar</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+
+	    	<div class="cont-content" id="sacarUI">
+    			<div class="cont-sacar">
+					<div class="m-agua"></div>
+					<form id="sacar1">
+						<div class="cont-form-sacar">
+							<div class="logo-sacar"></div>
+							<div class="form-sacar">
+								<input id="amounts" type="number" placeholder="$0">
+							</div>
+						</div>
+						<div class="btns-sacar">
+							<button class="btn-confirmar-sacar" type="submit">
+								<div class="confirmar-sacar">
+									<div class="text-confirmar-sacar">Confirmar</div>
+								</div>
+							</button>
+							<div class="botao-retornar-sacar" id="back1">
+								<div class="text-retornar-sacar">Voltar</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+
+	    	<div class="cont-content" id="transferirUI">
+    			<div class="cont-transferir">
+					<div class="m-agua"></div>
+					<form id="transferir1">
+						<div class="cont-form-transferir">
+							<div class="logo-transferir"></div>
+							<div class="form-transferir">
+								<input id="amountt" type="number" placeholder="$0">
+							</div>
+							<div class="form-transferir-to">
+								<input id="to" type="number" placeholder="Nº Passaporte">
+							</div>
+						</div>
+						<div class="btns-transferir">
+							<button class="btn-confirmar-transferir" type="submit">
+								<div class="confirmar-transferir">
+									<div class="text-confirmar-transferir">Confirmar</div>
+								</div>
+							</button>
+							<div class="botao-retornar-transferir" id="back2">
+								<div class="text-retornar-transferir">Voltar</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+			<div class="cont-content" id="pagarUI">
+    			<div class="cont-pagar">
+					<div class="m-agua"></div>
+					<form id="pagar1">
+						<div class="cont-form-pagar">
+							<div class="logo-pagar"></div>
+							<div class="saldo-multas"></div>
+							<div class="form-pagar">
+								<input id="amountp" type="number" placeholder="$0">
+							</div>
+						</div>
+						<div class="btns-pagar">
+							<button class="btn-confirmar-pagar" type="submit">
+								<div class="confirmar-pagar">
+									<div class="text-confirmar-pagar">Confirmar</div>
+								</div>
+							</button>
+							<div class="botao-retornar-pagar" id="back3">
+								<div class="text-retornar-pagar">Voltar</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+
+	    	<div class="cont-waiting" id="waiting">
+				<div class="bg-login">
+					<div class="background-login"></div>
+					<div class="marca-dagua"></div>
+				</div>
+				<div class="logo-inicio"></div>
+	    		<div class="login">
+					<h1>Bem vindo novamente!</h1>
+					<div class="botao-login">
+						<a>Acessar conta</a>
+					</div>
+					<div class="usuario-login">        
+						Lembrar meu login <img src="imagens/botao.png">
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<script src="numeral.min.js"></script>
+		
+		<script type="text/javascript">
+
+			$(".txtb input").on("focus",function(){
+				$(this).addClass("focus");
+			});
+
+			$(".txtb input").on("blur",function(){
+				if($(this).val() == "")
+				$(this).removeClass("focus");
+			});
+
+    		$(function() {
+				window.addEventListener('message', function(event) {
+					if (event.data.type === "openGeneral"){
+		                $('#waiting').show();
+		                $('body').addClass("active");
+					} else if(event.data.type === "balanceHUD") {
+						$('.balance').html("$" + event.data.balance);
+						$('.saldo-multas').html("Suas multas: $" + event.data.multas);
+					} else if (event.data.type === "closeAll"){
+		                $('#waiting, #general, #transferUI, #sacarUI, #depositarUI, #pagarUI').hide();
+		                $('body').removeClass("active");
+					}
+				});
+			});
+    		$('.btn-sair').click(function(){
+	            $('#general, #waiting, #transferirUI, #sacarUI, #depositarUI, #pagarUI').hide();
+	            $('body').removeClass("active");
+	            $.post('http://vrp_banco/NUIFocusOff', JSON.stringify({}));
+	        })
+	        $('#back').click(function(){
+	            $('#depositarUI, #sacarUI, #transferirUI, #pagarUI').hide();
+	            $('#general').show();
+	        })
+			$('#back1').click(function(){
+	            $('#depositarUI, #sacarUI, #transferirUI, #pagarUI').hide();
+	            $('#general').show();
+	        })
+			$('#back2').click(function(){
+	            $('#depositarUI, #sacarUI, #transferirUI, #pagarUI').hide();
+	            $('#general').show();
+	        })
+			$('#back3').click(function(){
+	            $('#depositarUI, #sacarUI, #transferirUI, #pagarUI').hide();
+	            $('#general').show();
+	        })
+	        $('.botao-depositar').click(function(){
+	            $('#general').hide();
+	            $('#depositarUI').show();
+	        })
+	        $('.botao-sacar').click(function(){
+	            $('#general').hide();
+	            $('#sacarUI').show();
+	        })
+	        $('.botao-transferir').click(function(){
+	            $('#general').hide();
+	            $('#transferirUI').show();
+	        })
+			$('.botao-pagar').click(function(){
+	            $('#general').hide();
+	            $('#pagarUI').show();
+	        })
+	        $('.botao-login').click(function(){
+	            setTimeout(function(){
+		  		$('#general').css('display', 'block')
+					$('#topbar').css('display', 'flex')
+					$('#waiting').css('display', 'none')
+				}, 1);
+	        })
+	        $("#depositar1").submit(function(e) {
+		        e.preventDefault();
+		        $.post('http://vrp_banco/depositar', JSON.stringify({
+		            amount: $("#amount").val()
+		        }));
+				$('#depositarUI').hide();
+				$('#general').show();
+				$("#amount").val('');
+			});
+			$("#sacar1").submit(function(e) {
+				e.preventDefault();
+		        $.post('http://vrp_banco/sacar', JSON.stringify({
+		            amounts: $("#amounts").val()
+		        }));
+				$('#sacarUI').hide();
+				$('#general').show();
+				$("#amounts").val('');
+			});
+			$("#transferir1").submit(function(e) {
+		        e.preventDefault();
+		        $.post('http://vrp_banco/transferir', JSON.stringify({
+					to: $("#to").val(),
+		            amountt: $("#amountt").val()
+		        }));
+				$('#transferirUI').hide();
+				$('#general').show();
+				$("#amountt").val('');
+			});
+			$("#pagar1").submit(function(e) {
+				e.preventDefault();
+		        $.post('http://vrp_banco/pagar', JSON.stringify({
+		            amountp: $("#amountp").val()
+		        }));
+				$('#pagarUI').hide();
+				$('#general').show();
+				$("#amountp").val('');
+			});
+			document.onkeyup = function(data){
+		        if (data.which == 27){
+		            $('#general, #waiting, #transferirUI, #sacarUI, #depositarUI, #pagarUI').hide();
+		            $('body').removeClass("active");
+		            $.post('http://vrp_banco/NUIFocusOff', JSON.stringify({}));
+		        }
+		    }
+		</script>	
+    </body>
+</html>
