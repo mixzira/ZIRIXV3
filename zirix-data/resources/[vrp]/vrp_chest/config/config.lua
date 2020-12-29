@@ -1,70 +1,28 @@
 config = {}
 
+config.imageServer = '' -- Deixe vazio caso você ultilize o serviço de straming de imagens da ZIRAFLIX;
+
 config.webhookBottomText = 'CLEAN TWO - '
 config.webhookIcon = 'https://i.imgur.com/CtQB816.png'
 config.webhookColor = 16431885
 
-config.webhooks = {
-	['ems'] = { '' },
-	['policia-arsenal'] = { '' },
-	['policia-evidencias'] = { '' },
-	['orgdone-factory'] = { '' },
-	['orgdtwo-factory'] = { '' },
-	['orgdthree-factory'] = { '' },
-	['orgdfour-factory'] = { '' },
-	['orgdfive-factory'] = { '' },
-	['orgdsix-factory'] = { '' },
-	['orggone-factory'] = { '' },
-	['orggone-base'] = { '' },
-	['orggtwo-factory'] = { '' },
-	['orgmone-base'] = { '' },
-	['orgmtwo-base'] = { '' },
-	['orgmthree-base'] = { '' },
-	['lscustoms-cofre'] = { '' },
-	['lscustoms-bau'] = { '' },
-	['imobiliaria-cofre'] = { '' }
-}
+config.policePermission = 'policia.permissao'
 
 config.chest = {
-    { 'ems', -453.53, -308.39, 34.92 },
-	{ 'policia-arsenal', -1098.8, -825.99, 14.29 },
-	{ 'policia-evidencias', -1074.87, -821.42, 11.04 },
-	{ 'orgdone-factory', 449.77, -1975.58, 17.29 },
-	{ 'orgdtwo-factory', 2523.88, 4118.89, 31.47 },
-	{ 'orgdthree-factory', 560.85, 2670.75, 35.05 },
-	{ 'orgdfour-factory', 800.05, -100.66, 74.92 },
-	{ 'orgdfive-factory', 148.84, -1708.25, 22.21 },
-	{ 'orgdsix-factory', -150.37, 6293.06, 24.58 },
-	{ 'orggone-factory', 1397.65, 1139.13, 109.75 },
-	{ 'orggone-base', 1403.24, 1152.4, 114.34 },
-	{ 'orggtwo-factory', 2854.57, 4448.12, 41.33 },
-	{ 'orgmone-base', 378.97, 258.34, 92.2 },
-	{ 'orgmtwo-base', 732.26, -795.21, 18.08 },
-	{ 'orgmthree-base', 93.19, -1291.4, 29.27 },
-	{ 'lscustoms-cofre', -323.46, -129.46, 39.01 },
-	{ 'lscustoms-bau', -344.75, -128.05, 39.01 },
-	{ 'imobiliaria-cofre', -1372.89, -462.17, 72.05 }
+    ['ems'] = { ['x'] = -453.53, ['y'] = -308.39, ['z'] = 34.92, ['weight'] = 5000, ['slots'] = 500, ['perm'] = 'ems.permissao', ['webhook'] = '' },
+	['policia-arsenal'] = { ['x'] = -1098.8, ['y'] = -825.99, ['z'] = 14.29, ['weight'] = 5000, ['slots'] = 500, ['perm'] = 'policia.permissao', ['webhook'] = '' },
+	['policia-evidencias'] = { ['x'] = -1074.87, ['y'] = -821.42, ['z'] = 11.04, ['weight'] = 5000, ['slots'] = 500, ['perm'] = 'policia.permissao', ['webhook'] = '' },
+	['orgdone-factory'] = { ['x'] = 449.77, ['y'] = -1975.58, ['z'] = 17.29, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orgdone.permissao', ['webhook'] = '' },
+	['orgdtwo-factory'] = { ['x'] = 2523.88, ['y'] = 4118.89, ['z'] = 31.47, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orgdtwo.permissao', ['webhook'] = '' },
+	['orgdthree-factory'] = { ['x'] = 560.85, ['y'] = 2670.75, ['z'] = 35.05, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orgdthree.permissao', ['webhook'] = '' },
+	['orgdfour-factory'] = { ['x'] = 800.05, ['y'] = -100.66, ['z'] = 74.92, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orgdfour.permissao', ['webhook'] = '' },
+	['orgdfive-factory'] = { ['x'] = 148.84, ['y'] = -1708.25, ['z'] = 22.21, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orgdfive.permissao', ['webhook'] = '' },
+	['orgdsix-factory'] = { ['x'] = -150.37, ['y'] = 6293.06, ['z'] = 24.58, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orgdsix.permissao', ['webhook'] = '' },
+	['orggone-factory'] = { ['x'] = 1397.65, ['y'] = 1139.13, ['z'] = 109.75, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orggone.permissao', ['webhook'] = '' },
+	['orggone-base'] = { ['x'] = 1403.24, ['y'] = 1152.4, ['z'] = 114.34, ['weight'] = 2000, ['slots'] = 200, ['perm'] = 'orggone.permissao', ['webhook'] = '' },
+	['orggtwo-factory'] = { ['x'] = 2854.57, ['y'] = 4448.12, ['z'] = 41.33, ['weight'] = 1000, ['slots'] = 100, ['perm'] = 'orggtwo.permissao', ['webhook'] = '' },
+	['orgmone-base'] = { ['x'] = 378.97, ['y'] = 258.34, ['z'] = 92.2, ['weight'] = 3000, ['slots'] = 300, ['perm'] = 'orgmone.permissao', ['webhook'] = '' },
+	['orgmtwo-base'] = { ['x'] = 732.26, ['y'] = -795.21, ['z'] = 18.08, ['weight'] = 3000, ['slots'] = 300, ['perm'] = 'orgmtwo.permissao', ['webhook'] = '' },
+	['orgmthree-base'] = { ['x'] = 93.19, ['y'] = -1291.4, ['z'] = 29.27, ['weight'] = 3000, ['slots'] = 300, ['perm'] = 'orgmthree.permissao', ['webhook'] = '' },
+	['lscustoms-bau'] = { ['x'] = -344.75, ['y'] = -128.05, ['z'] = 39.01, ['weight'] = 2000, ['slots'] = 200, ['perm'] = 'mecanico.permissao', ['webhook'] = '' }
 }
-
-config.chestInfos = {
-	['ems'] = { 5000, 500, 'ems.permissao' },
-	['policia-arsenal'] = { 5000, 500, 'policia.permissao' },
-	['policia-evidencias'] = { 5000, 500, 'policia.permissao' },
-	['orgdone-factory'] = { 1000, 100, 'orgdone.permissao' },
-	['orgdtwo-factory'] = { 1000, 100, 'orgdtwo.permissao' },
-	['orgdthree-factory'] = { 1000, 100, 'orgdthree.permissao' },
-	['orgdfour-factory'] = { 1000, 100, 'orgdfour.permissao' },
-	['orgdfive-factory'] = { 1000, 100, 'orgdfive.permissao' },
-	['orgdsix-factory'] = { 1000, 100, 'orgdsix.permissao' },
-	['orggone-factory'] = { 1000, 100, 'orggone.permissao' },
-	['orggone-base'] = { 2000, 200, 'orggone.permissao' },
-	['orggtwo-factory'] = { 1000, 100, 'orggtwo.permissao' },
-	['orgmone-base'] = { 3000, 300, 'orgmone.permissao' },
-	['orgmtwo-base'] = { 3000, 300, 'orgmtwo.permissao' },
-	['orgmthree-base'] = { 3000, 300, 'orgmthree.permissao' },
-	['lscustoms-cofre'] = { 1, 1, 'lider-mecanico.permissao' },
-	['lscustoms-bau'] = { 2000, 200, 'mecanico.permissao' },
-	['imobiliaria-cofre'] = { 1, 1, 'lider-corretor.permissao' }
-}
-
-config.imageServer = '' -- Deixe vazio caso use o serviço de straming de imagens da ZIRAFLIX;

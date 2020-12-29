@@ -2,24 +2,15 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONEXÃO ]-----------------------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_homes",src)
 vSERVER = Tunnel.getInterface("vrp_homes")
 
---[ VARIAVEIS ]---------------------------------------------------------------------------------------------------------------------------
-
-local houseTimer = false
 local houseOpen = ""
-
---[ STARTFOCUS ]--------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 end)
-
---[ CHESTCLOSE ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("chestClose",function(data)
 	TriggerEvent("vrp_sound:source",'mochila',0.2)
@@ -27,32 +18,24 @@ RegisterNUICallback("chestClose",function(data)
 	SendNUIMessage({ action = "hideMenu" })
 end)
 
---[ TAKEITEM ]----------------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback("takeItem",function(data)
 	vSERVER.takeItem(tostring(houseOpen),data.item,data.amount)
 end)
 
---[ STOREITEM ]---------------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback("storeItem",function(data)
 	vSERVER.storeItem(tostring(houseOpen),data.item,data.amount)
 end)
-
---[ AUTO-UPDATE ]-------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vrp_homes:Update")
 AddEventHandler("vrp_homes:Update",function(action)
 	SendNUIMessage({ action = action })
 end)
 
---[ REQUESTVAULT ]------------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback("requestVault",function(data,cb)
 	local inventory, chest, weight, maxweight, weightchest, maxweightchest, slots, slotschest = vSERVER.openChest(tostring(houseOpen))
 	local ip = config.imageServer
 	if ip == '' then
-		if vSERVER.checkAuth() then
+		if vSERVER.checkStreaming() then
 			ip = '192.99.251.232:3501'
 		end
 	end	
@@ -60,8 +43,6 @@ RegisterNUICallback("requestVault",function(data,cb)
 		cb({ inventory = inventory, chest = chest, weight = weight, maxweight = maxweight, weightchest = weightchest, maxweightchest = maxweightchest, slots = slots, slotschest = slotschest, ip = ip })
 	end
 end)
-
---[ ENTER ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vrp_homes:join")
 AddEventHandler("vrp_homes:join",function()
@@ -79,7 +60,6 @@ AddEventHandler("vrp_homes:join",function()
 					Citizen.Wait(750)
 					DoScreenFadeIn(1000)
 					houseOpen = tostring(k)
-					print(houseOpen)
 				end)
 			else
 				TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
@@ -127,9 +107,6 @@ AddEventHandler("vrp_homes:chest",function()
 				SetNuiFocus(true,true)
 				SendNUIMessage({ action = "showMenu" })
 				houseOpen = tostring(k)
-				SetTimeout(3000,function()
-					houseTimer = false
-				end)
 			else
 				TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
 			end
@@ -156,13 +133,9 @@ AddEventHandler("vrp_homes:invade",function()
 	end
 end)
 
---[ GETHOMESTATISTICS ]-------------------------------------------------------------------------------------------------------------------
-
 function src.getHomeStatistics()
 	return tostring(houseOpen)
 end
-
---[ SETBLIPSHOMES ]-----------------------------------------------------------------------------------------------------------------------
 
 function src.setBlipsOwner(homeName)
 	local blip = AddBlipForCoord(config.homes[homeName]["enter"][1],config.homes[homeName]["enter"][2],config.homes[homeName]["enter"][3])
@@ -174,8 +147,6 @@ function src.setBlipsOwner(homeName)
 	AddTextComponentString("Residência: ~g~"..homeName)
 	EndTextCommandSetBlipName(blip)
 end
-
---[ SETBLIPSHOMES ]-----------------------------------------------------------------------------------------------------------------------
 
 function src.setBlipsHomes(status)
 	for k,v in pairs(status) do

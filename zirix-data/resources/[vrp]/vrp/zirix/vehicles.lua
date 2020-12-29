@@ -67,7 +67,7 @@ vehs.vehglobal = {
 	["maverick"] = { ['name'] = "Maverick", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10, ['hash'] = -1660661558, ['banned'] = true },
 	["supervolito"] = { ['name'] = "Supervolito", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10, ['hash'] = 710198397, ['banned'] = true },
 	["supervolito2"] = { ['name'] = "Supervolito2", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10, ['hash'] = -1671539132, ['banned'] = true },
-	["volatus"] = { ['name'] = "Volatus", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10, ['hash'] = -1845487887, ['banned'] = true } },
+	["volatus"] = { ['name'] = "Volatus", ['price'] = 1000000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10, ['hash'] = -1845487887, ['banned'] = true },
 
 	-- Industrial
 	["flatbed"] = { ['name'] = "Reboque", ['price'] = 1000, ['tipo'] = "work", ["mala"] = 10, ["slots"] = 10, ['hash'] = 1353720154, ['banned'] = true },
