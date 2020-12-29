@@ -3,13 +3,9 @@ local Proxy = module('vrp','lib/Proxy')
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
---[ CONNECTION ]------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface('vrp_inspect',src)
 vCLIENT = Tunnel.getInterface('vrp_inspect')
-
---[ VARIABLES ]-------------------------------------------------------------------------------------
 
 local opened = {}
 local plunder = false
@@ -20,8 +16,6 @@ local customeremail = 'N/A'
 local customerdiscord = '<@N/A>'
 local customerip = 'N/A'
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
-
---[ INSPECT ]---------------------------------------------------------------------------------------
 
 RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -77,8 +71,6 @@ RegisterCommand(config.inspectCommand,function(source,args,rawCommand)
 	end
 end)
 
---[ PLUNDER ]---------------------------------------------------------------------------------------
-
 RegisterCommand(config.plunderCommand,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -111,7 +103,6 @@ RegisterCommand(config.plunderCommand,function(source,args,rawCommand)
 	end
 end)
 
---[ OPENINVENTORY ]---------------------------------------------------------------------------------
 slotsuser = 0
 slotsnuser = 0
 
@@ -163,8 +154,6 @@ function src.openChest()
 	end
 end
 
---[ STOREITEMS ]------------------------------------------------------------------------------------
-
 function src.storeItem(itemName,amount)
 	local source = source
 	if itemName then
@@ -199,8 +188,6 @@ function src.storeItem(itemName,amount)
 	return false
 end
 
---[ TAKEITEMS ]-------------------------------------------------------------------------------------
-
 function src.takeItem(itemName,amount)
 	local source = source
 	if itemName then
@@ -232,8 +219,6 @@ function src.takeItem(itemName,amount)
 		end
 	end
 end
-
---[ FUNCTIONS ]-------------------------------------------------------------------------------------
 
 function src.resetInspect()
 	local source = source

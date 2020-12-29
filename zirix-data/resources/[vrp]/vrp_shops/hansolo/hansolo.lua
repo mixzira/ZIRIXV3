@@ -3,24 +3,16 @@ local Proxy = module('vrp','lib/Proxy')
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
---[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
-
 vSERVER = Tunnel.getInterface('vrp_shops')
-
---[ VARIABLES ]-----------------------------------------------------------------------------------------------------------------
 
 local menuactive = false
 local openShop = {}
 local tShop = ''
 local dShop = ''
 
---[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 end)
-
---[ CHESTCLOSE ]-------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("shopClose",function(data)
 	TransitionFromBlurred(1000)
@@ -31,20 +23,14 @@ RegisterNUICallback("shopClose",function(data)
 	dShop = nil
 end)
 
---[ BUYITEM ]----------------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback("buyItem",function(data)
 	vSERVER.buyItem(data.item,data.amount,openShop)
 end)
-
---[ AUTO-UPDATE ]------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vrp_shops:Update")
 AddEventHandler("vrp_shops:Update",function(action)
 	SendNUIMessage({ action = action })
 end)
-
---[ MANU | FUNCTION ]-----------------------------------------------------------------------------------------------------------
 
 function ToggleActionMenu(type)
 	menuactive = not menuactive
@@ -75,8 +61,6 @@ RegisterNUICallback('requestShops',function(data,cb)
 	end
 end)
 
---[ KEYMAPPING | OPEN ]-----------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("vrp_shops:open")
 AddEventHandler("vrp_shops:open",function()
 	local ped = PlayerPedId()
@@ -99,8 +83,6 @@ AddEventHandler("vrp_shops:open",function()
 	end
 end)
 
---[ BLIP| THREAD ]-----------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000
@@ -119,8 +101,6 @@ Citizen.CreateThread(function()
 		Citizen.Wait(idle)
 	end
 end)
-
---[ TEXT | FUNCTION ]-----------------------------------------------------------------------------------------------------------
 
 function DrawText3D(x, y, z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)

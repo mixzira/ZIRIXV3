@@ -2,16 +2,10 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONECTIONS ]-------------------------------------------------------------------------------------------------------------------------
-
 vRPNserver = Tunnel.getInterface("vrp_identity")
-
---[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
 local nuidentity = false
 local identity = false
-
---[ IDENTIDADE ]-------------------------------------------------------------------------------------------------------------------------
 
 local css = [[
 	@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
@@ -230,7 +224,6 @@ RegisterCommand("arg",function(source,args)
 		end
 	end
 end)
-
 
 local ponto = {
 	{ ['x'] = -552.85, ['y'] = -190.74, ['z'] = 38.22 }

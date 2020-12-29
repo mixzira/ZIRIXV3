@@ -3,13 +3,9 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÕES ]---------------------------------------------------------------------------------------------------------------------------
-
 vRPN = {}
 Tunnel.bindInterface("vrp_trunkchest",vRPN)
 Proxy.addInterface("vrp_trunkchest",vRPN)
-
---[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
 local uchests = {}
 local vchests = {}
@@ -22,8 +18,6 @@ local customerdiscord = '<@N/A>'
 local customerip = 'N/A'
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
 
---[ ACTIVED ]----------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
 		for k,v in pairs(actived) do
@@ -34,8 +28,6 @@ Citizen.CreateThread(function()
 		Citizen.Wait(1000)
 	end
 end)
-
---[ INVENTORY & TRUNKCHEST ]-------------------------------------------------------------------------------------------------------------
 
 slotsinv = 0
 slotsmala = 0
@@ -89,9 +81,6 @@ function vRPN.Inventories()
 	return false
 end
 
-
---[ STOREITEM ]--------------------------------------------------------------------------------------------------------------------------
-
 function vRPN.storeItem(itemName,amount)
 	if itemName then
 		local source = source
@@ -116,8 +105,6 @@ function vRPN.storeItem(itemName,amount)
 	end
 end
 
---[ TAKEITEM ]---------------------------------------------------------------------------------------------------------------------------
-
 function vRPN.takeItem(itemName,amount)
 	if itemName then
 		local source = source
@@ -131,8 +118,6 @@ function vRPN.takeItem(itemName,amount)
 	end
 end
 
---[ CHESTCLOSE ]-------------------------------------------------------------------------------------------------------------------------
-
 function vRPN.chestClose()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -143,8 +128,6 @@ function vRPN.chestClose()
 	end
 	return false
 end
-
---[ TRUNK ]------------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("trytrunk:trunk")
 AddEventHandler("trytrunk:trunk",function()
@@ -165,8 +148,6 @@ AddEventHandler("trytrunk:trunk",function()
 		end
 	end
 end)
-
---[ SYNC TRUNKDOOR ]---------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("trytrunk")
 AddEventHandler("trytrunk",function(nveh)

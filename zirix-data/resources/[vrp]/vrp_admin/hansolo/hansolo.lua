@@ -2,18 +2,12 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ VARIÁVEIS ]---------------------------------------------------------------------------------------------------------------
-
 local showcoords = false
-
---[ CONEXÃO ]-----------------------------------------------------------------------------------------------------------------
 
 vRPidd = {}
 Tunnel.bindInterface("vrp_admin",vRPidd)
 Proxy.addInterface("vrp_admin",vRPidd)
 SVIDclient = Tunnel.getInterface("vrp_admin")
-
---[ UNCUFF ]------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('admcuff')
 AddEventHandler('admcuff',function()
@@ -24,15 +18,11 @@ AddEventHandler('admcuff',function()
 	end
 end)
 
---[ SYNCAREA ]----------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("syncarea")
 AddEventHandler("syncarea",function(x,y,z)
     ClearAreaOfVehicles(x,y,z,2000.0,false,false,false,false,false)
     ClearAreaOfEverything(x,y,z,2000.0,false,false,false,false)
 end)
-
---[ APAGAO ]------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("cloud:setApagao")
 AddEventHandler("cloud:setApagao", function(cond)
@@ -42,8 +32,6 @@ AddEventHandler("cloud:setApagao", function(cond)
     end
     SetBlackout(status)
 end)
-
---[ RAIOS ]-------------------------------------------------------------------------------------------------------------------
 
 local lightsCounter = 0
 Citizen.CreateThread(function()
@@ -62,8 +50,6 @@ AddEventHandler("cloud:raios", function(vezes)
     lightsCounter = lightsCounter + vezes
 end)
 
---[ TROCAR SEXO ]-------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("skinmenu")
 AddEventHandler("skinmenu",function(mhash)
     while not HasModelLoaded(mhash) do
@@ -76,8 +62,6 @@ AddEventHandler("skinmenu",function(mhash)
         SetModelAsNoLongerNeeded(mhash)
     end
 end)
-
---[ SYNCDELETEOBJ ]-----------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("syncdeleteobj")
 AddEventHandler("syncdeleteobj",function(index)
@@ -95,13 +79,9 @@ AddEventHandler("syncdeleteobj",function(index)
     end
 end)
 
---[ HEADING ]-----------------------------------------------------------------------------------------------------------------
-
 RegisterCommand("h",function(source,args)
 	TriggerEvent('chatMessage',"HEADING",{255,70,50},GetEntityHeading(PlayerPedId()))
 end)
-
---[ HASH VEICULO ]------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vehash")
 AddEventHandler("vehash",function()
@@ -110,8 +90,6 @@ AddEventHandler("vehash",function()
         vRP.prompt(source,"HASH: "..GetEntityModel(vehicle),GetEntityModel(vehicle))
 	end
 end)
-
---[ SPAWNAR VEÍCULO ]---------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('spawnarveiculo')
 AddEventHandler('spawnarveiculo',function(name)
@@ -145,8 +123,6 @@ AddEventHandler('spawnarveiculo',function(name)
 		SetModelAsNoLongerNeeded(mhash)
 	end
 end)
-
---[ TELEPORTAR PARA O LOCAL MARCADO ]-----------------------------------------------------------------------------------------
 
 RegisterNetEvent('tptoway')
 AddEventHandler('tptoway',function()
@@ -195,8 +171,6 @@ AddEventHandler('tptoway',function()
 	SetEntityCoordsNoOffset(ped,x,y,z,0,0,1)
 end)
 
---[ DELETAR NPCS MORTOS ]-----------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('delnpcs')
 AddEventHandler('delnpcs',function()
 	local handle,ped = FindFirstPed()
@@ -212,8 +186,6 @@ AddEventHandler('delnpcs',function()
 	until not finished
 	EndFindPed(handle)
 end)
-
---[ TUNING ]------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vehtuning")
 AddEventHandler("vehtuning",function()
@@ -271,9 +243,6 @@ AddEventHandler("vehtuning",function()
         SetVehicleNeonLightsColour(vehicle,0,0,0)
 	end
 end)
-
-
---[ DEBUG ]-------------------------------------------------------------------------------------------------------------------
 
 local dickheaddebug = false
 
@@ -458,9 +427,6 @@ Citizen.CreateThread( function()
     end
 end)
 
-
---[ IDS NA CABEÇA ]-----------------------------------------------------------------------------------------------------------
-
 local distancia = 300
 local mostraSeuID = true
 local players = {}
@@ -535,8 +501,6 @@ Citizen.CreateThread(function()
         Citizen.Wait(idle)
     end
 end)
-
---[ FUNÇÕES ]-----------------------------------------------------------------------------------------------------------------
 
 function drawTxtS(x,y ,width,height,scale, text, r,g,b,a)
     SetTextFont(0)

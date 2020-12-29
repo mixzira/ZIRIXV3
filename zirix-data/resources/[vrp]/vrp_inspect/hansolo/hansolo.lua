@@ -2,19 +2,13 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONNECTION ]-------------------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_inspect",src)
 vSERVER = Tunnel.getInterface("vrp_inspect")
 
---[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 end)
-
---[ CHESTCLOSE ]-------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("chestClose",function(data)
 	SetNuiFocus(false,false)
@@ -22,26 +16,18 @@ RegisterNUICallback("chestClose",function(data)
 	vSERVER.resetInspect()
 end)
 
---[ TAKEITEM ]---------------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback("takeItem",function(data)
 	vSERVER.takeItem(data.item,data.amount)
 end)
-
---[ STOREITEM ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("storeItem",function(data)
 	vSERVER.storeItem(data.item,data.amount)
 end)
 
---[ VRP_INSPECT:UPDATE ]-----------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("vrp_inspect:Update")
 AddEventHandler("vrp_inspect:Update",function(action)
 	SendNUIMessage({ action = action })
 end)
-
---[ REQUESTCHEST ]-----------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestChest",function(data,cb)
 	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight, slots, nuslots = vSERVER.openChest()
@@ -60,20 +46,14 @@ RegisterNUICallback("requestChest",function(data,cb)
 	end
 end)
 
---[ CHEST ]------------------------------------------------------------------------------------------------------------------------------
-
 function src.openInspect()
 	SetNuiFocus(true,true)
 	SendNUIMessage({ action = "showMenu" })
 end
 
---[ ENTITYHEADING ]----------------------------------------------------------------------------------------------------------------------
-
 function src.entityHeading()
 	return GetEntityHeading(PlayerPedId())
 end
-
---[ SETENTITYHEADING ]-------------------------------------------------------------------------------------------------------------------
 
 function src.setEntityHeading(h)
 	SetEntityHeading(PlayerPedId(),h)
@@ -87,8 +67,6 @@ function src.inVehicle(source)
 		return false
 	end
 end
-
---[ TOGGLECARRY ]------------------------------------------------------------------------------------------------------------------------
 
 local uCarry = nil
 local iCarry = false

@@ -4,15 +4,11 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONNECTION ]-------------------------------------------------------------------------------------------------------------------------
-
 vRPN = {}
 Tunnel.bindInterface("vrp_inventory",vRPN)
 Proxy.addInterface("vrp_inventory",vRPN)
 vRPCclient = Tunnel.getInterface("vrp_inventory")
 vGARAGE = Tunnel.getInterface("vrp_garages")
-
---[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
 local idgens = Tools.newIDGenerator()
 local actived = {}
@@ -26,8 +22,6 @@ local customeremail = 'N/A'
 local customerdiscord = '<@N/A>'
 local customerip = 'N/A'
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
-
---[ BACKPACK ]---------------------------------------------------------------------------------------------------------------------------
 
 function vRPN.Inventory()
 	local source = source
@@ -102,8 +96,6 @@ function vRPN.haveMoreSlots(user_id)
 	end
 end
 
---[ SENDITEM ]---------------------------------------------------------------------------------------------------------------------------
-
 function vRPN.sendItem(itemName,type,amount)
 	local source = source
 
@@ -160,8 +152,6 @@ function vRPN.sendItem(itemName,type,amount)
 	return false
 end
 
---[ DROPITEM ]---------------------------------------------------------------------------------------------------------------------------
-
 function vRPN.dropItem(itemName,type,amount)
 	local source = source
 	if itemName then
@@ -181,8 +171,6 @@ function vRPN.dropItem(itemName,type,amount)
 	end
 	return false
 end
-
---[ USEITEM ]----------------------------------------------------------------------------------------------------------------------------
 
 function vRPN.useItem(itemName,type,ramount)
 	local source = source
@@ -361,12 +349,6 @@ function vRPN.useItem(itemName,type,ramount)
 			elseif itemName == "lockpick" then
 				local vehicle,vnetid,placa,vname,lock,banned,trunk,model,street = vRPclient.vehList(source,2)
 				local policia = vRP.getUsersByPermission("policia.permissao")
-
-				--[[if #policia >= 2 then
-					TriggerClientEvent("Notify",source,"aviso","Policiais insuficientes em serviço.")
-					return true
-				end]]
-
 				if vehicle then
 					if vRP.getInventoryItemAmount(user_id,"lockpick") >= 1 and vRP.tryGetInventoryItem(user_id,"lockpick",1) then
 						actived[user_id] = true
@@ -431,9 +413,6 @@ function vRPN.useItem(itemName,type,ramount)
                         end)
                     end
                 end
-
-				--[ BEBIDAS ]-------------------------------------------------------------------------------------------------------------------------------------
-	
 			elseif itemName == "agua" then
 				local src = source
 				if vRP.tryGetInventoryItem(user_id,"agua",1) then
@@ -1202,13 +1181,9 @@ function vRPN.useItem(itemName,type,ramount)
 	end
 end
 
---[ PLAYERLEAVE ]------------------------------------------------------------------------------------------------------------------------
-
 AddEventHandler("vRP:playerLeave",function(user_id,source)
 	actived[user_id] = nil
 end)
-
---[ GARMAS ]-----------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('garmas',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -1235,8 +1210,6 @@ RegisterCommand('garmas',function(source,args,rawCommand)
 	end)
 end)
 
---[ GCOLETE ]----------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('gcolete',function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -1262,8 +1235,6 @@ RegisterCommand('gcolete',function(source,args,rawCommand)
 		end)
 	end
 end)
-
---[ GMOCHILA ]---------------------------------------------------------------------------------------------------------------------------
 
 function vRPN.unEquip()
 	local source = source

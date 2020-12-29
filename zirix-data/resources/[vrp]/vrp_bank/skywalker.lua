@@ -3,20 +3,14 @@ local Proxy = module("vrp", "lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 banK = {}
-Tunnel.bindInterface("vrp_banco",banK)
-Proxy.addInterface("vrp_banco",banK)
-
---[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
+Tunnel.bindInterface("vrp_bank",banK)
+Proxy.addInterface("vrp_bank",banK)
 
 local reward = 0
 local andamento = false
 local dinheirosujo = {}
 local recebimentofinal = 0
-
---[ PAGAR MULTAS ]-----------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand(config.fines,function(source,args,rawCommand)
 	local source = source
@@ -78,8 +72,6 @@ RegisterCommand(config.fines,function(source,args,rawCommand)
 	end
 end)
 
---[ DEPOSITAR ]--------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent('bank:depositar')
 AddEventHandler('bank:depositar', function(amount)
 	local _source = source
@@ -93,7 +85,7 @@ AddEventHandler('bank:depositar', function(amount)
 
 		PerformHttpRequest(config.logBankDepositar, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
-				{ 	------------------------------------------------------------
+				{ 	
 					title = "REGISTRO DE DEPOSITOS:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
 						url = "https://i.imgur.com/CtQB816.png"
@@ -121,8 +113,6 @@ AddEventHandler('bank:depositar', function(amount)
 	end
 end)
 
---[ SACAR ]------------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent('bank:sacar')
 AddEventHandler('bank:sacar', function(amount)
 	local _source = source
@@ -139,7 +129,7 @@ AddEventHandler('bank:sacar', function(amount)
 
 		PerformHttpRequest(config.logBankSacar, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
-				{ 	------------------------------------------------------------
+				{ 	
 					title = "REGISTRO DE SAQUES:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
 						url = "https://i.imgur.com/CtQB816.png"
@@ -166,8 +156,6 @@ AddEventHandler('bank:sacar', function(amount)
 		TriggerClientEvent("Notify",_source,"sucesso","Você sacou <b>$"..amount.." dólares</b>.")
 	end
 end)
-
---[ PAGAR ]------------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent('bank:pagar')
 AddEventHandler('bank:pagar', function(amount)
@@ -227,8 +215,6 @@ AddEventHandler('bank:pagar', function(amount)
 	end
 end)
 
---[ SALDO ]------------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent('bank:balance')
 AddEventHandler('bank:balance', function()
 	local _source = source
@@ -239,8 +225,6 @@ AddEventHandler('bank:balance', function()
 	TriggerClientEvent("currentbalance1",_source,addComma(math.floor(getbankmoney)),multasbalance)
 	TriggerClientEvent("currentbalance2",_source)
 end)
-
---[ TRANSFERENCIAS ]---------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent('bank:transferir')
 AddEventHandler('bank:transferir', function(to,amountt)
@@ -270,7 +254,7 @@ AddEventHandler('bank:transferir', function(to,amountt)
 
 				PerformHttpRequest(config.logBankTransferencia, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
-						{ 	------------------------------------------------------------
+						{ 
 							title = "REGISTRO DE TRANSFERENCIAS:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
 								url = "https://i.imgur.com/CtQB816.png"
@@ -305,8 +289,6 @@ AddEventHandler('bank:transferir', function(to,amountt)
 	end
 end)
 
---[ TEMPO ]------------------------------------------------------------------------------------------------------------------------------
-
 local timers = {}
 Citizen.CreateThread(function()
 	while true do
@@ -318,10 +300,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
-
-
---[ CHECKROBBERY ]-----------------------------------------------------------------------------------------------------------------------
 
 function banK.checkRobbery(id,x,y,z,head)
 	local source = source
@@ -382,8 +360,6 @@ function banK.checkRobbery(id,x,y,z,head)
 	end
 end
 
---[ CANCELROBBERY ]----------------------------------------------------------------------------------------------------------------------
-
 function banK.cancelRobbery()
 	if andamento then
 		andamento = false 
@@ -399,9 +375,6 @@ function banK.cancelRobbery()
 		end
 	end
 end
-
-
---[ PAYMENTROBBERY ]---------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -452,14 +425,11 @@ function banK.robberywebwook()
 	}), { ['Content-Type'] = 'application/json' })
 end
 
----[ CHECK PERMISSIONS ]------------------------------------------------------------------------------------------------------------------
-
 function banK.checkPermission()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	return not (vRP.hasPermission(user_id,config.permissao))
 end
-
 
 function banK.giveDebitCard()
 	local source = source
@@ -482,8 +452,6 @@ function banK.giveDebitCard()
 		TriggerClientEvent("Notify",source,"negado","Sua mochila está cheia.")
 	end
 end
-
---[ TESTE ]------------------------------------------------------------------------------------------------------------------------------
 
 function round(num, numDecimalPlaces)
 	local mult = 5^(numDecimalPlaces or 0)

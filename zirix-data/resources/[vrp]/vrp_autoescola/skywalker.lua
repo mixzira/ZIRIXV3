@@ -4,17 +4,11 @@ local Tools = module("vrp", "lib/Tools")
 vRPclient = Tunnel.getInterface("vRP")
 vRP = Proxy.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 dmv = {}
 Tunnel.bindInterface("vrp_autoescola",dmv)
 
---[ mySQL ]------------------------------------------------------------------------------------------------------------------------------
-
 vRP._prepare("vRP/update_driverlicense","UPDATE vrp_user_identities SET driverlicense = @driverlicense WHERE user_id = @user_id")
 vRP._prepare("vRP/get_driverlicense","SELECT user_id FROM vrp_user_identities WHERE driverlicense = @driverlicense")
-
---[ AÇÃO ]-------------------------------------------------------------------------------------------------------------------------------
 
 local timers = {}
 
@@ -41,7 +35,6 @@ function dmv.checkTime()
         return false
     end
 end
-
 
 function dmv.pagamento()
     local source = source

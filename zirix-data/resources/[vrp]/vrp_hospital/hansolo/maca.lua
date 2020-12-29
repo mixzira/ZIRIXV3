@@ -1,5 +1,3 @@
---[ VARIÁVEIS ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local beds = {
 	'v_med_bed1',
 	'v_med_bed2',
@@ -7,8 +5,6 @@ local beds = {
 }
 
 local nearObjectM, isLocal
-
---[ THREAD ]--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -52,8 +48,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ EVENTOS ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('vrp_for_medic:stretcher:spawn')
 AddEventHandler('vrp_for_medic:stretcher:spawn', function()
 	LoadModel('v_med_bed1')
@@ -67,8 +61,6 @@ AddEventHandler('vrp_for_medic:stretcher:delete', function()
 		DeleteEntity(maca)
 	end
 end)
-
---[ FUNÇÕES ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function LoadModel(model)
 	while not HasModelLoaded(model) do

@@ -2,9 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-banK = Tunnel.getInterface("vrp_banco")
-
---[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
+banK = Tunnel.getInterface("vrp_bank")
 
 inMenu = true
 local andamento = false
@@ -15,16 +13,12 @@ local bankMenu	= true
 local blip = nil
 local hora = 0	
 
---[ CALCULAR TEMPO ]---------------------------------------------------------------------------------------------------------------------
-
 function CalculateTimeToDisplay()
 	hora = GetClockHours()
 	if hora <= 9 then
 		hora = "0" .. hora
 	end
 end
-
---[ ACESSAR BANCO ]----------------------------------------------------------------------------------------------------------------------
 
 if bankMenu then
 	Citizen.CreateThread(function()
@@ -80,8 +74,6 @@ if bankMenu then
 		end
 	end)
 end
-
---[ NUI bank ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('currentbalance1')
 AddEventHandler('currentbalance1', function(balance,multas)
@@ -179,8 +171,6 @@ function nearATM()
 	end
 end
 
---[ INICIO/CANCELAR ]--------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000
@@ -212,8 +202,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ INICIADO ]---------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("iniciandocaixaeletronico")
 AddEventHandler("iniciandocaixaeletronico",function(x,y,z,secs,head)
 	segundos = secs
@@ -222,8 +210,6 @@ AddEventHandler("iniciandocaixaeletronico",function(x,y,z,secs,head)
 	SetEntityCoords(PlayerPedId(),x,y,z-1,false,false,false,false)
 	TriggerEvent('cancelando',true)
 end)
-
---[ CONTAGEM ]---------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -239,8 +225,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
---[ FUNÇÕES ]----------------------------------------------------------------------------------------------------------------------------
 
 function drawTxt(text,font,x,y,scale,r,g,b,a)
 	SetTextFont(font)

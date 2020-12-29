@@ -4,21 +4,14 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
-
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_garages",src)
 vSERVER = Tunnel.getInterface("vrp_garages")
-
---[ VARIAVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
 local workgarage = ""
 local vehicle = {}
 local vehblips = {}
 local pointspawn = 1
-
---[ SPAWN ]------------------------------------------------------------------------------------------------------------------------------
 
 local spawn = {
 	[1] = { ['x'] = 53.98, ['y'] = -878.08, ['z'] = 30.38, ['name'] = "Garagem",
@@ -52,7 +45,6 @@ local spawn = {
 		[1] = { ['x'] = 147.51, ['y'] = 6639.8, ['z'] = 31.59, ['h'] = 319.17 },
 		[2] = { ['x'] = 150.55, ['y'] = 6635.8, ['z'] = 31.63, ['h'] = 319.17 }
 	},
-
 
 --[ DEPARTAMENTO DE POLÍCIA ]------------------------------------------------------------------------------------------------------------
 
@@ -999,9 +991,6 @@ local spawn = {
 	},
 }
 
-
---[ FUNCTION ]---------------------------------------------------------------------------------------------------------------------------
-
 local menuEnabled = false
 function ToggleActionMenu(name,status)
 	if name and status then
@@ -1020,13 +1009,9 @@ function ToggleActionMenu(name,status)
 	end
 end
 
---[ OPENGARAGE ]-------------------------------------------------------------------------------------------------------------------------
-
 function src.openGarage(work,number)
 	ToggleActionMenu(work,parseInt(number))
 end
-
---[ VEHICLEMODS ]------------------------------------------------------------------------------------------------------------------------
 
 function src.vehicleMods(veh,custom)
 	if custom and veh then
@@ -1124,8 +1109,6 @@ function src.vehicleMods(veh,custom)
 	end
 end
 
---[ SPAWNVEHICLE ]-----------------------------------------------------------------------------------------------------------------------
-
 local gps = {}
 function src.spawnVehicle(vehname,vehengine,vehbody,vehfuel,custom)
 	if vehicle[vehname] == nil then
@@ -1186,8 +1169,6 @@ function src.spawnVehicle(vehname,vehengine,vehbody,vehfuel,custom)
 	return false
 end
 
---[ SYNCBLIPS ---------------------------------------------------------------------------------------------------------------------------
-
 function src.syncBlips(nveh,vehname)
 	Citizen.CreateThread(function()
 		while true do
@@ -1206,15 +1187,11 @@ function src.syncBlips(nveh,vehname)
 	end)
 end
 
---[ DELETEVEHICLE -----------------------------------------------------------------------------------------------------------------------
-
 function src.deleteVehicle(vehicle)
 	if IsEntityAVehicle(vehicle) then
 		vSERVER.tryDelete(VehToNet(vehicle),GetVehicleEngineHealth(vehicle),GetVehicleBodyHealth(vehicle),GetVehicleFuelLevel(vehicle))
 	end
 end
-
---[ DELETEVEHICLE ]----------------------------------------------------------------------------------------------------------------------
 
 function src.removeGpsVehicle(vehname)
 	if vehicle[vehname] then
@@ -1223,8 +1200,6 @@ function src.removeGpsVehicle(vehname)
 		gps[vehname] = nil
 	end
 end
-
---[ NOTEBOOKREMOVE ]---------------------------------------------------------------------------------------------------------------------
 
 function src.freezeVehicleNotebook(vehicle)
 	while not HasAnimDictLoaded(animDict) do
@@ -1242,8 +1217,6 @@ function src.freezeVehicleNotebook(vehicle)
 	end
 end
 
---[ SYNCVEHICLE ]------------------------------------------------------------------------------------------------------------------------
-
 function src.syncVehicle(vehicle)
 	if NetworkDoesNetworkIdExist(vehicle) then
 		local v = NetToVeh(vehicle)
@@ -1260,8 +1233,6 @@ function src.syncVehicle(vehicle)
 	end
 end
 
---[ SYNCNAMEDELETE ]---------------------------------------------------------------------------------------------------------------------
-
 function src.syncNameDelete(vehname)
 	if vehicle[vehname] then
 		vehicle[vehname] = nil
@@ -1272,13 +1243,9 @@ function src.syncNameDelete(vehname)
 	end
 end
 
---[ RETURNVEHICLE ]----------------------------------------------------------------------------------------------------------------------
-
 function src.returnVehicle(name)
 	return vehicle[name]
 end
-
---[ VEHICLEANCHOR ]----------------------------------------------------------------------------------------------------------------------
 
 local vehicleanchor = false
 function src.vehicleAnchor(vehicle)
@@ -1298,8 +1265,6 @@ function src.vehicleAnchor(vehicle)
 	end
 end
 
---[ BOATANCHOR ]-------------------------------------------------------------------------------------------------------------------------
-
 local boatanchor = false
 function src.boatAnchor(vehicle)
 	if IsEntityAVehicle(vehicle) and GetVehicleClass(vehicle) == 14 then
@@ -1315,15 +1280,11 @@ function src.boatAnchor(vehicle)
 	end
 end
 
---[ BUTTONCLICK ]------------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "exit" then
 		ToggleActionMenu()
 	end
 end)
-
---[ REQUESTVEHICLES ]--------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("myVehicles",function(data,cb)
 	local vehicles = vSERVER.myVehicles(workgarage)
@@ -1331,8 +1292,6 @@ RegisterNUICallback("myVehicles",function(data,cb)
 		cb({ vehicles = vehicles })
 	end
 end)
-
---[ COOLDOWN ]---------------------------------------------------------------------------------------------------------------------------
 
 local cooldown = 0
 Citizen.CreateThread(function()
@@ -1344,8 +1303,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ SPAWNVEHICLES ]----------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback('spawnVehicles',function(data)
     if cooldown < 1 then
         cooldown = 3
@@ -1353,16 +1310,12 @@ RegisterNUICallback('spawnVehicles',function(data)
 	end
 end)
 
---[ DELETEVEHICLES ]---------------------------------------------------------------------------------------------------------------------
-
 RegisterNUICallback('deleteVehicles',function(data)
     if cooldown < 1 then
         cooldown = 3
 		vSERVER.deleteVehicles()
     end
 end)
-
---[ VEHICLECLIENTLOCK ]------------------------------------------------------------------------------------------------------------------
 
 function src.vehicleClientLock(index,lock)
 	if NetworkDoesNetworkIdExist(index) then
@@ -1387,8 +1340,6 @@ function src.vehicleClientLock(index,lock)
 	end
 end
 
---[ VEHICLECLIENTTRUNK ]-----------------------------------------------------------------------------------------------------------------
-
 function src.vehicleClientTrunk(vehid,trunk)
 	if NetworkDoesNetworkIdExist(vehid) then
 		local v = NetToVeh(vehid)
@@ -1402,11 +1353,7 @@ function src.vehicleClientTrunk(vehid,trunk)
 	end
 end
 
---[ BUTTONS ]----------------------------------------------------------------------------------------------------------------------------
-
 RegisterKeyMapping('vrp_garages:lock', '[V] Trancar/destrancar veiculo', 'keyboard', 'L')
-
---[ BUTTONS ]----------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('vrp_garages:lock', function()
 	local ped = PlayerPedId()
@@ -1447,13 +1394,9 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ SYNCDOORSEVERYONE ]------------------------------------------------------------------------------------------------------------------
-
 function src.syncVehiclesEveryone(veh,status)
 	SetVehicleDoorsLocked(veh,status)
 end
-
---[ LIMPAR ]-----------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('limpar')
 AddEventHandler('limpar',function()
@@ -1478,8 +1421,6 @@ AddEventHandler('synclimpar',function(index)
 		end
 	end
 end)
-
---[ REPARAR ]----------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('reparar')
 AddEventHandler('reparar',function()
@@ -1507,8 +1448,6 @@ AddEventHandler('syncreparar',function(index)
 	end
 end)
 
---[ REPARAR MOTOR ]----------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('repararmotor')
 AddEventHandler('repararmotor',function()
 	local vehicle = vRP.getNearestVehicle(3)
@@ -1529,15 +1468,11 @@ AddEventHandler('syncmotor',function(index)
 	end
 end)
 
---[ SETLIVERY ]--------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand("setlivery",function(source,args,custom)
 	local ped = PlayerPedId()
 	local vehicle = vRP.getNearestVehicle(5)
 	SetVehicleLivery(vehicle,parseInt(args[1]))
 end)
-
---[ RETURNLIVERY ]-----------------------------------------------------------------------------------------------------------------------
 
 function src.returnlivery(vehicle,livery)
 	local ped = PlayerPedId()
@@ -1546,15 +1481,11 @@ function src.returnlivery(vehicle,livery)
 	return livery
 end
 
---[ GET HASH ]---------------------------------------------------------------------------------------------------------------------------
-
 function src.getHash(vehiclehash)
     local vehicle = vRP.getNearestVehicle(7)
     local vehiclehash = GetEntityModel(vehicle)
     return vehiclehash
 end
-
---[ FUNÇÃO DE TEXTO ]--------------------------------------------------------------------------------------------------------------------
 
 function DrawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)

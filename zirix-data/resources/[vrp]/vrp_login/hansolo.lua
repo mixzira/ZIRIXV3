@@ -2,8 +2,6 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ FUNCTION ]---------------------------------------------------------------------------------------------------------------------------
-
 local menuactive = false
 function ToggleActionMenu()
 	menuactive = not menuactive
@@ -15,8 +13,6 @@ function ToggleActionMenu()
 		SendNUIMessage({ hidemenu = true })
 	end
 end
-
---[ BUTTON ]-----------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "rodoviaria" then
@@ -32,8 +28,6 @@ end)
 RegisterCommand("tlogin",function(source,args)
 	ToggleActionMenu()
 end)
-
---[ TOOGLE LOGIN ]-----------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('vrp:ToogleLoginMenu')
 AddEventHandler('vrp:ToogleLoginMenu',function()

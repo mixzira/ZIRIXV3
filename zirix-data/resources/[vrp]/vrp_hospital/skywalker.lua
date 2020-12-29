@@ -4,20 +4,12 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÕES ]------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 Resg = {}
 Tunnel.bindInterface("vrp_hospital",Resg)
 
---[ VARIÁVEL ]------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local idgens = Tools.newIDGenerator()
 
---[ WEBHOOK ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local logSistemaLaudo = "https://discordapp.com/api/webhooks/764957969972330517/MRFjuO6Mepz9_4N2OfuuttRFUdlDPjMAjIvH_uSaPeZOBlXoL5y0tln9VRxGhu7chrRi"
-
---[ RESGATE ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('ems', function(source,args,rawCommand)
 	local source = source
@@ -74,16 +66,12 @@ RegisterCommand('ems', function(source,args,rawCommand)
 	end
 end)
 
--- [ REANIMAR ] ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('reanimar',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"ems.permissao") then
 		TriggerClientEvent('reanimar',source)
 	end
 end)
-
--- [ RE ] ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('re',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -143,8 +131,6 @@ RegisterCommand('re',function(source,args,rawCommand)
 	end
 end)
 
---[ TRATAMENTO ]----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('tratamento',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"ems.permissao") then
@@ -158,8 +144,6 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
     end
 end)
 
---[ FUNÇÕES ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 function Resg.checkServices()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -170,8 +154,6 @@ function Resg.checkServices()
 		end
 	end
 end
-
---[ LAUDO MÉDICO ]--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('laudo',function(source,args,rawCommand)
 	local source = source
@@ -211,7 +193,7 @@ RegisterCommand('laudo',function(source,args,rawCommand)
 
 						PerformHttpRequest(logSistemaLaudo, function(err, text, headers) end, 'POST', json.encode({
 							embeds = {
-								{ 	------------------------------------------------------------
+								{ 	
 									title = "LAUDO MÉDICO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 									thumbnail = {
 									url = "https://i.imgur.com/CtQB816.png"
@@ -266,8 +248,6 @@ RegisterCommand('laudo',function(source,args,rawCommand)
 	end
 end)
 
---[ LAUDO MÉDICO ]--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('sme',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -288,5 +268,3 @@ RegisterCommand('sme',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ RESGATE ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -2,11 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONEXÕES ]---------------------------------------------------------------------------------------------------------------------------
-
 src = Tunnel.getInterface("vrp_policia")
-
---[ /RMASCARA ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("rmascara")
 AddEventHandler("rmascara",function()
@@ -18,14 +14,10 @@ AddEventHandler("rcolete",function()
 	SetPedComponentVariation(PlayerPedId(),9,0,0,2)
 end)
 
---[ /RCHAPEU ]---------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("rchapeu")
 AddEventHandler("rchapeu",function()
 	ClearPedProp(PlayerPedId(),0)
 end)
-
---[ SET & REMOVE ALGEMAS ]---------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("setalgemas")
 AddEventHandler("setalgemas",function()
@@ -41,8 +33,6 @@ RegisterNetEvent("removealgemas")
 AddEventHandler("removealgemas",function()
 	SetPedComponentVariation(PlayerPedId(),7,0,0,2)
 end)
-
---[ DISPAROS ]------------------------------------------------------------------------------------------------------------------------------------
 
 local blacklistedWeapons = {
 	"GADGET_PARACHUTE",
@@ -89,8 +79,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ CARREGAR ]---------------------------------------------------------------------------------------------------------------------------
-
 other = nil
 drag = false
 carregado = false
@@ -136,8 +124,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ CONE ]-------------------------------------------------------------------------------------------------------------------------------
-
 local cone = nil
 RegisterNetEvent('cone')
 AddEventHandler('cone',function(nome)
@@ -162,8 +148,6 @@ AddEventHandler('cone',function(nome)
 	end
 end)
 
---[ BARREIRA ]---------------------------------------------------------------------------------------------------------------------------
-
 local barreira = nil
 RegisterNetEvent('barreira')
 AddEventHandler('barreira',function(nome)
@@ -187,8 +171,6 @@ AddEventHandler('barreira',function(nome)
 		end
 	end
 end)
-
---[ SPIKE ]------------------------------------------------------------------------------------------------------------------------------
 
 local spike = nil
 RegisterNetEvent('spike')
@@ -240,8 +222,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
---[ PRISÃO ]-----------------------------------------------------------------------------------------------------------------------------
 
 local prisioneiro = false
 local reducaopenal = false

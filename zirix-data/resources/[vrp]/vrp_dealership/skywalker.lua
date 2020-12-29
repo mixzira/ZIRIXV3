@@ -3,19 +3,13 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_dealership",src)
 vCLIENT = Tunnel.getInterface("vrp_dealership")
 
---[ VARIAVEIS ]--------------------------------------------------------------------------------------------------------------------------
-
 local motos = {}
 local carros = {}
 local import = {} 
-
---[ SYSTEM ]-----------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	for k,v in pairs(vRP.vehicleGlobal()) do
@@ -39,8 +33,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
---[ UPDATEVEHICLES ]---------------------------------------------------------------------------------------------------------------------
 
 function src.updateVehicles(vname,vehtype)
 	if vehtype == "carros" then
@@ -76,8 +68,6 @@ function src.updateVehicles(vname,vehtype)
 	end
 end
 
---[ CARROS ]-----------------------------------------------------------------------------------------------------------------------------
-
 function src.Carros()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -85,8 +75,6 @@ function src.Carros()
 		return carros
 	end
 end
-
---[ MOTOS ]------------------------------------------------------------------------------------------------------------------------------
 
 function src.Motos()
 	local source = source
@@ -96,8 +84,6 @@ function src.Motos()
 	end
 end
 
---[ IMPORT ]-----------------------------------------------------------------------------------------------------------------------------
-
 function src.Import()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -105,8 +91,6 @@ function src.Import()
 		return import
 	end
 end
-
---[ BUYDEALER ]--------------------------------------------------------------------------------------------------------------------------
 
 function src.buyDealer(name)
 	local source = source
@@ -183,8 +167,6 @@ function src.buyDealer(name)
 		--end
 	end
 end
-
---[ SELLDEALER ]-------------------------------------------------------------------------------------------------------------------------
 
 function src.permissao()
     local source = source

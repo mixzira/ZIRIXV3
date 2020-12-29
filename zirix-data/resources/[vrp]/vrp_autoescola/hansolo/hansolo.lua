@@ -2,11 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 dmv = Tunnel.getInterface("vrp_autoescola")
-
---[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
 local emaula = false
 local onrota = false
@@ -14,8 +10,6 @@ local emrota = 0
 local area = 0
 local erros = 0
 local emcolizao = false
-
---[ AÇÕES ]------------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
     while true do
@@ -50,8 +44,6 @@ Citizen.CreateThread(function()
         Citizen.Wait(idle)
 	end
 end)
-
---[ SPAWN VEÍCULO ]----------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('autoescola:veiculo')
 AddEventHandler('autoescola:veiculo', function()
@@ -94,8 +86,6 @@ AddEventHandler('autoescola:veiculo', function()
     Wait(1000)
     TriggerEvent("autoescola:rota")
 end)
-
---[ ROTA ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('autoescola:rota')
 AddEventHandler('autoescola:rota', function()
@@ -382,8 +372,6 @@ Citizen.CreateThread(function()
     end
 end)
 
---[ TESTE FINAL ]------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('autoescola:final')
 AddEventHandler('autoescola:final', function()
     local player = GetPlayerFromServerId(src)
@@ -413,8 +401,6 @@ AddEventHandler('autoescola:final', function()
     end
 end)
 
---[ TESTES ]-----------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
         Citizen.Wait(3000)
@@ -442,9 +428,6 @@ Citizen.CreateThread(function()
         end
 	end
 end)
-
-
---[ TESTES ]-----------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -499,8 +482,6 @@ Citizen.CreateThread(function()
         Citizen.Wait(idle)
 	end
 end)
-
---[ FUNÇÕES ]----------------------------------------------------------------------------------------------------------------------------
 
 function DrawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)

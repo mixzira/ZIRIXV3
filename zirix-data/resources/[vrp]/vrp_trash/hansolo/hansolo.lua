@@ -2,13 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONNECTION ]---------------------------------------------------------------------------------------
-
 misc = Tunnel.getInterface("vrp_trash")
-
---[ VARIABLES ]----------------------------------------------------------------------------------------
-
---[ THREADS ]------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vrp_trash:use")
 AddEventHandler("vrp_trash:use",function()
@@ -35,16 +29,12 @@ AddEventHandler("vrp_trash:use",function()
     end
 end)
 
---[ EVENTS ]-------------------------------------------------------------------------------------------
-
 RegisterNetEvent('vrp_trash:trashAnim')
 AddEventHandler('vrp_trash:trashAnim', function()
     TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_BIN", 0, true)
     Citizen.Wait(6000)
     ClearPedTasks(PlayerPedId())
 end)
-
---[ FUNCTIONS ]----------------------------------------------------------------------------------------
 
 function DrawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)

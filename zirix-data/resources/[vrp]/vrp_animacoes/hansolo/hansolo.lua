@@ -2,22 +2,12 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
------------------------------------------------------------------------------------------------------------------------------------------
-
--- 60309 hand ESQUERDA
--- 28422 hand DIREITA
--- 50 NÃO REPETE
--- 49 REPETE
-
------------------------------------------------------------------------------------------------------------------------------------------
-
 local fov_min = 5.0
 local fov_max = 70.0
 local binoculos = false
 local camera = false
 local fov = (fov_max+fov_min)*0.5
 
------------------------------------------------------------------------------------------------------------------------------------------
 local animacoes = {
 	{ nome = "radio2" , prop = "prop_boombox_01" , flag = 50 , hand = 57005 , pos1 = 0.30 , pos2 = 0 , pos3 = 0 , pos4 = 0 , pos5 = 260.0 , pos6 = 60.0 },
 	{ nome = "bolsa" , prop = "prop_ld_case_01" , flag = 50 , hand = 57005 , pos1 = 0.16 , pos2 = 0 , pos3 = 0 , pos4 = 0 , pos5 = 260.0 , pos6 = 60.0 },
@@ -532,29 +522,6 @@ local animacoes = {
         camera = true
     end }
 	
-	--[[{ nome = "bong" , dict = "anim@safehouse@bong" , anim = "bong_stage1" , prop = "prop_bong_01" , flag = 50 , hand = 60309 , extra = function() 
-		if not IsPedInAnyVehicle(PlayerPedId()) then
-			TriggerEvent('cancelando',true)
-			TriggerEvent("progress",9000,"fumando")
-			TriggerEvent("vrp_sound:source",'bong',0.5)
-			SetTimeout(8700,function()
-				vRP._DeletarObjeto()
-				ShakeGameplayCam('SMALL_EXPLOSION_SHAKE',0.5)
-			end)
-			SetTimeout(9000,function()
-				vRP.loadAnimSet("MOVE_M@DRUNK@VERYDRUNK")
-				SetTimecycleModifier("REDMIST_blend")
-				ShakeGameplayCam("FAMILY5_DRUG_TRIP_SHAKE",1.0)
-				StartScreenEffect("DMT_flight",30000,false)
-				Wait(30000)
-				TriggerEvent('cancelando',false)
-				SetTimecycleModifier("")
-				SetTransitionTimecycleModifier("")
-				StopGameplayCamShaking()
-				ResetPedMovementClipset(PlayerPedId())
-			end)
-		end
-	end}]]
 }
 
 RegisterNetEvent('emotes')

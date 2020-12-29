@@ -2,11 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 src = Tunnel.getInterface("vrp_player",src)
-
---[ VTUNING ]----------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand("vtuning",function(source,args)
 	local vehicle = GetVehiclePedIsUsing(PlayerPedId())
@@ -85,8 +81,6 @@ RegisterCommand("vtuning",function(source,args)
 		TriggerEvent("Notify","importante","<b>Motor:</b> "..motor.."<br><b>Freio:</b> "..freio.."<br><b>Transmissão:</b> "..transmissao.."<br><b>Suspensão:</b> "..suspensao.."<br><b>Blindagem:</b> "..blindagem.."<br><b>Chassi:</b> "..parseInt(body/10).."%<br><b>Engine:</b> "..parseInt(engine/10).."%<br><b>Gasolina:</b> "..parseInt(fuel).."%",15000)
 	end
 end)
-
---[ ANDAR ]------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand("homem",function(source,args)
 	if not prisioneiro then
@@ -274,16 +268,12 @@ RegisterCommand("sensual",function(source,args)
 	end
 end)
 
---[ SALÁRIO ]----------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(30*60000)
 		TriggerServerEvent('salario:pagamento')
 	end
 end)
-
---[ ANIMACAO DA BOCA AO FALAR ]----------------------------------------------------------------------------------------------------------
 
 function GetPlayers()
   local players = {}
@@ -294,31 +284,6 @@ function GetPlayers()
   end
   return players
 end
-
---[[Citizen.CreateThread(function()
-  RequestAnimDict("facials@gen_male@variations@normal")
-  RequestAnimDict("mp_facial")
-
-  local talkingPlayers = {}
-  while true do
-      Citizen.Wait(300)
-
-      for k,v in pairs(GetPlayers()) do
-          local boolTalking = NetworkIsPlayerTalking(v)
-          if v ~= PlayerId() then
-              if boolTalking and not talkingPlayers[v] then
-                  PlayFacialAnim(GetPlayerPed(v), "mic_chatter", "mp_facial")
-                  talkingPlayers[v] = true
-              elseif not boolTalking and talkingPlayers[v] then
-                  PlayFacialAnim(GetPlayerPed(v), "mood_normal_1", "facials@gen_male@variations@normal")
-                  talkingPlayers[v] = nil
-              end
-          end
-      end
-  end
-end)]]
-
---[ NOCARJACK ]--------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -336,8 +301,6 @@ RegisterNetEvent("SyncDoorsEveryone")
 AddEventHandler("SyncDoorsEveryone",function(veh,doors)
 	SetVehicleDoorsLocked(veh,doors)
 end)
-
---[ ATTACHS ]----------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand("attachs",function(source,args)
 	local ped = PlayerPedId()
@@ -716,8 +679,6 @@ RegisterCommand("attachs",function(source,args)
 	end
 end)
 
---[ BEBIDAS ENERGETICAS ]----------------------------------------------------------------------------------------------------------------
-
 local energetico = false
 RegisterNetEvent('energeticos')
 AddEventHandler('energeticos',function(status)
@@ -740,8 +701,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ AFKSYSTEM ]--------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1000)
@@ -762,8 +721,6 @@ Citizen.CreateThread(function()
         py = y
     end
 end)
-
---[ OPEN/CLOSE HOOD OF VEHICLE ]----------------------------------------------------------------------------------------------------------
 
 RegisterCommand("capo",function(source,args)
 	local vehicle = vRP.getNearestVehicle(7)
@@ -788,8 +745,6 @@ AddEventHandler("synchood",function(index)
 		end
 	end
 end)
-
---[ OPEN/CLOSE WINDOWS OF VEHICLE ]------------------------------------------------------------------------------------------------------
 
 local vidros = false
 RegisterCommand("vidros",function(source,args)
@@ -823,8 +778,6 @@ AddEventHandler("syncwins",function(index)
 	end
 end)
 
---[ AGACHAR ]----------------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(5)
@@ -847,8 +800,6 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
---[ ABRIR PORTAS DO VEICULO ]------------------------------------------------------------------------------------------------------------
 
 RegisterCommand("portas",function(source,args)
 	local vehicle = vRP.getNearestVehicle(7)
@@ -927,8 +878,6 @@ AddEventHandler("synctrunk",function(index)
 	end
 end)
 
---[ SETCHAPEU ]--------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('setchapeu')
 AddEventHandler('setchapeu',function(modelo,cor)
 	local ped = PlayerPedId()
@@ -958,8 +907,6 @@ AddEventHandler('setchapeu',function(modelo,cor)
 	end
 end)
 
---[ SETMASCARA ]-------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('setmascara')
 AddEventHandler('setmascara',function(modelo,cor)
 	local ped = PlayerPedId()
@@ -983,8 +930,6 @@ AddEventHandler('setmascara',function(modelo,cor)
 		end
 	end
 end)
-
---[ SETOCULOS ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('setoculos')
 AddEventHandler('setoculos',function(modelo,cor)
@@ -1015,8 +960,6 @@ AddEventHandler('setoculos',function(modelo,cor)
 	end
 end)
 
---[ SETCOLETE ]--------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('setcolete')
 AddEventHandler('setcolete',function()
 	local ped = PlayerPedId()
@@ -1028,8 +971,6 @@ AddEventHandler('setcolete',function()
 		return
 	end
 end)
-
---[ TOW ]--------------------------------------------------------------------------------------------------------------------------------
 
 local reboque = nil
 local rebocado = nil
@@ -1074,8 +1015,6 @@ function getVehicleInDirection(coordsfrom,coordsto)
 	return vehicle
 end
 
---[ REPARAR ]----------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('reparar')
 AddEventHandler('reparar',function()
 	local vehicle = vRP.getNearestVehicle(3)
@@ -1102,8 +1041,6 @@ AddEventHandler('syncreparar',function(index)
 	end
 end)
 
---[ REPARAR MOTOR ]----------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('repararmotor')
 AddEventHandler('repararmotor',function()
 	local vehicle = vRP.getNearestVehicle(3)
@@ -1123,8 +1060,6 @@ AddEventHandler('syncmotor',function(index)
 		end
 	end
 end)
-
---[ CARREGAR ]---------------------------------------------------------------------------------------------------------------------------
 
 local carregado = false
 RegisterCommand("carregar",function(source,args)
@@ -1150,8 +1085,6 @@ RegisterCommand("carregar",function(source,args)
 	until not sucess
 	EndFindPed(randomico)
 end)
-
---[ SEQUESTRO 2 ]------------------------------------------------------------------------------------------------------------------------
 
 local sequestrado = nil
 RegisterCommand("sequestro2",function(source,args)
@@ -1187,8 +1120,6 @@ RegisterCommand("sequestro2",function(source,args)
 	until not complet
 	EndFindPed(random)
 end)
-
---[ EMPURRAR ]---------------------------------------------------------------------------------------------------------------------------
 
 local entityEnumerator = {
 	__gc = function(enum)
@@ -1324,8 +1255,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ UPDATE ROUPAS ]----------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent("updateRoupas")
 AddEventHandler("updateRoupas",function(custom)
 	local ped = PlayerPedId()
@@ -1429,8 +1358,6 @@ AddEventHandler("updateRoupas",function(custom)
 		end
 	end
 end)
-
---[ DRAWTEXT3DS ]------------------------------------------------------------------------------------------------------------------------
 
 function DrawText3D(x,y,z,text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)

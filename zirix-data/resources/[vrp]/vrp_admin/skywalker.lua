@@ -3,14 +3,10 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÃO ]-----------------------------------------------------------------------------------------------------------------
-
 vRPidd = {}
 Tunnel.bindInterface("vrp_admin",vRPidd)
 Proxy.addInterface("vrp_admin",vRPidd)
 IDDclient = Tunnel.getInterface("vrp_admin")
-
---[ WEBHOOK ]-----------------------------------------------------------------------------------------------------------------
 
 local logAdminEstoque = "https://discordapp.com/api/webhooks/762555672033230858/LB_QDLQhfNCUSCNou1WW5FBiCpwU9KO0i3vgNfw2LQJAYcVC455TwefCfsvb6xVccvBQ"
 local logAdminWhitelist = "https://discordapp.com/api/webhooks/762554515714867232/23GZxyxiWBtuyf7DipsOkrP6q8_yYGDuJcb1p59k0VhFF8f5ii2UnheAuDcUF3suLiL_"
@@ -31,8 +27,6 @@ local logAdminTps = "https://discordapp.com/api/webhooks/762557744351281165/BjV5
 local logAdminOrg = "https://discordapp.com/api/webhooks/762556417701183490/ShVX6PPb3pGvsKxoFg5ARVvHqYeZJVWRpya3UYz3Ofc44A7hMseyfT6ruyjsZeIRFFSk"
 local logAdmCorno = "https://discordapp.com/api/webhooks/762557852719775774/F5SGySSrV_4qBVjNNbNDUNPnrfVKGaQoCKiDlNAwBz3IoqE0UOn0hMUrU9CaR39oOph3"
 local logAdmStatus = "https://discordapp.com/api/webhooks/763897002646962217/zNjezEN5f_fNvddMYvHMXf2IeuGSJ75zOgaF-jz42Xuvpr74JuBpGIc6G7rcDRWYQ8y5"
-
---[ RENOMEAR ]----------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('renomear',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -82,8 +76,6 @@ RegisterCommand('renomear',function(source,args,rawCommand)
     end
 end)
 
---[ VROUPAS ]-----------------------------------------------------------------------------------------------------------------
-
 local player_customs = {}
 RegisterCommand('vroupas',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -105,8 +97,6 @@ RegisterCommand('vroupas',function(source,args,rawCommand)
         end
     end
 end)
-
---[ ESTOQUE ]-----------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('estoque',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -145,8 +135,6 @@ RegisterCommand('estoque',function(source,args,rawCommand)
         end
     end
 end)
-
---[ ADICIONAR CARRO ]---------------------------------------------------------------------------------------------------------
 
 RegisterCommand('addcar',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -190,8 +178,6 @@ RegisterCommand('addcar',function(source,args,rawCommand)
     end
 end)
 
---[ REMOVER CARRO ]-----------------------------------------------------------------------------------------------------------
-
 RegisterCommand('remcar',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -234,8 +220,6 @@ RegisterCommand('remcar',function(source,args,rawCommand)
     end
 end)
 
---[ UNCUFF ]------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('uncuff',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -245,8 +229,6 @@ RegisterCommand('uncuff',function(source,args,rawCommand)
 	end
 end)
 
---[ SYNCAREA ]----------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('limpararea',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local x,y,z = vRPclient.getPosition(source)
@@ -254,8 +236,6 @@ RegisterCommand('limpararea',function(source,args,rawCommand)
         TriggerClientEvent("syncarea",-1,x,y,z)
     end
 end)
-
---[ APAGAO ]------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('apagao',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -269,8 +249,6 @@ RegisterCommand('apagao',function(source,args,rawCommand)
     end
 end)
 
---[ RAIOS ]-------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('raios', function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id ~= nil then
@@ -281,8 +259,6 @@ RegisterCommand('raios', function(source,args,rawCommand)
         end
     end
 end)
-
---[ TROCAR SEXO ]-------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('skin',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -297,8 +273,6 @@ RegisterCommand('skin',function(source,args,rawCommand)
     end
 end)
 
---[ DEBUG ]-------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('debug',function(source, args, rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id ~= nil then
@@ -309,14 +283,10 @@ RegisterCommand('debug',function(source, args, rawCommand)
 	end
 end)
 
---[ TRYDELETEOBJ ]------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("trydeleteobj")
 AddEventHandler("trydeleteobj",function(index)
     TriggerClientEvent("syncdeleteobj",-1,index)
 end)
-
---[ FIX ]---------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('fix',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -353,8 +323,6 @@ RegisterCommand('fix',function(source,args,rawCommand)
 	end
 end)
 
---[ REVIVER ]-----------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('reviver',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -368,7 +336,7 @@ RegisterCommand('reviver',function(source,args,rawCommand)
 
 				PerformHttpRequest(logAdminReviver, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
-						{ 	------------------------------------------------------------
+						{ 	
 							title = "REGISTRO DE REVIVER⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
 								url = "https://i.imgur.com/CtQB816.png"
@@ -403,7 +371,7 @@ RegisterCommand('reviver',function(source,args,rawCommand)
 		else
 			PerformHttpRequest(logAdminReviver, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
-					{ 	------------------------------------------------------------
+					{ 	
 						title = "REGISTRO DE REVIVER⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
 							url = "https://i.imgur.com/CtQB816.png"
@@ -434,8 +402,6 @@ RegisterCommand('reviver',function(source,args,rawCommand)
     end
 end)
 
---[ REVIVER ALL ]-------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('reviverall',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -453,7 +419,7 @@ RegisterCommand('reviverall',function(source,args,rawCommand)
 		
 		PerformHttpRequest(logAdminReviver, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
-				{ 	------------------------------------------------------------
+				{ 	
 					title = "REGISTRO DE REVIVER TODOS⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
 						url = "https://i.imgur.com/CtQB816.png"
@@ -475,8 +441,6 @@ RegisterCommand('reviverall',function(source,args,rawCommand)
     end
 end)
 
---[ HASH ]--------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('hash',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"manager.permissao") then
@@ -484,16 +448,12 @@ RegisterCommand('hash',function(source,args,rawCommand)
 	end
 end)
 
---[ TUNING ]------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('tuning',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		TriggerClientEvent('vehtuning',source)
 	end
 end)
-
---[ WL ]----------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('wl',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -533,8 +493,6 @@ RegisterCommand('wl',function(source,args,rawCommand)
     end
 end)
 
---[ UNWL ]--------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('unwl',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -573,8 +531,6 @@ RegisterCommand('unwl',function(source,args,rawCommand)
 	end
 end)
 
---[ KICK ]--------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('kick',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -585,7 +541,7 @@ RegisterCommand('kick',function(source,args,rawCommand)
 
 				PerformHttpRequest(logAdminKick, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
-						{ 	------------------------------------------------------------
+						{ 	
 							title = "REGISTRO DE KICK⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
 								url = "https://i.imgur.com/CtQB816.png"
@@ -616,8 +572,6 @@ RegisterCommand('kick',function(source,args,rawCommand)
 	end
 end)
 
---[ KICK ALL ]----------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('kickall',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -633,7 +587,7 @@ RegisterCommand('kickall',function(source,args,rawCommand)
 		
 		PerformHttpRequest(logAdminKick, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
-				{ 	------------------------------------------------------------
+				{ 	
 					title = "REGISTRO DE KICKAR TODOS⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
 						url = "https://i.imgur.com/CtQB816.png"
@@ -654,8 +608,6 @@ RegisterCommand('kickall',function(source,args,rawCommand)
 		}), { ['Content-Type'] = 'application/json' })
     end
 end)
-
---[ BAN ]---------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('ban',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -699,8 +651,6 @@ RegisterCommand('ban',function(source,args,rawCommand)
 	end
 end)
 
---[ UNBAN ]-------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('unban',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -739,8 +689,6 @@ RegisterCommand('unban',function(source,args,rawCommand)
 	end
 end)
 
---[ NC ]----------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('nc',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -749,7 +697,7 @@ RegisterCommand('nc',function(source,args,rawCommand)
 		
 		PerformHttpRequest(logAdminNc, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
-				{ 	------------------------------------------------------------
+				{ 	
 					title = "REGISTRO DE NC⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
 						url = "https://i.imgur.com/CtQB816.png"
@@ -773,8 +721,6 @@ RegisterCommand('nc',function(source,args,rawCommand)
 	end
 end)
 
---[ TPCDS ]-------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('tpcds',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id, "suporte.permissao") or vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
@@ -789,8 +735,6 @@ RegisterCommand('tpcds',function(source,args,rawCommand)
 		vRPclient.teleport(source,coords[1] or 0,coords[2] or 0,coords[3] or 0)
 	end
 end)
-
---[ COORDENADAS ]-------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('cds',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -824,8 +768,6 @@ RegisterCommand('cds4',function(source,args,rawCommand)
 		vRP.prompt(source,"Cordenadas:","x = "..tD(x)..", y = "..tD(y)..", z = "..tD(z))
 	end
 end)
-
---[ GROUP ]-------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('group',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -868,8 +810,6 @@ RegisterCommand('group',function(source,args,rawCommand)
 	end
 end)
 
---[ UNGROUP ]-----------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('ungroup',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -909,8 +849,6 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ TPTOME ]------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('tptome',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -953,8 +891,6 @@ RegisterCommand('tptome',function(source,args,rawCommand)
 	end
 end)
 
---[ TPTO ]--------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('tpto',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -994,8 +930,6 @@ RegisterCommand('tpto',function(source,args,rawCommand)
 	end
 end)
 
---[ TPWAY ]-------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('tpway',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -1028,16 +962,12 @@ RegisterCommand('tpway',function(source,args,rawCommand)
 	end
 end)
 
---[ DELNPCS ]-----------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('delnpcs',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		TriggerClientEvent('delnpcs',source)
 	end
 end)
-
---[ PLAYERSON ]---------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('pon',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -1059,8 +989,6 @@ RegisterCommand('pon',function(source,args,rawCommand)
         TriggerClientEvent('chatMessage',source,"ID's ONLINE",{255,160,0},players)
     end
 end)
-
---[ ORGS MANAGER ]------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('org',function(source,args,rawCommand)
 	if args[1] then
@@ -1210,7 +1138,7 @@ RegisterCommand('org',function(source,args,rawCommand)
 
 					PerformHttpRequest(logAdminOrg, function(err, text, headers) end, 'POST', json.encode({
 						embeds = {
-							{ 	------------------------------------------------------------
+							{ 
 								title = "REGISTRO DE CONTRATAÇÃO ORG⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 								thumbnail = {
 									url = "https://i.imgur.com/CtQB816.png"
@@ -1375,7 +1303,7 @@ RegisterCommand('org',function(source,args,rawCommand)
 
 					PerformHttpRequest(logAdminOrg, function(err, text, headers) end, 'POST', json.encode({
 						embeds = {
-							{ 	------------------------------------------------------------
+							{ 
 								title = "REGISTRO DE DEMISSÃO ORG⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 								thumbnail = {
 									url = "https://i.imgur.com/CtQB816.png"
@@ -1408,8 +1336,6 @@ RegisterCommand('org',function(source,args,rawCommand)
 	end
 end)
 
---[ ID NA CABEÇA ]------------------------------------------------------------------------------------------------------------
-
 function vRPidd.getPermissao()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -1436,7 +1362,7 @@ function vRPidd.logID()
 
 	PerformHttpRequest(logAdmCorno, function(err, text, headers) end, 'POST', json.encode({
 		embeds = {
-			{ 	------------------------------------------------------------
+			{ 	
 				title = "REGISTRO DE ID VISIVEL:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 				thumbnail = {
 				url = "https://i.imgur.com/CtQB816.png"
@@ -1519,7 +1445,7 @@ RegisterCommand('staff',function(source,args,rawCommand)
 
 	PerformHttpRequest(logAdmStatus, function(err, text, headers) end, 'POST', json.encode({
         embeds = {
-            { 	------------------------------------------------------------
+            { 	
                 title = "REGISTRO ADMINISTRATIVO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
                 thumbnail = {
                     url = "https://i.imgur.com/CtQB816.png"
@@ -1587,8 +1513,6 @@ function tD(n)
     n = math.ceil(n * 100) / 100
     return n
 end
-
---[ VIP ]---------------------------------------------------------------------------------------------------------------------
 
 local run = {}
 

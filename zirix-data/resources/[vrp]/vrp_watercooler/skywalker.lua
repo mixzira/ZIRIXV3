@@ -3,12 +3,8 @@ local Proxy = module('vrp','lib/Proxy')
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
---[ CONNECTION ]------------------------------------------------------------------------------------
-
 misc = {}
 Tunnel.bindInterface('vrp_watercooler',misc)
-
---[ WATHER COOLER | FUNCTION ]----------------------------------------------------------------------
 
 function misc.searchCooler()
 	local source = source

@@ -3,19 +3,13 @@ local Proxy = module('vrp','lib/Proxy')
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
---[ CONNECTION ]------------------------------------------------------------------------------------
-
 misc = {}
 Tunnel.bindInterface('vrp_trash',misc)
-
---[ VARIABLES ]-------------------------------------------------------------------------------------
 
 local timers = {}
 local amount = {}
 local amountMoney = {}
 local payment = ''
-
---[ SEARCH TRASH | THREAD ]-------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -27,8 +21,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
---[ SEARCH TRASH | FUNCTION ]-----------------------------------------------------------------------
 
 function misc.amount()
 	local source = source

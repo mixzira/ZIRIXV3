@@ -9,8 +9,6 @@ Proxy.addInterface('vrp_identity',vRPN)
 
 local identidade = false
 
---[ FUNÇÕES ]----------------------------------------------------------------------------------------------------------------------------
-
 function vRPN.checkItem()
 	local source = source
 	local user_id = vRP.getUserId(source)

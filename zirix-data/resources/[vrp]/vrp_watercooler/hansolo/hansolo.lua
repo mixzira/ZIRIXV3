@@ -2,11 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONNECTION ]---------------------------------------------------------------------------------------
-
 misc = Tunnel.getInterface("vrp_watercooler")
-
---[ THREADS ]------------------------------------------------------------------------------------------
 
 RegisterNetEvent("vrp_watercooler:use")
 AddEventHandler("vrp_watercooler:use",function()

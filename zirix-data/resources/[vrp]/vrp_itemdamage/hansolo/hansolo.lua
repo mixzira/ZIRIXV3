@@ -2,8 +2,6 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ WATHER ITEM DAMAGE | THREAD ]-------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000

@@ -1,8 +1,4 @@
---[ VARIÁVEIS ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local nearObjectC
-
---[ THREAD ]--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -35,8 +31,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ EVENTOS ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 RegisterNetEvent('vrp_for_medic:wheelchair:spawn')
 AddEventHandler('vrp_for_medic:wheelchair:spawn', function()
 	LoadModel('prop_wheelchair_01')
@@ -52,8 +46,6 @@ AddEventHandler('vrp_for_medic:wheelchair:delete', function()
 		DeleteEntity(wheelchair)
 	end
 end, false)
-
---[ FUNÇÕES ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function LoadModel(model)
 	while not HasModelLoaded(model) do

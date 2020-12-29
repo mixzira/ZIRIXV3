@@ -1,21 +1,12 @@
-
---[ vRP ]--------------------------------------------------------------------------------------------------------------------------------
-
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 Resg = Tunnel.getInterface("vrp_hospital")
-
---[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
 local tratamento = false
 local segundos = 0
 local medicalTratamento = false
-
---[ REANIMAR ]---------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('reanimar')
 AddEventHandler('reanimar',function()
@@ -46,8 +37,6 @@ AddEventHandler('reanimar',function()
 	until not finished
 	EndFindPed(handle)
 end)
-
---[ MACAS DO HOSPITAL ]------------------------------------------------------------------------------------------------------------------  ['x'] = 318.39, ['y'] = -580.79, ['z'] = 43.29
 
 local macas = {
 	{ ['x'] = -459.46, ['y'] = -287.97, ['z'] = 34.92, ['x2'] = -460.17, ['y2'] = -288.72, ['z2'] = 35.84, ['h'] = 200.98, ['name'] = "Pressione [~p~E~w~] para deitar   ~p~&~w~    [~p~G~w~] para se tratar." }, -- Enfermaria;  sim
@@ -100,14 +89,7 @@ local macas = {
 
 	{ ['x'] = -446.46, ['y'] = -290.87, ['z'] = -130.87, ['x2'] = -446.09, ['y2'] = -291.7, ['z2'] = -129.93, ['h'] = 295.79, ['name'] = "Pressione [~p~E~w~] para deitar." },
 
-
-
-
-
-
 }
-
---[ USO ]-------------------------------------------------------------------------------------------------------------------------------- 
 
 local emMaca = false
 Citizen.CreateThread(function()
@@ -163,8 +145,6 @@ Citizen.CreateThread(function()
 		Citizen.Wait(idle)
 	end
 end)
-
---[ TRATAMENTO ]-------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -253,8 +233,6 @@ AddEventHandler("medical-tratamento",function()
 		TriggerEvent("Notify","negado","Você precisa estar deitado em uma maca para ser tratado.",8000)
 	end
 end)
-
---[ FUNÇÕES ]----------------------------------------------------------------------------------------------------------------------------
 
 function drawTxt(text,font,x,y,scale,r,g,b,a)
 	SetTextFont(font)

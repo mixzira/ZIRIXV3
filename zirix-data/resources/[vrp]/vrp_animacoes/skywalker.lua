@@ -3,15 +3,11 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ E ]----------------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('e', function(source,args,rawCommand)
 	if not vRPclient.checkAcao(source) then
 		TriggerClientEvent("emotes",source,args[1])
 	end
 end)
-
---[ E2 ]---------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('e2', function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -22,8 +18,6 @@ RegisterCommand('e2', function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ PANO ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("tryclean")
 AddEventHandler("tryclean",function(nveh)

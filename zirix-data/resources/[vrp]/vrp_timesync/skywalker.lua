@@ -3,25 +3,17 @@ local Proxy = module('vrp','lib/Proxy')
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
---[ CONNECTION ]-------------------------------------------------------------------------------------------------------------------------
-
 misc = {}
 Tunnel.bindInterface('vrp_timesync',misc)
-
---[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
 local hours = config.startHour
 local minutes = config.startMinutes
 local weather = config.standardWeather
 
---[ REQUESTSYNC ]------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent('vrp_timesync:requestSync')
 AddEventHandler('vrp_timesync:requestSync',function()
 	TriggerClientEvent('vrp_timesync:updateWeather',-1,weather)
 end)
-
---[ UPDATECLOCK ]------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do
@@ -38,8 +30,6 @@ Citizen.CreateThread(function()
 		TriggerClientEvent('vrp_timesync:syncTimers',-1,hours,minutes)
 	end
 end)
-
---[ UPDATETIMERS ]-----------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do

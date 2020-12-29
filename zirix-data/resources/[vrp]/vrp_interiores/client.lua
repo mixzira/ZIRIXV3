@@ -1,6 +1,5 @@
 Citizen.CreateThread(function()
 
-	--DisneyAllsuell
 	RequestIpl("DisneyAllsuell_01")
 	RequestIpl("DisneyAllsuell_02")
 	RequestIpl("DisneyAllsuell_03")
@@ -22,7 +21,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyAllsuell_20")
 	RequestIpl("DisneyAllsuell_21")
 
-	--DisneyFamilies
 	RequestIpl("DisneyFamilies_01")
 	RequestIpl("DisneyFamilies_02")
 	RequestIpl("DisneyFamilies_03")
@@ -39,7 +37,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyFamilies_14")
 	RequestIpl("DisneyFamilies_15")
 
-	--DisneyForthills
 	RequestIpl("DisneyForthills_01")
 	RequestIpl("DisneyForthills_02")
 	RequestIpl("DisneyForthills_03")
@@ -141,7 +138,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyForthills_99")		
 	RequestIpl("DisneyForthills_100")
 
-	--DisneyLuxury 
 	RequestIpl("DisneyLuxury_01")
 	RequestIpl("DisneyLuxury_02")
 	RequestIpl("DisneyLuxury_03")
@@ -214,7 +210,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyLuxury_70")		
 	RequestIpl("DisneyLuxury_71")	
 
-	--DisneyFranklinGueto
 	RequestIpl("DisneyFranklinGueto_01")
 	RequestIpl("DisneyFranklinGueto_02")
 	RequestIpl("DisneyFranklinGueto_03")
@@ -236,7 +231,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyFranklinGueto_19")
 	RequestIpl("DisneyFranklinGueto_20")
 
-	--DisneyFranklins
 	RequestIpl("DisneyFranklins_01")
 	RequestIpl("DisneyFranklins_02")
 	RequestIpl("DisneyFranklins_03")
@@ -266,7 +260,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyFranklins_27")
 	RequestIpl("DisneyFranklins_28")
 
-	--DisneyLostudio
 	RequestIpl("DisneyLostudio_01")
 	RequestIpl("DisneyLostudio_02")
 	RequestIpl("DisneyLostudio_03")
@@ -326,7 +319,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyLostudio_57")
 	RequestIpl("DisneyLostudio_58")
 
-	--DisneyMansao
 	RequestIpl("DisneyMansao_03")
 	RequestIpl("DisneyMansao_04")
 	RequestIpl("DisneyMansao_05")
@@ -335,7 +327,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyMansao_08")
 	RequestIpl("DisneyMansao_09")
 
-	--DisneyMidspaz
 	RequestIpl("DisneyMidspaz_01")
 	RequestIpl("DisneyMidspaz_02")
 	RequestIpl("DisneyMidspaz_03")
@@ -347,7 +338,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyMidspaz_09")
 	RequestIpl("DisneyMidspaz_10")
 
-	--DisneyPaletoBay
 	RequestIpl("DisneyPaletoBay_01")
 	RequestIpl("DisneyPaletoBay_02")
 	RequestIpl("DisneyPaletoBay_03")
@@ -380,7 +370,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyPaletoBay_30")
 	RequestIpl("DisneyPaletoBay_31")
 
-	--DisneyPaletoMotel
 	RequestIpl("DisneyPaletoMotel_01")
 	RequestIpl("DisneyPaletoMotel_02")
 	RequestIpl("DisneyPaletoMotel_03")
@@ -403,7 +392,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyPaletoMotel_21")
 	RequestIpl("DisneyPaletoMotel_22")
 
-	--DisneyPinkCageMotel
 	RequestIpl("DisneyPinkCageMotel_01")
 	RequestIpl("DisneyPinkCageMotel_02")
 	RequestIpl("DisneyPinkCageMotel_03")
@@ -443,10 +431,8 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyPinkCageMotel_37")
 	RequestIpl("DisneyPinkCageMotel_38")
 
-	--DisneySandyShore
 	RequestIpl("DisneySandyShore_01")
 
-	--DisneyVagosHouse
 	RequestIpl("DisneyVagosHouse_01")
 	RequestIpl("DisneyVagosHouse_02")
 	RequestIpl("DisneyVagosHouse_03")
@@ -482,7 +468,6 @@ Citizen.CreateThread(function()
 	RequestIpl("DisneyVagosHouse_34")
 	RequestIpl("DisneyVagosHouse_35")
 
-	--DisneyVagosMotel	
 	RequestIpl("DisneyVagosMotel_01")
 	RequestIpl("DisneyVagosMotel_02")
 	RequestIpl("DisneyVagosMotel_03")

@@ -4,13 +4,9 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
-
 vRPN = {}
 Tunnel.bindInterface("vrp_doors",vRPN)
 Proxy.addInterface("vrp_doors",vRPN)
-
---[ VARIABLES ]-----------------------------------------------------------------------------------------------------------------
 
 local idgens = Tools.newIDGenerator()
 local cfg = module("vrp_doors","config/config")
@@ -18,15 +14,11 @@ local timers = {}
 local pick = {}
 local blips = {}
 
---[ SPAWN | EVENT ]-------------------------------------------------------------------------------------------------------------
-
 AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
 	if first_spawn then
 		TriggerClientEvent('vrpdoorsystem:load',source,cfg.list)
 	end
 end)
-
---[ OPEN DOOR PERMISSION | EVENT ]----------------------------------------------------------------------------------------------
 
 RegisterServerEvent('vrpdoorsystem:open')
 AddEventHandler('vrpdoorsystem:open',function(id)
@@ -44,8 +36,6 @@ AddEventHandler('vrpdoorsystem:open',function(id)
 	end
 end)
 
---[ TIMERS ID | THREAD ]--------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
@@ -57,8 +47,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ OPEN DOOR TIME | FUNCTION ]-------------------------------------------------------------------------------------------------
-
 function vRPN.timeOpen(id)
 	TriggerClientEvent('vrpdoorsystem:statusSend',-1,id,false)
 	if cfg.list[id].other ~= nil then
@@ -67,8 +55,6 @@ function vRPN.timeOpen(id)
 		TriggerClientEvent('vrpdoorsystem:statusSend',-1,idsecond,false)
 	end
 end
-
---[ CLOSE DOOR TIME | FUNCTION ]------------------------------------------------------------------------------------------------
 
 function vRPN.timeClose(id)
 	if timers[id] == 0 or not timers[id] then
@@ -87,8 +73,6 @@ function vRPN.timeClose(id)
 		end
 	end
 end
-
---[ FORCE OPEN DOOR | FUNCTION ]------------------------------------------------------------------------------------------------
 
 function vRPN.forceOpen(id)
 	local source = source

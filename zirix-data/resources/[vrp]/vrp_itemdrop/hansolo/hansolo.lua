@@ -43,8 +43,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ FUNÇÕES ]----------------------------------------------------------------------------------------------------------------------------
-
 function drawTxt(text,font,x,y,scale,r,g,b,a)
 	SetTextFont(font)
 	SetTextScale(scale,scale)

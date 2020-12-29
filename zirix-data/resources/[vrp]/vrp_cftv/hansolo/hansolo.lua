@@ -2,11 +2,7 @@ local Tunnel = module("vrp", "lib/Tunnel")
 local Proxy = module("vrp", "lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
-
 cftv = Tunnel.getInterface("vrp_cftv")
-
---[ VARIABLES ]-----------------------------------------------------------------------------------------------------------------
 
 local menuactive = false
 
@@ -45,8 +41,6 @@ local monitoramento = {
 	{ ['x'] = -1089.69, ['y'] = -834.95, ['z'] = 30.76, ['h'] = 263.55 },
 	{ ['x'] = -1093.51, ['y'] = -837.78, ['z'] = 30.76, ['h'] = 185.39 }
 }
-
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
 function CalculateTimeToDisplay()
 	hour = GetClockHours()
@@ -101,8 +95,6 @@ function UpdateOverlay()
 	CalculateDateToDisplay()
 end
 
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
-
 function ToggleActionMenu()
 	menuactive = not menuactive
 	if menuactive then
@@ -113,8 +105,6 @@ function ToggleActionMenu()
 		SendNUIMessage({ hidemenu = true })
 	end
 end
-
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "camera1" then
@@ -157,8 +147,6 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		ToggleActionMenu()
 	end
 end)
-
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
 inCam = false
 cftvCam = 0
@@ -270,8 +258,6 @@ Citizen.CreateThread(function(camNumber)
 	end
 end)
 
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
-
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 	while true do
@@ -297,8 +283,6 @@ Citizen.CreateThread(function()
 		Citizen.Wait(idle)
 	end
 end)
-
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
 function DrawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)

@@ -4,14 +4,10 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_garages",src)
 vCLIENT = Tunnel.getInterface("vrp_garages")
 local idgens = Tools.newIDGenerator()
-
---[ PREPARE ]----------------------------------------------------------------------------------------------------------------------------
 
 vRP._prepare("losanjos/get_vehicle","SELECT * FROM vrp_user_vehicles WHERE user_id = @user_id")
 vRP._prepare("losanjos/rem_vehicle","DELETE FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
@@ -27,12 +23,8 @@ vRP._prepare("losanjos/get_estoque","SELECT * FROM vrp_estoque WHERE vehicle = @
 vRP._prepare("losanjos/set_estoque","UPDATE vrp_estoque SET quantidade = @quantidade WHERE vehicle = @vehicle")
 vRP._prepare("losanjos/get_users","SELECT * FROM vrp_users WHERE id = @user_id")
 
---[ WEBHOOK ]----------------------------------------------------------------------------------------------------------------------------
-
 local logAdminCar = "https://discordapp.com/api/webhooks/762557171267141663/riNjMOzbFzUjggesmwo3_XptfIkHTLtANhFjQMajYKB5qMnM2UEwGKLYy_I8WPKPTMye"
 local logAdminDv = "https://discordapp.com/api/webhooks/762557286153453588/CSKA7TL1jeorRYHNjl056wJ1zQEAycTXIO6tiduXoL9epDyuYnyHhAhTwozsTZQ8ZPrj"
-
---[ VARIAVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
 local police = {}
 local vehlist = {}
@@ -41,20 +33,14 @@ local trydoors = {}
 trydoors["CLONADOS"] = true
 trydoors["CREATIVE"] = true
 
---[ RETURNVEHICLESEVERYONE ]-------------------------------------------------------------------------------------------------------------
-
 function src.returnVehicleEveryone(placa)
 	return trydoors[placa]
 end
-
---[ SETPLATEEVERYONE ]-------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("setPlateEveryone")
 AddEventHandler("setPlateEveryone",function(placa)
 	trydoors[placa] = true
 end)
-
---[ GARAGENS ]---------------------------------------------------------------------------------------------------------------------------
 
 local garages = {
 	[1] = { ['name'] = "Garagem", ['payment'] = true, ['price'] = 3000, ['public'] = true },
@@ -428,8 +414,6 @@ local workgarage = {
 	}
 }
 
---[ MYVEHICLES ]-------------------------------------------------------------------------------------------------------------------------
-
 function src.myVehicles(work)
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -519,8 +503,6 @@ function src.myVehicles(work)
 		end
 	end
 end
-
---[ SPAWNVEHICLES ]----------------------------------------------------------------------------------------------------------------------
 
 function src.spawnVehicles(name,use)
 	if name then
@@ -641,8 +623,6 @@ function src.spawnVehicles(name,use)
 	end
 end
 
---[ DELETEVEHICLES ]---------------------------------------------------------------------------------------------------------------------
-
 function src.deleteVehicles()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -653,8 +633,6 @@ function src.deleteVehicles()
 		end
 	end
 end
-
---[ VEHPRICE ]---------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("desmancheVehicles62")
 AddEventHandler("desmancheVehicles62",function()
@@ -673,8 +651,6 @@ AddEventHandler("desmancheVehicles62",function()
 		end
 	end
 end)
-
---[ DV ]---------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('dv',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -711,8 +687,6 @@ RegisterCommand('dv',function(source,args,rawCommand)
 	end
 end)
 
---[ VEHICLELOCK ]------------------------------------------------------------------------------------------------------------------------
-
 function src.vehicleLock()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -733,8 +707,6 @@ function src.vehicleLock()
 		end
 	end
 end
-
---[ TRYDELETE ]--------------------------------------------------------------------------------------------------------------------------
 
 function src.tryDelete(vehid,vehengine,vehbody,vehfuel)
 	if vehlist[vehid] and vehid ~= 0 then
@@ -765,14 +737,10 @@ function src.tryDelete(vehid,vehengine,vehbody,vehfuel)
 	vCLIENT.syncVehicle(-1,vehid)
 end
 
---[ TRYDELETEVEH ]-----------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("trydeleteveh")
 AddEventHandler("trydeleteveh",function(vehid)
 	vCLIENT.syncVehicle(-1,vehid)
 end)
-
---[ RETURNHOUSES ]-----------------------------------------------------------------------------------------------------------------------
 
 function src.returnHouses(nome,garage)
 	local source = source
@@ -811,8 +779,6 @@ function src.returnHouses(nome,garage)
 	end
 end
 
---[ VEHICLE ANCORAR ]--------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('travar',function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -831,8 +797,6 @@ RegisterCommand('travar',function(source,args,rawCommand)
 	end
 end)
 
---[ BOAT ANCORAR ]-----------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('ancorar',function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -845,8 +809,6 @@ RegisterCommand('ancorar',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ POLICEALERT ]------------------------------------------------------------------------------------------------------------------------
 
 function src.policeAlert()
 	local source = source
@@ -873,8 +835,6 @@ function src.policeAlert()
 	end
 end
 
---[ CAR ]--------------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('car',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -884,7 +844,7 @@ RegisterCommand('car',function(source,args,rawCommand)
 
 				PerformHttpRequest(logAdminCar, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
-						{ 	------------------------------------------------------------
+						{ 
 							title = "REGISTRO DE SPAWNCAR⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
 								url = "https://i.imgur.com/CtQB816.png"
@@ -914,8 +874,6 @@ RegisterCommand('car',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ VEHS ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('vehs',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -991,28 +949,20 @@ RegisterCommand('vehs',function(source,args,rawCommand)
 		end
 end)
 
---[ LIMPAR ]-----------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("trylimpar")
 AddEventHandler("trylimpar",function(nveh)
 	TriggerClientEvent("synclimpar",-1,nveh)
 end)
-
---[ REPARAR ]----------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("tryreparar")
 AddEventHandler("tryreparar",function(nveh)
 	TriggerClientEvent("syncreparar",-1,nveh)
 end)
 
---[ MOTOR ]------------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("trymotor")
 AddEventHandler("trymotor",function(nveh)
 	TriggerClientEvent("syncmotor",-1,nveh)
 end)
-
---[ SAVELIVERY ]-------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('savelivery',function(source,args,rawCommand)
 	local source = source
@@ -1031,8 +981,6 @@ RegisterCommand('savelivery',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ CHECK LIVERY PERMISSION ]------------------------------------------------------------------------------------------------------------
 
 function src.CheckLiveryPermission()
 	local source = source

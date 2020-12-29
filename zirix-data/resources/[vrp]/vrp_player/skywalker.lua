@@ -4,18 +4,12 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONEXÃO ]----------------------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_player",src)
 local idgens = Tools.newIDGenerator()
 
---[ WEBHOOK ]----------------------------------------------------------------------------------------------------------------------------
-
 local logAdminItem = "https://discordapp.com/api/webhooks/762557007957327903/v7NaPuZf37nzTY72VYbuyhC_7l4UGXw2jiTVhMKiGHPJT-ts1Ll2gKuFgC2rbWrKmq2P"
 local logPegaTroxa = "https://discordapp.com/api/webhooks/762560794562134017/uH2JSuamSt3DI2aeCp5MsjZKFoj70OWP9yeuSrafkIU7atu89MIAebM55wqhR1GSn7Ud"
-
---[ CHECK ROUPAS ]-----------------------------------------------------------------------------------------------------------------------
 
 function src.checkChapeu()
 	local source = source
@@ -61,8 +55,6 @@ function src.checkOculos()
 		end
 	end
 end
-
---[ ITEM ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('item',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -110,8 +102,6 @@ RegisterCommand('item',function(source,args,rawCommand)
 	end
 end)
 
---[ USER VEHS ADMIN ]--------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('uservehs',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id then
@@ -131,14 +121,10 @@ RegisterCommand('uservehs',function(source,args,rawCommand)
     end
 end)
 
---[ RESKIN ]-----------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('reskin',function(source,rawCommand)
 	local user_id = vRP.getUserId(source)		
 	vRPclient._setCustomization(vRPclient.getCustomization(source))		
 end)
-
---[ ID ]---------------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('id',function(source,rawCommand)	
 	local nplayer = vRPclient.getNearestPlayer(source,2)
@@ -150,8 +136,6 @@ RegisterCommand('id',function(source,rawCommand)
 		vRPclient.removeDiv(source,"completerg")
 	end
 end)
-
---[ SALÁRIO ]----------------------------------------------------------------------------------------------------------------------------
 
 local salarios = {
 
@@ -226,7 +210,7 @@ AddEventHandler('salario:pagamento',function()
 	else
 		PerformHttpRequest(logPegaTroxa, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
-				{ 	------------------------------------------------------------
+				{ 	
 					title = "REGISTRO DE BANIMENTO POR CHEAT:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
 						url = "https://i.imgur.com/CtQB816.png"
@@ -251,8 +235,6 @@ AddEventHandler('salario:pagamento',function()
 	end
 end)
 
---[ NOCARJACK ]--------------------------------------------------------------------------------------------------------------------------
-
 local veiculos = {}
 RegisterServerEvent("TryDoorsEveryone")
 AddEventHandler("TryDoorsEveryone",function(veh,doors,placa)
@@ -262,8 +244,6 @@ AddEventHandler("TryDoorsEveryone",function(veh,doors,placa)
 	end
 end)
 
---[ AFKSYSTEM ]--------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("kickAFK")
 AddEventHandler("kickAFK",function()
     local source = source
@@ -272,8 +252,6 @@ AddEventHandler("kickAFK",function()
         DropPlayer(source,"Voce foi desconectado por ficar ausente.")
     end
 end)
-
---[ SEQUESTRO ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('sequestro',function(source,args,rawCommand)
 	local nplayer = vRPclient.getNearestPlayer(source,5)
@@ -295,35 +273,25 @@ RegisterCommand('sequestro',function(source,args,rawCommand)
 	end
 end)
 
---[ TRYTOW ]-----------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("trytow")
 AddEventHandler("trytow",function(nveh,rveh)
 	TriggerClientEvent("synctow",-1,nveh,rveh)
 end)
-
---[ WINS ]-------------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("trywins")
 AddEventHandler("trywins",function(nveh)
 	TriggerClientEvent("syncwins",-1,nveh)
 end)
 
---[ HOOD ]-------------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("tryhood")
 AddEventHandler("tryhood",function(nveh)
 	TriggerClientEvent("synchood",-1,nveh)
 end)
 
---[ DOORS ]------------------------------------------------------------------------------------------------------------------------------
-
 RegisterServerEvent("trydoors")
 AddEventHandler("trydoors",function(nveh,door)
 	TriggerClientEvent("syncdoors",-1,nveh,door)
 end)
-
---[ CALL ]-------------------------------------------------------------------------------------------------------------------------------
 
 local blips = {}
 RegisterCommand('chamar',function(source,args,rawCommand)
@@ -493,8 +461,6 @@ RegisterCommand('chamar',function(source,args,rawCommand)
 	end
 end)
 
---[ CHAPEU ]----------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('chapeu',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRPclient.getHealth(source) > 101 then
@@ -507,8 +473,6 @@ RegisterCommand('chapeu',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ MASCARA ]----------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('mascara',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -523,9 +487,6 @@ RegisterCommand('mascara',function(source,args,rawCommand)
 	end
 end)
 
-
---[ COLETE ]-----------------------------------------------------------------------------------------------------------------------------
-
 RegisterCommand('colete',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRPclient.getHealth(source) > 101 then
@@ -538,8 +499,6 @@ RegisterCommand('colete',function(source,args,rawCommand)
 		end
 	end
 end)
-
---[ OCULOS ]-----------------------------------------------------------------------------------------------------------------------------
 
 RegisterCommand('oculos',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)

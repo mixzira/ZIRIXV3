@@ -3,12 +3,8 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONNECTION ]------------------------------------------------------------------------------------
-
 misc = {}
 Tunnel.bindInterface("vrp_misc",misc)
-
---[ VARIABLES ]-------------------------------------------------------------------------------------
 
 SetConvarServerInfo("tags", "zirix, ziraflix")
 SetConvarServerInfo("DevelopedBy", "ZIRAFLIX")
@@ -16,8 +12,6 @@ SetConvarServerInfo("Discord", "discord.gg/ziraflix")
 SetConvarServerInfo("Website", "www.ziraflix.com")
 
 local cooldown = {}
-
---[ RICHPRESENCE | FUNCTION ]-----------------------------------------------------------------------
 
 function misc.discord()
 	local quantidade = 0
@@ -29,8 +23,6 @@ function misc.discord()
 
 	return parseInt(quantidade)
 end
-
---[ RADIO PERMISSION | FUNCTION ]-------------------------------------------------------------------
 
 function misc.permissaoDpla()
 	local source = source
@@ -129,8 +121,6 @@ function misc.permissaoSemantic()
 	return vRP.hasPermission(user_id,"semantic.permissao")
 end
 
---[ /RADIO | COMMAND ]------------------------------------------------------------------------------
-
 RegisterCommand('radio',function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -145,8 +135,6 @@ RegisterCommand('radio',function(source,args,rawCommand)
 		TriggerClientEvent("Notify",source,"aviso","Você <b>não possui</b> um <b>rádio</b> na mochila.") 
 	end
 end)
-
---[ WATHER ITEM DAMAGE | EVENT ]--------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do

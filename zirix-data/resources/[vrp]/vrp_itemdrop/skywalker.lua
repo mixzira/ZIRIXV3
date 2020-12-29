@@ -4,16 +4,10 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP","vrp_itemdrop")
 
---[ VARIÁEIS ]---------------------------------------------------------------------------------------------------------------------------
-
 local markers_ids = Tools.newIDGenerator()
 local items = {}
 
---[ WEBHOOK ]----------------------------------------------------------------------------------------------------------------------------
-
 local logInvPegar = ""
-
---[ EVENTOS ]----------------------------------------------------------------------------------------------------------------------------
 
 AddEventHandler('DropSystem:create',function(item,count,px,py,pz,tempo)
 	local id = markers_ids:gen()
@@ -105,8 +99,6 @@ AddEventHandler('DropSystem:take33',function(id)
 		end
 	end
 end)
-
---[ TEMPO ]------------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do

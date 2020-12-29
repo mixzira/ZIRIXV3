@@ -3,16 +3,10 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONNECTION ]------------------------------------------------------------------------------------
-
 misc = {}
 Tunnel.bindInterface("vrp_misc",misc)
 
---[ VARIABLES ]-------------------------------------------------------------------------------------
-
 local cooldown = {}
-
---[ WATHER ITEM DAMAGE | EVENT ]--------------------------------------------------------------------
 
 Citizen.CreateThread(function()
 	while true do

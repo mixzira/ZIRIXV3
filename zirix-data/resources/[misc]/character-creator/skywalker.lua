@@ -2,8 +2,6 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
---[ VARIABLES ]--------------------------------------------------------------------------------------------------
-
 local userlogin = {}
 local auth = false
 local customer = 'N/A'
@@ -19,8 +17,6 @@ function SendWebhookMessage(webhook,message)
         PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = message}), { ['Content-Type'] = 'application/json' })
     end
 end
-
---[ FUNCTIONS ]--------------------------------------------------------------------------------------------------
 
 AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
 	if first_spawn then
@@ -46,8 +42,6 @@ function processSpawnController(source,statusSent,user_id)
 		TriggerClientEvent("character-creator:characterCreate",source)
 	end
 end
-
---[ FUNCTIONS ]--------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("character-creator:finishedCharacter")
 AddEventHandler("character-creator:finishedCharacter",function(characterNome,characterSobrenome,characterIdade,currentCharacterMode)

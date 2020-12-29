@@ -3,8 +3,6 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
-
 src = {}
 Tunnel.bindInterface("vrp_shops",src)
 
@@ -17,8 +15,6 @@ local customeremail = 'N/A'
 local customerdiscord = '<@N/A>'
 local customerip = 'N/A'
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
-
---[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
 function src.openNav(shopName)
 	local source = source

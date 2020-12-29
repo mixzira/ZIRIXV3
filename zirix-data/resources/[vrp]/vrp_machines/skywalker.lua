@@ -3,8 +3,6 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
---[ CONNECTION ]------------------------------------------------------------------------------------
-
 misc = {}
 Tunnel.bindInterface("vrp_machines",misc)
 
