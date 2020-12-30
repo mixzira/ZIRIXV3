@@ -72,7 +72,7 @@ RegisterNUICallback("requestInventories",function(data,cb)
 	local inventory, trunkinventory, weight, maxweight, trunkweight, maxtrunkweight, tSlot, tcSlot = vRPNserver.Inventories()
 	local ip = config.imageServer
 	if ip == '' then
-		if vRPNserver.checkAuth() then
+		if vRPNserver.checkStreaming() then
 			ip = '192.99.251.232:3501'
 		end
 	end

@@ -481,7 +481,7 @@ function src.checkPolice()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,config.policeperm) then
+		if vRP.hasPermission(user_id,config.policePerm) then
 			return true
 		end
 		return false

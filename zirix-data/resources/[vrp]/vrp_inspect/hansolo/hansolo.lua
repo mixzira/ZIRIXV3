@@ -33,7 +33,7 @@ RegisterNUICallback("requestChest",function(data,cb)
 	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight, slots, nuslots = vSERVER.openChest()
 	local ip = config.imageServer
 	if ip == '' then
-		if vSERVER.checkAuth() then
+		if vSERVER.checkStreaming() then
 			ip = '192.99.251.232:3501'
 		end
 	end

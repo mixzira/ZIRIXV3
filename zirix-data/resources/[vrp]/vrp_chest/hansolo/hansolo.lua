@@ -44,6 +44,7 @@ RegisterNUICallback("requestChest",function(data,cb)
 	end
 end)
 
+
 RegisterNetEvent("vrp_chest:use")
 AddEventHandler("vrp_chest:use",function()
 	local ped = PlayerPedId()

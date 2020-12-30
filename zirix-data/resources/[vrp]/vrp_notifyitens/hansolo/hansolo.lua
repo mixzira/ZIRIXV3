@@ -8,7 +8,7 @@ RegisterNetEvent("itensNotify")
 AddEventHandler("itensNotify",function(mode,mensagem,item,quantidade,peso)
 	local ip = config.imageServer
 	if ip == '' then
-        if vSERVER.checkAuth() then
+        if vSERVER.checkStreaming() then
             ip = '192.99.251.232:3501'
         end
     end
@@ -18,3 +18,4 @@ AddEventHandler("itensNotify",function(mode,mensagem,item,quantidade,peso)
         TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
     end
 end)
+

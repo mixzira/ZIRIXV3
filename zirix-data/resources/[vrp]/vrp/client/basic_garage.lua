@@ -71,10 +71,10 @@ function tvRP.vehListHash()
 	end
 
 	if IsEntityAVehicle(veh) then
-		for k,v in pairs(vehs.vehList) do
+		for k,v in pairs(vehs.vehglobal) do
 			if v.hash == GetEntityModel(veh) then
-				if v.name then
-					return veh,v.hash,GetVehicleNumberPlateText(veh),v.name
+				if vehs.vehglobal then
+					return veh,v.hash,GetVehicleNumberPlateText(veh),vehs.vehglobal
 				end
 			end
 		end
@@ -92,11 +92,11 @@ function tvRP.vehList(radius)
 	if IsEntityAVehicle(veh) then
 		local trunk = GetVehicleDoorAngleRatio(v,5)
 		local x,y,z = table.unpack(GetEntityCoords(ped))
-		for k,v in pairs(vehs.vehList) do
+		for k,v in pairs(vehs.vehglobal) do
 			if v.hash == GetEntityModel(veh) then
-				if v.name then
+				if k then
 					local tuning = { GetNumVehicleMods(veh,13),GetNumVehicleMods(veh,12),GetNumVehicleMods(veh,15),GetNumVehicleMods(veh,11),GetNumVehicleMods(veh,16) }
-					return veh,VehToNet(veh),GetVehicleNumberPlateText(veh),v.name,GetVehicleDoorsLockedForPlayer(veh,PlayerId()),v.banned,trunk,GetDisplayNameFromVehicleModel(v.name),GetStreetNameFromHashKey(GetStreetNameAtCoord(x,y,z)),tuning
+					return veh,VehToNet(veh),GetVehicleNumberPlateText(veh),k,GetVehicleDoorsLockedForPlayer(veh,PlayerId()),v.banned,trunk,GetDisplayNameFromVehicleModel(k),GetStreetNameFromHashKey(GetStreetNameAtCoord(x,y,z)),tuning
 				end
 			end
 		end
