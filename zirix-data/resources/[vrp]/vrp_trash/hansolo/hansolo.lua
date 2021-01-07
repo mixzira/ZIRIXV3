@@ -4,13 +4,10 @@ vRP = Proxy.getInterface("vRP")
 
 misc = Tunnel.getInterface("vrp_trash")
 
-local lastTrash = 0
-
 RegisterNetEvent("vrp_trash:use")
 AddEventHandler("vrp_trash:use",function()
     local ped = GetPlayerPed(-1)
     local pedCoords = GetEntityCoords(ped, 0)
-    local trashEmpty = false
 
     for k,v in pairs(config.propTrashCans) do
         local trash = GetClosestObjectOfType(pedCoords["x"], pedCoords["y"], pedCoords["z"], 1.0, GetHashKey(v[1]), true, true, true)
