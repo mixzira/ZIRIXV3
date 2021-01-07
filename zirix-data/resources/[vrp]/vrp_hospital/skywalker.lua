@@ -9,8 +9,6 @@ Tunnel.bindInterface("vrp_hospital",Resg)
 
 local idgens = Tools.newIDGenerator()
 
-local logSistemaLaudo = "https://discordapp.com/api/webhooks/764957969972330517/MRFjuO6Mepz9_4N2OfuuttRFUdlDPjMAjIvH_uSaPeZOBlXoL5y0tln9VRxGhu7chrRi"
-
 RegisterCommand('ems', function(source,args,rawCommand)
 	local source = source
  	local user_id = vRP.getUserId(source)
@@ -18,7 +16,7 @@ RegisterCommand('ems', function(source,args,rawCommand)
 	
 	if args[1] == "info" then
 		if args[2] ~= '' then
-			if vRP.hasPermission(user_id,"ems.permissao") then
+			if vRP.hasPermission(user_id,config.emspermission) then
 				if user_id then
 					TriggerClientEvent('chatMessage',-1,"EMS - Informativo",{235,109,114},rawCommand:sub(9))
 				end
@@ -26,7 +24,7 @@ RegisterCommand('ems', function(source,args,rawCommand)
 		end
 	elseif args[1] == 'int' then
 		if args[2] ~= '' then
-			local permission = "ems.permissao"
+			local permission = config.emspermission
 			if vRP.hasPermission(user_id,permission) then
 				local colaborador = vRP.getUsersByPermission(permission)
 				for l,w in pairs(colaborador) do
@@ -49,7 +47,7 @@ RegisterCommand('ems', function(source,args,rawCommand)
 			TriggerClientEvent('chatMessageProximity2',-1,source,"💙 EMS - PULSAR | Dr(a). "..identity.name.." "..identity.firstname,{69,115,235}," Pulsação fraca. 🩸")
 		end
 	elseif args [1] == nil then
-		local colaboradordmla = vRP.getUsersByPermission("ems.permissao")
+		local colaboradordmla = vRP.getUsersByPermission(config.emspermission)
 		local colaboradores = 0
 		
 		for k,v in ipairs(colaboradordmla) do
@@ -68,14 +66,14 @@ end)
 
 RegisterCommand('reanimar',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"ems.permissao") then
+	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,config.emspermission) then
 		TriggerClientEvent('reanimar',source)
 	end
 end)
 
 RegisterCommand('re',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id,"ems.permissao") then
+	if vRP.hasPermission(user_id,config.emspermission) then
 		local nplayer = vRPclient.getNearestPlayer(source,2)
 		
 		if nplayer then
@@ -133,7 +131,7 @@ end)
 
 RegisterCommand('tratamento',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
-    if vRP.hasPermission(user_id,"ems.permissao") then
+    if vRP.hasPermission(user_id,config.emspermission) then
         local nplayer = vRPclient.getNearestPlayer(source,3)
         if nplayer then
 			if not vRPclient.isComa(nplayer) then
@@ -148,7 +146,7 @@ function Resg.checkServices()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local dmla = vRP.getUsersByPermission("ems.permissao")
+		local dmla = vRP.getUsersByPermission(config.emspermission)
 		if parseInt(#dmla) == 0 then
 			return true
 		end
@@ -159,7 +157,7 @@ RegisterCommand('laudo',function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
 
-	if vRP.hasPermission(user_id,"ems.permissao") then
+	if vRP.hasPermission(user_id,config.emspermission) then
 		local source = source
 		local user_id = vRP.getUserId(source)
 		local identity = vRP.getUserIdentity(user_id)
@@ -191,7 +189,7 @@ RegisterCommand('laudo',function(source,args,rawCommand)
 				
 						end
 
-						PerformHttpRequest(logSistemaLaudo, function(err, text, headers) end, 'POST', json.encode({
+						PerformHttpRequest(config.logSistemaLaudo, function(err, text, headers) end, 'POST', json.encode({
 							embeds = {
 								{ 	
 									title = "LAUDO MÉDICO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
@@ -226,10 +224,10 @@ RegisterCommand('laudo',function(source,args,rawCommand)
 				
 									}, 
 									footer = { 
-										text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"), 
-										icon_url = "https://i.imgur.com/CtQB816.png"
+										config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), 
+										config.webhookIcon
 									},
-									color = 15906321 
+									config.webhookColor
 								}
 							}
 						}), { ['Content-Type'] = 'application/json' })
@@ -251,7 +249,7 @@ end)
 RegisterCommand('sme',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.hasPermission(user_id,"ems.permissao") then
+		if vRP.hasPermission(user_id,config.emspermission) then
 			if args[1] == "cadeira" then
 				if args[2] == "add" then
 					TriggerClientEvent("vrp_for_medic:wheelchair:spawn", source)
