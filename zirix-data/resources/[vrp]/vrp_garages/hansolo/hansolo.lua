@@ -1353,9 +1353,8 @@ function src.vehicleClientTrunk(vehid,trunk)
 	end
 end
 
-RegisterKeyMapping('vrp_garages:lock', '[V] Trancar/destrancar veiculo', 'keyboard', 'L')
-
-RegisterCommand('vrp_garages:lock', function()
+RegisterNetEvent("vrp_garages:lock")
+AddEventHandler("vrp_garages:lock",function()
 	local ped = PlayerPedId()
 	local vehicle = vRP.getNearestVehicle(5)
 	if vehicle and not IsPedInAnyVehicle(ped) then

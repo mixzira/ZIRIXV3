@@ -4,6 +4,8 @@ vRP = Proxy.getInterface("vRP")
 
 misc = Tunnel.getInterface("vrp_trash")
 
+local lastTrash = 0
+
 RegisterNetEvent("vrp_trash:use")
 AddEventHandler("vrp_trash:use",function()
     local ped = GetPlayerPed(-1)
@@ -19,7 +21,7 @@ AddEventHandler("vrp_trash:use",function()
     end
 
     if trashCoords ~= nil then
-        if (GetDistanceBetweenCoords(pedCoords["x"], pedCoords["y"], pedCoords["z"], trashCoords["x"], trashCoords["y"], trashCoords["z"] < 0.5)) then
+        if (GetDistanceBetweenCoords(pedCoords["x"], pedCoords["y"], pedCoords["z"], trashCoords["x"], trashCoords["y"], trashCoords["z"])) < 1.0 then
             if misc.searchTrash(trashCoords["x"]) then
                 SetTimeout(6000,function()
                     misc.trashPayment()

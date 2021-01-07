@@ -123,10 +123,8 @@ local css = [[
 	}
 ]]
 
-RegisterKeyMapping ( 'vrp_identity:rg' , 'Identidade' , 'keyboard' , 'F11' )
-
-RegisterCommand('vrp_identity:rg',function(source,args)
-	
+RegisterNetEvent('vrp_identity:rg')
+AddEventHandler('vrp_identity:rg',function()
 	if vRPNserver.checkItem() then
 		if identity then
 			vRP._removeDiv("rg")

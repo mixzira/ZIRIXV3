@@ -37,6 +37,7 @@ client_scripts {
 	'zirix/items.lua',
 	'zirix/vehicles.lua',
 
+	'client/keymappings.lua',
 	'client/base.lua',
 	'client/basic_garage.lua',
 	'client/iplloader.lua',

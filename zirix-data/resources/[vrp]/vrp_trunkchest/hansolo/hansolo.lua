@@ -8,17 +8,6 @@ vRPNserver = Tunnel.getInterface("vrp_trunkchest")
 
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
 
-RegisterKeyMapping('vrp_trunkchest:trunk', '[V] Porta Malas', 'keyboard', config.openKey)
-
-RegisterCommand('vrp_trunkchest:trunk',function(source, args, rawCommand)
-	local ped = PlayerPedId()
-	if IsPedInAnyVehicle(ped) then
-		TriggerEvent('Notify','negado','Você não pode fazer isso dentro do carro.')
-	else
-		TriggerServerEvent('trytrunk:trunk')
-	end
-end)
-
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 end)

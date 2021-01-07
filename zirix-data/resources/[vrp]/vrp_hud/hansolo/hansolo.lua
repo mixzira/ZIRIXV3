@@ -142,9 +142,9 @@ Fwv = function (entity)
   return { x = math.cos(hr) * 2.0, y = math.sin(hr) * 2.0 }
 end
 
-RegisterKeyMapping ( 'vrp:g' , 'Cinto de segurança' , 'keyboard' , 'G' )
 
-RegisterCommand('vrp:g', function()
+RegisterNetEvent("vrp_hud:belt")
+AddEventHandler("vrp_hud:belt",function()
   local ped = PlayerPedId()
   local car = GetVehiclePedIsIn(ped)
   if car ~= 0 and (ExNoCarro or IsCar(car)) then

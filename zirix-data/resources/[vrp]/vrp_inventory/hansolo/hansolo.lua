@@ -32,39 +32,14 @@ RegisterNUICallback("invClose",function(data)
     TriggerEvent("status:celular",false)
 end)
 
-RegisterKeyMapping('vrp_inventory:useClick', 'Interação', 'keyboard','E')
-
-RegisterCommand('vrp_inventory:useClick', function()
-    TriggerEvent('vrp_trash:use')
-    TriggerEvent('vrp_machines:use')
-    TriggerEvent('vrp_chest:use')
-    TriggerEvent('vrp_homes:join')
-    TriggerEvent('vrp_homes:exit')
-    TriggerEvent('vrp_homes:chest')
-    TriggerEvent('vrp_homes:invade')
-    TriggerEvent('vrp_shops:open')
-end, false)
-
-
-RegisterNUICallback("useClick",function(cb)
-    TriggerEvent('vrp_trash:use')
-    TriggerEvent('vrp_machines:use')
-    TriggerEvent('vrp_chest:use')
-    TriggerEvent('vrp_homes:join')
-    TriggerEvent('vrp_homes:exit')
-    TriggerEvent('vrp_homes:chest')
-    TriggerEvent('vrp_homes:invade')
-end)
-
 RegisterNUICallback("unEquip",function(cb)
     vRPNserver.unEquip()
 end)
 
 --[ INVOPEN ]----------------------------------------------------------------------------------------------------------------------------
 
-RegisterKeyMapping('vrp_inventory:openInv', 'Inventário', 'keyboard', config.openKey)
-
-RegisterCommand('vrp_inventory:openInv', function()
+RegisterNetEvent('vrp_inventory:openInv')
+AddEventHandler('vrp_inventory:openInv',function()
     local ped = PlayerPedId()
     if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) and vRPNserver.checkAuth() then
         if not invOpen then
