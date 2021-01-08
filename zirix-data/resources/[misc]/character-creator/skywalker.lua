@@ -3,20 +3,14 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
 local userlogin = {}
+
 local auth = false
 local customer = 'N/A'
 local customerid = 'N/A'
 local customeremail = 'N/A'
 local customerdiscord = '<@N/A>'
 local customerip = 'N/A'
-
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
-
-function SendWebhookMessage(webhook,message)
-    if webhook ~= nil and webhook ~= "" then
-        PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = message}), { ['Content-Type'] = 'application/json' })
-    end
-end
 
 AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
 	if first_spawn then
@@ -51,9 +45,12 @@ AddEventHandler("character-creator:finishedCharacter",function(characterNome,cha
 		if auth then
 			vRP.setUData(user_id,"currentCharacterMode",json.encode(currentCharacterMode))
 			vRP.setUData(user_id,"vRP:spawnController",json.encode(2))
-		
+			
+			if user_id == 1 then
+				vRP.addUserGroup(1,'manager')
+			end
+
 			vRP.execute("vRP/update_user_first_spawn",{ user_id = user_id, firstname = characterSobrenome, name = characterNome, age = characterIdade })
-		
 			doSpawnPlayer(source,user_id,true)
 		else
 			vRP.setUData(user_id,"currentCharacterMode",json.encode(currentCharacterMode))
