@@ -32,14 +32,39 @@ RegisterNUICallback("invClose",function(data)
     TriggerEvent("status:celular",false)
 end)
 
+RegisterKeyMapping('vrp_inventory:useClick', 'Interação', 'keyboard','E')
+
+RegisterCommand('vrp_inventory:useClick', function()
+    TriggerEvent('vrp_trash:use')
+    TriggerEvent('vrp_machines:use')
+    TriggerEvent('vrp_chest:use')
+    TriggerEvent('vrp_homes:join')
+    TriggerEvent('vrp_homes:exit')
+    TriggerEvent('vrp_homes:chest')
+    TriggerEvent('vrp_homes:invade')
+    TriggerEvent('vrp_shops:open')
+end, false)
+
+
+RegisterNUICallback("useClick",function(cb)
+    TriggerEvent('vrp_trash:use')
+    TriggerEvent('vrp_machines:use')
+    TriggerEvent('vrp_chest:use')
+    TriggerEvent('vrp_homes:join')
+    TriggerEvent('vrp_homes:exit')
+    TriggerEvent('vrp_homes:chest')
+    TriggerEvent('vrp_homes:invade')
+end)
+
 RegisterNUICallback("unEquip",function(cb)
     vRPNserver.unEquip()
 end)
 
 --[ INVOPEN ]----------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('vrp_inventory:openInv')
-AddEventHandler('vrp_inventory:openInv',function()
+RegisterKeyMapping('vrp_inventory:openInv', 'Inventário', 'keyboard', config.openKey)
+
+RegisterCommand('vrp_inventory:openInv', function()
     local ped = PlayerPedId()
     if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) and vRPNserver.checkAuth() then
         if not invOpen then
@@ -114,7 +139,7 @@ RegisterNUICallback("requestInventory",function(data,cb)
     local inventario, peso, maxpeso, slots = vRPNserver.Inventory()
     local ip = config.imageServer
     if ip == '' then
-        if vRPNserver.checkStreaming() then
+        if vRPNserver.checkAuth() then
             ip = '192.99.251.232:3501'
         end
     end
@@ -126,7 +151,6 @@ RegisterNUICallback("requestInventory",function(data,cb)
         TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
     end
 end)
-
 
 --[ AUTO-UPDATE ]------------------------------------------------------------------------------------------------------------------------
 

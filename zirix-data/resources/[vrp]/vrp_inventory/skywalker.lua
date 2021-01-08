@@ -212,6 +212,74 @@ function vRPN.useItem(itemName,type,ramount)
 						TriggerClientEvent("itensNotify",source,'use',"Equipou",""..itemName.."")
 					end
 				end
+			elseif itemName == "plano-one" then
+				local dias = 1
+				local consulta = vRP.getUData(user_id,"vRP:plano")
+				local resultado = json.decode(consulta) or {}
+				local plan = {}
+				if resultado.tempo > 0 then
+					resultado = resultado.tempo/1440 or 0
+					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
+				else  
+						if vRP.tryGetInventoryItem(user_id,"plano-one",1) then                
+							resultado.tempo = resultado.tempo or 0
+							resultado.tempo = (resultado.tempo or 0)+tonumber(dias)*1440
+							plan[vRP.getUserId(source)] = resultado.tempo
+							vRP.setUData(user_id, "vRP:plano", json.encode(resultado))
+							TriggerClientEvent("Notify",source,"sucesso","Plano contratado com sucesso! Você tem <b>"..dias.." dias restantes</b>.")
+						end
+				end
+			elseif itemName == "plano-three" then
+				local dias = 3
+				local consulta = vRP.getUData(user_id,"vRP:plano")
+				local resultado = json.decode(consulta) or {}
+				local plan = {}
+				if resultado.tempo > 0 then
+					resultado = resultado.tempo/1440 or 0
+					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
+				else  
+						if vRP.tryGetInventoryItem(user_id,"plano-three",1) then                
+							resultado.tempo = resultado.tempo or 0
+							resultado.tempo = (resultado.tempo or 0)+tonumber(dias)*1440
+							plan[vRP.getUserId(source)] = resultado.tempo
+							vRP.setUData(user_id, "vRP:plano", json.encode(resultado))
+							TriggerClientEvent("Notify",source,"sucesso","Plano contratado com sucesso! Você tem <b>"..dias.." dias restantes</b>.")
+						end
+				end
+			elseif itemName == "plano-five" then
+				local dias = 5
+				local consulta = vRP.getUData(user_id,"vRP:plano")
+				local resultado = json.decode(consulta) or {}
+				local plan = {}
+				if resultado.tempo > 0 then
+					resultado = resultado.tempo/1440 or 0
+					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
+				else  
+						if vRP.tryGetInventoryItem(user_id,"plano-five",1) then                
+							resultado.tempo = resultado.tempo or 0
+							resultado.tempo = (resultado.tempo or 0)+tonumber(dias)*1440
+							plan[vRP.getUserId(source)] = resultado.tempo
+							vRP.setUData(user_id, "vRP:plano", json.encode(resultado))
+							TriggerClientEvent("Notify",source,"sucesso","Plano contratado com sucesso! Você tem <b>"..dias.." dias restantes</b>.")
+						end
+				end
+			elseif itemName == "plano-ten" then
+				local dias = 10
+				local consulta = vRP.getUData(user_id,"vRP:plano")
+				local resultado = json.decode(consulta) or {}
+				local plan = {}
+				if resultado.tempo > 0 then
+					resultado = resultado.tempo/1440 or 0
+					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
+				else  
+						if vRP.tryGetInventoryItem(user_id,"plano-ten",1) then                
+							resultado.tempo = resultado.tempo or 0
+							resultado.tempo = (resultado.tempo or 0)+tonumber(dias)*1440
+							plan[vRP.getUserId(source)] = resultado.tempo
+							vRP.setUData(user_id, "vRP:plano", json.encode(resultado))
+							TriggerClientEvent("Notify",source,"sucesso","Plano contratado com sucesso! Você tem <b>"..dias.." dias restantes</b>.")
+						end
+				end
 			elseif itemName == "maquininha" then
 				local source = source
 				local user_id = vRP.getUserId(source)

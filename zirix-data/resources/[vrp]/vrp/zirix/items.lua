@@ -5,6 +5,11 @@ items.list = {
 	['mochilam'] = { ['index'] = 'mochilam', ['name'] = 'Mochila M', ['type'] = 'use', ['weight'] = 0.5 },
 	['mochilag'] = { ['index'] = 'mochilag', ['name'] = 'Mochila G', ['type'] = 'use', ['weight'] = 0.5 },
 
+	['plano-one'] = { ['index'] = 'plano-one', ['name'] = 'Plano 1', ['type'] = 'use', ['weight'] = 0.5 },
+	['plano-three'] = { ['index'] = 'plano-three', ['name'] = 'Plano 3', ['type'] = 'use', ['weight'] = 0.5 },
+	['plano-five'] = { ['index'] = 'plano-five', ['name'] = 'Plano 5', ['type'] = 'use', ['weight'] = 0.5 },
+	['plano-ten'] = { ['index'] = 'plano-ten', ['name'] = 'Plano 10', ['type'] = 'use', ['weight'] = 0.5 },
+
 	['celular'] = { ['index'] = 'celular', ['name'] = 'iFruit XI', ['type'] = 'use', ['weight'] = 0.5 },
 	['celular-pro'] = { ['index'] = 'celular-pro', ['name'] = 'iFruit XII', ['type'] = 'use', ['weight'] = 0.5 },
 	['jbl'] = { ['index'] = 'jbl', ['name'] = 'JBL', ['type'] = 'use', ['weight'] = 0.5 },
