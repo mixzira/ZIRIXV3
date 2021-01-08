@@ -27,6 +27,11 @@ RegisterNUICallback("buyItem",function(data)
 	vSERVER.buyItem(data.item,data.amount,openShop)
 end)
 
+RegisterNUICallback("sellItem",function(data)
+	print(data.item)
+	vSERVER.sellItem(data.item,data.amount,openShop)
+end)
+
 RegisterNetEvent("vrp_shops:Update")
 AddEventHandler("vrp_shops:Update",function(action)
 	SendNUIMessage({ action = action })

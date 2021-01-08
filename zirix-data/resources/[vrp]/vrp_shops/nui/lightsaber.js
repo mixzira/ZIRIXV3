@@ -98,6 +98,31 @@ const updateDrag = () => {
 		}
 	})
 
+	$('.item').draggable({
+		helper: 'clone',
+		appendTo: 'body',
+		zIndex: 99999,
+		revert: 'invalid',
+		opacity: 0.5,
+		start: function(event,ui){
+			if (disabled) return false;
+
+			$(this).children().children('img').hide();
+			itemData = { key: $(this).data('item-key') };
+
+			if (itemData.key === undefined) return;
+
+			let $el = $(this);
+			$el.addClass("active");
+		},
+		stop: function(){
+			$(this).children().children('img').show();
+
+			let $el = $(this);
+			$el.removeClass("active");
+		}
+	})
+
 	$('#inventory-items').droppable({
 		hoverClass: 'hoverControl',
 		accept: '.shop-item',
@@ -109,6 +134,25 @@ const updateDrag = () => {
 			disableInventory(500);
 
 			$.post("http://vrp_shops/buyItem", JSON.stringify({
+				item: itemData.key,
+				amount: Number($("#amount").val())
+			}))
+
+			document.getElementById("amount").value = "";
+		}
+	})
+
+	$('.shop').droppable({
+		hoverClass: 'hoverControl',
+		accept: '.item',
+		drop: function(event,ui){
+			itemData = { key: ui.draggable.data('item-key') };
+
+			if (itemData.key === undefined) return;
+
+			disableInventory(500);
+
+			$.post("http://vrp_shops/sellItem", JSON.stringify({
 				item: itemData.key,
 				amount: Number($("#amount").val())
 			}))
@@ -140,7 +184,7 @@ const updateShop = () => {
 			${inventoryItems.map((item) => (`
 				<div class="fake-slot">
 					<div class="slot">
-						<div class="item">
+						<div class="item" data-item-key="${item.key}">
 							<div id="item-icon"><img src='http://${data.ip}/image-streaming/08070605/vrp_itens/${item.index}.png'></div>
 							<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 							<div id="item-amount">${formatarNumero(item.amount)}x</div>
