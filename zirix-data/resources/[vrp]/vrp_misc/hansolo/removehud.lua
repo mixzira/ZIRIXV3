@@ -3,7 +3,7 @@
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5)
+		Citizen.Wait(1)
 
 		drawTxt("ZIRIX (v3.0.1) | WORKING IN PROGRESS",4,0.5,0.92,0.35,255,255,255,180)
 

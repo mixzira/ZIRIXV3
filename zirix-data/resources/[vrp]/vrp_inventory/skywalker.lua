@@ -57,11 +57,6 @@ function vRPN.Inventory()
 	end
 end
 
-RegisterCommand('teste',function(source,args,rawCommand)
-	peso = vRP.getItemWeight(args[1])
-	print(peso)
-end)
-
 function vRPN.verifySlots(user_id)
 	if vRP.getExp(user_id,"physical","strength") == 1900 then -- 90Kg
 		return 24

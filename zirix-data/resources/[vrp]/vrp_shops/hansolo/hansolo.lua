@@ -87,38 +87,3 @@ AddEventHandler("vrp_shops:open",function()
 		end
 	end
 end)
-
-Citizen.CreateThread(function()
-	while true do
-		local idle = 1000
-		local ped = PlayerPedId()
-		local x,y,z = table.unpack(GetEntityCoords(ped))
-		for k,v in pairs(config.shops) do
-			for k,v in pairs(v.coords) do
-				local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
-				local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
-				if distance < 5.1 then
-					idle = 5
-					DrawMarker(23, v.x, v.y, v.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
-				end
-			end
-		end
-		Citizen.Wait(idle)
-	end
-end)
-
-function DrawText3D(x, y, z, text)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    
-    SetTextScale(0.28, 0.28)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry('STRING')
-    SetTextCentre(1)
-    AddTextComponentString(text)
-    DrawText(_x,_y)
-    local factor = (string.len(text)) / 370
-    DrawRect(_x,_y+0.0125, 0.005+ factor, 0.03, 41, 11, 41, 68)
-end

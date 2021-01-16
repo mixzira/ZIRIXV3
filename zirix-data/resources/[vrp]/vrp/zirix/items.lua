@@ -278,24 +278,24 @@ items.list = {
 
 	--[ Handguns ][ Ammo ]---------------------------------------------------------------------------------------------
 
-	['wammoWEAPON_PISTOL'] = { ['index'] = 'm-pt92af', ['name'] = 'M-PT92AF', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_PISTOL_MK2'] = { ['index'] = 'm-czp09', ['name'] = 'M-CZ P-09', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_COMBATPISTOL'] = { ['index'] = 'm-px4', ['name'] = 'M-Px4', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_APPISTOL'] = { ['index'] = 'm-x2e1911', ['name'] = 'M-XSE 1911', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_STUNGUN'] = { ['index'] = 'm-taser', ['name'] = 'M-Taser', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_PISTOL50'] = { ['index'] = 'm-derserteagle', ['name'] = 'M-Desert Eagle', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SNSPISTOL'] = { ['index'] = 'm-waltherppk', ['name'] = 'M-Walther PPK', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SNSPISTOL_MK2'] = { ['index'] = 'm-waltherppk2', ['name'] = 'M-Walther PPK2', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_HEAVYPISTOL'] = { ['index'] = 'm-wide1911', ['name'] = 'M-Wide 1911', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_VINTAGEPISTOL'] = { ['index'] = 'm-fn1903', ['name'] = 'M-FN 1903', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_FLAREGUN'] = { ['index'] = 'm-sinalizador', ['name'] = 'M-Sinalizador', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MARKSMANPISTOL'] = { ['index'] = 'm-musketpistol', ['name'] = 'M-Musket Pistol', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_REVOLVER'] = { ['index'] = 'm-asgco2', ['name'] = 'M-ASG CO2', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_REVOLVER_MK2'] = { ['index'] = 'm-ragingbull', ['name'] = 'M-Raging Bull', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_DOUBLEACTION'] = { ['index'] = 'm-python', ['name'] = 'M-Python', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_RAYPISTOL'] = { ['index'] = 'm-raypistol', ['name'] = 'M-Raypistol', ['type'] = 'reloading', ['weight'] = 1.0 }, --[ Admin Gun ]-
-	['wammoWEAPON_CERAMICPISTOL'] = { ['index'] = 'm-kochp7', ['name'] = 'M-Koch P7', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_NAVYREVOLVER'] = { ['index'] = 'm-colt1851', ['name'] = 'M-Colt 1851', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_PISTOL'] = { ['index'] = 'm-pt92af', ['name'] = 'M-PT92AF', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_PISTOL_MK2'] = { ['index'] = 'm-czp09', ['name'] = 'M-CZ P-09', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_COMBATPISTOL'] = { ['index'] = 'm-px4', ['name'] = 'M-Px4', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_APPISTOL'] = { ['index'] = 'm-x2e1911', ['name'] = 'M-XSE 1911', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_STUNGUN'] = { ['index'] = 'm-taser', ['name'] = 'M-Taser', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_PISTOL50'] = { ['index'] = 'm-derserteagle', ['name'] = 'M-Desert Eagle', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SNSPISTOL'] = { ['index'] = 'm-waltherppk', ['name'] = 'M-Walther PPK', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SNSPISTOL_MK2'] = { ['index'] = 'm-waltherppk2', ['name'] = 'M-Walther PPK2', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_HEAVYPISTOL'] = { ['index'] = 'm-wide1911', ['name'] = 'M-Wide 1911', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_VINTAGEPISTOL'] = { ['index'] = 'm-fn1903', ['name'] = 'M-FN 1903', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_FLAREGUN'] = { ['index'] = 'm-sinalizador', ['name'] = 'M-Sinalizador', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MARKSMANPISTOL'] = { ['index'] = 'm-musketpistol', ['name'] = 'M-Musket Pistol', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_REVOLVER'] = { ['index'] = 'm-asgco2', ['name'] = 'M-ASG CO2', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_REVOLVER_MK2'] = { ['index'] = 'm-ragingbull', ['name'] = 'M-Raging Bull', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_DOUBLEACTION'] = { ['index'] = 'm-python', ['name'] = 'M-Python', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_RAYPISTOL'] = { ['index'] = 'm-raypistol', ['name'] = 'M-Raypistol', ['type'] = 'reloading', ['weight'] = 0.01 }, --[ Admin Gun ]-
+	['wammoWEAPON_CERAMICPISTOL'] = { ['index'] = 'm-kochp7', ['name'] = 'M-Koch P7', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_NAVYREVOLVER'] = { ['index'] = 'm-colt1851', ['name'] = 'M-Colt 1851', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Submachine Guns ][ Weapons ]-----------------------------------------------------------------------------------
 
@@ -310,14 +310,14 @@ items.list = {
 
 	--[ Submachine Guns ][ Ammo ]--------------------------------------------------------------------------------------
 
-	['wammoWEAPON_MICROSMG'] = { ['index'] = 'm-microuzi', ['name'] = 'M-Micro Uzi', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SMG'] = { ['index'] = 'm-mp5', ['name'] = 'M-MP5', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SMG_MK2'] = { ['index'] = 'm-mp5k', ['name'] = 'M-MP5K', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_ASSAULTSMG'] = { ['index'] = 'm-p90', ['name'] = 'M-P90', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_COMBATPDW'] = { ['index'] = 'm-mpxsd', ['name'] = 'M-MPX-SD', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MACHINEPISTOL'] = { ['index'] = 'm-tecdc9', ['name'] = 'M-TEC-DC9', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MINISMG'] = { ['index'] = 'm-vz82', ['name'] = 'M-VZ.82', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_RAYCARBINE'] = { ['index'] = 'm-raycarbine', ['name'] = 'M-Ray Carbine', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_MICROSMG'] = { ['index'] = 'm-microuzi', ['name'] = 'M-Micro Uzi', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SMG'] = { ['index'] = 'm-mp5', ['name'] = 'M-MP5', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SMG_MK2'] = { ['index'] = 'm-mp5k', ['name'] = 'M-MP5K', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_ASSAULTSMG'] = { ['index'] = 'm-p90', ['name'] = 'M-P90', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_COMBATPDW'] = { ['index'] = 'm-mpxsd', ['name'] = 'M-MPX-SD', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MACHINEPISTOL'] = { ['index'] = 'm-tecdc9', ['name'] = 'M-TEC-DC9', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MINISMG'] = { ['index'] = 'm-vz82', ['name'] = 'M-VZ.82', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_RAYCARBINE'] = { ['index'] = 'm-raycarbine', ['name'] = 'M-Ray Carbine', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Shotguns ][ Weapons ]------------------------------------------------------------------------------------------
 
@@ -333,15 +333,15 @@ items.list = {
 
 	--[ Shotguns ][ Ammo ]---------------------------------------------------------------------------------------------
 
-	['wammoWEAPON_PUMPSHOTGUN'] = { ['index'] = 'm-mossberg590', ['name'] = 'M-Mossberg 590', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_PUMPSHOTGUN_MK2'] = { ['index'] = 'm-remington870', ['name'] = 'M-Remington 870', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SAWNOFFSHOTGUN'] = { ['index'] = 'm-mossberg500', ['name'] = 'M-Mossberg 500', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_ASSAULTSHOTGUN'] = { ['index'] = 'm-uts15', ['name'] = 'M-UTS-15', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_BULLPUPSHOTGUN'] = { ['index'] = 'm-keltecksg', ['name'] = 'M-Kel-Tec KSG ', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MUSKET'] = { ['index'] = 'm-musket', ['name'] = 'M-Musket', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_HEAVYSHOTGUN'] = { ['index'] = 'm-saiga12', ['name'] = 'M-Saiga 12', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_DBSHOTGUN'] = { ['index'] = 'm-zabala', ['name'] = 'M-Zabala', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_AUTOSHOTGUN'] = { ['index'] = 'm-armselprotecta', ['name'] = 'M-Armsel Protecta', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_PUMPSHOTGUN'] = { ['index'] = 'm-mossberg590', ['name'] = 'M-Mossberg 590', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_PUMPSHOTGUN_MK2'] = { ['index'] = 'm-remington870', ['name'] = 'M-Remington 870', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SAWNOFFSHOTGUN'] = { ['index'] = 'm-mossberg500', ['name'] = 'M-Mossberg 500', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_ASSAULTSHOTGUN'] = { ['index'] = 'm-uts15', ['name'] = 'M-UTS-15', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_BULLPUPSHOTGUN'] = { ['index'] = 'm-keltecksg', ['name'] = 'M-Kel-Tec KSG ', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MUSKET'] = { ['index'] = 'm-musket', ['name'] = 'M-Musket', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_HEAVYSHOTGUN'] = { ['index'] = 'm-saiga12', ['name'] = 'M-Saiga 12', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_DBSHOTGUN'] = { ['index'] = 'm-zabala', ['name'] = 'M-Zabala', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_AUTOSHOTGUN'] = { ['index'] = 'm-armselprotecta', ['name'] = 'M-Armsel Protecta', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Assault Rifles ][ Weapons ]------------------------------------------------------------------------------------
 
@@ -358,16 +358,16 @@ items.list = {
 
 	--[ Assault Rifles ][ Ammo ]---------------------------------------------------------------------------------------
 
-	['wammoWEAPON_ASSAULTRIFLE'] = { ['index'] = 'm-ak74', ['name'] = 'M-AK-74', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_ASSAULTRIFLE_MK2'] = { ['index'] = 'm-ak47', ['name'] = 'M-AK-47', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_CARBINERIFLE'] = { ['index'] = 'm-ar15', ['name'] = 'M-AR-15', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_CARBINERIFLE_MK2'] = { ['index'] = 'm-m4a1', ['name'] = 'M-M4-A1', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_ADVANCEDRIFLE'] = { ['index'] = 'm-tavorctar21', ['name'] = 'M-Tavor CTAR-21', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SPECIALCARBINE'] = { ['index'] = 'm-g36c', ['name'] = 'M-G36C', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_SPECIALCARBINE_MK2'] = { ['index'] = 'm-g36k', ['name'] = 'M-G36K', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_BULLPUPRIFLE'] = { ['index'] = 'm-noricon86s', ['name'] = 'M-Norinco 86S', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_BULLPUPRIFLE_MK2'] = { ['index'] = 'm-hsvhsd2', ['name'] = 'M-HS VHS-D2', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_COMPACTRIFLE'] = { ['index'] = 'm-minidraco', ['name'] = 'M-Draco', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_ASSAULTRIFLE'] = { ['index'] = 'm-ak74', ['name'] = 'M-AK-74', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_ASSAULTRIFLE_MK2'] = { ['index'] = 'm-ak47', ['name'] = 'M-AK-47', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_CARBINERIFLE'] = { ['index'] = 'm-ar15', ['name'] = 'M-AR-15', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_CARBINERIFLE_MK2'] = { ['index'] = 'm-m4a1', ['name'] = 'M-M4-A1', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_ADVANCEDRIFLE'] = { ['index'] = 'm-tavorctar21', ['name'] = 'M-Tavor CTAR-21', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SPECIALCARBINE'] = { ['index'] = 'm-g36c', ['name'] = 'M-G36C', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_SPECIALCARBINE_MK2'] = { ['index'] = 'm-g36k', ['name'] = 'M-G36K', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_BULLPUPRIFLE'] = { ['index'] = 'm-noricon86s', ['name'] = 'M-Norinco 86S', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_BULLPUPRIFLE_MK2'] = { ['index'] = 'm-hsvhsd2', ['name'] = 'M-HS VHS-D2', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_COMPACTRIFLE'] = { ['index'] = 'm-minidraco', ['name'] = 'M-Draco', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Light Machine Guns ][ Weapons ]--------------------------------------------------------------------------------
 
@@ -378,10 +378,10 @@ items.list = {
 
 	--[ Light Machine Guns ][ Ammo ]-----------------------------------------------------------------------------------
 
-	['wammoWEAPON_MG'] = { ['index'] = 'm-pkm', ['name'] = 'M-PKM', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_COMBATMG'] = { ['index'] = 'm-m60', ['name'] = 'M-M60', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_COMBATMG_MK2'] = { ['index'] = 'm-m6e4', ['name'] = 'M-M60E4', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_GUSENBERG'] = { ['index'] = 'm-thompson', ['name'] = 'M-Thompson', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_MG'] = { ['index'] = 'm-pkm', ['name'] = 'M-PKM', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_COMBATMG'] = { ['index'] = 'm-m60', ['name'] = 'M-M60', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_COMBATMG_MK2'] = { ['index'] = 'm-m6e4', ['name'] = 'M-M60E4', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_GUSENBERG'] = { ['index'] = 'm-thompson', ['name'] = 'M-Thompson', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Sniper Rifles ][ Weapons ]-------------------------------------------------------------------------------------
 
@@ -393,11 +393,11 @@ items.list = {
 
 	--[ Sniper Rifles ][ Ammo ]----------------------------------------------------------------------------------------
 
-	['wammoWEAPON_SNIPERRIFLE'] = { ['index'] = 'm-awf', ['name'] = 'M-AW-F', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_HEAVYSNIPER'] = { ['index'] = 'm-barrettm107', ['name'] = 'M-Barrett M107', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_HEAVYSNIPER_MK2'] = { ['index'] = 'm-serbubfg504', ['name'] = 'M-Serbu BFG-50A', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MASKMANRIFLE'] = { ['index'] = 'm-m39', ['name'] = 'M-M39', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MASKMANRIFLE_MK2'] = { ['index'] = 'm-m1a', ['name'] = 'M-M1A', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_SNIPERRIFLE'] = { ['index'] = 'm-awf', ['name'] = 'M-AW-F', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_HEAVYSNIPER'] = { ['index'] = 'm-barrettm107', ['name'] = 'M-Barrett M107', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_HEAVYSNIPER_MK2'] = { ['index'] = 'm-serbubfg504', ['name'] = 'M-Serbu BFG-50A', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MASKMANRIFLE'] = { ['index'] = 'm-m39', ['name'] = 'M-M39', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MASKMANRIFLE_MK2'] = { ['index'] = 'm-m1a', ['name'] = 'M-M1A', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Heavy Weapons ][ Weapons ]-------------------------------------------------------------------------------------
 
@@ -413,15 +413,15 @@ items.list = {
 
 	--[ Heavy Weapons ][ Ammo ]----------------------------------------------------------------------------------------
 
-	['wammoWEAPON_RPG'] = { ['index'] = 'm-rpg', ['name'] = 'M-RPG', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_GRENADELAUNCHER'] = { ['index'] = 'm-grenadelauncher', ['name'] = 'M-Lançador de Granadas', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_GRENADELAUNCHER_SMOKE'] = { ['index'] = 'm-grenadelaunchersmoke', ['name'] = 'M-Lançador de Granadas', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_MINIGUN'] = { ['index'] = 'm-minigun', ['name'] = 'M-Minigun', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_FIREWORK'] = { ['index'] = 'm-firework', ['name'] = 'M-Firework', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_RAILGUN'] = { ['index'] = 'm-railgun', ['name'] = 'M-Railgun', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_HOMINGLAUNCHER'] = { ['index'] = 'm-hominglauncher', ['name'] = 'M-Railgun', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_COMPACTLAUNCHER'] = { ['index'] = 'm-compactlauncher', ['name'] = 'M-Lançador de Granadas', ['type'] = 'reloading', ['weight'] = 1.0 },
-	['wammoWEAPON_RAYMINIGUN'] = { ['index'] = 'm-rayminigun', ['name'] = 'M-Rayminigun', ['type'] = 'reloading', ['weight'] = 1.0 },
+	['wammoWEAPON_RPG'] = { ['index'] = 'm-rpg', ['name'] = 'M-RPG', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_GRENADELAUNCHER'] = { ['index'] = 'm-grenadelauncher', ['name'] = 'M-Lançador de Granadas', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_GRENADELAUNCHER_SMOKE'] = { ['index'] = 'm-grenadelaunchersmoke', ['name'] = 'M-Lançador de Granadas', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_MINIGUN'] = { ['index'] = 'm-minigun', ['name'] = 'M-Minigun', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_FIREWORK'] = { ['index'] = 'm-firework', ['name'] = 'M-Firework', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_RAILGUN'] = { ['index'] = 'm-railgun', ['name'] = 'M-Railgun', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_HOMINGLAUNCHER'] = { ['index'] = 'm-hominglauncher', ['name'] = 'M-Railgun', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_COMPACTLAUNCHER'] = { ['index'] = 'm-compactlauncher', ['name'] = 'M-Lançador de Granadas', ['type'] = 'reloading', ['weight'] = 0.01 },
+	['wammoWEAPON_RAYMINIGUN'] = { ['index'] = 'm-rayminigun', ['name'] = 'M-Rayminigun', ['type'] = 'reloading', ['weight'] = 0.01 },
 
 	--[ Throwables ]---------------------------------------------------------------------------------------------------
 
