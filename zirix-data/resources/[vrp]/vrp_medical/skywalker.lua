@@ -5,7 +5,7 @@ vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
 Resg = {}
-Tunnel.bindInterface("vrp_hospital",Resg)
+Tunnel.bindInterface("vrp_medical",Resg)
 
 local idgens = Tools.newIDGenerator()
 

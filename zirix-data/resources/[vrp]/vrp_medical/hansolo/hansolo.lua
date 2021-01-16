@@ -2,7 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-Resg = Tunnel.getInterface("vrp_hospital")
+Resg = Tunnel.getInterface("vrp_medical")
 
 local tratamento = false
 local segundos = 0
