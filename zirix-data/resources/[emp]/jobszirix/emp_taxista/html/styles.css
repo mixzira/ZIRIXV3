@@ -1,0 +1,173 @@
+.console {
+    background-color: rgba(255, 86, 60, 0.3);
+    width: 500px;
+    min-height: 30px;
+    color: white;
+    position: absolute;
+    top: 5px;
+    left: 200px;
+}
+
+html {
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: 'taximeter';
+    src: url(taximeter.ttf)
+}
+
+#cursor {
+    position: absolute;
+    z-index: 99999999;
+    display: block;
+}
+
+.sans {
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+}
+
+.taxifare {
+    font-size: 35px;
+    text-align: right;
+    background-color: #ff9c11;
+    font-family: 'taximeter';
+    src: url(taximeter.ttf)
+}
+
+.active {
+    color: red;
+    font-weight: bold;
+}
+
+.notactive {
+    color: #660000;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 120;
+    right: 40;
+    width: 300px;
+    height: 200px;
+}
+
+.green {
+    color: rgb(0, 125, 0);
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.red {
+    color: rgb(255, 0, 0);
+}
+
+#pre {
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+.balance {
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+}
+
+.transaction {
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+}
+
+.full-screen {
+    width: 40%;
+    height: 80%;
+    position: absolute;
+    right: -160px;
+    bottom: -300px;
+    display: none;
+    align-items: center;
+}
+
+.taxi-container {
+    width: 45%;
+    border: 3px solid #222;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: 18%;
+    right: 40px;
+    position: absolute;
+    top: 35%;
+    overflow: hidden;
+    display: block;
+    z-index: 9999999;
+}
+
+.header {
+    width: 100%;
+    background-color: grey;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.header .logo {
+    max-height: 80%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.header .header-right {
+    color: #777;
+    margin-right: 70px;
+    margin-top: 10px;
+}
+
+.header-right h3 {
+    float: right;
+    margin-top: 30px;
+}
+
+.body {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: none;
+}
+
+.centered {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.number-display p {
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+}
+
+.form {
+    max-width: 74%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}

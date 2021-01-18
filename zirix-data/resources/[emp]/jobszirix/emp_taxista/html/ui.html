@@ -1,0 +1,32 @@
+<head>
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<script src="scripts.js" type="text/javascript"></script>
+	<script src="debounce.min.js" type="text/javascript"></script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+
+<body>
+	<div class="full-screen">
+		<div class="taxi-container">
+			<div class="header">
+				<h3 class="sans"><span class="sans" style="font-size: 11px; text-align: center;">F1 para pausar a corrida | F2 para resetar a corrida</span></h3>
+			</div>
+			<div class="body">
+				<TABLE border="1" style="width: 100%; border: 3px solid black; border-style: solid;">
+					<tr style="color: white;" class="taxifare">
+						<td class="currentfare"></td>
+						<td class="currentmiles"></td>
+					</tr>
+					<tr align="center" style="color: white;" class="sans">
+						<td><b>VALOR</td>
+							<td><b>MILHAS</td>
+							</tr>
+						</table>
+						<div style="margin-left: 25px; text-align: center;">
+							<span id="hired" class="notactive sans">EM CORRIDA</span> <span style="display:inline-block; width: 20px;"></span><span id="timeoff"class="active sans">DESLIGADO</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
