@@ -30,7 +30,7 @@ Citizen.CreateThread(function()
 					if IsControlJustPressed(0,38) then
 						servico = true
 						selecionado = math.random(9)
-						CriandoBlip(locs,selecionado)
+						Criandoblip(locs,selecionado)
 						emp8.Quantidade()
 						TriggerEvent("Notify","sucesso","Você entrou em serviço.")
 						TriggerEvent("Notify","importante","Vá até o próximo local e entregue <b>"..quantidade.."x Toras de Madeira</b>.")
@@ -54,7 +54,7 @@ Citizen.CreateThread(function()
 			local bowz,cdz = GetGroundZFor_3dCoord(configlumberjackdelivery.locs[selecionado].x,configlumberjackdelivery.locs[selecionado].y,configlumberjackdelivery.locs[selecionado].z)
 			local distance = GetDistanceBetweenCoords(configlumberjackdelivery.locs[selecionado].x,configlumberjackdelivery.locs[selecionado].y,cdz,x,y,z,true)
 			local vehicle = GetPlayersLastVehicle()
-			if distance <= 3 and GetEntityModel(vehicle) == -431692672 then
+			if distance <= 3 and GetEntityModel(vehicle) == configlumberjackdelivery.car then
 				DrawMarker(21,configlumberjackdelivery.locs[selecionado].x,configlumberjackdelivery.locs[selecionado].y,configlumberjackdelivery.locs[selecionado].z-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,136, 96, 240,180,0,0,0,1)
 				if distance <= 1.2 then
 					idle = 5
@@ -71,7 +71,7 @@ Citizen.CreateThread(function()
 								end
 								Citizen.Wait(1)
 							end
-							CriandoBlip(locs,selecionado)
+							Criandoblip(locs,selecionado)
 							TriggerEvent("Notify","importante","Vá até o próximo local e entregue <b>"..quantidade.."x Toras de Madeira</b>.")
 						end
 					end
@@ -114,7 +114,7 @@ function drawTxt(text,font,x,y,scale,r,g,b,a)
 	DrawText(x,y)
 end
 
-function CriandoBlip(locs,selecionado)
+function Criandoblip(locs,selecionado)
 	blips = AddBlipForCoord(configlumberjackdelivery.locs[selecionado].x,configlumberjackdelivery.locs[selecionado].y,configlumberjackdelivery.locs[selecionado].z)
 	SetBlipSprite(blips,1)
 	SetBlipColour(blips,27)

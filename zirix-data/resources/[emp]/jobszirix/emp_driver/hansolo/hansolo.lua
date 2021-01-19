@@ -46,7 +46,7 @@ Citizen.CreateThread(function()
 									else
 										destino = 1
 									end
-									CriandoBlip(configdriver.route,destino)
+									criandoblip(configdriver.route,destino)
 									TriggerEvent("Notify","sucesso","Você entrou em serviço.")
 								else
 									TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
@@ -86,7 +86,7 @@ Citizen.CreateThread(function()
 								emp6.checkPayment(20)
 								destino = destino + 1
 							end
-							CriandoBlip(configdriver.route,destino)
+							criandoblip(configdriver.route,destino)
 						end
 					end
 				end
@@ -96,15 +96,16 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[ CANCEL | THREAD  ]--------------------------------------------------------------------------------------------------------------------
+--[ CANCEL | THREAD ]--------------------------------------------------------------------------------------------------------------------
 
-RegisterCommand("off",function(source,args)
-	if args[1] == "motorista" then
-		if emservico then
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(5)
+		if emservico and IsControlJustPressed(1,121) then
 			emservico = false
 			RemoveBlip(blip)
+			TriggerEvent("Notify","importante","Você saiu de serviço",8000)
 		end
-		TriggerEvent("Notify","importante","Você saiu de serviço",8000)
 	end
 end)
 
@@ -121,7 +122,7 @@ function drawTxt(text,font,x,y,scale,r,g,b,a)
 	DrawText(x,y)
 end
 
-function CriandoBlip(entregas,destino)
+function criandoblip(entregas,destino)
 	blip = AddBlipForCoord(configdriver.route[destino].x,configdriver.route[destino].y,configdriver.route[destino].z)
 	SetBlipSprite(blip,1)
 	SetBlipColour(blip,27)

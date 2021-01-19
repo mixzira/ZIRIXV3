@@ -12,6 +12,12 @@ configlumberjackdelivery.tora = "tora"
 
 configlumberjackdelivery.money = { 200 , 300 }
 
+--[ CAR ]----------------------------------------------------------------------------------------------------------------------------
+
+-- HASH DO VEICULO QUE SERA NESECESSARIO PARA ENTREGA DA TORA, ESTA O PANTO
+
+configlumberjackdelivery.car = -431692672
+
 --[ DELIVERY ]----------------------------------------------------------------------------------------------------------------------------
 
 -- QUANTIDADE DE TORA PRA ENTREGAR

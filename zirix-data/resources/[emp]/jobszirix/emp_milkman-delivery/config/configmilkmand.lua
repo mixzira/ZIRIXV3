@@ -28,7 +28,7 @@ configmilkmand.deliveryss = { 3 , 6 }
 
 --[ HASH ]----------------------------------------------------------------------------------------------------------------------------
 
--- HASH DO VEICULO QUE SERA NESECESSARIO PARA ENTREGA DO LEITO, ESTA YOUGA2
+-- HASH DO VEICULO QUE SERA NESECESSARIO PARA ENTREGA DO LEITE, ESTA YOUGA2
 
 configmilkmand.lastve = 1026149675
 
