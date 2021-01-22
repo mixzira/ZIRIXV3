@@ -12,12 +12,14 @@ local menuactive = false
 local openShop = {}
 local tShop = ''
 local dShop = ''
+local tRobbery = 0
+local inRobbery = false
 
-RegisterNUICallback("buyItem",function(data)
+RegisterNUICallback('buyItem',function(data)
 	vSERVER.buyItem(data.item,data.amount,openShop)
 end)
 
-RegisterNUICallback("sellItem",function(data)
+RegisterNUICallback('sellItem',function(data)
 	vSERVER.sellItem(data.item,data.amount,openShop)
 end)
 
@@ -37,10 +39,10 @@ RegisterNUICallback('upgradePrice',function(data)
 	vSERVER.upgradePrice(data.item,openShop)
 end)
 
-RegisterNUICallback("shopClose",function(data)
+RegisterNUICallback('shopClose',function(data)
 	TransitionFromBlurred(1000)
 	SetNuiFocus(false,false)
-	SendNUIMessage({ action = "hideMenu" })
+	SendNUIMessage({ action = 'hideMenu' })
 	menuactive = false
 	openShop = nil
 	dShop = nil
@@ -66,7 +68,7 @@ function toggleActionMenu(type)
 	if menuactive then
 		TransitionToBlurred(1000)
 		SetNuiFocus(true,true)
-		SendNUIMessage({ action = "showMenu", type = type })
+		SendNUIMessage({ action = 'showMenu', type = type })
 		TriggerEvent('cancelando',true)
 		if vSERVER.checkOwner(type) then
 			SendNUIMessage({ action = 'ownerOn' })
@@ -74,62 +76,281 @@ function toggleActionMenu(type)
 	else
 		TransitionFromBlurred(1000)
 		SetNuiFocus(false,false)
-		SendNUIMessage({ action = "hideMenu" })
+		SendNUIMessage({ action = 'hideMenu' })
 		openShop = nil
 		tShop = nil
 		TriggerEvent('cancelando',false)
 	end
 end
 
+function vRobbery(shop,security)
+	Citizen.CreateThread(function()
+		local ped = PlayerPedId()
+		local x,y,z = GetEntityCoords(ped)
+		local deletProps = false
+		inRobbery = true
+		for k,v in pairs(config.shops) do
+			if security == 3 then
+				tRobbery = 50
+			elseif security == 2 then
+				tRobbery = 27
+			elseif security == 1 then
+				tRobbery = 13
+			end
+			local vault = v.vault
+			local distance = GetDistanceBetweenCoords(vault.position.x, vault.position.y, vault.position.z, x,y,z,true)
+			if distance <= 3 then
+				TaskGoStraightToCoord(ped, vault.position.x,vault.position.y,vault.position.z,1.0, 100000, vault.position.h, 2.0)
+				if distance <= 0.3 then
+					ClearPedTasks(ped)
+					SetEntityHeading(ped, vault.position.h)
+				end
+			end
+			local thermal_hash = GetHashKey('hei_prop_heist_thermite_flash')
+			local bagHash4 = GetHashKey('p_ld_heist_bag_s_pro_o')
+			local coords = GetEntityCoords(ped)
+			LoadModel(thermal_hash)
+			Wait(10)
+			LoadModel(bagHash4)
+			Wait(10)
+			thermalentity = CreateObject(thermal_hash, (vault.position.x+vault.position.y+vault.position.z-0.20)-40, true, true)
+			local bagProp4 = CreateObject(bagHash4, coords-20, true, false)
+			SetEntityAsMissionEntity(thermalentity, true, true)
+			SetEntityAsMissionEntity(bagProp4, true, true)
+			termitacolocando = true
+			local boneIndexf1 = GetPedBoneIndex(PlayerPedId(), 28422)
+			local bagIndex1 = GetPedBoneIndex(PlayerPedId(), 57005)
+			Wait(500)
+			SetPedComponentVariation(PlayerPedId(), 5, 0, 0, 0)
+			AttachEntityToEntity(thermalentity, PlayerPedId(), boneIndexf1, 0.0, 0.0, 0.0, 180.0, 180.0, 0, 1, 1, 0, 1, 1, 1)
+			AttachEntityToEntity(bagProp4, PlayerPedId(), bagIndex1, 0.3, -0.25, -0.3, 300.0, 200.0, 300.0, true, true, false, true, 1, true)
+			RequestAnimDict('anim@heists@ornate_bank@thermal_charge')
+			while not HasAnimDictLoaded('anim@heists@ornate_bank@thermal_charge') do
+				Wait(100)
+			end
+			vRP._playAnim(false,{{'anim@heists@ornate_bank@thermal_charge','thermal_charge'}},false)
+			Wait(2500)
+			DetachEntity(bagProp4, 1, 1)
+			FreezeEntityPosition(bagProp4, true)
+			Wait(2500)
+			FreezeEntityPosition(bagProp4, false)
+			AttachEntityToEntity(bagProp4, PlayerPedId(), bagIndex1, 0.3, -0.25, -0.3, 300.0, 200.0, 300.0, true, true, false, true, 1, true)
+			Wait(1000)
+			DeleteEntity(bagProp4)
+			SetPedComponentVariation(PlayerPedId(), 5, 40, 0, 0)
+			DeleteEntity(thermalentity)
+			ClearPedTasks(ped)
+			TriggerEvent('Notify','importante','Você plantou a bomba, cuidado...')
+			local counter = 0
+			while counter <= tRobbery and inRobbery do
+				if tRobbery == 13 then
+					TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+					Wait(25000)
+					counter = tRobbery + 1
+				elseif tRobbery == 27 then
+					if counter <= 14 then
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Wait(1000)
+					else
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Wait(25000)
+						counter = tRobbery + 1
+					end
+				elseif tRobbery == 50 then
+					if counter <= 25 then
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Wait(1000)
+					else
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Wait(25000)
+						counter = tRobbery + 1
+					end
+				end
+				counter = counter + 1
+			end
+			AddExplosion(vault.position.x, vault.position.y, vault.position.z, 2, 100.0, true, false, true)
+			local moneyProp = 'hei_prop_heist_cash_pile'
+			RequestModel(moneyProp)
+			while not HasModelLoaded(moneyProp) do
+				Citizen.Wait(10)
+			end
+			if not HasModelLoaded(moneyProp) then
+				SetModelAsNoLongerNeeded(moneyProp)
+			else
+				SetModelAsNoLongerNeeded(moneyProp)
+				local counterwell = 4
+				local amount = 5
+				local boneIndex = GetPedBoneIndex(PlayerPedId(), 57005)
+				while counterwell >= 0 and inRobbery do
+					Citizen.Wait(10)
+					x,y,z = table.unpack(GetEntityCoords(ped))
+					local distancewell = GetDistanceBetweenCoords( vault.position.x, vault.position.y, vault.position.z, x, y, z,true)
+					local coord = GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,1.0,-0.94)
+					if amount >= 0 then
+						oMoney = CreateObjectNoOffset(moneyProp, vault.position.x2, vault.position.y2, vault.position.z2-0.94, 1, 0, 1)
+						PlaceObjectOnGroundProperly(oMoney)
+						SetModelAsNoLongerNeeded(oMoney)
+						Citizen.InvokeNative(0xAD738C3085FE7E11,oMoney,true,true)
+						FreezeEntityPosition(oMoney,true)
+						SetEntityAsNoLongerNeeded(oMoney)
+						x2,y2,z2 = table.unpack(GetEntityCoords(oMoney))
+						amount = amount - 1
+					end
+					if distancewell <= 1 then
+						drawText3D(x2,y2,z2,'~b~[E] ~w~PEGAR')
+						if IsControlJustPressed(0,38) and not IsPedInAnyVehicle(ped) and not IsEntityDead(ped) then
+							vRP._playAnim(false,{{'pickup_object','pickup_low'}},false)
+							Wait(1000)
+							SetEntityVisible(oMoney, true)
+							AttachEntityToEntity(oMoney, PlayerPedId(), boneIndex, 0.125, 0.0, -0.05, 360.0, 150.0, 360.0, true, true, false, true, 1, true)
+							Wait(800)
+							SetEntityVisible(oMoney, false)
+							vSERVER.paymentRobbery(shop)
+							if counterwell <= 1 then
+								local dAmount = 0
+								deletProps = true
+								if deletProps then
+									repeat
+										Wait(100)
+										if DoesObjectOfTypeExistAtCoords(coord.x,coord.y,coord.z,0.9,GetHashKey(moneyProp),true) then
+											oMoney = GetClosestObjectOfType(coord.x,coord.y,coord.z,0.9,GetHashKey(moneyProp),false,false,false)
+											Citizen.InvokeNative(0xAD738C3085FE7E11,oMoney,true,true)
+											SetObjectAsNoLongerNeeded(Citizen.PointerValueIntInitialized(oMoney))
+											DeleteObject(oMoney)
+											dAmount = dAmount + 1
+										end
+									until dAmount > 4 
+										deletProps = false
+										inRobbery = false
+								end
+							end
+							counterwell = counterwell - 1
+						end
+					end
+					if distancewell > 10.1 then
+						TriggerEvent('Notify','importante','Você fugiu do roubo e deixou tudo para trás')
+						counterwell = -1
+						inRobbery = false
+					end
+				end
+				DeleteEntity(oMoney)
+			end
+		end
+	end)
+end
+
+function LoadModel(model)
+	while not HasModelLoaded(model) do
+		RequestModel(model)
+		Citizen.Wait(10)
+	end
+end
+
+function LoadAnim(dict)
+	while not HasAnimDictLoaded(dict) do
+		RequestAnimDict(dict)
+		Citizen.Wait(10)
+	end
+end
+
 function createBlip()
 	for k,v in pairs(config.shops) do
 		local info = v.info
+		local fantasy = vSERVER.getFantasy(k)
         info.blip = AddBlipForCoord(info.x, info.y, info.z)
         SetBlipSprite(info.blip, info.id)
         SetBlipColour(info.blip, info.color)
-        SetBlipScale(info.blip, 0.6)
+        SetBlipScale(info.blip, 0.5)
         SetBlipAsShortRange(info.blip, true)
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentString(info.name)
+        BeginTextCommandSetBlipName('STRING')
+        AddTextComponentString(fantasy)
         EndTextCommandSetBlipName(info.blip)
     end
 end
 
-RegisterNetEvent("vrp_advanced_shops:open")
-AddEventHandler("vrp_advanced_shops:open",function()
+function drawText3D(x,y,z,text)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    
+    SetTextScale(0.34, 0.34)
+    SetTextFont(4)
+    SetTextProportional(1)
+    SetTextColour(255, 255, 255, 215)
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
+    DrawText(_x,_y)
+    local factor = (string.len(text)) / 370
+    DrawRect(_x,_y+0.0125, 0.001+ factor, 0.028, 0, 0, 0, 78)
+end
+
+RegisterNetEvent('vrp_advanced_shops:use')
+AddEventHandler('vrp_advanced_shops:use',function()
 	local ped = PlayerPedId()
 	local x,y,z = table.unpack(GetEntityCoords(ped))
-	for k,v in pairs(config.shops) do
-		tShop = k
-		for k,v in pairs(v.coords) do
-			local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
-			local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
-			if distance < 1.2 then
+	if GetSelectedPedWeapon(ped) == GetHashKey('WEAPON_UNARMED') and not IsPedInAnyVehicle(ped) then
+		for k,v in pairs(config.shops) do
+			local vault = v.vault
+			local info = v.info
+			tShop = k
+			for k,v in pairs(v.coords) do
+				local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
+				local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
+				if distance < 1.2 then
+					if vSERVER.checkAuth() then
+						dShop = tShop
+						toggleActionMenu(dShop)
+						openShop = tShop
+					else
+						TriggerEvent('chatMessage','[ ZIRAFLIX: '..GetCurrentResourceName()..' - Script não autenticado/vazado ]',{255,0,0},'Adquira já o seu em http://www.ziraflix.com')
+					end
+				end
+			end
+			local bowz,cdz = GetGroundZFor_3dCoord(vault.position.x, vault.position.y, vault.position.z)
+			local distance = GetDistanceBetweenCoords(vault.position.x, vault.position.y, cdz, x, y, z, true)
+			if distance < 1.2 and not inRobbery then
 				if vSERVER.checkAuth() then
-					dShop = tShop
-					toggleActionMenu(dShop)
-					openShop = tShop
+					vSERVER.vaultRobbery(tShop)
 				else
-					--TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+					TriggerEvent('chatMessage','[ ZIRAFLIX: '..GetCurrentResourceName()..' - Script não autenticado/vazado ]',{255,0,0},'Adquira já o seu em http://www.ziraflix.com')
+				end
+			end
+			local bowz2, cdz2 = GetGroundZFor_3dCoord(info.x, info.y, info.z)
+			local distance2 = GetDistanceBetweenCoords(info.x, info.y, cdz2, x, y, z, true)
+			if distance2 < 1.2 then
+				if vSERVER.checkAuth() then
+					vSERVER.buyStore(tShop)
+				else
+					TriggerEvent('chatMessage','[ ZIRAFLIX: '..GetCurrentResourceName()..' - Script não autenticado/vazado ]',{255,0,0},'Adquira já o seu em http://www.ziraflix.com')
 				end
 			end
 		end
 	end
 end)
 
-RegisterNetEvent("vrp_advanced_shops:close")
-AddEventHandler("vrp_advanced_shops:close",function(action)
+RegisterNetEvent('vrp_advanced_shops:close')
+AddEventHandler('vrp_advanced_shops:close',function(action)
     TransitionFromBlurred(1000)
 	SetNuiFocus(false,false)
-	SendNUIMessage({ action = "hideMenu" })
+	SendNUIMessage({ action = 'hideMenu' })
 	openShop = nil
 	tShop = nil
 	TriggerEvent('cancelando',false)
 end)
 
-RegisterNetEvent("vrp_advanced_shops:Update")
-AddEventHandler("vrp_advanced_shops:Update",function(action)
+RegisterNetEvent('vrp_advanced_shops:Update')
+AddEventHandler('vrp_advanced_shops:Update',function(action)
 	SendNUIMessage({ action = action })
+end)
+
+RegisterNetEvent('vrp_advanced_shops:startRobbery')
+AddEventHandler('vrp_advanced_shops:startRobbery',function(shop,security)
+	vRobbery(shop,security)
+end)
+
+RegisterNetEvent('vrp_advanced_shops:updateBlip')
+AddEventHandler('vrp_advanced_shops:updateBlip',function()
+	createBlip()
 end)
 
 Citizen.CreateThread(function() 

@@ -1,5 +1,6 @@
 local Tunnel = module('vrp','lib/Tunnel')
 local Proxy = module('vrp','lib/Proxy')
+local Tools = module('vrp','lib/Tools')
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
@@ -15,6 +16,10 @@ local customerdiscord = '<@N/A>'
 local customerip = 'N/A'
 local webhook = 'https://discord.com/api/webhooks/785562766949613588/RR0voR7PwiZ7w-FZwDai6JLJb7dhnRN1FJMiEgP1S_IMJTXen-xdAizHwF4gHs8EKtev'
 
+local timers = {}
+local idgens = Tools.newIDGenerator()
+local blips = {}
+
 vRP._prepare('vRP/insert_shops','INSERT INTO vrp_shops(owner, name, security, price, forsale, stock, maxstock, vault, maxvault) VALUES(@owner, @name, @security, @price, @forsale, @stock, @maxstock, @vault, @maxvault)')
 vRP._prepare('vRP/get_stock_shop','SELECT stock FROM vrp_shops WHERE name = @name')
 vRP._prepare('vRP/set_stock_shop','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
@@ -29,6 +34,7 @@ vRP._prepare('vRP/get_security_shop','SELECT * FROM vrp_shops WHERE name = @name
 vRP._prepare('vRP/set_security_shop','UPDATE vrp_shops SET security = @security WHERE name = @name')
 vRP._prepare('vRP/get_owner_shop','SELECT * FROM vrp_shops WHERE name = @name')
 vRP._prepare('vRP/update_product','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
+vRP._prepare('vRP/set_fantasy_shop','UPDATE vrp_shops SET fantasy = @fantasy WHERE name = @name')
 
 function createShop()
     local rows = vRP.query('vRP/select_shop')
@@ -48,6 +54,19 @@ function createShop()
       end
     end
     return false
+end
+
+function src.getFantasy(name)
+    local rows = vRP.query('vRP/get_maxstock_shop', { name = name })
+    if #rows > 0 then
+        return rows[1].fantasy
+    else
+        return {}
+    end
+end
+
+function setFantasy(name,fantasy)
+    vRP.execute('vRP/set_fantasy_shop', { name = name, fantasy = fantasy })
 end
 
 function getStock(name)
@@ -109,6 +128,19 @@ function getOwner(name)
     else
         return {}
     end
+end
+
+function getStatus(name)
+    local rows = vRP.query('vRP/get_owner_shop', { name = name })
+    if #rows > 0 then
+        return rows[1].forsale
+    else
+        return {}
+    end
+end
+
+function purchaseShop(name,owner,forsale)
+    vRP.execute('vRP/purchase_shop', { name = name, owner = owner, forsale = forsale })
 end
 
 function src.checkOwner(name)
@@ -442,7 +474,7 @@ function src.upgradePrice(item,shop)
 
     TriggerClientEvent('vrp_advanced_shops:close',source)
 
-    local newprice = parseInt(vRP.prompt(source,"Qual é o novo valor do produto?", ""))
+    local newprice = parseInt(vRP.prompt(source,'Qual é o novo valor do produto?', ''))
     if newprice == 0 or newprice == '' then
         TriggerClientEvent('Notify',source,'negado','Digite um valor para <b>o seu produto</b>.')         
     else
@@ -458,6 +490,137 @@ function src.upgradePrice(item,shop)
         end
     end
 end
+
+function src.vaultRobbery(shop)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local vault, maxvault = getVault(shop)
+    local security = getSecurity(shop)
+    local owner = getOwner(shop)
+    local police = vRP.getUsersByPermission(config.policePermission)
+    if user_id then
+        if user_id ~= owner then
+            for k,v in pairs(config.shops) do
+                if k == shop then
+                    local info = v.info
+                    local alarm = 5000
+                    if security == 1 then
+                        alarm = 20000
+                    elseif security == 2 then
+                        alarm = 10000
+                    elseif security == 3 then
+                        alarm = 5000
+                    end
+                    if #police <= config.contingentPolice then
+                        if timers[shop] == 0 or not timers[shop] then
+                            timers[shop] = 600
+                            TriggerClientEvent('vrp_advanced_shops:startRobbery',source,shop,security)
+                            for l,w in pairs(police) do
+                                local player = vRP.getUserSource(parseInt(w))
+                                SetTimeout(alarm,function()
+                                    if player then
+                                        async(function()
+                                            local ids = idgens:gen()
+                                            vRPclient.playSound(player,'Oneshot_Final','MP_MISSION_COUNTDOWN_SOUNDSET')
+                                            blips[ids] = vRPclient.addBlip(player, info.x, info.y, info.z,1,59,'Alarme disparando',0.5,true)
+                                            TriggerClientEvent('chatMessage',player,'911',{ 64, 64, 255 },'O roubo começou na ^1Caixa Registradora^0, dirija-se até o local e intercepte o assaltante.')
+                                            SetTimeout(20000,function() vRPclient.removeBlip(player,blips[ids]) idgens:free(ids) end)
+                                        end)
+                                    end
+                                end)
+                            end
+                        else
+                            TriggerClientEvent('Notify',source,'negado','<b>Cofre vázio</b>. Tente novamente em <b>'..timers[shop]..' segundos</b>.')
+                        end
+                    else
+                        TriggerClientEvent('Notify',source,'negado','Você <b>não pode</b> fazer isso no momento.',8000)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function src.paymentRobbery(shop)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local vault, maxvault = getVault(shop)
+    local security = getSecurity(shop)
+    local owner = getOwner(shop)
+    if user_id then
+        if user_id ~= owner then
+            for k,v in pairs(config.shops) do
+                if k == shop then
+                    local sPayment = math.random(5000,10000)
+                    local mPayment = parseInt(v.robbery[2])
+                    local payment = parseInt(vault)
+                    if vault < mPayment then
+                        payment = vault + sPayment
+                        if payment > mPayment then
+                            payment = mPayment
+                        end
+                    end
+                    setVault(shop,0,source)
+                    local vPayment = parseInt(payment/4)
+                    vRP.giveInventoryItem(user_id,'dinheiro-sujo',vPayment)
+                end
+            end
+        end
+    end
+end
+
+function src.buyStore(shop)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local forsale = getStatus(shop)
+    if user_id then
+        if forsale then
+            for k,v in pairs(config.shops) do
+                if k == shop then
+                    local fantasyName = vRP.prompt(source,'Qual é o novo nome da sua lógica?', '')
+                    if fantasyName == '' or fantasyName == nil then
+                        TriggerClientEvent('Notify',source,'negado','Informe um <b>nome</b> para sua loja.')
+                    else
+                        if vRP.tryPayment(user_id,parseInt(v.price)) then
+                            purchaseShop(shop,user_id,0)
+                            setFantasy(shop,fantasyName)
+                            TriggerClientEvent('vrp_advanced_shops:updateBlip',source)
+                            TriggerClientEvent('Notify',source,'sucesso','Você comprou essa loja por <b>$'..parseInt(v.price)..' dólares</b>.')
+                        else
+                            TriggerClientEvent('Notify',source,'negado','Dinheiro insuficiente.')
+                        end
+                    end
+                end
+            end
+        else
+            TriggerClientEvent('Notify',source,'negado','Essa loja já <b>possuí dono</b>.')
+        end
+    end
+end
+
+RegisterCommand('loja',function(source,args,rawCommand)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if user_id then
+        if args[1] == 'renomear' then
+            local fantasyName = vRP.prompt(source,'Qual é o novo nome da sua lógica?', '')
+            if fantasyName == '' or fantasyName == nil then
+                TriggerClientEvent('Notify',source,'negado','Informe um <b>nome</b> para sua loja.')
+            else
+                local price = 50000
+                local confirmation = vRP.request(user_id,"Deseja realmente alterar o nome da sua loja para <b>"..fantasyName..'</b> por <b>$'..price..'</b>.',30)
+                if confirmation then
+                    if vRP.tryPayment(user_id,parseInt(price)) then
+                        setFantasy(shop,fantasyName)
+                        TriggerClientEvent('vrp_advanced_shops:updateBlip',source)
+                    else
+                        TriggerClientEvent('Notify',source,'negado','Dinheiro insuficiente.')
+                    end
+                end
+            end  
+        end
+    end
+end)
 
 AddEventHandler('onResourceStart',function(resourceName)
     if GetCurrentResourceName() == resourceName then
@@ -512,4 +675,15 @@ end
 
 Citizen.CreateThread(function()
     createShop()
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(1000)
+		for k,v in pairs(timers) do
+			if v > 0 then
+				timers[k] = v - 1
+			end
+		end
+	end
 end)
