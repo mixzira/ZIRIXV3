@@ -212,6 +212,9 @@ items.list = {
 	['tomate'] = { ['index'] = 'tomate', ['name'] = 'Tomate', ['type'] = 'use', ['weight'] = 0.5 },
 	['blueberry'] = { ['index'] = 'blueberry', ['name'] = 'Blueberry', ['type'] = 'use', ['weight'] = 0.5 },
 
+	['graosimpuros'] = { ['index'] = 'graosimpuros', ['name'] = 'Graos Impuros', ['type'] = 'use', ['weight'] = 0.5 },
+	['graos'] = { ['index'] = 'graos', ['name'] = 'Graos', ['type'] = 'use', ['weight'] = 0.5 },
+
 	--[ Desmanche ]------------------------------------------------------------------------------------------
 
 	['transmissao'] = { ['index'] = 'transmissao', ['name'] = 'Transmissao', ['type'] = 'use', ['weight'] = 0.5 },

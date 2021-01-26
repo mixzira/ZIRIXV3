@@ -136,11 +136,6 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 	end
 end)
 
-RegisterCommand("fechar",function()
-	ToggleActionMenu()
-end)
-
-
 --[ THREAD ]-----------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()

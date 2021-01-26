@@ -130,6 +130,20 @@ server_scripts {
 	'emp_garbageman/skywalker.lua'
 }
 
+---[ FAZENDEIRO ]-------------------------------------------------------------
+
+client_scripts {
+	'@vrp/lib/utils.lua',
+	'emp_farmer/config/configfarmer.lua',
+	'emp_farmer/hansolo/*.lua'
+}
+
+server_scripts {
+	'@vrp/lib/utils.lua',
+	'emp_farmer/config/configfarmer.lua',
+	'emp_farmer/skywalker.lua'
+}
+
 ---[ TAXISTA ]-------------------------------------------------------------
 
 ui_page 'emp_taxista/html/ui.html'
