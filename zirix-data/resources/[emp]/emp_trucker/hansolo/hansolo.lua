@@ -160,7 +160,7 @@ Citizen.CreateThread(function()
 							drawTxt("PRESSIONE  ~p~E~w~  PARA INICIAR O SERVIÇO",4,0.5,0.92,0.35,255,255,255,180)
 							if IsControlJustPressed(1,38) then
 								CalculateTimeToDisplay6()
-                                if parseInt(hour) >= 00 and parseInt(hour) <= 23 then
+                                if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
                                     if lastVehicle == GetHashKey(configtrucker.truck) or lastVehicle == GetHashKey(configtrucker.truck1) then
 										ToggleActionMenu()
 									else
@@ -227,6 +227,7 @@ Citizen.CreateThread(function()
 		if wood then
 			if emservico then
 				local entrega = math.random(#configtrucker.routewood)
+				local pay = configtrucker.routewood[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
 				local bowz,cdz = GetGroundZFor_3dCoord(configtrucker.routewood[entrega].x, configtrucker.routewood[entrega].y, configtrucker.routewood[entrega].z)
 				local distance = GetDistanceBetweenCoords(configtrucker.routewood[entrega].x, configtrucker.routewood[entrega].y, configtrucker.routewood[entrega].z,cdz,x,y,z,true)

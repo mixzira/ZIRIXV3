@@ -54,6 +54,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 				if k == 1 then
 				TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
 				spawnVehicle(configpilot.plane,v.x,v.y,v.z)
+				servehicle = GetEntityModel(configpilot.plane)
 				emservico = true
 				gas = true
 				end
@@ -64,9 +65,10 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 			TriggerEvent("Notify","importante","Voce ja esta em serviço.",8000)
 		else
 			for k,v in pairs(configpilot.spawn) do
-				if k == 2 then
+				if k == 2 then 
 					TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
 					spawnVehicle(configpilot.plane,v.x,v.y,v.z)
+					servehicle = GetEntityModel(configpilot.plane)
 					emservico = true
 					gas = true
 				end
@@ -80,6 +82,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 				if k == 3 then
 					spawnVehicle(configpilot.plane,v.x,v.y,v.z)
 					TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
+					servehicle = GetEntityModel(configpilot.plane)
 					emservico = true
 					gas = true
 				end
@@ -92,8 +95,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 			for k,v in pairs(configpilot.spawn) do
 				if k == 4 then
 					spawnVehicle(configpilot.plane1,v.x,v.y,v.z)
-					emservico = true
 					TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
+					servehicle = GetEntityModel(configpilot.plane1)
+					emservico = true
 					wood = true
 				end
 			end
@@ -105,8 +109,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 			for k,v in pairs(configpilot.spawn) do
 				if k == 5 then
 					spawnVehicle(configpilot.plane1,v.x,v.y,v.z)
-					emservico = true
 					TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
+					servehicle = GetEntityModel(configpilot.plane1)
+					emservico = true
 					wood = true
 				end
 			end
@@ -118,8 +123,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 			for k,v in pairs(configpilot.spawn) do
 				if k == 6 then
 					spawnVehicle(configpilot.plane1,v.x,v.y,v.z)
-					emservico = true
 					TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
+					servehicle = GetEntityModel(configpilot.plane1)
+					emservico = true
 					wood = true
 				end
 			end
@@ -154,12 +160,8 @@ Citizen.CreateThread(function()
 							drawTxt("PRESSIONE  ~p~E~w~  PARA INICIAR O SERVIÇO",4,0.5,0.92,0.35,255,255,255,180)
 							if IsControlJustPressed(1,38) then
 								CalculateTimeToDisplay6()
-                                if parseInt(hour) >= 00 and parseInt(hour) <= 23 then
-                                    if lastVehicle == GetHashKey(configpilot.truck) or lastVehicle == GetHashKey(configpilot.truck1) then
-										ToggleActionMenu()
-									else
-                                        TriggerEvent("Notify","importante","Necessario um caminhao para iniciar.",8000)
-                                    end
+                                if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
+									ToggleActionMenu()
 								else
 									TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
 								end
@@ -179,31 +181,31 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if gas then
 			if emservico then
-				local entrega = math.random(#configpilot.routegas)
-				local pay = configpilot.routegas[entrega].pay
+				local entrega = math.random(#configpilot.routeshamal)
+				local pay = configpilot.routeshamal[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
-				local bowz,cdz = GetGroundZFor_3dCoord(configpilot.routegas[entrega].x, configpilot.routegas[entrega].y, configpilot.routegas[entrega].z)
-				local distance = GetDistanceBetweenCoords(GetEntityCoords(ped),configpilot.routegas[entrega].x,configpilot.routegas[entrega].y,configpilot.routegas[entrega].z,true)
+				local bowz,cdz = GetGroundZFor_3dCoord(configpilot.routeshamal[entrega].x, configpilot.routeshamal[entrega].y, configpilot.routeshamal[entrega].z)
+				local distance = GetDistanceBetweenCoords(GetEntityCoords(ped),configpilot.routeshamal[entrega].x,configpilot.routeshamal[entrega].y,configpilot.routeshamal[entrega].z,true)
 				if criado == false then
-					criandoblip(configpilot.routegas[entrega].x, configpilot.routegas[entrega].y, configpilot.routegas[entrega].z)
+					criandoblip(configpilot.routeshamal[entrega].x, configpilot.routeshamal[entrega].y, configpilot.routeshamal[entrega].z)
 					criado = true
 				end
-				if distance <= 50.0 then
+				if distance <= 100.0 then
 					idle = 5
-					DrawMarker(23,configpilot.routegas[entrega].x, configpilot.routegas[entrega].y, configpilot.routegas[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
+					DrawMarker(23,configpilot.routeshamal[entrega].x, configpilot.routeshamal[entrega].y, configpilot.routeshamal[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
 					if distance <= 10.0 then
 						if IsControlJustPressed(0,38) then
 							if not IsPedInAnyVehicle(ped) then
 								local vehicle = getVehicleInDirection(GetEntityCoords(PlayerPedId()),GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,5.0,0.0))
 								if GetEntityModel(vehicle) == servehicle then
 									vSERVER.deleteVehicles(vehicle)
-									emp16.checkPaymentGas(pay)
+									emp16.checkPaymentShamal(pay)
 									RemoveBlip(blip)
 									emservico = false
 									criado = false	
 								end
 							else	
-								TriggerEvent("Notify","importante","Saia do caminhao e vá ao lado da carga para entregar.",8000)					
+								TriggerEvent("Notify","importante","Saia do <b>Avião</b>.",8000)					
 							end
 						end
 					end
@@ -220,27 +222,32 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if wood then
 			if emservico then
-				local entrega = math.random(#configpilot.routewood)
+				local entrega = math.random(#configpilot.routemiljet)
+				local pay = configpilot.routemiljet[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
-				local bowz,cdz = GetGroundZFor_3dCoord(configpilot.routewood[entrega].x, configpilot.routewood[entrega].y, configpilot.routewood[entrega].z)
-				local distance = GetDistanceBetweenCoords(configpilot.routewood[entrega].x, configpilot.routewood[entrega].y, configpilot.routewood[entrega].z,cdz,x,y,z,true)
+				local bowz,cdz = GetGroundZFor_3dCoord(configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y, configpilot.routemiljet[entrega].z)
+				local distance = GetDistanceBetweenCoords(configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y,cdz,x,y,false)
 				if criado == false then
-					criandoblip(configpilot.routewood[entrega].x, configpilot.routewood[entrega].y, configpilot.routewood[entrega].z)
+					criandoblip(configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y, configpilot.routemiljet[entrega].z)
 					criado = true
 				end
-				if distance <= 10.0 then
-					if IsControlJustPressed(0,38) then
-						if not IsPedInAnyVehicle(ped) then
-							local vehicle = getVehicleInDirection(GetEntityCoords(PlayerPedId()),GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,5.0,0.0))
-							if GetEntityModel(vehicle) == servehicle then
-								vSERVER.deleteVehicles(vehicle)
-								emp16.checkPaymentWood(pay)
-								RemoveBlip(blip)
-								emservico = false
-								criado = false	
+				if distance <= 100.0 then
+				idle = 5
+				DrawMarker(23,configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y, configpilot.routemiljet[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
+					if distance <= 10.0 then						
+						if IsControlJustPressed(0,38) then
+							if IsPedInAnyVehicle(ped) then
+								local vehicle = GetEntityModel(GetPlayersLastVehicle())
+								if GetEntityModel(vehicle) == servehicle then
+									vSERVER.deleteVehicles(vehicle)
+									emp16.checkPaymentMiljet(pay)
+									RemoveBlip(blip)
+									emservico = false
+									criado = false	
+								end
+							else	
+								TriggerEvent("Notify","importante","Entre no <b>Avião</b> para terminar o serviço.",8000)					
 							end
-						else	
-							TriggerEvent("Notify","importante","Saia do caminhao e vá ao lado da carga para entregar.",8000)					
 						end
 					end
 				end
@@ -321,7 +328,7 @@ function spawnVehicle(name,x,y,z)
 		end
 
 		SetNetworkIdCanMigrate(id,true)
-		SetVehicleNumberPlateText(NetToVeh(netveh),"CAMINHAO")
+		SetVehicleNumberPlateText(NetToVeh(netveh),"AVIAO")
 		Citizen.InvokeNative(0xAD738C3085FE7E11,NetToVeh(netveh),true,true)
 		SetVehicleHasBeenOwnedByPlayer(NetToVeh(netveh),true)
 		SetVehicleNeedsToBeHotwired(NetToVeh(netveh),false)
