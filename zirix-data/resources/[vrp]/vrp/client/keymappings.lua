@@ -9,7 +9,7 @@ RegisterCommand('vrp:use', function()
     TriggerEvent('vrp_homes:chest')
     TriggerEvent('vrp_homes:invade')
     TriggerEvent('vrp_shops:open')
-    TriggerEvent('vrp_advanced_shops:open')
+    TriggerEvent('vrp_advanced_shops:use')
 end, false)
 
 ----------------------------------------------------------------------------------------------------

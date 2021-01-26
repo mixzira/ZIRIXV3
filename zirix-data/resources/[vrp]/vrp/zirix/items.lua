@@ -40,7 +40,7 @@ items.list = {
 
 	--[ Illegal Utilities ]--------------------------------------------------------------------------------------------
 
-	['dinheiro-sujo'] = { ['index'] = 'dinheiro-sujo', ['name'] = 'Dinheiro', ['type'] = 'use', ['weight'] = 0.01 },
+	['dinheiro-sujo'] = { ['index'] = 'dinheiro-sujo', ['name'] = 'Dinheiro', ['type'] = 'use', ['weight'] = 0.001 },
 	['algema'] = { ['index'] = 'algema', ['name'] = 'Algema', ['type'] = 'use', ['weight'] = 0.5 },
 	['lockpick'] = { ['index'] = 'lockpick', ['name'] = 'Lockpick', ['type'] = 'use', ['weight'] = 0.5 },
 	['capuz'] = { ['index'] = 'capuz', ['name'] = 'Capuz', ['type'] = 'use', ['weight'] = 0.5 },
