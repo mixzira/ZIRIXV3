@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<link href="ui.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="actionmenu">
+			<div id="mainmenu">
+				<button class="menuoption" data-sub="airport">Avião Shamal</button>
+				<button class="menuoption" data-sub="airport1">Avião Miljet</button>
+				<button class="menuoption" data-action="fechar">Fechar</button>
+			</div>
+
+			<div data-parent="mainmenu" id="airport" style="display: none;">
+				<button class="menuoption" data-action="airport-1">Aeroporto 01</button>
+				<button class="menuoption" data-action="airport-2">Aeroporto 02</button>
+				<button class="menuoption" data-action="airport-3">Aeroporto 03</button>
+			</div>
+
+			<div data-parent="mainmenu" id="airport1" style="display: none;">
+				<button class="menuoption" data-action="airport-01">Aeroporto 01</button>
+				<button class="menuoption" data-action="airport-02">Aeroporto 02</button>
+				<button class="menuoption" data-action="airport-03">Aeroporto 03</button>
+			</div>
+
+		</div>
+		<script src="ui.js" type="text/javascript"></script>
+	</body>
+</html>

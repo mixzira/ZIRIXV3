@@ -369,6 +369,8 @@ local garages = {
 	[620] = { ['name'] = "EX01", ['payment'] = false, ['public'] = false },
 	[621] = { ['name'] = "Prefeitura-pessoal", ['payment'] = true, ['perm'] = "justica.permissao" },
 	[622] = { ['name'] = "Hotel-pessoal", ['payment'] = true, ['perm'] = "hotel.permissao" },
+
+	[623] = { ['name'] = "Caminhoneiro", ['payment'] = false, ['public'] = true },
 }
 
 --[ GARAGEMS ]---------------------------------------------------------------------------------------------------------------------------
@@ -384,6 +386,9 @@ local workgarage = {
 	},
 	["DPLAH"] = {
 		"policiaheli"
+	},
+	["Caminhoneiro"] = {
+		"phantom"
 	},
 	["Taxista"] = {
 		"taxi"

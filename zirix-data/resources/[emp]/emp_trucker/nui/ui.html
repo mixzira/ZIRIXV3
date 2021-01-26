@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<link href="ui.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<div id="actionmenu">
+			<div id="mainmenu">
+				<button class="menuoption" data-sub="gas">Gasolina</button>
+				<button class="menuoption" data-sub="woods">Madeira</button>
+				<button class="menuoption" data-action="fechar">Fechar</button>
+			</div>
+
+			<div data-parent="mainmenu" id="gas" style="display: none;">
+				<button class="menuoption" data-action="gas-01">Localidade 01</button>
+				<button class="menuoption" data-action="gas-02">Localidade 02</button>
+				<button class="menuoption" data-action="gas-03">Localidade 03</button>
+			</div>
+
+			<div data-parent="mainmenu" id="woods" style="display: none;">
+				<button class="menuoption" data-action="woods-01">Localidade 01</button>
+				<button class="menuoption" data-action="woods-02">Localidade 02</button>
+				<button class="menuoption" data-action="woods-03">Localidade 03</button>
+			</div>
+
+		</div>
+		<script src="ui.js" type="text/javascript"></script>
+	</body>
+</html>

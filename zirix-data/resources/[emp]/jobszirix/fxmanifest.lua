@@ -130,7 +130,7 @@ server_scripts {
 	'emp_garbageman/skywalker.lua'
 }
 
----[ TEXISTA ]-------------------------------------------------------------
+---[ TAXISTA ]-------------------------------------------------------------
 
 ui_page 'emp_taxista/html/ui.html'
 
