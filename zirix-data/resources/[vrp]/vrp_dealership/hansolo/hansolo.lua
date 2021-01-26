@@ -11,6 +11,8 @@ vSERVER = Tunnel.getInterface("vrp_dealership")
 --[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
 
 local dealerOpen = false
+local vehicle = {}
+local pointspawn = 1
 
 --[ DEALERS ]----------------------------------------------------------------------------------------------------------------------------
 
@@ -18,6 +20,9 @@ local dealers = {
 	{ ['x'] = -56.64, ['y'] = -1096.91, ['z'] = 26.43 }
 }
 
+local spawn = {
+	{ ['x'] = -56.23, ['y'] = -1116.82, ['z'] = 26.44, ['h'] = 5.54 }
+}
 --[ OPEN DEALER ]------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
@@ -43,6 +48,93 @@ Citizen.CreateThread(function()
 		Citizen.Wait(idle)
 	end
 end)
+
+function src.buyRent(vehname)
+	if vehicle[vehname] == nil then
+		local mhash = GetHashKey(vehname)
+		--local player = GetPlayerFromServerId(k) --caso queira que o mesmo sera teletransportado ao carro ative isso.
+		local ped = GetPlayerPed(player)
+		local checkslot = 1
+		while not HasModelLoaded(mhash) do
+			RequestModel(mhash)
+			Citizen.Wait(1)
+		end
+			if HasModelLoaded(mhash) then
+				while true do
+					local checkPos = GetClosestVehicle(spawn[checkslot].x,spawn[checkslot].y,spawn[checkslot].z,3.001,0,71)
+					if DoesEntityExist(checkPos) and checkPos ~= nil then
+						checkslot = checkslot + 1
+						if checkslot > #spawn then
+							checkslot = -1
+							TriggerEvent("Notify","importante","Todas as vagas estão ocupadas no momento.",10000)
+							break
+						end
+					else
+						break
+					end
+					Citizen.Wait(10)
+				end
+				SetNuiFocus(false,false)
+				SendNUIMessage({ action = "hideMenu" })
+				dealerOpen = false
+				vRP._DeletarObjeto()
+				vRP._stopAnim(false)
+
+				while not HasModelLoaded(mhash) do
+					RequestModel(mhash)
+					Citizen.Wait(1)
+				end
+
+				if checkslot ~= -1 then
+				local nveh = CreateVehicle(mhash,spawn[checkslot].x,spawn[checkslot].y,spawn[checkslot].z+0.5,spawn[checkslot].h,true,false)
+				local netveh = VehToNet(nveh)
+				local id = NetworkGetNetworkIdFromEntity(nveh)
+
+				NetworkRegisterEntityAsNetworked(nveh)
+				while not NetworkGetEntityIsNetworked(nveh) do
+					NetworkRegisterEntityAsNetworked(nveh)
+					Citizen.Wait(1)
+				end
+			
+				if NetworkDoesNetworkIdExist(netveh) then
+					SetEntitySomething(nveh,true)
+					if NetworkGetEntityIsNetworked(nveh) then
+					SetNetworkIdExistsOnAllMachines(netveh,true)
+					end
+				end
+			
+				--SetNetworkIdCanMigrate(id,true) --caso queira que o mesmo sera teletransportado ao carro ative isso.
+				--SetPedIntoVehicle(ped,nveh,-1) --caso queira que o mesmo sera teletransportado ao carro ative isso.
+
+				SetVehicleIsStolen(nveh,false)
+				SetVehicleNeedsToBeHotwired(nveh,false)
+				SetVehicleOnGroundProperly(nveh)
+				SetVehicleNumberPlateText(nveh,vRP.getRegistrationNumber())
+				SetEntityAsMissionEntity(nveh,true,true)
+				SetVehRadioStation(nveh,"OFF")
+				
+				SetVehicleDoorsLocked(nveh,true)
+				SetVehicleDoorsLockedForAllPlayers(nveh,true)
+
+				TriggerEvent("Notify","importante","Seu test drive começou, ir ate o veículo.")
+
+				SetTimeout(180000,function()
+					DeleteVehicle(nveh)
+				end)
+
+				TriggerEvent("Notify","importante","Você tem 3 minutos para realizar seu test drive.")
+				Wait(60000)
+				TriggerEvent("Notify","importante","Faltam 2 minutos para encerrar seus test drive.")
+				Wait(60000)
+				TriggerEvent("Notify","importante","Faltam 1 minuto para encerrar seus test drive.")
+				Wait(60000)
+				TriggerEvent("Notify","importante","Seu test drive chegou ao fim!")
+
+			end
+		end
+	end
+	return false
+end
 
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
 
@@ -92,6 +184,14 @@ end)
 RegisterNUICallback("buyDealer",function(data)
 	if data.name ~= nil then
 		vSERVER.buyDealer(data.name)
+	end
+end)
+
+--[ RENT ]---------------------------------------------------------------------------------------------------------------------------
+
+RegisterNUICallback("buyRents",function(data)
+	if data.name ~= nil then
+		vSERVER.buyRents(data.name,parseInt(pointspawn))
 	end
 end)
 

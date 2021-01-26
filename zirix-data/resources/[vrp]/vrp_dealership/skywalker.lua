@@ -1,5 +1,6 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
+local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
@@ -10,6 +11,7 @@ vCLIENT = Tunnel.getInterface("vrp_dealership")
 local motos = {}
 local carros = {}
 local import = {} 
+local vehicle = {}
 
 Citizen.CreateThread(function()
 	for k,v in pairs(vRP.vehicleGlobal()) do
@@ -90,6 +92,12 @@ function src.Import()
 	if user_id then
 		return import
 	end
+end
+
+function src.buyRents(name)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	local spawnveh = vCLIENT.buyRent(source,name,1000,1000,100,custom,0,0,0,0,0,0,true)
 end
 
 function src.buyDealer(name)

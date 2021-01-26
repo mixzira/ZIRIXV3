@@ -165,6 +165,21 @@ button {
 	text-align: center;
 }
 
+.alugar {
+	color: #000;
+	background: #f6c23e;
+	padding: 12px 10px 11px;
+	position: absolute;
+	left: -80px;
+	margin: -45px 0 0 800px;
+	font-weight: 700;
+	border-radius: 10px 10px 0px 0px;
+}
+
+.alugar:hover {
+	background: #5d8800;
+}
+
 .comprar {
 	color: #000;
 	background: #f6c23e;

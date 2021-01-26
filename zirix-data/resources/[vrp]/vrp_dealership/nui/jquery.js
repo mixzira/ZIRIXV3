@@ -73,11 +73,12 @@ const updateCarros = () => {
 		const nameList = data.veiculos.sort((a,b) => (a.nome > b.nome) ? 1: -1);
 		$('#inicio').html(`
 			<div class="comprar">COMPRAR</div>
+			<div class="alugar">ALUGAR</div>
 			<div class="obs">Para efetuar uma <b>compra</b> selecione um modelo abaixo e clique em <b>comprar</b>, o sistema vai efetuar as checagens necessárias e se você possuir o valor do veículo ele compra automaticamente.</div>
 			<div class="title">CARROS</div>
 			${nameList.map((item) => (`
 				<div class="model" data-name-key="${item.k}">
-					<div class="imagem-carro"><img src="http://192.99.251.232:3555/images/vrp_vehicles/${item.nome}.png"/></div>
+					<div class="imagem-carro"><img src="http://192.99.251.232:3501/images/vrp_vehicles/${item.nome}.png"/></div>
 					<div class="id">${i = i + 1}</div>
 					<div class="name">${item.nome}</div>
 					<div class="valor">$${formatarNumero(item.price)}</div>
@@ -95,11 +96,12 @@ const updateMotos = () => {
 		const nameList = data.veiculos.sort((a,b) => (a.nome > b.nome) ? 1: -1);
 		$('#inicio').html(`
 			<div class="comprar">COMPRAR</div>
+			<div class="alugar">ALUGAR</div>
 			<div class="obs">Para efetuar uma <b>compra</b> selecione um modelo abaixo e clique em <b>comprar</b>, o sistema vai efetuar as checagens necessárias e se você possuir o valor do veículo ele compra automaticamente.</div>
 			<div class="title">MOTOS</div>
 			${nameList.map((item) => (`
 				<div class="model" data-name-key="${item.k}">
-					<div class="imagem-carro"><img src="http://192.99.251.232:3555/images/vrp_vehicles/${item.nome}.png"/></div>
+					<div class="imagem-carro"><img src="http://192.99.251.232:3501/images/vrp_vehicles/${item.nome}.png"/></div>
 					<div class="id">${i = i + 1}</div>
 					<div class="name">${item.nome}</div>
 					<div class="valor">$${formatarNumero(item.price)}</div>
@@ -121,7 +123,7 @@ const updateImport = () => {
 			<div class="title">IMPORTADOS</div>
 			${nameList.map((item) => (`
 				<div class="model" data-name-key="${item.k}">
-					<div class="imagem-carro"><img src="http://192.99.251.232:3555/images/vrp_vehicles/${item.k}.png"/></div>
+					<div class="imagem-carro"><img src="http://192.99.251.232:3501/images/vrp_vehicles/${item.k}.png"/></div>
 					<div class="id">${i = i + 1}</div>
 					<div class="name">${item.nome}</div>
 					<div class="valor">$${formatarNumero(item.price)}</div>
@@ -144,6 +146,15 @@ $(document).on("click",".comprar",function(){
 	let $el = $('.model.active');
 	if($el){
 		$.post("http://vrp_dealership/buyDealer",JSON.stringify({
+			name: $el.attr('data-name-key')
+		}));
+	}
+});
+
+$(document).on("click",".alugar",function(){
+	let $el = $('.model.active');
+	if($el){
+		$.post("http://vrp_dealership/buyRents",JSON.stringify({
 			name: $el.attr('data-name-key')
 		}));
 	}
