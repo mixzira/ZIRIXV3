@@ -73,7 +73,7 @@ const updateCarros = () => {
 		const nameList = data.veiculos.sort((a,b) => (a.nome > b.nome) ? 1: -1);
 		$('#inicio').html(`
 			<div class="comprar">COMPRAR</div>
-			<div class="alugar">ALUGAR</div>
+			<div class="alugar">TEST DRIVE</div>
 			<div class="obs">Para efetuar uma <b>compra</b> selecione um modelo abaixo e clique em <b>comprar</b>, o sistema vai efetuar as checagens necessárias e se você possuir o valor do veículo ele compra automaticamente.</div>
 			<div class="title">CARROS</div>
 			${nameList.map((item) => (`

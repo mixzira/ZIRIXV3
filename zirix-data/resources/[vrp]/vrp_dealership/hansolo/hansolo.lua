@@ -21,7 +21,7 @@ local dealers = {
 }
 
 local spawn = {
-	{ ['x'] = -56.23, ['y'] = -1116.82, ['z'] = 26.44, ['h'] = 5.54 }
+	{ ['x'] = -27.5, ['y'] = -1081.94, ['z'] = 26.64, ['h'] = 70.32 }
 }
 --[ OPEN DEALER ]------------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ end)
 function src.buyRent(vehname)
 	if vehicle[vehname] == nil then
 		local mhash = GetHashKey(vehname)
-		--local player = GetPlayerFromServerId(k) --caso queira que o mesmo sera teletransportado ao carro ative isso.
+		local player = GetPlayerFromServerId(k)
 		local ped = GetPlayerPed(player)
 		local checkslot = 1
 		while not HasModelLoaded(mhash) do
@@ -103,8 +103,8 @@ function src.buyRent(vehname)
 					end
 				end
 			
-				--SetNetworkIdCanMigrate(id,true) --caso queira que o mesmo sera teletransportado ao carro ative isso.
-				--SetPedIntoVehicle(ped,nveh,-1) --caso queira que o mesmo sera teletransportado ao carro ative isso.
+				SetNetworkIdCanMigrate(id,true) 
+				SetPedIntoVehicle(ped,nveh,-1) 
 
 				SetVehicleIsStolen(nveh,false)
 				SetVehicleNeedsToBeHotwired(nveh,false)
