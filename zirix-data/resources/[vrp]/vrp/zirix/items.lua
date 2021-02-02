@@ -45,6 +45,7 @@ items.list = {
 	['lockpick'] = { ['index'] = 'lockpick', ['name'] = 'Lockpick', ['type'] = 'use', ['weight'] = 0.5 },
 	['capuz'] = { ['index'] = 'capuz', ['name'] = 'Capuz', ['type'] = 'use', ['weight'] = 0.5 },
 	['placa'] = { ['index'] = 'placa', ['name'] = 'Placa', ['type'] = 'use', ['weight'] = 0.5 },
+	['plastico'] = { ['index'] = 'plastico', ['name'] = 'Plastico', ['type'] = 'use', ['weight'] = 0.1 },
 	
 	--[ Tools ] -------------------------------------------------------------------------------------------------------
 	
