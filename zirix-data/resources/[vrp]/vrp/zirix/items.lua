@@ -148,6 +148,11 @@ items.list = {
 	['cocaina'] = { ['index'] = 'cocaina', ['name'] = 'Cocaína', ['type'] = 'use', ['weight'] = 0.5 },
 	['pasta-base'] = { ['index'] = 'pasta-base', ['name'] = 'Pasta Base', ['type'] = 'use', ['weight'] = 0.5 },
 
+	--[ By-product ][ LSD production ]---------------------------------------------------------------------------------
+
+	['lsd'] = { ['index'] = 'lsd', ['name'] = 'LSD', ['type'] = 'use', ['weight'] = 0.5 },
+	['ergolina'] = { ['index'] = 'ergolina', ['name'] = 'Quimico Ergolina', ['type'] = 'use', ['weight'] = 0.5 },
+
 	--[ Miscellaneous ][ Cocaine production ]--------------------------------------------------------------------------
 
 	['acido-sulfurico'] = { ['index'] = 'acido-sulfurico', ['name'] = 'Ácido Sulfúrico', ['type'] = 'use', ['weight'] = 0.5 },

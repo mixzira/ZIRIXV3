@@ -9,6 +9,13 @@ vCLIENT = Tunnel.getInterface('medical_system')
 
 local morto = false
 
+local cabeca = false
+local torax = false
+local perna = false
+local pes = false
+
+local damaged = { }
+
 local bones = {
 	[11816] = 'Pélvis',
 	[58271] = 'Coxa Esquerda',
@@ -103,27 +110,54 @@ function src.checkOfficer()
 	end
 end
 
+function src.aplicado(bone)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if damaged[user_id] == nil then
+		damaged[user_id] = bone
+		print(bone)
+		print("---")
+	else
+		for k,v in pairs(damaged) do
+			if k == user_id then
+				abones = v
+				damaged[user_id] = bone,abones
+				print(abones)
+			end
+		end
+	end	
+	--print(bone)
+end
+
 function src.raiox()
     local source = source
 	local user_id = vRP.getUserId(source)
 	local nplayer = vRPclient.getNearestPlayer(source,2)
+	local nuser_id = vRP.getUserId(nplayer)
 	if nplayer then
 		local diagnostic = vCLIENT.getDiagnostic(nplayer)
-		for k,v in pairs(diagnostic) do
-			print(k)
-			if morto == false then
+		for k,v in pairs(damaged) do
+			if k == nuser_id then
+				print(v)
+			end
+			
+			
+			--[[if morto == false then
 				if diagnostic then
 					local danos = ''
-					local fratura = math.random(100)
 					danos = danos..'<b>'..bones[k]..'</b>'	
 					if k == 31086 or k == 12844 or k == 65068 or k == 39317 then -- cabeca/pescoco
-						return 1
-					elseif k == 58271 or k == 51826 or k == 23639 or k == 6442 or k == 45509 or k == 61163
+						cabeca = true
+						print("1")
+					end
+					if k == 58271 or k == 51826 or k == 23639 or k == 6442 or k == 45509 or k == 61163
 						or k == 61007 or k == 5232 or k == 40269 or k == 28252 or k == 43810 or k == 37119
 						or k == 22711 or k == 2992 or k == 11816 or k == 63931 or k == 36864 or k == 46078 
 						or k == 16335 then --Pernas/coxas/bracos/antebracos/cotovelos/pelvis/panturrilha/joelho
-						return 2
-					elseif k == 2108 or k == 20781 or k == 26610 or k == 4089 or k == 4090 or k == 26611 
+						perna = true
+						print("2")
+					end
+					if k == 2108 or k == 20781 or k == 26610 or k == 4089 or k == 4090 or k == 26611 
 						or k == 4169 or k == 4170 or k == 26612 or k == 4185 or k == 4186 or k == 26613 
 						or k == 4137 or k == 4138 or k == 26614 or k == 4153 or k == 4154 or k == 58866
 						or k == 64016 or k == 64017 or k == 58867 or k == 64096 or k == 64097 or k == 58868
@@ -131,13 +165,17 @@ function src.raiox()
 						or k == 64080 or k == 64081 or k == 18905 or k == 60309 or k == 36029 or k == 57005
 						or k == 28422 or k == 6286 or k == 14201 or k == 65245 or k == 57717 or k == 52301 
 						or k == 35502 or k == 24806 then -- pé/mão/dedo do pé/mão
-						return 3
-					elseif k == 57597 or k == 23553 or k == 24816 or k == 24817 or k == 24818 or k == 64729 
-						or k == 10706 then --Escapula/Espinhas cervicais/lobar/chacal
-						return 4
+						pe = true
+						print("3")
 					end
+					if k == 57597 or k == 23553 or k == 24816 or k == 24817 or k == 24818 or k == 64729 
+						or k == 10706 then --Escapula/Espinhas cervicais/lobar/chacal
+						torax = true
+						print("4")
+					end
+					return cabeca, perna, pe, torax
 				end
-			end	
+			end	]]
 		end
 	end
 end

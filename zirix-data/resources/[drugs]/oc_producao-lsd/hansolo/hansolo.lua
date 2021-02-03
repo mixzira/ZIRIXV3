@@ -6,12 +6,12 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-oC = Tunnel.getInterface("oc_producao-meta")
+oC = Tunnel.getInterface("oc_producao-lsd")
 -------------------------------------------------------------------------------------------------
 --[ LOCAL ]--------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 local prodMachine = {
-	{ ['x'] = -1095.45, ['y'] = 4945.47, ['z'] = 218.36 }, -- PADRAO
+	{ ['x'] = -2469.54, ['y'] = 3700.93, ['z'] = 14.74 }, -- PADRAO
 }
 -------------------------------------------------------------------------------------------------
 --[ MENU ]---------------------------------------------------------------------------------------
@@ -36,14 +36,14 @@ end
 --[ BOTÕES ]-------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
-	if data == "meta-baixa" then
-		TriggerServerEvent("produzir-meta","meta-baixa")
+	if data == "lsd-baixa" then
+		TriggerServerEvent("produzir-lsd","lsd-baixa")
 
-	elseif data == "meta-media" then
-		TriggerServerEvent("produzir-meta","meta-media")
+	elseif data == "lsd-media" then
+		TriggerServerEvent("produzir-lsd","lsd-media")
 
-	elseif data == "meta-alta" then
-		TriggerServerEvent("produzir-meta","meta-alta")
+	elseif data == "lsd-alta" then
+		TriggerServerEvent("produzir-lsd","lsd-alta")
 
 	elseif data == "fechar" then
 		ToggleActionMenu()
@@ -56,8 +56,8 @@ RegisterCommand("fechar",function()
 	onmenu = false
 end)
 
-RegisterNetEvent("fechar-nui-meta")
-AddEventHandler("fechar-nui-meta", function()
+RegisterNetEvent("fechar-nui-lsd")
+AddEventHandler("fechar-nui-lsd", function()
 	ToggleActionMenu()
 	onmenu = false
 end)
@@ -88,7 +88,7 @@ Citizen.CreateThread(function()
 			local idBancada = prodMachine[id]
 
 			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), prodMachine.x, prodMachine.y, prodMachine.z, true ) < 1.2 and not onmenu then
-				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE METANFETAMINA~w~.",4,0.5,0.92,0.35,255,255,255,180)
+				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE LSD~w~.",4,0.5,0.92,0.35,255,255,255,180)
 			end
 			if distance <= 5 then
 				DrawMarker(23, prodMachine.x, prodMachine.y, prodMachine.z-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)

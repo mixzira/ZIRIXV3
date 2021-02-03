@@ -6,25 +6,25 @@ $(function() {
 	window.addEventListener("message", function(event) {
 	  var item = event.data;
 	
-	  if (item.teste == 1) {
+	  if (item.cabeca == true) {
 		$('.cabeca').css('opacity', '1');   
 		$('.cabeca').css('background-image', 'url(img/cabeca2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao.png)');  
 	  }
 
-	  if (item.teste == 2) {
+	  if (item.perna == true) {
 		$('.perbra').css('opacity', '1');   
 		$('.perbra').css('background-image', 'url(img/permao2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao2.png)');
 	  }
 
-	  if (item.teste == 3) {
+	  if (item.pe == true) {
 		$('.pemao').css('opacity', '1');   
 		$('.pemao').css('background-image', 'url(img/mape2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao3.png)');
 	  }
 
-	  if (item.teste == 4) {
+	  if (item.torax == true) {
 		$('.coluna').css('opacity', '1');   
 		$('.coluna').css('background-image', 'url(img/coluna2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao.png)');
@@ -77,7 +77,7 @@ $(function() {
   
 	  if (element.attr("data-parent")) {
 		element.hide();
-	  } else {
+	  } {
 		element.show();
 	  }
 	});

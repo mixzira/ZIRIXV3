@@ -37,9 +37,12 @@ end
 
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "rem-kit" then
-		local diagnostico =	vSERVER.raiox()
-			SendNUIMessage({
-			teste = diagnostico,
+		local cabeca, perna, pe, torax = vSERVER.raiox()
+		SendNUIMessage({
+			cabeca = cabeca,
+			perna = perna,
+			pe = pe,
+			torax = torax,
 		});
 		
 	elseif data == "close" then
@@ -52,6 +55,9 @@ local bleeding = 0
 local bleedtype = "Superficial"
 
 function src.getDiagnostic()
+	for k,v in pairs(damaged) do
+		print(k)
+	end	
 	return damaged
 end
 
@@ -62,16 +68,14 @@ end
 Citizen.CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
-		if GetEntityHealth(ped) > 115 then
-			local ped = PlayerPedId()
-			local hit,bone = GetPedLastDamageBone(ped)			
-			if hit and not damaged[bone] and bone ~= 0 then
-				damaged[bone] = true
-				print('Quebrou: '..bone)
-				bleeding = bleeding + 1
-			end
+		local hit,bone = GetPedLastDamageBone(ped)						
+		if hit and not damaged[bone] and bone ~= 0 then
+			damaged[bone] = true
+			vSERVER.aplicado(bone)
+			print('Quebrou: '..bone)
+			bleeding = bleeding + 1
 		end
-		Citizen.Wait(500)
+		Citizen.Wait(5)
 	end
 end)
 
