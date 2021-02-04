@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"  type="text/javascript"></script>
+<script type="text/javascript">
+
+  var relPlayerPosition = [0.5, 0.7];
+  var fullSize = [256,256];
+  var playerPosition = [128, 128];
+  var rotation = 0;
+  var stepSize = 55;
+  var targets = [];
+  var lnctx;
+  var targetctx;
+  var trackbarImg = new Image();
+  var targetImg = new Image();
+  var allowProgress = false;
+
+  var debug = false;
+
+  function playSound(snd, vol) {
+		document.getElementById(snd).load();
+		document.getElementById(snd).volume = vol;
+		document.getElementById(snd).play();
+	}
+
+  function calculatePlayerPosition() {
+    for(var i = 0; i < 2; i++) {
+      playerPosition[i] = relPlayerPosition[i]*fullSize[i];
+    }
+  }
+
+  function removeTarget(i) {
+    targets.splice(i, 1);
+  }
+
+  function addTarget(r,phi) {
+    targets.push({"r": r, "phi": phi, "a": 0});
+  }
+
+  function hideTargets() {
+    for(var i = 0; i < targets.length; i++) {
+      targets[i].a = 0;
+    }
+  }
+
+  function drawImage(src, x, y, ctx) {
+    var img = new Image();
+    img.onload = function() {
+      ctx.drawImage(img, x, y);
+    }
+    img.src = src;
+  }
+
+  function drawImageCenter(src, x, y, ctx) {
+    var img = new Image();
+    img.onload = function() {
+      ctx.drawImage(img, x - 0.5*img.width, y - 0.5*img.height);
+    }
+    img.src = src;
+  }
+
+  function drawCircle(r, ctx) {
+    ctx.beginPath();
+    ctx.arc(playerPosition[0], playerPosition[1], r, 0, 2*Math.PI);
+    ctx.stroke();
+  }
+
+  function drawAuxLines(x,y,ctx) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, y*2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(x*2, y);
+    ctx.stroke();
+  }
+
+  function progressTracker() {
+    lnctx.setTransform(1, 0, 0, 1, 0, 0);
+    lnctx.clearRect(0,0,lnctx.canvas.width,lnctx.canvas.height);
+    rotation = (rotation >= 358) ? rotation - 358 : rotation + 2;
+    lnctx.translate(playerPosition[0], playerPosition[1]);
+    lnctx.rotate(rotation*Math.PI/180);
+    lnctx.drawImage(trackbarImg, -0.5*trackbarImg.width, -trackbarImg.height);
+
+    targetctx.clearRect(0,0,fullSize[0],fullSize[1]);
+    for(var i = 0; i < targets.length; i++) {
+      targets[i].a = (targets[i].a > 0.006) ? targets[i].a-0.006 : 0;
+      if(Math.ceil(targets[i].phi) <= rotation && Math.ceil(targets[i].phi) + 30 >= rotation && targets[i].a < 0.5) { // needs to handle 355° on
+        targets[i].a = 1;
+        playSound("audiobeep", 0.3);
+      }
+      targetctx.globalAlpha = targets[i].a;
+      var x = stepSize*targets[i].r*Math.sin(targets[i].phi*Math.PI/180) + playerPosition[0] - targetImg.width/2;
+      var y = -stepSize*targets[i].r*Math.cos(targets[i].phi*Math.PI/180) + playerPosition[1] - targetImg.height/2;
+
+      x = (x > fullSize[0] - targetImg.width/2) ? fullSize[0] - targetImg.width/2 : ((x < -targetImg.width/2) ? -targetImg.width/2 : x);
+      y = (y > fullSize[1] - targetImg.height/2) ? fullSize[1] - targetImg.height/2 : ((y < -targetImg.height/2) ? -targetImg.height/2 : y);
+      targetctx.drawImage(targetImg,x,y);
+    }
+  }
+
+  $(function(){
+
+    var appbg = document.getElementById('appbackground');
+    var bgctx = appbg.getContext('2d');
+    var appweb = document.getElementById('appweb');
+    var webctx = appweb.getContext('2d');
+    var apptargets = document.getElementById('apptargets');
+    targetctx = apptargets.getContext('2d');
+    var appln = document.getElementById('appline');
+    lnctx = appln.getContext('2d');
+    var apppl = document.getElementById('appplayer');
+    var plctx = apppl.getContext('2d');
+
+    trackbarImg.src = 'img/tracker_bar.png';
+    targetImg.src = 'img/tracker_target.png';
+
+    var img = new Image();
+    img.onload = function() {
+      fullSize[0] = img.width;
+      fullSize[1] = img.height;
+      $('#appwrapper').width(img.width);
+      $('#appwrapper').height(img.height);
+      bgctx.canvas.width = img.width;
+      bgctx.canvas.height = img.height;
+      webctx.canvas.width = img.width;
+      webctx.canvas.height = img.height;
+      targetctx.canvas.width = img.width;
+      targetctx.canvas.height = img.height;
+      lnctx.canvas.width = img.width;
+      lnctx.canvas.height = img.height;
+      plctx.canvas.width = img.width;
+      plctx.canvas.height = img.height;
+
+      calculatePlayerPosition();
+
+      drawImage('img/tracker_background.png',0,0,bgctx);
+
+      drawImageCenter('img/tracker_player.png',playerPosition[0], playerPosition[1], plctx);
+
+      // tf blue #0096ff
+      webctx.strokeStyle = '#ffffff';
+      webctx.lineWidth = 2;
+      webctx.globalAlpha = 0.5;
+      drawAuxLines(playerPosition[0], playerPosition[1], webctx);
+      var x = (fullSize[0]-playerPosition[0] > playerPosition[0]) ? fullSize[0]-playerPosition[0] : playerPosition[0];
+      var y = (fullSize[1]-playerPosition[1] > playerPosition[1]) ? fullSize[1]-playerPosition[1] : playerPosition[1];
+      var maxRadius = Math.sqrt(x*x + y*y)
+      for(var i = 1; stepSize*i < maxRadius; i++){
+          drawCircle(stepSize*i,webctx);
+      }
+    }
+    img.src = 'img/tracker_background.png';
+
+    window.addEventListener('message', function(event) {
+
+			var item = event.data;
+
+      if('show' in item) {
+        if (item.show) {
+					$('#phone').fadeIn();
+					$('#bgfill').fadeIn();
+					$('#appwrapper').fadeIn();
+				} else {
+					$('#phone').fadeOut();
+					$('#bgfill').fadeOut();
+					$('#appwrapper').fadeOut();
+				}
+      }
+
+      if('run' in item) {
+        if (item.run) {
+  				allowProgress = true;
+  			} else {
+  				allowProgress = false;
+  			}
+      }
+
+      if('settargets' in item) {
+        if(item.settargets.constructor == Array) {
+          targets = []
+          for(var i = 0; i < item.settargets.length; i++) {
+            if("r" in item.settargets[i] && "phi" in item.settargets[i]) {
+              addTarget(item.settargets[i].r, item.settargets[i].phi);
+            }
+          }
+        }
+      }
+
+      if('updatetargets' in item) {
+        if(item.updatetargets.constructor == Array) {
+          if(item.updatetargets.length == targets.length) {
+            for(var i = 0; i < item.updatetargets.length; i++) {
+              if("r" in item.updatetargets[i] && "phi" in item.updatetargets[i]) {
+                targets[i].r = item.updatetargets[i].r;
+                targets[i].phi = item.updatetargets[i].phi;
+              }
+            }
+          }
+        }
+        if (allowProgress) {
+          progressTracker();
+        }
+      }
+
+      if('removealltargets' in item) {
+        targets = [];
+      }
+
+    });
+  });
+</script>
+<style type="text/css">
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+audio {
+		display: none;
+}
+
+#app {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#phone {
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  z-index: 500;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+#bgfill {
+  position: absolute;
+  right: 15px;
+  bottom: 30px;
+  width: 280px;
+  height: 530px;
+  background: #111111;
+  display: none;
+}
+
+#appwrapper {
+  position: absolute;
+  right: 25px;
+  bottom: 60px;
+  width: 1920px;
+  height: 1080px;
+  display: none;
+}
+
+</style>
+</head>
+<body>
+  <audio id="audiobeep" src="beep.ogg"></audio>
+  <img id="phone" src="./img/phone.png" />
+  <div id="bgfill"></div>
+  <div id="appwrapper">
+    <div id="app">
+      <canvas id="appbackground" width="1920" height="1080" style="z-index: 201;"></canvas>
+      <canvas id="appweb" width="1920" height="1080" style="z-index: 202;"></canvas>
+      <canvas id="apptargets" width="1920" height="1080" style="z-index: 203;"></canvas>
+      <canvas id="appline" width="1920" height="1080" style="z-index: 204;"></canvas>
+      <canvas id="appplayer" width="1920" height="1080" style="z-index: 205;"></canvas>
+    </div>
+  </div>
+</body>
+</html>
