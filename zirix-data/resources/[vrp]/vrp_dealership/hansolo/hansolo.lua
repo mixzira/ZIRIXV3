@@ -195,6 +195,14 @@ RegisterNUICallback("buyRents",function(data)
 	end
 end)
 
+--[ ADDESTOQUE ]---------------------------------------------------------------------------------------------------------------------------
+
+RegisterNUICallback("addEstoque",function(data)
+	if data.name ~= nil then
+		vSERVER.addEstoque(data.name)
+	end
+end)
+
 --[ AUTO-UPDATE ]------------------------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent("dealership:Update")

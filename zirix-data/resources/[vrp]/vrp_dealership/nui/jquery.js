@@ -74,6 +74,7 @@ const updateCarros = () => {
 		$('#inicio').html(`
 			<div class="comprar">COMPRAR</div>
 			<div class="alugar">TEST DRIVE</div>
+			<div class="addestoque">PEDIR ESTOQUE</div>
 			<div class="obs">Para efetuar uma <b>compra</b> selecione um modelo abaixo e clique em <b>comprar</b>, o sistema vai efetuar as checagens necessárias e se você possuir o valor do veículo ele compra automaticamente.</div>
 			<div class="title">CARROS</div>
 			${nameList.map((item) => (`
@@ -97,6 +98,7 @@ const updateMotos = () => {
 		$('#inicio').html(`
 			<div class="comprar">COMPRAR</div>
 			<div class="alugar">ALUGAR</div>
+			<div class="addestoque">PEDIR ESTOQUE</div>
 			<div class="obs">Para efetuar uma <b>compra</b> selecione um modelo abaixo e clique em <b>comprar</b>, o sistema vai efetuar as checagens necessárias e se você possuir o valor do veículo ele compra automaticamente.</div>
 			<div class="title">MOTOS</div>
 			${nameList.map((item) => (`
@@ -155,6 +157,15 @@ $(document).on("click",".alugar",function(){
 	let $el = $('.model.active');
 	if($el){
 		$.post("http://vrp_dealership/buyRents",JSON.stringify({
+			name: $el.attr('data-name-key')
+		}));
+	}
+});
+
+$(document).on("click",".addestoque",function(){
+	let $el = $('.model.active');
+	if($el){
+		$.post("http://vrp_dealership/addEstoque",JSON.stringify({
 			name: $el.attr('data-name-key')
 		}));
 	}
