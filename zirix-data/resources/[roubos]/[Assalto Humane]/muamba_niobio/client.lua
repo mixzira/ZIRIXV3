@@ -39,6 +39,13 @@ local lochacker = {
 	[1] = { ['x'] = 3512.76, ['y'] = 3720.9, ['z'] = 29.69 },
 }
 
+
+RegisterCommand("cancelar",function()
+	TriggerEvent("mhacking:hide")
+	DeleteObject(laptop)
+	vRP.stopAnim(false)
+	TriggerEvent('cancelando',false)
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INICIO
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -54,15 +61,37 @@ Citizen.CreateThread(function()
             func.npcspawn()
             if distance <= 5.0 and not roubando then
                 idle = 5
-                Opacidade = math.floor(255 - (distance * 10))
-                TextoMarker(cdsx,cdsy,cdsz+0.4, "APERTE ~r~[ E ]~w~ PARA INICIAR O ROUBO", Opacidade, 0.54, 0.54)
-                DrawMarker(27,cdsx,cdsy,cdsz-0.5, 0, 0, 0, 0, 0, 0, 1.501,1.5001,0.5001,255,0,0,155, 0, 0, 0, 1)
-                TextoMarker(cdsx,cdsy,cdsz+0.7, '~r~UNIDADE: LABORATÓRIO HUMANE - NIÓBIO', Opacidade, 0.54, 0.54)
-                if IsControlJustPressed(0,38) and not IsPedInAnyVehicle(ped) then               
-                    if vSERVER.checkPolice(cdsx,cdsy,cdsz) then                   
-                        vSERVER.startNiobio()
-                        roubando = true
-                    end
+				drawTxt("Pressione [~r~E~w~] para iniciar o ~r~ROUBO~w~.",4,0.5,0.92,0.35,255,255,255,180)
+				DrawMarker(23, cdsx, cdsy, cdsz-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
+                if IsControlJustPressed(0,38) and vSERVER.checkHacker() and not IsPedInAnyVehicle(ped) and vSERVER.checkPermission() then
+					if vSERVER.checkPolice(cdsx,cdsy,cdsz) then 
+						roubando = true
+						vSERVER.sendMessageAll("ATUALIZAÇÃO: Os assaltantes estão hackeando a rede do laboratório.")
+						TriggerEvent("status:hacker_digital",true)
+						TriggerEvent('cancelando',true)
+						
+						prop = GetHashKey("prop_cs_hand_radio")
+						object = CreateObject(GetHashKey("prop_police_radio_main"), GetEntityCoords(PlayerPedId()), true)	
+						AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 28422), -0.03, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
+
+						RequestAnimDict('weapons@projectile@sticky_bomb')
+						while not HasAnimDictLoaded('weapons@projectile@sticky_bomb') do
+						Citizen.Wait(100)
+						end
+
+						vRP.playAnim(ped, 'weapons@projectile@sticky_bomb', 'plant_vertical', 8.0, -8, -1, 49, 0, 0, 0, 0)		
+						TriggerEvent("progress", 1900, "CONECTANDO AO DISPOSITIVO...")
+						Citizen.Wait(1000)
+						DeleteEntity(object)
+						Citizen.Wait(700)
+						ClearPedTasksImmediately(GetPlayerPed(-1))
+						Citizen.Wait(200)
+						TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)						
+						TriggerEvent("progress", 5000, "ACESSANDO O SISTEMA...")
+						Citizen.Wait(7100)
+						TriggerEvent("mhacking:show")
+						TriggerEvent("mhacking:start",3,20,mycallback)           
+					end
                 end
             end
         end		
@@ -80,47 +109,111 @@ function func.npcspawn()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- HACKER
+-- config.itens
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000
 		local ped = PlayerPedId()
-		local x,y,z = GetEntityCoords(ped)
-		if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_UNARMED") and not IsPedInAnyVehicle(ped) then
-			for k,v in pairs(lochacker) do
-				if Vdist(v.x,v.y,v.z,x,y,z) <= 1 and roubando then
-                    idle = 4
-					drawTxt("PRESSIONE  ~r~G~w~  PARA INICIAR A HACKEAR",4,0.5,0.93,0.50,255,255,255,180)
-					if IsControlJustPressed(0,47) and vSERVER.checkPermission() and vSERVER.checkHacker() then	
-                        vSERVER.sendMessageAll("ATUALIZAÇÃO: Os assaltantes estão hackeando a rede do laboratório.")
-                        TriggerEvent("status:hacker_digital",true)
-						TriggerEvent('cancelando',true)
-						
-						prop = GetHashKey("prop_cs_hand_radio")
-						object = CreateObject(GetHashKey("prop_police_radio_main"), GetEntityCoords(PlayerPedId()), true)	
-						AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 28422), -0.03, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
- 
-						RequestAnimDict('weapons@projectile@sticky_bomb')
-						while not HasAnimDictLoaded('weapons@projectile@sticky_bomb') do
-						Citizen.Wait(100)
-						end 
-
-						TaskPlayAnim(ped, 'weapons@projectile@sticky_bomb', 'plant_vertical', 8.0, -8, -1, 49, 0, 0, 0, 0)		
-						TriggerEvent("progress", 1900, "CONECTANDO AO DISPOSITIVO...")
-						Citizen.Wait(1000)
-						DeleteEntity(object)
-						Citizen.Wait(700)
-						ClearPedTasksImmediately(GetPlayerPed(-1))
-						Citizen.Wait(200)
-						TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)						
-						TriggerEvent("progress", 5000, "ACESSANDO O SISTEMA...")
-						Citizen.Wait(7100)
-						TriggerEvent("mhacking:show")
-						TriggerEvent("mhacking:start",3,20,mycallback)																					
+		local x,y,z = table.unpack(GetEntityCoords(ped))
+		local bowz,cdz = GetGroundZFor_3dCoord(cdsx,cdsy,cdsz)
+		for k,v in pairs(config.itens) do	
+			idle = 5	
+        	local distance = GetDistanceBetweenCoords(x,y,z,v.x,v.y,v.z,true)
+			if distance <= 15 then 
+				DrawMarker(23, v.x, v.y, v.z-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
+				if distance <= 1 then
+					drawTxt("Pressione [~r~E~w~] para pegar os ~r~ITENS~w~.",4,0.5,0.92,0.35,255,255,255,180)
+					if IsControlJustPressed(0,38) then
+						if k == 1 then
+								--vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								--SetTimeout(5000,function()
+									vSERVER.Start(k)
+								--	vRP.stopAnim(ped,false)
+								--end)
+						elseif k == 2 then
+								--vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								--SetTimeout(5000,function()
+									vSERVER.Start(k)
+									--vRP.stopAnim(ped,false)
+								--end)
+						elseif k == 3 then
+							if not item3 then
+							--	vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								--SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item3 = true
+								--	vRP.stopAnim(ped,false)
+								--end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						elseif k == 4 then
+							if not item4 then
+							--	vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item4 = true
+								--	vRP.stopAnim(ped,false)
+								end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						elseif k == 5 then
+							if not item5 then
+								vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item5 = true
+									vRP.stopAnim(ped,false)
+								end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						elseif k == 6 then
+							if not item6 then
+								vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item6 = true
+								end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						elseif k == 7 then
+							if not item7 then
+								vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item7 = true
+								end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						elseif k == 8 then
+							if not item8 then
+								vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item8 = true
+								end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						elseif k == 9 then
+							if not item9 then
+								vRP.playAnim(ped,false,{{"mini@repair","fixing_a_player"}},true)
+								SetTimeout(5000,function()
+									vSERVER.Start(k)
+									item9 = true
+								end)
+							else
+								TriggerEvent("Notify","negado","Armarios vazios.") 
+							end
+						end
 					end
 				end
-			end			
+			end
 		end
         Citizen.Wait(idle)
 	end
@@ -141,14 +234,17 @@ function mycallback(success,time)
     		end
 		end)
         vSERVER.sendMessageAll("ATUALIZAÇÃO: Os assaltantes acabaram de invadir o sistema.")
+		for k,v in pairs(config.itens) do
+			criandoblip(v.x,v.y,v.z)
+		end
 		DeleteObject(laptop)
-		vRP._stopAnim(false)
+		vRP.stopAnim(false)
 		TriggerEvent('cancelando',false)
 	else
 		chance = chance + 1
 		TriggerEvent("mhacking:hide")
 		DeleteObject(laptop)
-		vRP._stopAnim(false)
+		vRP.stopAnim(false)
 		TriggerEvent('cancelando',false)
 	end
 end
@@ -161,42 +257,7 @@ local timedown = 0
 local robbers = {
 	[1] = { ['x'] = 3559.88, ['y'] = 3674.68, ['z'] = 28.13 }	
 }
------------------------------------------------------------------------------------------------------------------------------------------
--- ROBBERSBUTTON
------------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
-	while true do
-		local idle = 1000
-		if not robbery then
-			local ped = PlayerPedId()
-			local x,y,z = table.unpack(GetEntityCoords(ped))
-			for k,v in pairs(robbers) do
-                idle = 4
-				local distance = Vdist(x,y,z,v.x,v.y,v.z)
-				if distance <= 1.1 and GetEntityHealth(ped) > 101 then					
-					drawText("PRESSIONE  ~r~E~w~  PARA INICIAR O ROUBO",4,0.5,0.93,0.50,255,255,255,180)
-					if IsControlJustPressed(0,38) and timedown <= 0 then										
-						timedown = 3
-                        if chance > 6 then
-                        chance = 6
-                        end						
-						vSERVER.Start(chance,v.x,v.y,v.z)
-                        vSERVER.sendMessageAll("ATUALIZAÇÃO: A Segurança dos Cofres foi violada de acordo com a segurança do laboratório. A Polícia está a caminho do local.") 
-					end
-				end
-			end
-		else
-            idle = 4
-			drawText("PARA CANCELAR O ROUBO SAIA DA SALA",4,0.5,0.88,0.36,255,255,255,50)
-			drawText("AGUARDE ~g~"..timedown.." SEGUNDOS~w~ ATÉ QUE TERMINE O ROUBO",4,0.5,0.9,0.46,255,255,255,150)
-			if GetEntityHealth(PlayerPedId()) <= 101 then
-				robbery = false
-				vSERVER.pararroubo()
-			end
-		end
-        Citizen.Wait(idle)
-	end
-end)
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STARTROBBERY
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -232,25 +293,22 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
 -----------------------------------------------------------------------------------------------------------------------------------------
--- FUNÇÕES
+-- FUNCTION
 -----------------------------------------------------------------------------------------------------------------------------------------
-function drawTxt(text,font,x,y,scale,r,g,b,a)
-    SetTextFont(font)
-    SetTextScale(scale,scale)
-    SetTextColour(r,g,b,a)
-    SetTextOutline()
-    SetTextCentre(1)
-    SetTextEntry("STRING")
-    AddTextComponentString(text)
-    DrawText(x,y)
+function criandoblip(x,y,z)
+	blip = AddBlipForCoord(x,y,z)
+	SetBlipSprite(blip,1)
+	SetBlipColour(blip,27)
+	SetBlipScale(blip,0.4)
+	SetBlipAsShortRange(blip,false)
+	SetBlipRoute(blip,false)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentString("Local de Roubo")
+	EndTextCommandSetBlipName(blip)
 end
 
------------------------------------------------------------------------------------------------------------------------------------------
--- DRAWTEXT
------------------------------------------------------------------------------------------------------------------------------------------
-function drawText(text,font,x,y,scale,r,g,b,a)
+function drawTxt(text,font,x,y,scale,r,g,b,a)
     SetTextFont(font)
     SetTextScale(scale,scale)
     SetTextColour(r,g,b,a)
@@ -268,25 +326,6 @@ function loadModel(model)
           Citizen.Wait(1)
         end
     end)
-end
-
-function TextoMarker(x,y,z, text, Opacidade, s1, s2)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())    
-    if onScreen then 
-        SetTextScale(s1, s2)
-        SetTextFont(4)
-        SetTextProportional(1)
-        SetTextColour(255, 255, 255, Opacidade)
-        SetTextDropshadow(0, 0, 0, 0, Opacidade)
-        SetTextEdge(2, 0, 0, 0, 150)
-        SetTextDropShadow()
-        SetTextOutline()
-        SetTextEntry("STRING")
-        SetTextCentre(1)
-        AddTextComponentString(text)
-        DrawText(_x,_y)
-    end
 end
 
 function func.spawnNpc(x,y,z)

@@ -3,6 +3,7 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
+local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -11,6 +12,8 @@ vRPclient = Tunnel.getInterface("vRP")
 func = {}
 Tunnel.bindInterface("vrp_niobio",func)
 vCLIENT = Tunnel.getInterface("vrp_niobio")
+local idgens = Tools.newIDGenerator()
+local blips = {}
 local robbery = false
 local timedown = 0
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -24,6 +27,16 @@ function SendWebhookMessage(webhook,message)
 	end
 end
 
+local item1 = false
+local item2 = false
+local item3 = false
+local item4 = false
+local item5 = false
+local item6 = false
+local item7 = false
+local item8 = false
+local item9 = false
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CHECNIOBIO
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +45,7 @@ function func.checkNiobio()
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if user_id then		
-		if vRP.getInventoryItemAmount(user_id,"cocaina") >= 1 and vRP.tryGetInventoryItem(user_id,"cocaina",1) then	
+		if vRP.getInventoryItemAmount(user_id,"celular") or vRP.getInventoryItemAmount(user_id,"celular")  >= 1 then	
 			return true							
 		else
 			TriggerClientEvent("Notify",source,"importante","Precisa de uma <b>C4</b> para explodir as portas.")
@@ -45,11 +58,11 @@ function func.checkHacker()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
-	if user_id then		
-		if vRP.getInventoryItemAmount(user_id,"notebook") >= 1 and vRP.tryGetInventoryItem(user_id,"notebook",1) then	
+	if user_id then	
+		if vRP.getInventoryItemAmount(user_id,"celular") >= 1 or vRP.getInventoryItemAmount(user_id,"celular-pro") >= 1 then	
 			return true							
 		else
-			TriggerClientEvent("Notify",source,"importante","Precisa de um <b>Telefone Descartável</b> para hackear.")
+			TriggerClientEvent("Notify",source,"importante","Precisa de um <b>Celular</b> para hackear.")
 			return false
 		end		
 	end
@@ -125,7 +138,7 @@ function func.checkPolice(x,y,z)
 			TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais no momento.",8000)
 			return false
 		elseif (os.time()-timedown) <= 21600 then
-			TriggerClientEvent("Notify",source,"aviso","O Laboratório Humane - Nióbio não se recuperou do ultimo roubo, aguarde <b>"..vRP.format(parseInt((21600-(os.time()-timers)))).." segundos</b> até que o laboratório seja liberado.")
+			TriggerClientEvent("Notify",source,"aviso","O Laboratório Humane  não se recuperou do ultimo roubo, aguarde <b>"..vRP.format(parseInt((21600-(os.time()-timers)))).." segundos</b> até que o laboratório seja liberado.")
 			return false
 		else
 			func.callPolice(x,y,z)
@@ -143,7 +156,7 @@ function func.startNiobio()
 	local identity = vRP.getUserIdentity(user_id)
 	local x,y,z = vRPclient.getPosition(source)
 	if user_id then		
-		TriggerClientEvent("pNotify:SendNotification", -1, {text = "<div class='imagem-notificacao'></div>", layout = "bottomCenter", type = "warning", theme = "metroui", timeout = 15000})
+		--TriggerClientEvent("pNotify:SendNotification", -1, {text = "<div class='imagem-notificacao'></div>", layout = "bottomCenter", type = "warning", theme = "metroui", timeout = 15000})
 	end
 end
 
@@ -162,22 +175,95 @@ local robbers = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STARTROBBERY
 -----------------------------------------------------------------------------------------------------------------------------------------
-function func.Start(id,x,y,z)
+function func.Start(id)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
-	if user_id then
-		robbery = true
-		timedown = os.time()
-		vCLIENT.inicioroubo(source,robbers[id].seconds,x,y,z)		
-		vRPclient.setStandBY(source,parseInt(600))		
-		SetTimeout(robbers[id].seconds*1000,function()
-			if robbery then				
-				robbery = false
-				vRP.searchTimer(user_id,1800)
-				vRP.giveInventoryItem(user_id,"dinheirosujo",parseInt(math.random(robbers[id].rewmin,robbers[id].rewmax)))				
+	for k,v in pairs(config.itens) do
+		if user_id then
+			if k == 1 then
+				if id == k then
+					if not item1 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)
+						item1 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 2 then
+				if id == k then
+					if not item2 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item2 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 3 then				
+				if id == k then
+					if not item3 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item3 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 4 then	
+				if id == k then
+					if not item4 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)
+						item4 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 5 then	
+				if id == k then
+					if not item5 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item5 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 6 then	
+				if id == k then
+					if not item6 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item6 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 7 then	
+				if id == k then
+					if not item7 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item7 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 8 then	
+				if id == k then
+					if not item8 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item8 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
+			elseif k == 9 then	
+				if id == k then
+					if not item9 then
+						vRP.giveInventoryItem(user_id,v.item,v.qtd)	
+						item9 = true
+					else
+						TriggerClientEvent("Notify",source,"negado","Armarios vazios.") 
+					end
+				end
 			end
-		end)
+		end
 	end
 end
 
