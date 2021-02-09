@@ -16,7 +16,7 @@ RegisterCommand('ems', function(source,args,rawCommand)
 	
 	if args[1] == "info" then
 		if args[2] ~= '' then
-			if vRP.hasPermission(user_id,"ems.permissao") then
+			if vRP.hasPermission(user_id,config.emspermission) then
 				if user_id then
 					TriggerClientEvent('chatMessage',-1,"EMS - Informativo",{235,109,114},rawCommand:sub(9))
 				end
@@ -24,7 +24,7 @@ RegisterCommand('ems', function(source,args,rawCommand)
 		end
 	elseif args[1] == 'int' then
 		if args[2] ~= '' then
-			local permission = "ems.permissao"
+			local permission = config.emspermission
 			if vRP.hasPermission(user_id,permission) then
 				local colaborador = vRP.getUsersByPermission(permission)
 				for l,w in pairs(colaborador) do
@@ -61,6 +61,13 @@ RegisterCommand('ems', function(source,args,rawCommand)
 		elseif  parseInt(#colaboradordmla) >= 1 then
 			TriggerClientEvent("Notify",source,"importante", "Atualmente, <b>"..colaboradores.." colaboradores do departamento médico</b> estão em serviço.")
 		end
+	end
+end)
+
+RegisterCommand('reanimar',function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,config.emspermission) then
+		TriggerClientEvent('reanimar',source)
 	end
 end)
 
@@ -124,7 +131,7 @@ end)
 
 RegisterCommand('tratamento',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
-    if vRP.hasPermission(user_id,"ems.permissao") then
+    if vRP.hasPermission(user_id,config.emspermission) then
         local nplayer = vRPclient.getNearestPlayer(source,3)
         if nplayer then
 			if not vRPclient.isComa(nplayer) then
