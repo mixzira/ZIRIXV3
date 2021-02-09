@@ -33,6 +33,5 @@ files {
 	'nui/img/mape2.png',
 	'nui/img/situacao.png',
 	'nui/img/situacao2.png',
-	'nui/img/situacao3.png',
-	'nui/img/situacao4.png'
+	'nui/img/situacao3.png'
 }
