@@ -28,19 +28,19 @@ end
 --[ BOTÕES ]-------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
-	if data == "produzir-ak47" then
+	if data == config.button1 then
 		TriggerServerEvent("produzir-arma",config.weapons[1])
-		
-	elseif data == "produzir-ak74u" then
+
+	elseif data == config.button2 then
 		TriggerServerEvent("produzir-arma",config.weapons[2])
 
-	elseif data == "produzir-uzi" then
+	elseif data == config.button3 then
 		TriggerServerEvent("produzir-arma",config.weapons[3])
 
-	elseif data == "produzir-magnum44" then
+	elseif data == config.button4 then
 		TriggerServerEvent("produzir-arma",config.weapons[4])
 
-	elseif data == "produzir-glock" then
+	elseif data == config.button5 then
 		TriggerServerEvent("produzir-arma",config.weapons[5])
 
 	elseif data == "fechar" then
@@ -71,7 +71,7 @@ Citizen.CreateThread(function()
 			local prodMachine = config.prodMachine[k]
 			local idBancada = config.prodMachine[id]
 
-			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), config.prodMachine.x, config.prodMachine.y, config.prodMachine.z, true ) < 1.2 and not onmenu then
+			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), prodMachine.x, prodMachine.y, prodMachine.z, true ) < 1.2 and not onmenu then
 				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE ARMAS~w~.",4,0.5,0.92,0.35,255,255,255,180)
 			end
 			if distance <= 5 then

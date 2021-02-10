@@ -177,6 +177,12 @@ items.list = {
 	['corpo-sub'] = { ['index'] = 'corpo-sub', ['name'] = 'Corpo de SUB', ['type'] = 'use', ['weight'] = 0.5 },
 	['corpo-pistola'] = { ['index'] = 'corpo-pistola', ['name'] = 'Corpo de Pistola', ['type'] = 'use', ['weight'] = 0.5 },
 
+	['corpo-ak47'] = { ['index'] = 'corpo-ak47', ['name'] = 'Corpo de AK-47', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-aks'] = { ['index'] = 'corpo-aks', ['name'] = 'Corpo de AKS', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-glock'] = { ['index'] = 'corpo-glock', ['name'] = 'Corpo de Glock', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-magnum44'] = { ['index'] = 'corpo-magnum44', ['name'] = 'Corpo de Magnum 44', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-uzi'] = { ['index'] = 'corpo-uzi', ['name'] = 'Corpo de Uzi', ['type'] = 'use', ['weight'] = 0.5 },
+
 	--[ Miscellaneous ][ Weapons Production ]--------------------------------------------------------------------------
 	
 	['molas'] = { ['index'] = 'molas', ['name'] = 'Molas', ['type'] = 'use', ['weight'] = 0.5 },
