@@ -5,7 +5,7 @@ $(function() {
   
 	window.addEventListener("message", function(event) {
 	  var item = event.data;
-	
+	  
 	  if (item.cabeca == true) {
 		$('.cabeca').css('opacity', '1');   
 		$('.cabeca').css('background-image', 'url(img/cabeca2.png)');
@@ -48,7 +48,13 @@ $(function() {
 	  if (item.col == 1) {
 		$('.coluna').css('opacity', '0.9');   
 		$('.coluna').css('background-image', 'url(img/coluna.png)'); 
-	  }	  
+	  }	
+
+	  if (item.sit == 1) {
+		$('.situacao').css('opacity', '0.9');   
+		$('.situacao').css('background-image', 'url(img/situacao4.png)'); 
+	  }	
+
   
 	  if (item.showmenu) {
 		ResetMenu();
