@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>NativeUI | Lavagem de Dinheiro</title>
+        <link rel="stylesheet" type="text/css" href="theforce.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,900&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="actionmenu" style="display: none;">
+            <div class="container">
+                <div class="container-tittle">
+                    <p><b>LAVAGEM DE DINHEIRO:</b></p>
+                </div>
+                <div class="itens">
+                    <section class="item-section">
+                        <div class="item-container">
+
+                            <div class="itens-session item-item" category="dirty-money-clean">
+                                <div class="item-info">
+                                    <div class="item-picture">
+                                        <img src="assets/clean-money-case.png">
+                                    </div>
+                                    <div class="item-menu">
+                                        <div class="item-name">
+                                            <p><b>LAVAGEM TERCEIRIZADA</b></p>
+                                        </div>
+                                        <div class="clean-money">
+                                            <button data-action="clean-money-terceirizada" class="menuoption"><b>LAVAR</b></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-description2">
+                                        <ul>
+                                            <li>LAVAGEM TERCEIRIZADA ONDE 25% DO DINHEIRO É UTILIZADO PARA COMPRAS DOS PRODUTOS NECESSÁRIOS E PAGAMENTO DE MAO DE OBRA.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="itens-session item-item" category="dirty-money-clean">
+                                <div class="item-info">
+                                    <div class="item-picture">
+                                        <img src="assets/clean-money-case.png">
+                                    </div>
+                                    <div class="item-menu">
+                                        <div class="item-name">
+                                            <p><b>25K (LIMPO)</b></p>
+                                        </div>
+                                        <div class="clean-money">
+                                            <button data-action="clean-money-25k" class="menuoption"><b>LAVAR</b></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-preparation-one">
+                                        <img src="assets/desinfectant-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-two">
+                                        <img src="assets/cleaner-spray-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-three">
+                                        <img src="assets/openned-box.png">
+                                    </div>
+                                    <div class="item-preparation-four">
+                                        <img src="assets/dirty-money.png">
+                                    </div>
+                                    <div class="item-description">
+                                        <ul>
+                                            <li>7x ALVEJANTE;</li>
+                                            <li>3x BORRIFADOR;</li>
+                                            <li>5x CAIXA;</li>
+                                            <li>$25000 DINHEIRO-SUJO;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="itens-session item-item" category="dirty-money-clean">
+                                <div class="item-info">
+                                    <div class="item-picture">
+                                        <img src="assets/clean-money-case.png">
+                                    </div>
+                                    <div class="item-menu">
+                                        <div class="item-name">
+                                            <p><b>50K (LIMPO)</b></p>
+                                        </div>
+                                        <div class="clean-money">
+                                            <button data-action="clean-money-50k" class="menuoption"><b>LAVAR</b></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-preparation-one">
+                                        <img src="assets/desinfectant-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-two">
+                                        <img src="assets/cleaner-spray-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-three">
+                                        <img src="assets/openned-box.png">
+                                    </div>
+                                    <div class="item-preparation-four">
+                                        <img src="assets/dirty-money.png">
+                                    </div>
+                                    <div class="item-description">
+                                        <ul>
+                                            <li>14x ALVEJANTE;</li>
+                                            <li>6x BORRIFADOR;</li>
+                                            <li>10x CAIXA;</li>
+                                            <li>$50000 DINHEIRO-SUJO;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="itens-session item-item" category="dirty-money-clean">
+                                <div class="item-info">
+                                    <div class="item-picture">
+                                        <img src="assets/clean-money-case.png">
+                                    </div>
+                                    <div class="item-menu">
+                                        <div class="item-name">
+                                            <p><b>100K (LIMPO)</b></p>
+                                        </div>
+                                        <div class="clean-money">
+                                            <button data-action="clean-money-100k" class="menuoption"><b>LAVAR</b></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-preparation-one">
+                                        <img src="assets/desinfectant-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-two">
+                                        <img src="assets/cleaner-spray-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-three">
+                                        <img src="assets/openned-box.png">
+                                    </div>
+                                    <div class="item-preparation-four">
+                                        <img src="assets/dirty-money.png">
+                                    </div>
+                                    <div class="item-description">
+                                        <ul>
+                                            <li>21x ALVEJANTE;</li>
+                                            <li>9x BORRIFADOR;</li>
+                                            <li>15x CAIXA;</li>
+                                            <li>$100000 DINHEIRO-SUJO;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="itens-session item-item" category="dirty-money-clean">
+                                <div class="item-info">
+                                    <div class="item-picture">
+                                        <img src="assets/clean-money-case.png">
+                                    </div>
+                                    <div class="item-menu">
+                                        <div class="item-name">
+                                            <p><b>500K (LIMPO)</b></p>
+                                        </div>
+                                        <div class="clean-money">
+                                            <button data-action="clean-money-500k" class="menuoption"><b>LAVAR</b></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-preparation-one">
+                                        <img src="assets/desinfectant-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-two">
+                                        <img src="assets/cleaner-spray-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-three">
+                                        <img src="assets/openned-box.png">
+                                    </div>
+                                    <div class="item-preparation-four">
+                                        <img src="assets/dirty-money.png">
+                                    </div>
+                                    <div class="item-description">
+                                        <ul>
+                                            <li>28x ALVEJANTE;</li>
+                                            <li>12x BORRIFADOR;</li>
+                                            <li>20x CAIXA;</li>
+                                            <li>$500000 DINHEIRO-SUJO;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="itens-session item-item" category="dirty-money-clean">
+                                <div class="item-info">
+                                    <div class="item-picture">
+                                        <img src="assets/clean-money-case.png">
+                                    </div>
+                                    <div class="item-menu">
+                                        <div class="item-name">
+                                            <p><b>1KK (LIMPO)</b></p>
+                                        </div>
+                                        <div class="clean-money">
+                                            <button data-action="clean-money-1kk" class="menuoption"><b>LAVAR</b></button>
+                                        </div>
+                                    </div>
+                                    <div class="item-preparation-one">
+                                        <img src="assets/desinfectant-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-two">
+                                        <img src="assets/cleaner-spray-bottle.png">
+                                    </div>
+                                    <div class="item-preparation-three">
+                                        <img src="assets/openned-box.png">
+                                    </div>
+                                    <div class="item-preparation-four">
+                                        <img src="assets/dirty-money.png">
+                                    </div>
+                                    <div class="item-description">
+                                        <ul>
+                                            <li>35x ALVEJANTE;</li>
+                                            <li>15x BORRIFADOR;</li>
+                                            <li>25x CAIXA;</li>
+                                            <li>$1000000 DINHEIRO-SUJO;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script src="lightsaber.js" type="text/javascript"></script>
+    </body>
+</html>
