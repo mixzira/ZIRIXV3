@@ -226,11 +226,28 @@ AddEventHandler("tratamento",function()
 		until GetEntityHealth(ped) >= 400 or GetEntityHealth(ped) <= 101
 			TriggerEvent("Notify","sucesso","Tratamento concluido.",8000)
 			tratamento = false
+			NetworkResurrectLocalPlayer(x,y,z,true,true,false)
+			ClearPedBloodDamage(ped)
+			SetEntityInvincible(ped,false)
+			SetEntityHealth(ped,400)
+			ClearPedTasks(ped)
+			ClearPedSecondaryTask(ped)
+			Wait(1000)
 			damaged = {}
-
-			
     end
 end)
+
+function src.killGod()
+	nocauteado = false
+	local ped = PlayerPedId()
+	local x,y,z = table.unpack(GetEntityCoords(ped))
+	NetworkResurrectLocalPlayer(x,y,z,true,true,false)
+	ClearPedBloodDamage(ped)
+	SetEntityInvincible(ped,false)
+	SetEntityHealth(ped,110)
+	ClearPedTasks(ped)
+	ClearPedSecondaryTask(ped)
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- FUNÇÕES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -244,60 +261,3 @@ function drawTxt(text,font,x,y,scale,r,g,b,a)
 	AddTextComponentString(text)
 	DrawText(x,y)
 end
-
-
-
-
-
-
-
-
-
---[[if tratamento then
-	if cabeca == true then
-		if vRP.getInventoryItemAmount(user_id,"headblock") then
-			TriggerEvent("Notify","sucesso","Tratamento de coluna iniciado.",8000)
-		end
-		else 
-			TriggerEvent("Notify","negado","Você não possui o item necessario",8000)
-		end
-	end
-	else
-		TriggerEvent("Notify","negado","A cabeça não está machucada.",8000)
-	end
-	if perna == true then
-		if vRP.getInventoryItemAmount(user_id,"gesso") then
-			TriggerEvent("Notify","sucesso","Tratamento de braços/pernas iniciado.",8000)
-		end
-		else
-			TriggerEvent("Notify","negado","Você não possui o item necessario",8000)
-		end
-	end
-	else
-		TriggerEvent("Notify","negado","Os braços/pernas não estão machucados.",8000)
-	end
-	if pe == true then
-		if vRP.getInventoryItemAmount(user_id,"bandagem") then
-			TriggerEvent("Notify","sucesso","Tratamento de mãos/pés iniciado.",8000)
-		end
-		else
-			TriggerEvent("Notify","negado","Você não possui o item necessario",8000)
-		end
-	end
-	else
-		TriggerEvent("Notify","negado","As mãos/pés não estão machucados.",8000)
-	end
-	if torax == true then
-		if vRP.getInventoryItemAmount(user_id,"cinta") then
-			TriggerEvent("Notify","sucesso","Tratamento de torax iniciado.",8000)
-		end
-		else
-			TriggerEvent("Notify","negado","Você não possui o item necessario",8000)
-		end
-	end
-	else
-		TriggerEvent("Notify","negado","O torax não está machucado.",8000)
-	end
-	if cabeca or perna or pe or torax == true then
-	return
-	end--]]

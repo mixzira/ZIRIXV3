@@ -169,20 +169,11 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 	local medico = user_id
     if vRP.hasPermission(user_id,"ems.permissao") then
 		local nplayer = vRP.getUserSource(parseInt(args[1]))
-		print(nplayer)
         if nplayer then
 			local vida = vRPclient.getHealth(nplayer)
-			print(vida)
 			if vida >=103 then
-				--[[headblock
-				gesso
-				bandagem
-				cinta]]
-
-
-
 				if cabeca2 == true then
-					if vRP.getInventoryItemAmount(user_id,"dinheiro",1) then
+					if vRP.tryGetInventoryItem(user_id, "headblock",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de coluna iniciado.",8000)
 					
 					else 
@@ -193,7 +184,7 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 					TriggerClientEvent("Notify",source,"negado","A cabeça não está machucada.",8000)
 				end
 				if perna2 == true then
-					if vRP.getInventoryItemAmount(user_id,"dinheiro",1) then
+					if vRP.tryGetInventoryItem(user_id, "gesso",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de braços/pernas iniciado.",8000)
 					
 					else
@@ -204,7 +195,7 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 					TriggerClientEvent("Notify",source,"negado","Os braços/pernas não estão machucados.",8000)
 				end
 				if pe2 == true then
-					if vRP.getInventoryItemAmount(user_id,"dinheiro",1) then
+					if vRP.tryGetInventoryItem(user_id, "bandagem",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de mãos/pés iniciado.",8000)
 					
 					else
@@ -215,7 +206,7 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 					TriggerClientEvent("Notify",source,"negado","As mãos/pés não estão machucados.",8000)
 				end
 				if torax2 == true then
-					if vRP.getInventoryItemAmount(user_id,"dinheiro",1) then
+					if vRP.tryGetInventoryItem(user_id, "cinta",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de torax iniciado.",8000)
 					
 					else
