@@ -6,7 +6,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-oC = Tunnel.getInterface("oc_producao-armas")
+oC = Tunnel.getInterface("oc_producao-weapons")
 
 
 local menuactive = false
@@ -29,19 +29,19 @@ end
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == config.button1 then
-		TriggerServerEvent("produzir-arma",config.weapons[1])
+		TriggerServerEvent("produzir-weapon",config.weapons[1])
 
 	elseif data == config.button2 then
-		TriggerServerEvent("produzir-arma",config.weapons[2])
+		TriggerServerEvent("produzir-weapon",config.weapons[2])
 
 	elseif data == config.button3 then
-		TriggerServerEvent("produzir-arma",config.weapons[3])
+		TriggerServerEvent("produzir-weapon",config.weapons[3])
 
 	elseif data == config.button4 then
-		TriggerServerEvent("produzir-arma",config.weapons[4])
+		TriggerServerEvent("produzir-weapon",config.weapons[4])
 
 	elseif data == config.button5 then
-		TriggerServerEvent("produzir-arma",config.weapons[5])
+		TriggerServerEvent("produzir-weapon",config.weapons[5])
 
 	elseif data == "fechar" then
 		ToggleActionMenu()

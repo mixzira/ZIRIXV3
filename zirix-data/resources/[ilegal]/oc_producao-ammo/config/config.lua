@@ -27,18 +27,18 @@ config.weapons = {
 
 -- ITENS NECESSARIOS PARA CADA MUNICAO.
 -- ITEM,QUANTIDADE
-config.weapon1 = { "corpo-ak47",1, "placa-metal",10, "molas",3, "gatilho",1 }
-config.weapon2 = { "corpo-aks74u",1, "placa-metal",6, "molas",2, "gatilho",1 }
-config.weapon3 = { "corpo-uzi",1, "placa-metal",6, "molas",2, "gatilho",1 }
-config.weapon4 = { "corpo-magnum",1, "placa-metal",6, "molas",2, "gatilho",1 }
-config.weapon5 = { "corpo-glock",1, "placa-metal",6, "molas",2, "gatilho",1 }
+config.weapon1 = { "capsulas",30, "polvora",30 }
+config.weapon2 = { "capsulas",30, "polvora",30 }
+config.weapon3 = { "capsulas",30, "polvora",30 }
+config.weapon4 = { "capsulas",30, "polvora",30 }
+config.weapon5 = { "capsulas",30, "polvora",30 }
 
 -- INDEX DA MUNICAO e QUANTIDADE PARA ADICIONAR AO INVENTARIO APÓS FABRICAR.
-config.gweapon1 = { "wbodyWEAPON_ASSAULTRIFLE_MK2", 1 }
-config.gweapon2 = { "wbodyWEAPON_COMPACTRIFLE", 1 }
-config.gweapon3 = { "wbodyWEAPON_MICROSMG", 1 }
-config.gweapon4 = { "wbodyWEAPON_REVOLVER_MK2", 1 }
-config.gweapon5 = { "wbodyWEAPON_COMBATPISTOL", 1 }
+config.gweapon1 = { "wammoWEAPON_ASSAULTRIFLE_MK2", 30}
+config.gweapon2 = { "wammoWEAPON_COMPACTRIFLE", 30 }
+config.gweapon3 = { "wammoWEAPON_MICROSMG", 30 }
+config.gweapon4 = { "wammoWEAPON_REVOLVER_MK2", 30 }
+config.gweapon5 = { "wammoWEAPON_COMBATPISTOL", 30 }
 
 --[ CONFIGURAÇÃO DA ANIMAÇÃO ]-------------------------------------------------------------------------------------------------------------------------
 
