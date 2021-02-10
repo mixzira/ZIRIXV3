@@ -130,7 +130,10 @@ items.list = {
 	['r-trandrylux'] = { ['index'] = 'r-trandrylux', ['name'] = 'Receituário Trandrylux', ['type'] = 'use', ['weight'] = 0.5 },
 	['r-dorfrex'] = { ['index'] = 'r-dorfrex', ['name'] = 'Receituário Dorfrex', ['type'] = 'use', ['weight'] = 0.5 },
 	['r-buscopom'] = { ['index'] = 'r-buscopom', ['name'] = 'Receituário Buscopom', ['type'] = 'use', ['weight'] = 0.5 },
-	
+	['headblock'] = { ['index'] = 'headblock', ['name'] = 'Headblock', ['type'] = 'use', ['weight'] = 0.1 },
+	['gesso'] = { ['index'] = 'gesso', ['name'] = 'Gesso', ['type'] = 'use', ['weight'] = 0.1 },
+	['cinta'] = { ['index'] = 'cinta', ['name'] = 'Cinta', ['type'] = 'use', ['weight'] = 0.1 },
+	['bandagem'] = { ['index'] = 'bandagem', ['name'] = 'Bandagem', ['type'] = 'use', ['weight'] = 0.1 },
 	--[ By-product ][ Methamphetamine production ]---------------------------------------------------------------------
 
 	['metanfetamina'] = { ['index'] = 'metanfetamina', ['name'] = 'Metanfetamina', ['type'] = 'use', ['weight'] = 0.5 },
