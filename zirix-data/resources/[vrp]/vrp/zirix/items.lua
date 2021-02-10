@@ -130,7 +130,10 @@ items.list = {
 	['r-trandrylux'] = { ['index'] = 'r-trandrylux', ['name'] = 'Receituário Trandrylux', ['type'] = 'use', ['weight'] = 0.5 },
 	['r-dorfrex'] = { ['index'] = 'r-dorfrex', ['name'] = 'Receituário Dorfrex', ['type'] = 'use', ['weight'] = 0.5 },
 	['r-buscopom'] = { ['index'] = 'r-buscopom', ['name'] = 'Receituário Buscopom', ['type'] = 'use', ['weight'] = 0.5 },
-	
+	['headblock'] = { ['index'] = 'headblock', ['name'] = 'Headblock', ['type'] = 'use', ['weight'] = 0.1 },
+	['gesso'] = { ['index'] = 'gesso', ['name'] = 'Gesso', ['type'] = 'use', ['weight'] = 0.1 },
+	['cinta'] = { ['index'] = 'cinta', ['name'] = 'Cinta', ['type'] = 'use', ['weight'] = 0.1 },
+	['bandagem'] = { ['index'] = 'bandagem', ['name'] = 'Bandagem', ['type'] = 'use', ['weight'] = 0.1 },
 	--[ By-product ][ Methamphetamine production ]---------------------------------------------------------------------
 
 	['metanfetamina'] = { ['index'] = 'metanfetamina', ['name'] = 'Metanfetamina', ['type'] = 'use', ['weight'] = 0.5 },
@@ -173,6 +176,12 @@ items.list = {
 	['corpo-fuzil'] = { ['index'] = 'corpo-fuzil', ['name'] = 'Corpo de Fuzil', ['type'] = 'use', ['weight'] = 0.5 },
 	['corpo-sub'] = { ['index'] = 'corpo-sub', ['name'] = 'Corpo de SUB', ['type'] = 'use', ['weight'] = 0.5 },
 	['corpo-pistola'] = { ['index'] = 'corpo-pistola', ['name'] = 'Corpo de Pistola', ['type'] = 'use', ['weight'] = 0.5 },
+
+	['corpo-ak47'] = { ['index'] = 'corpo-ak47', ['name'] = 'Corpo de AK-47', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-aks'] = { ['index'] = 'corpo-aks', ['name'] = 'Corpo de AKS', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-glock'] = { ['index'] = 'corpo-glock', ['name'] = 'Corpo de Glock', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-magnum44'] = { ['index'] = 'corpo-magnum44', ['name'] = 'Corpo de Magnum 44', ['type'] = 'use', ['weight'] = 0.5 },
+	['corpo-uzi'] = { ['index'] = 'corpo-uzi', ['name'] = 'Corpo de Uzi', ['type'] = 'use', ['weight'] = 0.5 },
 
 	--[ Miscellaneous ][ Weapons Production ]--------------------------------------------------------------------------
 	

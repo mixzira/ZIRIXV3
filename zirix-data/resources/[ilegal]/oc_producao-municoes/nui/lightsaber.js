@@ -1,3 +1,7 @@
+/*--------------------------------------------------------------------------------------------------------
+--[   Esse script foi desenvolvido pela equipe da Ziraflix Dev Group, por favor mantenha os créditos   ]--
+--[                     Contato: contato@ziraflix.com   Discord: discord.gg/6p3M3Cz                    ]--
+--------------------------------------------------------------------------------------------------------*/
 $(function() {
 	init();
   
@@ -5,56 +9,6 @@ $(function() {
   
 	window.addEventListener("message", function(event) {
 	  var item = event.data;
-	  
-	  if (item.cabeca == true) {
-		$('.cabeca').css('opacity', '1');   
-		$('.cabeca').css('background-image', 'url(img/cabeca2.png)');
-		$('.situacao').css('background-image', 'url(img/situacao.png)');  
-	  }
-
-	  if (item.perna == true) {
-		$('.perbra').css('opacity', '1');   
-		$('.perbra').css('background-image', 'url(img/permao2.png)');
-		$('.situacao').css('background-image', 'url(img/situacao2.png)');
-	  }
-
-	  if (item.pe == true) {
-		$('.pemao').css('opacity', '1');   
-		$('.pemao').css('background-image', 'url(img/mape2.png)');
-		$('.situacao').css('background-image', 'url(img/situacao3.png)');
-	  }
-
-	  if (item.torax == true) {
-		$('.coluna').css('opacity', '1');   
-		$('.coluna').css('background-image', 'url(img/coluna2.png)');
-		$('.situacao').css('background-image', 'url(img/situacao.png)');
-	  }
-
-	  if (item.cab == 1) {
-		$('.cabeca').css('opacity', '0.9');   
-		$('.cabeca').css('background-image', 'url(img/cabeca.png)'); 
-	  }
-
-	  if (item.per == 1) {
-		$('.perbra').css('opacity', '0.9');   
-		$('.perbra').css('background-image', 'url(img/permao.png)'); 
-	  }
-
-	  if (item.mao == 1) {
-		$('.pemao').css('opacity', '0.9');   
-		$('.pemao').css('background-image', 'url(img/mape.png)'); 
-	  }
-
-	  if (item.col == 1) {
-		$('.coluna').css('opacity', '0.9');   
-		$('.coluna').css('background-image', 'url(img/coluna.png)'); 
-	  }	
-
-	  if (item.sit == 1) {
-		$('.situacao').css('opacity', '0.9');   
-		$('.situacao').css('background-image', 'url(img/situacao4.png)'); 
-	  }	
-
   
 	  if (item.showmenu) {
 		ResetMenu();
@@ -83,14 +37,14 @@ $(function() {
   
 	  if (element.attr("data-parent")) {
 		element.hide();
-	  } {
+	  } else {
 		element.show();
 	  }
 	});
   }
   
   function init() {
-	$(".button").each(function(i, obj) {
+	$(".menuoption").each(function(i, obj) {
 	  if ($(this).attr("data-action")) {
 		$(this).click(function() {
 		  var data = $(this).data("action");
@@ -116,7 +70,7 @@ $(function() {
   }
   
   function sendData(name, data) {
-	$.post("http://medical_system/" + name, JSON.stringify(data), function(
+	$.post("http://oc_producao-municoes/" + name, JSON.stringify(data), function(
 	  datab
 	) {
 	  if (datab != "ok") {
@@ -148,6 +102,3 @@ $(function() {
 	}
 	setTimeout(showAll, 100);
   });
-
-
-  
