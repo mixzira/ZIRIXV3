@@ -6,7 +6,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-oC = Tunnel.getInterface("oc_producao-municoes")
+oC = Tunnel.getInterface("oc_producao-ammunition")
 
 
 local menuactive = false
@@ -29,19 +29,19 @@ end
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == config.button1 then
-		TriggerServerEvent("produzir-municao",config.weapons[1])
+		TriggerServerEvent("produzir-ammo",config.weapons[1])
 
 	elseif data == config.button2 then
-		TriggerServerEvent("produzir-municao",config.weapons[2])
+		TriggerServerEvent("produzir-ammo",config.weapons[2])
 
 	elseif data == config.button3 then
-		TriggerServerEvent("produzir-municao",config.weapons[3])
+		TriggerServerEvent("produzir-ammo",config.weapons[3])
 
 	elseif data == config.button4 then
-		TriggerServerEvent("produzir-municao",config.weapons[4])
+		TriggerServerEvent("produzir-ammo",config.weapons[4])
 
 	elseif data == config.button5 then
-		TriggerServerEvent("produzir-municao",config.weapons[5])
+		TriggerServerEvent("produzir-ammo",config.weapons[5])
 
 	elseif data == "fechar" then
 		ToggleActionMenu()
@@ -50,8 +50,8 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 
-RegisterNetEvent("fechar-nui-municao")
-AddEventHandler("fechar-nui-municao", function()
+RegisterNetEvent("fechar-nui-ammo")
+AddEventHandler("fechar-nui-ammo", function()
 	ToggleActionMenu()
 	onmenu = false
 end)
@@ -71,7 +71,7 @@ Citizen.CreateThread(function()
 			local idBancada = config.prodMachine[id]
 
 			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), prodMachine.x, prodMachine.y, prodMachine.z, true ) < 1.2 and not onmenu then
-				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE MUNICAO~w~.",4,0.5,0.92,0.35,255,255,255,180)
+				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE ammo~w~.",4,0.5,0.92,0.35,255,255,255,180)
 			end
 			if distance <= 5 then
 				DrawMarker(23, prodMachine.x, prodMachine.y, prodMachine.z-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)			

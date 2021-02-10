@@ -7,13 +7,13 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 oC = {}
-Tunnel.bindInterface("oc_producao-armas",oC)
+Tunnel.bindInterface("oc_producao-weapons",oC)
 
 -----------------------------------------------------------------------------------------------------------------------------------
 --[ EVENTOS ]----------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("produzir-arma")
-AddEventHandler("produzir-arma",function(item)
+RegisterServerEvent("produzir-weapon")
+AddEventHandler("produzir-weapon",function(item)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
