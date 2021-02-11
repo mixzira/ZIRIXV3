@@ -13,17 +13,8 @@ function ToggleActionMenu()
 end
 
 RegisterNUICallback("ButtonClick",function(data,cb)
-	if data == "pegar-headblock" then
-		TriggerServerEvent("medical-pegar","headblock")
-
-	elseif data == "pegar-gesso" then
-		TriggerServerEvent("medical-pegar","gesso")
-
-	elseif data == "pegar-bandagem" then
-		TriggerServerEvent("medical-pegar","bandagem")
-
-	elseif data == "pegar-cinta" then
-		TriggerServerEvent("medical-pegar","cinta")
+	if data == "pegar-repairkit" then
+		TriggerServerEvent("mecanic-pegar","repairkit")
 	
 	elseif data == "fechar" then
 		ToggleActionMenu()
@@ -32,7 +23,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 local lojas = {
-	{ ['x'] = 295.7, ['y'] = -591.77, ['z'] = 43.27 },
+	{ ['x'] = -319.41, ['y'] = -131.93, ['z'] = 38.98 },
 }
 
 Citizen.CreateThread(function()
@@ -55,7 +46,7 @@ Citizen.CreateThread(function()
 				DrawMarker(23, lojas.x, lojas.y, lojas.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
 				idle = 5
 				if distance <= 1.2 then
-					if vRPex.checkPermission("ems.per") then
+					if vRPex.checkPermission("mecanico.permissao") then
 						if IsControlJustPressed(0,38) then
 							ToggleActionMenu()
 						end
