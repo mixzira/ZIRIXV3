@@ -155,15 +155,15 @@ Citizen.CreateThread(function()
 							drawTxt("PRESSIONE  ~p~E~w~  PARA INICIAR O SERVIÇO",4,0.5,0.92,0.35,255,255,255,180)
 							if IsControlJustPressed(1,38) then
 								CalculateTimeToDisplay6()
-                                if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
+                                --if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
                                     if lastVehicle == GetHashKey(configtrucker.truck) or lastVehicle == GetHashKey(configtrucker.truck1) then
 										ToggleActionMenu()
 									else
                                         TriggerEvent("Notify","importante","Necessario um caminhao para iniciar.",8000)
                                     end
-								else
-									TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
-								end
+								--else
+									--TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
+								--end
 							end
 						end
 					end
@@ -189,7 +189,7 @@ Citizen.CreateThread(function()
 					criandoblip(configtrucker.routegas[entrega].x, configtrucker.routegas[entrega].y, configtrucker.routegas[entrega].z)
 					criado = true
 				end
-				if distance <= 50.0 then
+				if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), configtrucker.routegas[entrega].x,configtrucker.routegas[entrega].y,configtrucker.routegas[entrega].z, true ) < 50 then
 					idle = 5
 					DrawMarker(23,configtrucker.routegas[entrega].x, configtrucker.routegas[entrega].y, configtrucker.routegas[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
 					if distance <= 10.0 then
@@ -230,7 +230,9 @@ Citizen.CreateThread(function()
 					criandoblip(configtrucker.routewood[entrega].x, configtrucker.routewood[entrega].y, configtrucker.routewood[entrega].z)
 					criado = true
 				end
-				if distance <= 10.0 then
+				if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), configtrucker.routewood[entrega].x,configtrucker.routewood[entrega].y,configtrucker.routewood[entrega].z, true ) < 50 then
+					idle = 5
+					DrawMarker(23,configtrucker.routewood[entrega].x, configtrucker.routewood[entrega].y, configtrucker.routewood[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
 					if IsControlJustPressed(0,38) then
 						if not IsPedInAnyVehicle(ped) then
 							local vehicle = getVehicleInDirection(GetEntityCoords(PlayerPedId()),GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,5.0,0.0))

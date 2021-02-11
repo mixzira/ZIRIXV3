@@ -212,6 +212,9 @@ function vRPN.useItem(itemName,type,ramount)
 				local consulta = vRP.getUData(user_id,"vRP:plano")
 				local resultado = json.decode(consulta) or {}
 				local plan = {}
+				if resultado.tempo == nil then
+					resultado.tempo = 0
+				end
 				if resultado.tempo > 0 then
 					resultado = resultado.tempo/1440 or 0
 					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
@@ -229,6 +232,9 @@ function vRPN.useItem(itemName,type,ramount)
 				local consulta = vRP.getUData(user_id,"vRP:plano")
 				local resultado = json.decode(consulta) or {}
 				local plan = {}
+				if resultado.tempo == nil then
+					resultado.tempo = 0
+				end
 				if resultado.tempo > 0 then
 					resultado = resultado.tempo/1440 or 0
 					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
@@ -246,6 +252,9 @@ function vRPN.useItem(itemName,type,ramount)
 				local consulta = vRP.getUData(user_id,"vRP:plano")
 				local resultado = json.decode(consulta) or {}
 				local plan = {}
+				if resultado.tempo == nil then
+					resultado.tempo = 0
+				end
 				if resultado.tempo > 0 then
 					resultado = resultado.tempo/1440 or 0
 					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")
@@ -263,6 +272,9 @@ function vRPN.useItem(itemName,type,ramount)
 				local consulta = vRP.getUData(user_id,"vRP:plano")
 				local resultado = json.decode(consulta) or {}
 				local plan = {}
+				if resultado.tempo == nil then
+					resultado.tempo = 0
+				end
 				if resultado.tempo > 0 then
 					resultado = resultado.tempo/1440 or 0
 					TriggerClientEvent("Notify",source,"negado","Você já tem um plano ativo no momento, com <b>"..math.ceil(resultado).." dias restantes</b>.")

@@ -66,7 +66,7 @@ function init() {
 }
 
 function sendData(name, data) {
-    $.post("http://zirixmesclados/" + name, JSON.stringify(data), function(
+    $.post("http://emp_miner-foundry/" + name, JSON.stringify(data), function(
         datab
     ) {
         if (datab != "ok") {

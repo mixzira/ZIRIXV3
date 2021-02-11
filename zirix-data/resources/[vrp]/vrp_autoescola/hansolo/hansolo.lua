@@ -24,7 +24,7 @@ Citizen.CreateThread(function()
             idle = 5
         end
         
-        if distance < 1.5 then
+        if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), 226.11, 375.24, 106.12, true ) < 1.5 then
             if IsControlJustPressed(0,38) then
                 if dmv.checkcarlicense() then
                     if dmv.pagamento() and dmv.checkTime() and not emaula then

@@ -29,7 +29,7 @@ AddEventHandler("fundir",function(item)
 			if item == v.bar then
                 if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(item) <= vRP.getInventoryMaxWeight(user_id) then
                     if vRP.tryGetInventoryItem(user_id,v.ore,v.oreAmmount) then
-                        TriggerClientEvent("fechar-nui",source)
+                        TriggerClientEvent("fechar-nui-foundry",source)
 
                         TriggerClientEvent("progress",source,10000,"Fundindo")
                         vRPclient._playAnim(source,false,{{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"}},true)

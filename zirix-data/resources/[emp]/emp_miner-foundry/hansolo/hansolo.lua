@@ -50,8 +50,8 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 
-RegisterNetEvent("fechar-nui")
-AddEventHandler("fechar-nui", function()
+RegisterNetEvent("fechar-nui-foundry")
+AddEventHandler("fechar-nui-foundry", function()
 	ToggleActionMenu()
 end)
 
