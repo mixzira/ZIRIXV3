@@ -8,14 +8,14 @@ ui_page 'nui/darkside.html'
 
 client_scripts {
 	'@vrp/lib/utils.lua',
-	'hansolo/hansolo.lua',
-	'config/config.lua'
+	'config/config.lua',
+	'hansolo/hansolo.lua'
 }
 
 server_scripts {
 	'@vrp/lib/utils.lua',
-	'skywalker.lua',
-	'config/config.lua'
+	'config/config.lua',
+	'skywalker.lua'
 }
 
 files {
@@ -23,16 +23,5 @@ files {
 	'nui/*.js',
 	'nui/*.css',
     
-	'nui/img/cabeca.png',
-	'nui/img/cabeca2.png',
-	'nui/img/coluna.png',
-	'nui/img/coluna2.png',
-	'nui/img/permao.png',
-	'nui/img/permao2.png',
-	'nui/img/mape.png',
-	'nui/img/mape2.png',
-	'nui/img/situacao.png',
-	'nui/img/situacao2.png',
-	'nui/img/situacao3.png',
-	'nui/img/situacao4.png'
+	'nui/img/*.png',
 }
