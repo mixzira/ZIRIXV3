@@ -4,7 +4,7 @@ vRP = Proxy.getInterface("vRP")
 
 --[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
 
-emp3 = Tunnel.getInterface("vrp_milkman-delivery")
+emp3 = Tunnel.getInterface("vrp_farmer-delivery")
 
 --[ VARIABLES ]-----------------------------------------------------------------------------------------------------------------
 
@@ -30,25 +30,33 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if not IsPedInAnyVehicle(ped) then
 			local x,y,z = table.unpack(GetEntityCoords(ped))
-			local bowz,cdz = GetGroundZFor_3dCoord(configmilkmand.ini.x,configmilkmand.ini.y,configmilkmand.ini.z)
-			local distance = Vdist(configmilkmand.ini.x,configmilkmand.ini.y,configmilkmand.ini.z,x,y,z)
+			local bowz,cdz = GetGroundZFor_3dCoord(configfarmerd.ini.x,configfarmerd.ini.y,configfarmerd.ini.z)
+			local distance = Vdist(configfarmerd.ini.x,configfarmerd.ini.y,configfarmerd.ini.z,x,y,z)
 			local lastVehicle = GetEntityModel(GetPlayersLastVehicle())
 			if distance < 15.1 then
 				idle = 5
-				DrawMarker(23,configmilkmand.ini.x,configmilkmand.ini.y,configmilkmand.ini.z-0.97,0,0,0,0,0,0,1.0,1.0,0.5,136, 96, 240, 180,0,0,0,0)
+				DrawMarker(23,configfarmerd.ini.x,configfarmerd.ini.y,configfarmerd.ini.z-0.97,0,0,0,0,0,0,1.0,1.0,0.5,136, 96, 240, 180,0,0,0,0)
 				if distance <= 1.2 then
 					drawTexts("PRESSIONE  ~b~E~w~  PARA INICIAR ENTREGAS",4,0.5,0.92,0.35,255,255,255,180)
-					if IsControlJustPressed(1,38) and lastVehicle == configmilkmand.lastve and emp3.checkPlate(lastVehicle) and emp3.checkCrimeRecord() then
-						if not working then
-							CalculateTimeToDisplay3()
-							if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
-								working = true
-								check = math.random(#configmilkmand.deliverys)
-								makeBlipsServices2()
-								TriggerEvent("Notify","sucesso","Entregas iniciada com <b>sucesso</b>.",8000)
+					if IsControlJustPressed(1,38) then
+						if lastVehicle == configfarmerd.lastve and emp3.checkPlate(lastVehicle) then
+							if emp3.checkCrimeRecord() then
+								if not working then
+									CalculateTimeToDisplay3()
+									if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
+										working = true
+										check = math.random(#configfarmerd.deliverys)
+										makeBlipsServices2()
+										TriggerEvent("Notify","sucesso","Entregas iniciada com <b>sucesso</b>.",8000)
+									else
+										TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
+									end
+								end
 							else
-								TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
+								TriggerEvent("Notify","importante","Sua ficha criminal se encontra suja.",8000)
 							end
+						else
+							TriggerEvent("Notify","importante","Veiculo inválido.",8000)
 						end
 					end
 				end
@@ -67,20 +75,20 @@ Citizen.CreateThread(function()
 		if working then
 			if not IsPedInAnyVehicle(ped) then
 				local x,y,z = table.unpack(GetEntityCoords(ped))
-				local distance = Vdist(configmilkmand.deliverys[check][1],configmilkmand.deliverys[check][2],configmilkmand.deliverys[check][3],x,y,z)
+				local distance = Vdist(configfarmerd.deliverys[check][1],configfarmerd.deliverys[check][2],configfarmerd.deliverys[check][3],x,y,z)
 				local lastVehicle = GetEntityModel(GetPlayersLastVehicle())local lastVehicle = GetEntityModel(GetPlayersLastVehicle())
 				if distance < 15.1 then
 					idle = 5
-					DrawMarker(21,configmilkmand.deliverys[check][1],configmilkmand.deliverys[check][2],configmilkmand.deliverys[check][3]-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,136, 96, 240, 180,0,0,0,1)
+					DrawMarker(21,configfarmerd.deliverys[check][1],configfarmerd.deliverys[check][2],configfarmerd.deliverys[check][3]-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,136, 96, 240, 180,0,0,0,1)
 					if distance <= 1.2 then
-						drawTexts("PRESSIONE  ~b~E~w~  PARA ENTREGAR GARRAFAS DE LEITE",4,0.5,0.93,0.50,255,255,255,180)
+						drawTexts("PRESSIONE  ~b~E~w~  PARA ENTREGAR GRAOS",4,0.5,0.93,0.50,255,255,255,180)
 						if IsControlJustPressed(1,38) and lastVehicle == 1026149675 and emp3.checkPlate(lastVehicle) and emp3.checkCrimeRecord() then
 							
 							CalculateTimeToDisplay3()
 							if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
 								if emp3.startPayments() then
 									RemoveBlip(blips)
-									check = math.random(#configmilkmand.deliverys)
+									check = math.random(#configfarmerd.deliverys)
 									makeBlipsServices2()
 								end
 							else
@@ -122,7 +130,7 @@ function drawTexts(text,font,x,y,scale,r,g,b,a)
 end
 
 function makeBlipsServices2()
-	blips = AddBlipForCoord(configmilkmand.deliverys[check][1],configmilkmand.deliverys[check][2],configmilkmand.deliverys[check][3])
+	blips = AddBlipForCoord(configfarmerd.deliverys[check][1],configfarmerd.deliverys[check][2],configfarmerd.deliverys[check][3])
 	SetBlipSprite(blips,1)
 	SetBlipColour(blips,27)
 	SetBlipScale(blips,0.4)

@@ -180,7 +180,7 @@ Citizen.CreateThread(function()
 			for k,v in pairs(config.atmrobbery) do
 				if Vdist(v.x,v.y,v.z,x,y,z) <= 1 and not andamento then
 					idle = 5
-					if IsControlJustPressed(0,47) and bank.checkPermission() then
+					if IsControlJustPressed(0,47) and banK.checkPermission() then
 						bank.checkRobbery(v.id,v.x,v.y,v.z,v.h)
 					end
 				end

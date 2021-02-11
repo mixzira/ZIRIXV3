@@ -371,6 +371,7 @@ local garages = {
 	[622] = { ['name'] = "Hotel-pessoal", ['payment'] = true, ['perm'] = "hotel.permissao" },
 
 	[623] = { ['name'] = "Caminhoneiro", ['payment'] = false, ['public'] = true },
+	[624] = { ['name'] = "Farmer", ['payment'] = false, ['public'] = true },
 }
 
 --[ GARAGEMS ]---------------------------------------------------------------------------------------------------------------------------
@@ -416,6 +417,10 @@ local workgarage = {
 	},
 	["Ems-heliponto"] = {
 		"paramedicoheli"
+	},
+	["Farmer"] = {
+		"tractor2",
+		"youga2"
 	}
 }
 

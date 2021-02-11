@@ -87,7 +87,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
-		if servico and IsControlJustPressed(1,121) then
+		if servico and IsControlJustPressed(1,168) then
 			servico = false
 			RemoveBlip(blips)
 			TriggerEvent("Notify","importante","Você saiu de serviço",8000)

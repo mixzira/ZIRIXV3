@@ -144,6 +144,20 @@ server_scripts {
 	'emp_farmer/skywalker.lua'
 }
 
+---[ FAZENDEIRO ENTREGAS ]----------------------------------------------------------------
+
+client_scripts {
+	'@vrp/lib/utils.lua',
+	'emp_farmer-delivery/config/configfarmerd.lua',
+	'emp_farmer-delivery/hansolo/*.lua'
+}
+
+server_scripts {
+	'@vrp/lib/utils.lua',
+	'emp_farmer-delivery/config/configfarmerd.lua',
+	'emp_farmer-delivery/skywalker.lua'
+}
+
 ---[ TAXISTA ]-------------------------------------------------------------
 
 ui_page 'emp_taxista/html/ui.html'

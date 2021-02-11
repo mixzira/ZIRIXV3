@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
 						if GetSelectedPedWeapon(ped) == GetHashKey(configlumberjack.axe) or GetSelectedPedWeapon(ped) == GetHashKey(configlumberjack.axe) then
 							if IsControlJustPressed(0,38) and emp7.checkPayment() then
 								CalculateTimeToDisplay7()
-								if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
+								--if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
 									if emp7.checkPayment() then
 										list[i] = true
 										processo = true
@@ -49,9 +49,9 @@ Citizen.CreateThread(function()
 										vRP._playAnim(false,{{"melee@hatchet@streamed_core","plyr_front_takedown_b"}},true)
 										TriggerEvent('cancelando',true)
 									end
-								else
-									TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
-								end
+								--else
+									--TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
+								--end
 							end
 						end
 					end
