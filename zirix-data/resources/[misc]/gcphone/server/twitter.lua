@@ -2,24 +2,24 @@ function TwitterGetTweets (accountId, cb)
   if accountId == nil then
     MySQL.Async.fetchAll([===[
       SELECT twitter_tweets.*,
-      twitter_accounts.username as author,
-      twitter_accounts.avatar_url as authorIcon
+        twitter_accounts.username as author,
+        twitter_accounts.avatar_url as authorIcon
       FROM twitter_tweets
-      LEFT JOIN twitter_accounts
-      ON twitter_tweets.authorId = twitter_accounts.id
+        LEFT JOIN twitter_accounts
+        ON twitter_tweets.authorId = twitter_accounts.id
       ORDER BY time DESC LIMIT 130
       ]===], {}, cb)
   else
     MySQL.Async.fetchAll([===[
       SELECT twitter_tweets.*,
-      twitter_accounts.username as author,
-      twitter_accounts.avatar_url as authorIcon,
-      twitter_likes.id AS isLikes
+        twitter_accounts.username as author,
+        twitter_accounts.avatar_url as authorIcon,
+        twitter_likes.id AS isLikes
       FROM twitter_tweets
-      LEFT JOIN twitter_accounts
-      ON twitter_tweets.authorId = twitter_accounts.id
-      LEFT JOIN twitter_likes 
-      ON twitter_tweets.id = twitter_likes.tweetId AND twitter_likes.authorId = @accountId
+        LEFT JOIN twitter_accounts
+          ON twitter_tweets.authorId = twitter_accounts.id
+        LEFT JOIN twitter_likes
+          ON twitter_tweets.id = twitter_likes.tweetId AND twitter_likes.authorId = @accountId
       ORDER BY time DESC LIMIT 130
     ]===], { ['@accountId'] = accountId }, cb)
   end
@@ -246,17 +246,17 @@ end)
 
 RegisterServerEvent('gcPhone:twitter_getTweets')
 AddEventHandler('gcPhone:twitter_getTweets', function(username, password)
-  local sourcePlayer = tonumber(source)
+  local source = source
   if username ~= nil and username ~= "" and password ~= nil and password ~= "" then
     getUser(username, password, function (user)
       local accountId = user and user.id
       TwitterGetTweets(accountId, function (tweets)
-        TriggerClientEvent('gcPhone:twitter_getTweets', sourcePlayer, tweets)
+        TriggerClientEvent('gcPhone:twitter_getTweets', source, tweets)
       end)
     end)
   else
     TwitterGetTweets(nil, function (tweets)
-      TriggerClientEvent('gcPhone:twitter_getTweets', sourcePlayer, tweets)
+      TriggerClientEvent('gcPhone:twitter_getTweets', source, tweets)
     end)
   end
 end)
