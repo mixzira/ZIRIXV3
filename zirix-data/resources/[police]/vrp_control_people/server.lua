@@ -263,7 +263,7 @@ RegisterCommand('teste2',function(source,args,rawCommand)
     print(user_id)
     print(nplayer)
     if nplayer then
-        local veh, npcsHealth = funcClient.sendServer()
+        local veh, npcsHealth = funcCliente.sendServer()
         print(veh)
         print(npcsHealth)
     end
