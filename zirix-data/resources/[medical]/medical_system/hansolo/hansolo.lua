@@ -11,7 +11,7 @@ local han = 0
 local col = 0
 local sit = 0
 
-RegisterCommand("diagnostico",function()
+RegisterCommand(config.diagnosticPlayer,function()
 	vSERVER.checkOfficer()
 	ToggleActionMenu()
 	SendNUIMessage({
@@ -193,14 +193,10 @@ AddEventHandler("tratamento",function()
     local ped = PlayerPedId()
     local health = GetEntityHealth(ped)
     local armour = GetPedArmour(ped)
-
     local x,y,z = table.unpack(GetEntityCoords(ped))
-    --NetworkResurrectLocalPlayer(x,y,z,GetEntityHeading(ped),true,false)
     SetEntityHealth(ped,health)
     SetPedArmour(ped,armour)
-
 	tratamento = true   
-
 	if tratamento then
 		repeat
 			Citizen.Wait(600)
@@ -232,9 +228,7 @@ function src.killGod()
 	ClearPedTasks(ped)
 	ClearPedSecondaryTask(ped)
 end
------------------------------------------------------------------------------------------------------------------------------------------
--- FUNÇÕES
------------------------------------------------------------------------------------------------------------------------------------------
+
 function drawTxt(text,font,x,y,scale,r,g,b,a)
 	SetTextFont(font)
 	SetTextScale(scale,scale)

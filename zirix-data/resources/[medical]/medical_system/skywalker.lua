@@ -1,5 +1,6 @@
 local Tunnel = module('vrp','lib/Tunnel')
 local Proxy = module('vrp','lib/Proxy')
+local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface('vRP')
 vRPclient = Tunnel.getInterface('vRP')
 
@@ -7,6 +8,7 @@ src = {}
 Tunnel.bindInterface('medical_system',src)
 vCLIENT = Tunnel.getInterface('medical_system')
 
+local idgens = Tools.newIDGenerator()
 local morto = false
 
 local bones = {
@@ -103,6 +105,17 @@ function src.checkOfficer()
 	end
 end
 
+function src.checkServices()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local paramedicos = vRP.getUsersByPermission(config.medicpermission)
+		if parseInt(#paramedicos) == 0 then
+			return true
+		end
+	end
+end
+
 	local headTwo = false
 	local breastTwo = false
 	local legsTwo = false
@@ -158,7 +171,7 @@ end
 
 
 
-RegisterCommand('tratamento',function(source,args,rawCommand)
+RegisterCommand(config.treatment,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local medico = user_id
     if vRP.hasPermission(user_id,config.medicpermission) then
@@ -235,7 +248,7 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
     end
 end)
 
-RegisterCommand('re',function(source,args,rawCommand)
+RegisterCommand(config.revive,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,config.medicpermission) then
 		local nplayer = vRPclient.getNearestPlayer(source,2)
@@ -260,14 +273,3 @@ RegisterCommand('re',function(source,args,rawCommand)
 		end
 	end
 end)
-
-function src.checkServices()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		local paramedicos = vRP.getUsersByPermission(config.medicpermission)
-		if parseInt(#paramedicos) == 0 then
-			return true
-		end
-	end
-end
