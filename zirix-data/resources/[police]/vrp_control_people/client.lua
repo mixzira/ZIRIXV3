@@ -296,7 +296,7 @@ function funcClient.carroPrisao(id, tempo)
             end
         end)
     end
-    return nveh, npcsHealth
+    return nveh
 end
 
 Citizen.CreateThread(function()

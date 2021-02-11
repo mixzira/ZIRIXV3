@@ -263,5 +263,7 @@ RegisterCommand('liberar',function(source,args,rawCommand)
     end
 end)
 
--- Distancia do nveh
--- Check item 
+-- Checar se o carro que o user_id esta perto é o nveh
+-- Checar a distancia do nveh e o user_id para abrir
+-- Checar se ele tem item necessário
+-- Adicionar uma função que depois de X tempo deletar o carro 
