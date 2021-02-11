@@ -6,41 +6,41 @@ $(function() {
 	window.addEventListener("message", function(event) {
 	  var item = event.data;
 	  
-	  if (item.cabeca == true) {
+	  if (item.head == true) {
 		$('.cabeca').css('opacity', '1');   
 		$('.cabeca').css('background-image', 'url(img/cabeca2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao.png)');  
 	  }
 
-	  if (item.perna == true) {
+	  if (item.legs == true) {
 		$('.perbra').css('opacity', '1');   
 		$('.perbra').css('background-image', 'url(img/permao2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao2.png)');
 	  }
 
-	  if (item.pe == true) {
+	  if (item.foot == true) {
 		$('.pemao').css('opacity', '1');   
 		$('.pemao').css('background-image', 'url(img/mape2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao3.png)');
 	  }
 
-	  if (item.torax == true) {
+	  if (item.breast == true) {
 		$('.coluna').css('opacity', '1');   
 		$('.coluna').css('background-image', 'url(img/coluna2.png)');
 		$('.situacao').css('background-image', 'url(img/situacao.png)');
 	  }
 
-	  if (item.cab == 1) {
+	  if (item.hea == 1) {
 		$('.cabeca').css('opacity', '0.9');   
 		$('.cabeca').css('background-image', 'url(img/cabeca.png)'); 
 	  }
 
-	  if (item.per == 1) {
+	  if (item.leg == 1) {
 		$('.perbra').css('opacity', '0.9');   
 		$('.perbra').css('background-image', 'url(img/permao.png)'); 
 	  }
 
-	  if (item.mao == 1) {
+	  if (item.han == 1) {
 		$('.pemao').css('opacity', '0.9');   
 		$('.pemao').css('background-image', 'url(img/mape.png)'); 
 	  }

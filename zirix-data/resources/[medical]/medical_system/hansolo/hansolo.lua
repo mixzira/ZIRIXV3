@@ -5,9 +5,9 @@ src = {}
 Tunnel.bindInterface("medical_system",src)
 vSERVER = Tunnel.getInterface("medical_system")
 
-local cab = 0
-local per = 0
-local mao = 0
+local hea = 0
+local leg = 0
+local han = 0
 local col = 0
 local sit = 0
 
@@ -15,9 +15,9 @@ RegisterCommand("diagnostico",function()
 	vSERVER.checkOfficer()
 	ToggleActionMenu()
 	SendNUIMessage({
-		cab = 1,
-		per = 1,
-		mao = 1,
+		hea = 1,
+		leg = 1,
+		han = 1,
 		col = 1,
 		sit = 1,
 	});
@@ -39,17 +39,12 @@ end
 
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "rem-kit" then
-		print("teste")
-		local cabeca, perna, pe, torax = vSERVER.raiox()
-		print(cabeca)
-		print(perna) 
-		print(pe)
-		print(torax)
+		local head, legs, foot, breast = vSERVER.raiox()
 		SendNUIMessage({
-			cabeca = cabeca,
-			perna = perna,
-			pe = pe,
-			torax = torax,
+			head = head,
+			legs = legs,
+			foot = foot,
+			breast = breast,
 		});
 		
 	elseif data == "close" then
@@ -69,7 +64,6 @@ Citizen.CreateThread(function()
 			local hit,bone = GetPedLastDamageBone(ped)						
 			if hit and not damaged[bone] and bone ~= 0 and not teste then
 				damaged[bone] = true
-				print(json.encode(damaged,{indent = true})) 
 				bleeding = bleeding + 1
 			end
 		end
@@ -79,9 +73,7 @@ end)
 
 function src.getDiagnostic()
 	for k,v in pairs(damaged) do
-		print("--")
-		print(k)
-		print("--")
+		print(".")
 	end	
 	return damaged
 end
@@ -129,21 +121,16 @@ AddEventHandler("resetDiagnostic",function()
 	teste = true
 	damaged = {}
 	Wait(1000)
-	print("diagnostic")
-	print(json.encode(damaged,{indent = true})) 
 	teste = false
-	print(json.encode(teste,{indent = true})) 
 end)
 
 RegisterNetEvent("resetBleeding")
 AddEventHandler("resetBleeding",function()
-	print("bleeding")
 	bleeding = 0
 end)
 
 RegisterNetEvent("resetWarfarina")
 AddEventHandler("resetWarfarina",function()
-	print("warfarina")
 	repeat
 		Citizen.Wait(15000)
 		bleeding = bleeding - 1
@@ -151,9 +138,6 @@ AddEventHandler("resetWarfarina",function()
 		TriggerEvent("Notify","importante","Sangramento paralisado.",8000)
 end)
 
------------------------------------------------------------------------------------------------------------------------------------------
--- DEITANDO
------------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000

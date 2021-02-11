@@ -98,44 +98,40 @@ end
 function src.checkOfficer()
 	local src = source
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id,'ems.permissao') or vRP.hasPermission(user_id,'manager.permissao') then
+	if vRP.hasPermission(user_id,config.medicpermission) then
 		return true
 	end
 end
 
-	local cabeca2 = false
-	local torax2 = false
-	local perna2 = false
-	local pes2 = false
+	local headTwo = false
+	local breastTwo = false
+	local legsTwo = false
+	local footTwo = false
 	
 function src.raiox()
     local source = source
 	local user_id = vRP.getUserId(source)
 	local nplayer = vRPclient.getNearestPlayer(source,2)
 	local nuser_id = vRP.getUserId(nplayer)
-	local cabeca = false
-	local torax = false
-	local perna = false
-	local pe = false
+	local head = false
+	local breast = false
+	local legs = false
+	local foot = false
 	if nplayer then
 		local diagnostic = vCLIENT.getDiagnostic(nplayer)
-		print(json.encode(diagnostic, {indent = true})) 
 		for k,v in pairs(diagnostic) do
 			if morto == false then
 				if diagnostic then
-
 					if k == 31086 or k == 12844 or k == 65068 or k == 39317 then -- cabeca/pescoco
-						cabeca = true
-						cabeca2 = true
-						print("1")
+						head = true
+						headTwo = true
 					end
 					if k == 58271 or k == 51826 or k == 23639 or k == 6442 or k == 45509 or k == 61163
 						or k == 61007 or k == 5232 or k == 40269 or k == 28252 or k == 43810 or k == 37119
 						or k == 22711 or k == 2992 or k == 11816 or k == 63931 or k == 36864 or k == 46078 
 						or k == 16335 then --Pernas/coxas/bracos/antebracos/cotovelos/pelvis/panturrilha/joelho
-						perna = true
-						perna2 = true
-						print("2")
+						legs = true
+						legsTwo = true
 					end
 					if k == 2108 or k == 20781 or k == 26610 or k == 4089 or k == 4090 or k == 26611 
 						or k == 4169 or k == 4170 or k == 26612 or k == 4185 or k == 4186 or k == 26613 
@@ -145,20 +141,18 @@ function src.raiox()
 						or k == 64080 or k == 64081 or k == 18905 or k == 60309 or k == 36029 or k == 57005
 						or k == 28422 or k == 6286 or k == 14201 or k == 65245 or k == 57717 or k == 52301 
 						or k == 35502 or k == 24806 then -- pé/mão/dedo do pé/mão
-						pe = true
-						pe2 = true
-						print("3")
+						foot = true
+						footTwo = true
 					end
 					if k == 57597 or k == 23553 or k == 24816 or k == 24817 or k == 24818 or k == 64729 
 						or k == 10706 then --Escapula/Espinhas cervicais/lobar/chacal
-						torax = true
-						torax2 = true
-						print("4")
+						breast = true
+						breastTwo = true
 					end
 				end
 			end
 		end
-		return cabeca, perna, pe, torax 
+		return head, legs, foot, breast 
 	end
 end
 
@@ -167,14 +161,19 @@ end
 RegisterCommand('tratamento',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local medico = user_id
-    if vRP.hasPermission(user_id,"ems.permissao") then
-		local nplayer = vRP.getUserSource(parseInt(args[1]))
+    if vRP.hasPermission(user_id,config.medicpermission) then
+		local nplayer = vRPclient.getNearestPlayer(source,2)
         if nplayer then
 			local vida = vRPclient.getHealth(nplayer)
 			if vida >=103 then
-				if cabeca2 == true then
+				if headTwo == true then
 					if vRP.tryGetInventoryItem(user_id, "headblock",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de coluna iniciado.",8000)
+						TriggerClientEvent("tratamento",nplayer)
+						TriggerClientEvent("resetDiagnostic",nplayer)
+						TriggerClientEvent("resetBleeding",nplayer)
+						TriggerClientEvent("resetWarfarina",nplayer)
+						headTwo = false
 					
 					else 
 						TriggerClientEvent("Notify",source,"negado","Você não possui o item necessario",8000)
@@ -183,9 +182,14 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 				else
 					TriggerClientEvent("Notify",source,"negado","A cabeça não está machucada.",8000)
 				end
-				if perna2 == true then
+				if legsTwo == true then
 					if vRP.tryGetInventoryItem(user_id, "gesso",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de braços/pernas iniciado.",8000)
+						TriggerClientEvent("tratamento",nplayer)
+						TriggerClientEvent("resetDiagnostic",nplayer)
+						TriggerClientEvent("resetBleeding",nplayer)
+						TriggerClientEvent("resetWarfarina",nplayer)
+						legsTwo = false
 					
 					else
 						TriggerClientEvent("Notify",source,"negado","Você não possui o item necessario",8000)
@@ -194,9 +198,14 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 				else
 					TriggerClientEvent("Notify",source,"negado","Os braços/pernas não estão machucados.",8000)
 				end
-				if pe2 == true then
+				if footTwo == true then
 					if vRP.tryGetInventoryItem(user_id, "bandagem",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de mãos/pés iniciado.",8000)
+						TriggerClientEvent("tratamento",nplayer)
+						TriggerClientEvent("resetDiagnostic",nplayer)
+						TriggerClientEvent("resetBleeding",nplayer)
+						TriggerClientEvent("resetWarfarina",nplayer)
+						footTwo = false
 					
 					else
 						TriggerClientEvent("Notify",source,"negado","Você não possui o item necessario",8000)
@@ -205,9 +214,14 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 				else
 					TriggerClientEvent("Notify",source,"negado","As mãos/pés não estão machucados.",8000)
 				end
-				if torax2 == true then
+				if breastTwo == true then
 					if vRP.tryGetInventoryItem(user_id, "cinta",1) then
 						TriggerClientEvent("Notify",source,"sucesso","Tratamento de torax iniciado.",8000)
+						TriggerClientEvent("tratamento",nplayer)
+						TriggerClientEvent("resetDiagnostic",nplayer)
+						TriggerClientEvent("resetBleeding",nplayer)
+						TriggerClientEvent("resetWarfarina",nplayer)
+						breastTwo = false
 					
 					else
 						TriggerClientEvent("Notify",source,"negado","Você não possui o item necessario",8000)
@@ -216,21 +230,6 @@ RegisterCommand('tratamento',function(source,args,rawCommand)
 				else
 					TriggerClientEvent("Notify",source,"negado","O torax não está machucado.",8000)
 				end
-				if cabeca2 or perna2 or pe2 or torax2 then
-					TriggerClientEvent("Notify",nplayer,"sucesso","Tratamento iniciado, aguarde a liberação do paramédico.",8000)
-						
-					TriggerClientEvent("tratamento",nplayer)
-					
-					TriggerClientEvent("Notify",source,"sucesso","Tentando tratar o paciente.",10000)					
-						
-					TriggerClientEvent("resetDiagnostic",nplayer)
-					TriggerClientEvent("resetBleeding",nplayer)
-					TriggerClientEvent("resetWarfarina",nplayer)
-					cabeca2 = false
-					perna2 = false
-					pe2 = false
-					torax2 = false
-				end
             end
         end
     end
@@ -238,7 +237,7 @@ end)
 
 RegisterCommand('re',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"ems.permissao") then
+	if vRP.hasPermission(user_id,config.medicpermission) then
 		local nplayer = vRPclient.getNearestPlayer(source,2)
 		if nplayer then
 			if vRPclient.isInComa(nplayer) then
@@ -252,7 +251,7 @@ RegisterCommand('re',function(source,args,rawCommand)
 					vRPclient.killGod(nplayer)
 					vRPclient._stopAnim(source,false)
 					TriggerClientEvent("resetBleeding",nplayer)
-					TriggerClientEvent("Notify",source,"importante","O paciente ainda tem pulso.")
+					TriggerClientEvent("Notify",source,"importante","O paciente foi reanimado.")
 					TriggerClientEvent('cancelando',source,false)
 				end)
 			else
@@ -266,7 +265,7 @@ function src.checkServices()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local paramedicos = vRP.getUsersByPermission("ems.permissao")
+		local paramedicos = vRP.getUsersByPermission(config.medicpermission)
 		if parseInt(#paramedicos) == 0 then
 			return true
 		end

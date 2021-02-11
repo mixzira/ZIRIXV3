@@ -1,7 +1,7 @@
 config = {}
 
 config.medicpermission = "ems.permissao"
-config.policepermission = "policia.permissao"
+
 
 
 config.stretchers = {

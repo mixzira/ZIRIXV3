@@ -241,3 +241,30 @@ function func.markOcorrency(x,y,z)
 		end
 	end
 end
+
+function getOut()
+    local source = source
+	local user_id = vRP.getUserId(source)
+	local nplayer = vRPclient.getNearestPlayer(source,2)
+	local nuser_id = vRP.getUserId(nplayer)
+	if nplayer then
+		if npcsHealth == false then
+				
+				
+		end
+	end
+end
+
+
+
+RegisterCommand('teste2',function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	local nplayer = vRPclient.getNearestPlayer(source,3)
+    print(user_id)
+    print(nplayer)
+    if nplayer then
+        local veh, npcsHealth = funcClient.sendServer()
+        print(veh)
+        print(npcsHealth)
+    end
+end)
