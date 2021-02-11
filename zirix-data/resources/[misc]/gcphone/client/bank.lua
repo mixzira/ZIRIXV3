@@ -1,17 +1,23 @@
-inMenu = true
+local Tunnel = module("vrp","lib/Tunnel")
+local Proxy = module("vrp","lib/Proxy")
+vRP = Proxy.getInterface("vRP")
+
+--[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
+
+src = Tunnel.getInterface("gcphone")
+
+--[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
+
 local bank = 0
-local firstname = ''
-local lastname = ''
+function setBankBalance (value)
+      bank = value
+      SendNUIMessage({event = 'updateBankbalance', banking = bank})
+end
 
-RegisterNetEvent("vRP:updateBalanceGc")
-AddEventHandler('vRP:updateBalanceGc', function(bank)
-      SendNUIMessage({event = 'updateBankbalance', banking = bank})    
-end)
-
-RegisterNetEvent('esx:playerLoaded21')
-AddEventHandler('esx:playerLoaded21', function(playerData)
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(playerData)
       local accounts = playerData.accounts or {}
-      for index, account in ipairs(accounts) do 
+      for index, account in ipairs(accounts) do
             if account.name == 'bank' then
                   setBankBalance(account.money)
                   break
@@ -19,8 +25,8 @@ AddEventHandler('esx:playerLoaded21', function(playerData)
       end
 end)
 
-RegisterNetEvent('esx:setAccountMoney21')
-AddEventHandler('esx:setAccountMoney21', function(account)
+RegisterNetEvent('esx:setAccountMoney')
+AddEventHandler('esx:setAccountMoney', function(account)
       if account.name == 'bank' then
             setBankBalance(account.money)
       end
@@ -41,20 +47,8 @@ AddEventHandler('es:displayBank', function(bank)
       setBankBalance(bank)
 end)
 
-RegisterNUICallback('transfer', function(data)
-	TriggerServerEvent('gcPhone:transfer', data.to, data.amountt)
+RegisterNUICallback('bank_makeTransfer', function(data)
+    TriggerServerEvent('bank:transfer', data.iban, data.amount)
+    TriggerServerEvent('bank:balance')
+    SendNUIMessage({event = 'transferSuccess', banking = data.balance - data.amount})
 end)
-
-RegisterNetEvent("gcPhone:firstname")
-AddEventHandler("gcPhone:firstname", function(_name)
-  firstname = _name
-  SendNUIMessage({event = 'updateMyFirstname', firstname = firstname})
-end)
-
-RegisterNetEvent("gcPhone:lastname")
-AddEventHandler("gcPhone:lastname", function(_firstname)
-  lastname = _firstname
-  SendNUIMessage({event = 'updateMyListname', lastname = lastname})
-end)
-
-

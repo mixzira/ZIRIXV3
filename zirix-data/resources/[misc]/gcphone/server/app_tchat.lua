@@ -1,6 +1,6 @@
 function TchatGetMessageChannel (channel, cb)
     MySQL.Async.fetchAll("SELECT * FROM phone_app_chat WHERE channel = @channel ORDER BY time DESC LIMIT 100", { 
-      ['@channel'] = channel
+        ['@channel'] = channel
     }, cb)
 end
 
@@ -18,12 +18,11 @@ function TchatAddMessage (channel, message)
   end)
 end
 
-
-RegisterServerEvent('gcPhone:tchat_channeldumpamistocazzo')
-AddEventHandler('gcPhone:tchat_channeldumpamistocazzo', function(channel)
+RegisterServerEvent('gcPhone:tchat_channel')
+AddEventHandler('gcPhone:tchat_channel', function(channel)
   local sourcePlayer = tonumber(source)
   TchatGetMessageChannel(channel, function (messages)
-    TriggerClientEvent('gcPhone:tchat_channeldumpamistocazzo', sourcePlayer, channel, messages)
+    TriggerClientEvent('gcPhone:tchat_channel', sourcePlayer, channel, messages)
   end)
 end)
 

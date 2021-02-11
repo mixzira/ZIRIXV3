@@ -1,8 +1,7 @@
 {
-  "reseau": "DiamondSim",
+  "reseau": "HelloSin",
   "warningMessageCount": 750,
-  "themeColor": "#2a98df",
-  "themeColorTitle": "#0000",
+  "themeColor": "#a4c639",
   "colors": [
     "#EF5350",
     "#EC407A",
@@ -23,31 +22,28 @@
     "#78909C"
   ],
 
-  "useFormatNumberFrance": true,
+  "useFormatNumberFrance": false,
   "useWebRTCVocal": true,
-
   "RTCConfig": {
     "iceServers": [{
-      "urls": ["turn:170.81.41.74:25565"],
-      "username": "diamondrp",
-      "credential": "roleplay"
+      "urls": ["turn:192.99.251.232:25565"],
+      "username": "DIAMOND",
+      "credential": "HOLAQUETAL"
     }]
   },
 
   "//": "REQUIRE https://github.com/citizenfx/screenshot-basic or set false",
   "enableTakePhoto": true,
-  "fileUploadService_Url": "http://170.81.41.74:3555/upload/",
+  "fileUploadService_Url": "https://192.99.251.232:3555/upload.php",
   "fileUploadService_Field": "files[]",
 
   "background": {
     "White desert": "back001.jpg",
     "Palms": "back002.jpg",
     "Santa Mónica Beach": "back003.jpg",
-
     "Route 66": "color.jpg",
     "Classic tokyo": "humo.jpg",
     "Dark planet": "iluminacion.jpg",
-
     "AstroNeon": "neon.jpg",
     "Illuminated planet": "oscuridad.jpg",
     "Wild beach": "playa.jpg",
@@ -55,10 +51,12 @@
     "Tokio neon": "tokio.jpg",
     "Custom URL": "URL"
   },
+
   "background_default": {
     "label": "Santa Mónica Beach",
     "value": "back003.jpg"
   },
+
   "coque": {
     "Gray": "grey.png",
     "Salmon": "pink.png",
@@ -68,165 +66,128 @@
     "Iphone2": "iphonex2.png",
     "Iphone 11": "no_cover.png"
   },
-  "sonido": {
-    "Astronomia": "ring.ogg",
-    "Safaera": "safaera.ogg",
-    "Bella Ciao": "bella_ciao.ogg",
-    "Casa Papel": "casa_papel.ogg",
-    "Iphone 11": "iphone_11.ogg",
-    "Tusa": "tusa.ogg",
-    "XXXTentacion": "xtentacion.ogg"
-  },
+
   "coque_default": {
     "label": "Mint",
     "value": "s8.png"
   },
-  "sonido_default": {
-    "label": "Casa Papel",
-    "value": "casa_papel.ogg"
-  },
 
   "serviceCall": [],
-
   "defaultContacts": [],
 
-  "apps": [
-    {
-      "name": "Config",
-      "en_US__name": "Config",
-      "icons": "/html/static/img/icons_app/settings.png",
-      "routeName": "parametre",
-      "inHomePage": false
-    },
-    {
-      "name": "Telefone",
-      "en_US__name": "Telefone",
-      "icons": "/html/static/img/icons_app/call.png",
-      "routeName": "appels",
-      "inMenuPage": false
-    },
-    {
-      "name": "Contatos",
-      "en_US__name": "Contatos",
-      "icons": "/html/static/img/icons_app/contacts.png",
-      "routeName": "contacts",
-      "inMenuPage": false
-    },
-    {
-      "name": "Mensagens",
-      "en_US__name": "Mensagens",
-      "icons": "/html/static/img/icons_app/sms.png",
-      "routeName": "messages",
-      "inMenuPage": false,
-      "puceRef": "nbMessagesUnread"
-    },
-    {
-      "name": "Instagram",
-      "en_US__name": "Instagram",
-      "icons": "/html/static/img/icons_app/insta.png",
-      "routeName": "instagramslash"
-    },
-    {
+  "apps": [{
       "name": "Twitter",
+      "tr_TR__name": "Twitter",
       "en_US__name": "Twitter",
       "icons": "/html/static/img/icons_app/twitter.png",
       "routeName": "twitter.splash",
-      "inMenuPage": false
-    },
-    {
-      "name": "Secret",
-      "en_US__name": "Secret",
-      "icons": "/html/static/img/icons_app/secret.png",
-      "routeName": "tchat"
-    },
-    {
-      "name": "VOA",
-      "en_US__name": "VOA",
-      "icons": "/html/static/img/icons_app/voa.png",
-      "routeName": "yellowpages",
-      "enabled": false
-    },
-    {
-      "name": "Weazel",
-      "en_US__name": "Weazel",
-      "icons": "/html/static/img/icons_app/weazel.png",
-      "routeName": "haberlerslplash"
-    },
-    {
-      "name": "Banco",
-      "en_US__name": "Banco",
-      "icons": "/html/static/img/icons_app/banco.png",
-      "routeName": "bankb",
       "inHomePage": false,
       "enabled": true
     },
     {
-      "name": "Camera",
-      "en_US__name": "Camera",
-      "icons": "/html/static/img/icons_app/photo.png",
-      "routeName": "photo"
+        "name": "Instagram",
+        "tr_TR__name": "Instagram",
+        "en_US__name": "Instagram",
+        "icons": "/html/static/img/icons_app/instagram.png",
+        "routeName": "instagram.splash",
+        "inHomePage": false,
+        "enabled": true
     },
     {
-      "name": "Tetris",
-      "en_US__name": "Tetris",
-      "icons": "/html/static/img/icons_app/tetris.png",
-      "routeName": "tetris"
+        "name": "Google",
+        "tr_TR__name": "Google",
+        "en_US__name": "Google",
+        "icons": "/html/static/img/icons_app/google.png",
+        "routeName": "google.splash",
+        "inHomePage": false,
+        "enabled": false
     },
     {
-      "name": "Bolsa",
-      "en_US__name": "Bolsa",
+      "name": "Telefone",
+      "tr_TR__name": "Telefone",
+      "en_US__name": "Phone",
+      "icons": "/html/static/img/icons_app/call.png",
+      "routeName": "appels",
+      "inHomePage": true,
+      "enabled": false
+    },
+    {
+      "name": "Mensagens",
+      "pt_BR__name": "Mensagens",
+      "icons": "/html/static/img/icons_app/sms.png",
+      "routeName": "messages",
+      "inHomePage": false,
+      "puceRef": "nbMessagesUnread",
+      "enabled": true
+    },
+    {
+      "name": "Contatos",
+      "pt_BR__name": "Contatos",
+      "icons": "/html/static/img/icons_app/contacts.png",
+      "routeName": "contacts",
+      "inHomePage": false,
+      "enabled": true
+    },
+    {
+      "name": "Configs",
+      "pt_BR__name": "Configs",
+      "icons": "/html/static/img/icons_app/settings.png",
+      "routeName": "parametre",
+      "inHomePage": false,
+      "enabled": true
+    },
+    {
+      "name": "Banco",
+      "pt_BR__name": "Banco",
+      "icons": "/html/static/img/icons_app/bank.png",
+      "routeName": "bank",
+      "inHomePage": false,
+      "enabled": true
+    },
+    {
+      "name": "Borsa",
+      "pt_BR__name": "Borsa",
       "icons": "/html/static/img/icons_app/bourse.png",
       "routeName": "bourse",
       "enabled": false
     },
     {
-      "name": "Faturas",
-      "en_US__name": "Faturas",
-      "icons": "/html/static/img/icons_app/logo.png",
-      "routeName": "faturaslash",
-      "enabled": false
+      "name": "Camera",
+      "pt_BR__name": "Camera",
+      "icons": "/html/static/img/icons_app/photo.png",
+      "routeName": "photo",
+      "enabled": true
     },
     {
-      "name": "2048",
-      "en_US__name": "2048",
-      "icons": "/html/static/img/icons_app/logo.png",
-      "routeName": "numbers",
-      "enabled": false
+      "name": "Secret",
+      "pt_BR__name": "Secret",
+      "icons": "/html/static/img/icons_app/secret.png",
+      "routeName": "tchat",
+      "inHomePage": false,
+      "enabled": true
     },
     {
-      "name": "Reddit",
-      "en_US__name": "Reddit",
-      "icons": "/html/static/img/icons_app/reddit.png",
-      "routeName": "reddit",
-      "enabled": false
-    },
-    {
-      "name": "E-bay",
-      "en_US__name": "E-bay",
-      "icons": "/html/static/img/icons_app/market.png",
-      "routeName": "marketslsh",
-      "enabled": false
-    },
-    {
-      "name": "Vale",
-      "en_US__name": "Vale",
-      "icons": "/html/static/img/icons_app/vale.png",
-      "routeName": "vale",
+      "name": "9GAG",
+      "icons": "/html/static/img/icons_app/9gag.png",
+      "routeName": "9gag",
       "enabled": false
     }
   ],
 
   "defaultLanguage": "pt_BR",
-
+  
   "language": {
-    "en_US": {
+     "pt_BR": {
       "NAME": "Português",
+
 
       "PHONE_WARNING_MESSAGE": "Lembrete",
       "PHONE_WARNING_MESSAGE_MESS": "Mensagens",
 
+
       "CONFIRM": "Aceitar",
       "CANCEL": "Cancelar",
+
 
       "APP_CONFIG_TITLE": "Configurações",
       "APP_CONFIG_MY_MUNBER": "Meu número",
@@ -240,23 +201,39 @@
       "APP_CONFIG_RESET": "Formatar",
       "APP_CONFIG_RESET_CONFIRM": "Confirmar",
 
-      "APP_PHONE_CALL": "Call",
+      
+      "APP_PHONE_CALL": "Chamada",
       "APP_PHONE_CALL_ANONYMOUS": "Chamada anônima",
       "APP_PHONE_DELETE": "Apagar",
       "APP_PHONE_DELETE_ALL": "Apagar tudo",
-      "APP_PHONE_CANCEL": "Cancelar",
-      "APP_PHONE_ADD": "Salvar novo contato",
       "APP_PHONE_TITLE": "Número de telefone",
       "APP_PHONE_MENU_FAVORITES": "Serviços",
       "APP_PHONE_MENU_RECENTS": "Recentes",
       "APP_PHONE_MENU_CONTACTS": "Contatos",
       "APP_PHONE_ENTER_NUMBER": "Digite um número",
-      "APP_PHONE_NUMBER_HIDDEN": "Número privado",
-      "APP_PHONE_NUMBER_UNKNOWN": "Desconhecido",
+
+      
+      "APP_BANK_TRANSFER": "PIX - Transferências",
+      "APP_BANK_YOU": "Transferir o seu saldo.",
+      "APP_BANK_YOUID": "Passaporte:",
+      "APP_BANK_BALANCE": "Valor a transferir:",
+      "APP_BANK_SUMBIT": "Confirmar",
+
 
       "APP_BANK_TITLE": "Banco",
+      "APP_BANK_ACCOUNT_TITLE": "Sua conta",
+      "APP_BANK_CURRENCY": "$",
+      "APP_BANK_TRANSFER_TITLE": "PIX - Transferências",
+      "APP_BANK_IBAN": "Conta:",
+      "APP_BANK_AMOUNT": "Valor:",
+      "APP_BANK_TRANSFER_BUTTON": "Transferir",
+      "APP_BANK_IBAN_EMPTY": "Conta inválida",
+      "APP_BANK_AMOUNT_EMPTY": "Valor inválido",
+      "APP_BANK_TRANSFER_SUCCESS":"A transferência foi bem sucedida",
 
-      "APP_BOURSE_TITLE": "Bolsa de valores",
+
+      "APP_BOURSE_TITLE": "Bolsa de Valores",
+
 
       "APP_CONTACT_TITLE": "Contatos",
       "APP_CONTACT_NEW": "Novo contato",
@@ -267,8 +244,8 @@
       "APP_CONTACT_LABEL_NAME": "Nome",
       "APP_CONTACT_LABEL_NUMBER": "Número",
 
+
       "APP_MESSAGE_TITLE": "Mensagens",
-      "APP_MESSAGE_SAVE_CONTACT": "Salvar contato",
       "APP_MESSAGE_NEW_MESSAGE": "Nova mensagem",
       "APP_MESSAGE_ERASE_CONVERSATION": "Apagar conversa",
       "APP_MESSAGE_ERASE_ALL_CONVERSATIONS": "Apagar tudo",
@@ -280,16 +257,15 @@
       "APP_MESSAGE_CONTACT_TITLE": "Contatos",
       "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Digite um número",
       "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Enviar mensagem",
-      "APP_MESSAGE_MESS_SMS": "SMS",
-      "APP_MESSAGE_MESS_CALL": "Ligar",
-      "APP_MESSAGE_MESS_COPY": "Copiar",
       "APP_MESSAGE_SEND_PHOTO": "Enviar foto",
+
 
       "APP_DARKTCHAT_TITLE": "Secret",
       "APP_DARKTCHAT_NEW_CHANNEL": "Adicionar sala",
       "APP_DARKTCHAT_DELETE_CHANNEL": "Apagar sala",
       "APP_DARKTCHAT_CANCEL": "Cancelar",
       "APP_DARKTCHAT_PLACEHOLDER_ENTER_MESSAGE": "Enviar mensagem",
+
 
       "APP_TWITTER_NAME": "Twitter",
       "APP_TWITTER_VIEW_TWITTER": "Twitter",
@@ -330,100 +306,47 @@
       "APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR": "Oops.... Sua senha não foi trocada",
       "APP_TWITTER_NOTIF_NEW_PASSWORD_MISS_MATCH": "As senhas não coincidem",
       "APP_TWITTER_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Senha fraca",
-      "APP_TWITTER_BUTTON_ACTION_TWEETPHOTO": "Enviar foto",
-      "APP_TWITTER_LIKEISLIKE": "Like/UnLike",
-      "APP_TWITTER_RETWETTER": "Retweet",
-      "APP_TWITTER_BUTTON_ACTION_TWEETERFT": "Tirar foto",
-      "APP_TWITTER_IMAGE_MESSAGE": "URL foto",
 
 
-      "APP_INSTAGRAM_NAME": "Instagram",
-      "APP_INSTAGRAM_POST": "Legenda",
-      "APP_INSTAGRAM_NEW_ACCOUNT_FORENAME": "Nome",
-      "APP_INSTAGRAM_NEW_ACCOUNT_SURNAME": "Sobrenome",
-      "APP_INSTAGRAM_NEW_ACCOUNT_USERNAME": "Usuário:",
-      "APP_INSTAGRAM_NEW_ACCOUNT_PASSWORD": "Senha:",
-      "APP_INSTAGRAM_NEW_ACCOUNT_PASSWORD_CONFIRM": "Confirmar senha",
-      "APP_INSTAGRAM_NEW_ACCOUNT_AVATAR": "URL da foto de perfil",
-      "APP_INSTAGRAM_ACCOUNT_LOGIN": "Entrar",
+      "APP_INSTAGRAM_VIEW_INSTAGRAM": "Instagram",
+      "APP_INSTAGRAM_NEW_PIC_INSTAGRAM": "Compartilhar",
+      "APP_INSTAGRAM_VIEW_SETTING": "Definições",
+      "APP_INSTAGRAM_ACCOUNT_LOGIN": "Login",
       "APP_INSTAGRAM_ACCOUNT_LOGOUT": "Sair",
       "APP_INSTAGRAM_ACCOUNT_PARAM": "Minha conta",
-      "APP_INSTAGRAM_ACCOUNT_AVATAR": "Mudar foto de perfil",
-      "APP_INSTAGRAM_ACCOUNT_CHANGE_PASSWORD": "Mudar senha",
+      "APP_INSTAGRAM_ACCOUNT_AVATAR": "Mudar Avatar",
       "APP_INSTAGRAM_ACCOUNT_NEW": "Nova conta",
-      "APP_INSTAGRAM_ACCOUNT_USERNAME": "usuário",
-      "APP_INSTAGRAM_ACCOUNT_PASSWORD": "senha",
-      "APP_INSTAGRAM_NOTIFICATION": "notificações",
-      "APP_INSTAGRAM_NOTIFICATION_WHEN": "Ser notificado",
-      "APP_INSTAGRAM_NOTIFICATION_ALL": "Todas as novidades",
-      "APP_INSTAGRAM_NOTIFICATION_NEVER": "Nada",
-      "APP_INSTAGRAM_NOTIFICATION_SOUND": "Tocar som",
+      "APP_INSTAGRAM_ACCOUNT_SAVE": "Cadastro",
+      "APP_INSTAGRAM_ACCOUNT_CREATE": "Criar uma nova conta",
+      "APP_INSTAGRAM_ACCOUNT_CANCEL": "Não",
+      "APP_INSTAGRAM_ACCOUNT_USERNAME": "Conta",
+      "APP_INSTAGRAM_NOTIFICATION": "Notificação",
+      "APP_INSTAGRAM_NOTIFICATION_WHEN": "Quando eu marquei",
+      "APP_INSTAGRAM_NOTIFICATION_ALL": "Tudo",
+      "APP_INSTAGRAM_NOTIFICATION_MENTION": "Quando eu marquei",
+      "APP_INSTAGRAM_NOTIFICATION_NEVER": "Ninguém",
+      "APP_INSTAGRAM_NOTIFICATION_SOUND": "Som de notificação",
       "APP_INSTAGRAM_NOTIFICATION_SOUND_YES": "Sim",
       "APP_INSTAGRAM_NOTIFICATION_SOUND_NO": "Não",
-      "APP_INSTAGRAM_NOTIF_ACCOUNT_CREATE_SUCCESS": "Sua conta do Instagram foi criada",
-      "APP_INSTAGRAM_NOTIF_ACCOUNT_CREATE_ERROR": "Não foi possível criar a sua conta do Twitter",
-      "APP_INSTAGRAM_NOTIF_LOGIN_SUCCESS": "Você está conectado no Instagram",
-      "APP_INSTAGRAM_NOTIF_LOGIN_ERROR": "Conta/Senha inválidas",
-      "APP_INSTAGRAM_NOTIF_AVATAR_SUCCESS": "Foto de perfil atualizada",
-      "APP_INSTAGRAM_NOTIF_NEW_PASSWORD_SUCCESS": "Senha atualizada",
-      "APP_INSTAGRAM_NOTIF_NEW_PASSWORD_ERROR": "Oops.... Sua senha não foi trocada",
-      "APP_INSTAGRAM_NOTIF_NEW_PASSWORD_MISS_MATCH": "As senhas não coincidem",
-      "APP_INSTAGRAM_NOTIF_NEW_PASSWORD_LENGTH_ERROR": "Senha fraca",
-      "APP_INSTAGRAM_CANCEL": "Cancelar",
-      "APP_INSTAGRAM_NEXT": "Proxímo",
-      "APP_INSTAGRAM_SHARE": "Compartilhar",
-
-
-      "APP_BANK_TRANSFER": "PIX - Transferências",
-      "APP_BANK_YOU": "Transferir o seu saldo.",
-      "APP_BANK_YOUID": "Passaporte:",
-      "APP_BANK_BALANCE": "Valor a transferir:",
-      "APP_BANK_SUMBIT": "Confirmar",
-
-      "APP_FATURA_HEADER": "BILLING",
-      "APP_FATURA_PAY": "Bill Pay",
-      "APP_YELLOW_HEADER": "YELLOWPAGES",
-
-      "APP_APP_FOV": "Return",
-      "APP_APP_ANNO": "Annuler",
-  
-      "APP_YELLOW_NOTIFICATION_WHEN": "To be notified",
-      "APP_YELLOW_NOTIFICATION_ALL": "All News",
-      "APP_YELLOW_NOTIFICATION_NEVER": "Nobody",
-      "APP_YELLOW_NOTIFICATION_SOUND": "Play a sound",
-      "APP_YELLOW_NOTIFICATION_SOUND_YES": "Yes",
-      "APP_YELLOW_NOTIFICATION_SOUND_NO": "No",
-
-      "APP_HABERLER_HEADER": "News",
-      "APP_HABERLER_HEADER_DETAIL": "News Detail",
-      
-      "APP_MARKET_HEADER": "Market",
-      "APP_CONFIG_RINGTONE": "Ring tone",
-      "APP_MARKET_PAY": "Buy",
-      "APP_REDDIT_HEADER": "Reddit",
-      
-
-      "APP_YELLOW_ILANTEXT": "Advertisement Text",
-      "APP_YELLOW_ILAN": "Post Your Ad",
-      "APP_YELLOW_IMAGE": "Img URL",
-      
-      "APP_BANK_TRANSFER_H": "Extrato",
-      "APP_BANK_TRANSFER_GPR": "Despesas:",
-      "APP_BANK_TRANSFER_GLR": "Receita:",
-
-      "APP_VALE_GARAJDA": "Garage",
-      "APP_VALE_DISARDA": "Outside",
-      "APP_VALE_CAGIR": "Get Car",
+      "APP_INSTAGRAM_NOTIF_ACCOUNT_CREATE_SUCCESS": "Conta criada com sucesso",
+      "APP_INSTAGRAM_NOTIF_ACCOUNT_CREATE_ERROR": "Não foi possível criar sua conta",
+      "APP_INSTAGRAM_NOTIF_LOGIN_SUCCESS": "Seu Login",
+      "APP_INSTAGRAM_NOTIF_LOGIN_ERROR": "Login inválido ou conta não é sua",
+      "APP_INSTAGRAM_NOTIF_AVATAR_SUCCESS": "Seu avatar foi alterado com sucesso",
+      "APP_INSTAGRAM_NEW_ACCOUNT_USERNAME": "Username",
+      "APP_INSTAGRAM_NEW_ACCOUNT_AVATAR": "Perfil",
+      "APP_INSTAGRAM_PLACEHOLDER_MESSAGE": "  Assinatura",
+      "APP_INSTAGRAM_BUTTON_ACTION_INSTAGRAM":"Tire uma foto",
 
       "TIMEAGO": [
-        "just now",
-        ["%s second ago", "%s seconds ago"],
-        ["%s minute ago", "%s minutes ago"],
-        ["%s hour ago", "%s hours ago"],
-        ["%s day ago", "%s days ago"],
-        ["%s week ago", "%s weeks ago"],
-        ["%s month ago", "%s months ago"],
-        ["%s year ago", "%s years ago"]
+        "Agora",
+        ["%s segundo atrás", "%s segundos atrás"],
+        ["%s minuto atrás", "%s minutos atrás"],
+        ["%s hora atrás", "%s horas atrás"],
+        ["%s dia atrás", "%s dias atrás"],
+        ["%s semana atrás", "%s semanas atrás"],
+        ["%s mês atrás", "%s meses atrás"],
+        ["%s ano atrás", "%s anos atrás"]
       ]
     }
   }
