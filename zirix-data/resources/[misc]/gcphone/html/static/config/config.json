@@ -36,7 +36,7 @@
 
   "//": "REQUIRE https://github.com/citizenfx/screenshot-basic or set false",
   "enableTakePhoto": true,
-  "fileUploadService_Url": "http://170.81.41.74:3555/upload/",
+  "fileUploadService_Url": "http://191.96.225.73:3555/upload/",
   "fileUploadService_Field": "files[]",
 
   "background": {

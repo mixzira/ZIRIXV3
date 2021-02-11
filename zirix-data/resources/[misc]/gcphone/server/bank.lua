@@ -6,35 +6,21 @@ vRPclient = Tunnel.getInterface("vRP")
 
 local logBankTransferencia = "https://discordapp.com/api/webhooks/762559610002866196/7-PjG811yekbIMM65UXMMbHNM2eVyakH3PsaCRLMjowEvTiEssHLxiQo4iDdKTbhaVCn"
 
-AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
-	local sourcePlayer = tonumber(source)
-    local identifier = getPlayerID(source)
-    local identity = vRP.getUserIdentity(identifier)
-    
-	getOrGeneratePhoneNumber(sourcePlayer,identifier,function(myPhoneNumber)
-		TriggerClientEvent("gcPhone:myPhoneNumber",sourcePlayer,myPhoneNumber)
-		TriggerClientEvent("vRP:updateBalanceGc", source, bmoney)
-		TriggerClientEvent("gcPhone:contactList",sourcePlayer,getContacts(identifier))
-        TriggerClientEvent("gcPhone:allMessage",sourcePlayer,getMessages(identifier))
-        TriggerClientEvent("gcPhone:firstname",source,identity.name)
-        TriggerClientEvent("gcPhone:lastname",source,identity.firstname)
-	end)
-end)
-
 RegisterServerEvent('gcPhone:allUpdate')
 AddEventHandler('gcPhone:allUpdate',function()
-	local sourcePlayer = tonumber(source)
-	local identifier = getPlayerID(source)
-    local num = getNumberPhone(identifier)
-    local identity = vRP.getUserIdentity(identifier)
+	local source = source
+	local user_id = vRP.getUserId(source)
+    local num = getNumberPhone(user_id)
+    local identity = vRP.getUserIdentity(user_id)
+    local money = vRP.getBankMoney(user_id)
 
-	TriggerClientEvent("gcPhone:myPhoneNumber",sourcePlayer,num)
-	TriggerClientEvent("vRP:updateBalanceGc", source, bmoney)
-	TriggerClientEvent("gcPhone:contactList",sourcePlayer,getContacts(identifier))
-    TriggerClientEvent("gcPhone:allMessage",sourcePlayer,getMessages(identifier))
-    TriggerClientEvent("gcPhone:firstname",source,identity.name)
-    TriggerClientEvent("gcPhone:lastname",source,identity.firstname)
-    sendHistoriqueCall(sourcePlayer,num)
+	TriggerClientEvent("gcPhone:myPhoneNumber", source, num)
+	TriggerClientEvent("vRP:updateBalanceGc", source, money)
+	TriggerClientEvent("gcPhone:contactList",source, getContacts(user_id))
+    TriggerClientEvent("gcPhone:allMessage",source, getMessages(user_id))
+    TriggerClientEvent("gcPhone:firstname",source, identity.name)
+    TriggerClientEvent("gcPhone:lastname",source, identity.firstname)
+    sendHistoriqueCall(source, num)
 end)
 
 RegisterNetEvent("vRP/update_gc_phone")
@@ -44,23 +30,9 @@ AddEventHandler("vRP/update_gc_phone", function()
 	local bmoney = vRP.getBankMoney(user_id)
     local identity = vRP.getUserIdentity(user_id)
 
-    TriggerClientEvent("vRP:updateBalanceGc",source,bmoney)
-    TriggerClientEvent("gcPhone:firstname",source,identity.name)
-    TriggerClientEvent("gcPhone:lastname",source,identity.firstname)
-end)
-
-AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
-	local source = source
-    local user_id = vRP.getUserId(source)
-    
-    if user_id then
-        local money = vRP.getBankMoney(user_id)
-        local identity = vRP.getUserIdentity(user_id)
-
-        TriggerClientEvent("vRP:updateBalanceGc",source,money)
-        TriggerClientEvent("gcPhone:firstname",source,identity.name)
-        TriggerClientEvent("gcPhone:lastname",source,identity.firstname)
-    end
+    TriggerClientEvent("vRP:updateBalanceGc", source, bmoney)
+    TriggerClientEvent("gcPhone:firstname", source, identity.name)
+    TriggerClientEvent("gcPhone:lastname", source, identity.firstname)
 end)
 
 RegisterServerEvent('gcPhone:transfer')
@@ -129,5 +101,35 @@ AddEventHandler('gcPhone:transfer', function(to,amountt)
         end
     else
         return TriggerClientEvent('Notify',_source,'negado','Usuario invalido.')
+    end
+end)
+
+--[[AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
+	local source = source
+    local user_id = vRP.getUserId(source)
+    if user_id then
+        local money = vRP.getBankMoney(user_id)
+        local identity = vRP.getUserIdentity(user_id)
+        TriggerClientEvent("vRP:updateBalanceGc",source, money)
+        TriggerClientEvent("gcPhone:firstname",source, identity.name)
+        TriggerClientEvent("gcPhone:lastname",source, identity.firstname)
+    end
+end)]]
+
+AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
+	local source = source
+    local user_id = vRP.getUserId(source)
+    
+    if user_id then
+        local money = vRP.getBankMoney(user_id)
+        local identity = vRP.getUserIdentity(user_id)
+        getOrGeneratePhoneNumber(source, identifier, function(myPhoneNumber)
+            TriggerClientEvent("gcPhone:myPhoneNumber",source, myPhoneNumber)
+            TriggerClientEvent("vRP:updateBalanceGc", source, money)
+            TriggerClientEvent("gcPhone:contactList",source, getContacts(user_id))
+            TriggerClientEvent("gcPhone:allMessage",source, getMessages(user_id))
+            TriggerClientEvent("gcPhone:firstname",source, identity.name)
+            TriggerClientEvent("gcPhone:lastname",source, identity.firstname)
+        end)
     end
 end)

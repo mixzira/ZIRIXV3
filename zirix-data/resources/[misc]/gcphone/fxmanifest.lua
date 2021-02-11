@@ -46,34 +46,24 @@ files {
 }
 
 client_script {
-	"@vrp/lib/utils.lua",
-	"config.lua",
-	"client/animation.lua",
-	"client/client.lua",
-	"client/photo.lua",
-	"client/app_tchat.lua",
-	"client/bank.lua",
-	"client/twitter.lua",
-	"client/yellow.lua",
-	"client/fatura.lua",
-	"client/instagram.lua",
-	"client/reddit.lua",
-	"client/market.lua",
-	"client/valet.lua"
+	'@vrp/lib/utils.lua',
+	'config.lua',
+	'client/animation.lua',
+	'client/client.lua',
+	'client/photo.lua',
+	'client/app_tchat.lua',
+	'client/bank.lua',
+	'client/twitter.lua',
+	'client/instagram.lua',
 }
 
 server_script {
-	"@vrp/lib/utils.lua",
-	"@mysql-async/lib/MySQL.lua",
-	"config.lua",
-	"server/server.lua",
-	"server/app_tchat.lua",
-	"server/twitter.lua",
-    "server/yellow.lua",
-	"server/bank.lua",
-	"server/fatura.lua",
-	"server/instagram.lua",
-    "server/market.lua",
-	"server/reddit.lua",
-	"server/valet.lua"
+	'@vrp/lib/utils.lua',
+	'@mysql-async/lib/MySQL.lua',
+	'config.lua',
+	'server/server.lua',
+	'server/app_tchat.lua',
+	'server/twitter.lua',
+	'server/bank.lua',
+	'server/instagram.lua',
 }

@@ -81,7 +81,7 @@ function TwitterUsersTweets (accountId, cb)
   end
 end
 
-function getUser(username,password,cb)
+function getUser(username, password, cb)
   MySQL.Async.fetchAll("SELECT id, username as author, avatar_url as authorIcon FROM twitter_accounts WHERE twitter_accounts.username = @username AND twitter_accounts.password = @password", {
     ['@username'] = username,
     ['@password'] = password
@@ -90,11 +90,11 @@ function getUser(username,password,cb)
   end)
 end
 
-function TwitterPostTweet(username,password,message,image,sourcePlayer,realUser,cb)
-  getUser(username,password,function(user)
+function TwitterPostTweet(username, password, message, image, source, user_id, cb)
+  getUser(username, password, function(user)
     if user == nil then
-      if sourcePlayer ~= nil then
-        TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
+      if source ~= nil then
+        TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
       end
       return
     end
@@ -102,7 +102,7 @@ function TwitterPostTweet(username,password,message,image,sourcePlayer,realUser,
       ['@authorId'] = user.id,
       ['@message'] = message,
 	    ['@image'] = image,
-      ['@realUser'] = realUser
+      ['@realUser'] = user_id
     }, function (id)
       MySQL.Async.fetchAll('SELECT * from twitter_tweets WHERE id = @id', {
         ['@id'] = id
@@ -117,11 +117,11 @@ function TwitterPostTweet(username,password,message,image,sourcePlayer,realUser,
   end)
 end
 
-function TwitterToogleLike (username, password, tweetId, sourcePlayer)
-  getUser(username,password,function(user)
+function TwitterToogleLike (username, password, tweetId, source)
+  getUser(username, password, function(user)
     if user == nil then
-      if sourcePlayer ~= nil then
-        TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
+      if source ~= nil then
+        TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
       end
       return
     end
@@ -143,7 +143,7 @@ function TwitterToogleLike (username, password, tweetId, sourcePlayer)
               ['@id'] = tweet.id
             }, function ()
               TriggerClientEvent('gcPhone:twitter_updateTweetLikes', -1, tweet.id, tweet.likes + 1)
-              TriggerClientEvent('gcPhone:twitter_setTweetLikes', sourcePlayer, tweet.id, true)
+              TriggerClientEvent('gcPhone:twitter_setTweetLikes', source, tweet.id, true)
               TriggerEvent('gcPhone:twitter_updateTweetLikes', tweet.id, tweet.likes + 1)
             end)    
           end)
@@ -155,7 +155,7 @@ function TwitterToogleLike (username, password, tweetId, sourcePlayer)
               ['@id'] = tweet.id
             }, function ()
               TriggerClientEvent('gcPhone:twitter_updateTweetLikes', -1, tweet.id, tweet.likes - 1)
-              TriggerClientEvent('gcPhone:twitter_setTweetLikes', sourcePlayer, tweet.id, false)
+              TriggerClientEvent('gcPhone:twitter_setTweetLikes', source, tweet.id, false)
               TriggerEvent('gcPhone:twitter_updateTweetLikes', tweet.id, tweet.likes - 1)
             end)
           end)
@@ -165,11 +165,11 @@ function TwitterToogleLike (username, password, tweetId, sourcePlayer)
   end)
 end
 
-function TwitteUsersDelete(username,password,tweetId,sourcePlayer)
-  getUser(username,password,function(user)
+function TwitteUsersDelete(username, password, tweetId, source)
+  getUser(username, password, function(user)
     if user == nil then
-      if sourcePlayer ~= nil then
-        TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
+      if source ~= nil then
+        TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
       end
       return
     end
@@ -187,33 +187,33 @@ function TwitterCreateAccount(username, password, avatarUrl, cb)
   }, cb)
 end
 
-function TwitterShowError (sourcePlayer,title,message,image)
-  TriggerClientEvent('gcPhone:twitter_showError',sourcePlayer,message,image)
+function TwitterShowError (source, title, message, image)
+  TriggerClientEvent('gcPhone:twitter_showError', source, message, image)
 end
 
-function TwitterShowSuccess(sourcePlayer,title,message,image)
-  TriggerClientEvent('gcPhone:twitter_showSuccess',sourcePlayer,title,message,image)
+function TwitterShowSuccess(source, title, message, image)
+  TriggerClientEvent('gcPhone:twitter_showSuccess',source, title, message, image)
 end
 
 RegisterServerEvent('gcPhone:twitter_login')
-AddEventHandler('gcPhone:twitter_login', function(username,password)
-  local sourcePlayer = tonumber(source)
-  getUser(username,password,function (user)
+AddEventHandler('gcPhone:twitter_login', function(username, password)
+  local source = tonumber(source)
+  getUser(username, password,function (user)
     if user == nil then
-      TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
+      TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
     else
-      TwitterShowSuccess(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_SUCCESS')
-      TriggerClientEvent('gcPhone:twitter_setAccount', sourcePlayer, username, password, user.authorIcon)
+      TwitterShowSuccess(source, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_SUCCESS')
+      TriggerClientEvent('gcPhone:twitter_setAccount', source, username, password, user.authorIcon)
     end
   end)
 end)
 
 RegisterServerEvent('gcPhone:twitter_changePassword')
 AddEventHandler('gcPhone:twitter_changePassword',function(username,password,newPassword)
-  local sourcePlayer = tonumber(source)
+  local source = source
   getUser(username,password,function(user)
     if user == nil then
-      TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR')
+      TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR')
     else
       MySQL.Async.execute("UPDATE `twitter_accounts` SET `password`= @newPassword WHERE twitter_accounts.username = @username AND twitter_accounts.password = @password", {
         ['@username'] = username,
@@ -221,10 +221,10 @@ AddEventHandler('gcPhone:twitter_changePassword',function(username,password,newP
         ['@newPassword'] = newPassword
       }, function (result)
         if (result == 1) then
-          TriggerClientEvent('gcPhone:twitter_setAccount',sourcePlayer,username,newPassword,user.authorIcon)
-          TwitterShowSuccess(sourcePlayer, 'Twitter Info','APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS')
+          TriggerClientEvent('gcPhone:twitter_setAccount', source, username, newPassword, user.authorIcon)
+          TwitterShowSuccess(source, 'Twitter Info','APP_TWITTER_NOTIF_NEW_PASSWORD_SUCCESS')
         else
-          TwitterShowError(sourcePlayer,'Twitter Info','APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR')
+          TwitterShowError(source,'Twitter Info','APP_TWITTER_NOTIF_NEW_PASSWORD_ERROR')
         end
       end)
     end
@@ -233,13 +233,13 @@ end)
 
 RegisterServerEvent('gcPhone:twitter_createAccount')
 AddEventHandler('gcPhone:twitter_createAccount', function(username, password, avatarUrl)
-  local sourcePlayer = tonumber(source)
+  local source = source
   TwitterCreateAccount(username, password, avatarUrl, function (id)
     if (id ~= 0) then
-      TriggerClientEvent('gcPhone:twitter_setAccount', sourcePlayer, username, password, avatarUrl)
-      TwitterShowSuccess(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS')
+      TriggerClientEvent('gcPhone:twitter_setAccount', source, username, password, avatarUrl)
+      TwitterShowSuccess(source, 'Twitter Info', 'APP_TWITTER_NOTIF_ACCOUNT_CREATE_SUCCESS')
     else
-      TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR')
+      TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_ACCOUNT_CREATE_ERROR')
     end
   end)
 end)
@@ -263,71 +263,70 @@ end)
 
 RegisterServerEvent('gcPhone:twitter_getFavoriteTweets')
 AddEventHandler('gcPhone:twitter_getFavoriteTweets', function(username, password)
-  local sourcePlayer = tonumber(source)
+  local source = source
   if username ~= nil and username ~= "" and password ~= nil and password ~= "" then
     getUser(username, password, function (user)
       local accountId = user and user.id
       TwitterGetFavotireTweets(accountId, function (tweets)
-        TriggerClientEvent('gcPhone:twitter_getFavoriteTweets', sourcePlayer, tweets)
+        TriggerClientEvent('gcPhone:twitter_getFavoriteTweets', source, tweets)
       end)
     end)
   else
     TwitterGetFavotireTweets(nil, function (tweets)
-      TriggerClientEvent('gcPhone:twitter_getFavoriteTweets', sourcePlayer, tweets)
+      TriggerClientEvent('gcPhone:twitter_getFavoriteTweets', source, tweets)
     end)
   end
 end)
 
 RegisterServerEvent('gcPhone:twitter_getUserTweets')
 AddEventHandler('gcPhone:twitter_getUserTweets', function(username, password)
-  local sourcePlayer = tonumber(source)
+  local source = source
   if username ~= nil and username ~= "" and password ~= nil and password ~= "" then
     getUser(username, password, function (user)
       local accountId = user and user.id
       TwitterUsersTweets(accountId, function (tweets)
-        TriggerClientEvent('gcPhone:twitter_getUserTweets', sourcePlayer, tweets)
+        TriggerClientEvent('gcPhone:twitter_getUserTweets', source, tweets)
       end)
     end)
   else
     TwitterUsersTweets(nil, function (tweets)
-      TriggerClientEvent('gcPhone:twitter_getUserTweets', sourcePlayer, tweets)
+      TriggerClientEvent('gcPhone:twitter_getUserTweets', source, tweets)
     end)
   end
 end)
 
 RegisterServerEvent('gcPhone:twitter_postTweets')
 AddEventHandler('gcPhone:twitter_postTweets', function(username, password, message, image)
-  local _source = source
-  local sourcePlayer = tonumber(_source)
-  local srcIdentifier = getPlayerID(source)
-  TwitterPostTweet(username, password, message, image, sourcePlayer, srcIdentifier)
+  local source = source
+  local user_id = vRP.getUserId(source)
+  TwitterPostTweet(username, password, message, image, source, user_id)
 end)
 
 RegisterServerEvent('gcPhone:twitter_toogleLikeTweet')
 AddEventHandler('gcPhone:twitter_toogleLikeTweet', function(username, password, tweetId)
-  local sourcePlayer = tonumber(source)
-  TwitterToogleLike(username, password, tweetId, sourcePlayer)
+  local source = source
+  TwitterToogleLike(username, password, tweetId, source)
 end)
 
 RegisterServerEvent('gcPhone:twitter_usersDeleteTweet')
 AddEventHandler('gcPhone:twitter_usersDeleteTweet', function(username, password, tweetId)
-  local sourcePlayer = tonumber(source)
-  TwitteUsersDelete(username, password, tweetId, sourcePlayer)
+  local source = source
+  TwitteUsersDelete(username, password, tweetId, source)
 end)
 
 RegisterServerEvent('gcPhone:twitter_setAvatarUrl')
 AddEventHandler('gcPhone:twitter_setAvatarUrl', function(username, password, avatarUrl)
-  local sourcePlayer = tonumber(source)
+  local source = source
   MySQL.Async.execute("UPDATE `twitter_accounts` SET `avatar_url`= @avatarUrl WHERE twitter_accounts.username = @username AND twitter_accounts.password = @password", {
     ['@username'] = username,
     ['@password'] = password,
     ['@avatarUrl'] = avatarUrl
   }, function (result)
     if (result == 1) then
-      TriggerClientEvent('gcPhone:twitter_setAccount', sourcePlayer, username, password, avatarUrl)
-      TwitterShowSuccess(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_AVATAR_SUCCESS')
+      TriggerClientEvent('gcPhone:twitter_setAccount', source, username, password, avatarUrl)
+      TwitterShowSuccess(source, 'Twitter Info', 'APP_TWITTER_NOTIF_AVATAR_SUCCESS')
     else
-      TwitterShowError(sourcePlayer, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
+      TwitterShowError(source, 'Twitter Info', 'APP_TWITTER_NOTIF_LOGIN_ERROR')
     end
   end)
 end)
