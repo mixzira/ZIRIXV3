@@ -1,9 +1,22 @@
-FixePhone = {
-  -- Poste de police
-  ['911'] = { name =  "Central Police", coords = { x = 441.2, y = -979.7, z = 30.58 } },
-  
-  -- Cabine proche du poste de police
-  ['008-0001'] = { name = "Cabine Telephonique", coords = { x = 372.25, y = -965.75, z = 28.58 } },
+Config = {}
+
+Config.Locale = 'en'
+
+Config.ValePrice = 100
+
+Config.AutoFindFixePhones = true
+
+Config.FixePhone = {
+  ['911'] = { 
+    name = {'mission_row'}, 
+    coords = { x = 441.2, y = -979.7, z = 30.58 } 
+  },
 }
 
-ShowNumberNotification = true -- Show Number or Contact Name when you receive new SMS
+Config.KeyOpenClose = 311
+Config.KeyTakeCall  = 38
+
+Config.UseMumbleVoIP = false
+Config.UseTokoVoIP   = false
+
+Config.ShowNumberNotification = false

@@ -155,7 +155,7 @@ Citizen.CreateThread(function()
 							drawTxt("PRESSIONE  ~p~E~w~  PARA INICIAR O SERVIÇO",4,0.5,0.92,0.35,255,255,255,180)
 							if IsControlJustPressed(1,38) then
 								CalculateTimeToDisplay6()
-                                if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
+                if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
 									ToggleActionMenu()
 								else
 									TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
