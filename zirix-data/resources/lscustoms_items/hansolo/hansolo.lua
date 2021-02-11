@@ -1,3 +1,10 @@
+local Tunnel = module('vrp','lib/Tunnel')
+local Proxy = module('vrp','lib/Proxy')
+vRP = Proxy.getInterface('vRP')
+vRPclient = Tunnel.getInterface('vRP')
+
+src = Tunnel.getInterface('lscustoms_items')
+
 local menuactive = false
 function ToggleActionMenu()
 	menuactive = not menuactive
@@ -43,10 +50,10 @@ Citizen.CreateThread(function()
 			end
 			
 			if distance <= 10 then
-				DrawMarker(23, lojas.x, lojas.y, lojas.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
 				idle = 5
+				DrawMarker(23, lojas.x, lojas.y, lojas.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
 				if distance <= 1.2 then
-					if vRPex.checkPermission("mecanico.permissao") then
+					if src.checkPermission("mecanico.permissao") then
 						if IsControlJustPressed(0,38) then
 							ToggleActionMenu()
 						end
