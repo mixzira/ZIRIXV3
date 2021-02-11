@@ -8,14 +8,7 @@ vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 oC = {}
 Tunnel.bindInterface("oc_producao-meta",oC)
------------------------------------------------------------------------------------------------------------------------------------------
---[ ARRAY ]------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------
-local drogas = {
-	{ item = "meta-baixa" },
-	{ item = "meta-media" },
-	{ item = "meta-alta" },
-}
+
 -----------------------------------------------------------------------------------------------------------------------------------
 --[ EVENTOS ]----------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -24,104 +17,101 @@ AddEventHandler("produzir-meta",function(item)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		for k,v in pairs(drogas) do
-			if item == v.item then
-				if item == "meta-baixa" then
-					if vRP.getInventoryWeight(user_id)+vRP.getItemWeight("metanfetamina") <= vRP.getInventoryMaxWeight(user_id) then
-                        if vRP.getInventoryItemAmount(user_id,"pseudoefedrina") >= 1 then
-                            if vRP.getInventoryItemAmount(user_id,"nitrato-amonia") >= 10 then
-                                if vRP.getInventoryItemAmount(user_id,"plastico") >= 5 then
-                                    if vRP.tryGetInventoryItem(user_id,"pseudoefedrina",1) and vRP.tryGetInventoryItem(user_id,"nitrato-amonia",10) and vRP.tryGetInventoryItem(user_id,"plastico",5) then
-                                        TriggerClientEvent("fechar-nui-meta",source)
-                                        TriggerClientEvent("produzindo-true",source)
+        if item == config.meta[1] then
+            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config.glowquant[1])*config.glowquant[2] <= vRP.getInventoryMaxWeight(user_id) then
+                if vRP.getInventoryItemAmount(user_id,config.lowquant[1]) >= config.lowquant[2] then
+                    if vRP.getInventoryItemAmount(user_id,config.lowquant[3]) >= config.lowquant[4] then
+                        if vRP.getInventoryItemAmount(user_id,config.lowquant[5]) >= config.lowquant[6] then
+                            if vRP.tryGetInventoryItem(user_id,config.lowquant[1],config.lowquant[2]) and vRP.tryGetInventoryItem(user_id,config.lowquant[3],config.lowquant[4]) and vRP.tryGetInventoryItem(user_id,config.lowquant[5],config.lowquant[6]) and vRP.tryGetInventoryItem(user_id,config.lowquant[7],config.lowquant[8]) then
+                                TriggerClientEvent("fechar-nui",source)
+                                TriggerClientEvent("progress",source,config.time,"Fazendo "..config.meta[1].."")
+                                vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
-                                        TriggerClientEvent("progress",source,10000,"Produzindo Metanfetamina")
-                                        vRPclient._playAnim(source,false,{{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"}},true)
-
-                                        SetTimeout(10000,function()
-                                            TriggerClientEvent("produzindo-false",source)
-                                            vRPclient._stopAnim(source,false)
-                                            vRP.giveInventoryItem(user_id,"metanfetamina",5)
-                                            TriggerClientEvent("Notify",source,"sucesso","Você produziu <b>METANFETAMINA</b>.")
-                                        end)
-                                    end
-                                else
-                                    TriggerClientEvent("Notify",source,"negado","Você precisa de <b>5x Plasticos</b>.")
-                                end
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Você precisa de <b>10x Nitrato de Amonia</b>.")
+                                SetTimeout(config.time,function()
+                                    vRPclient._stopAnim(source,false)
+                                    vRP.giveInventoryItem(user_id,config.glowquant[1],config.glowquant[2])
+                                    TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.meta[1].."</b>.")
+                                end)
                             end
                         else
-                            TriggerClientEvent("Notify",source,"negado","Você não tem <b>Pseudoefedrina</b> na mochila.")
+                            TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..config.lowquant[6].."x "..config.lowquant[5].."</b>.")
                         end
-					else
-						TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..config.lowquant[4].."x "..config.lowquant[3].."</b>.")
                     end
-                elseif item == "meta-media" then
-                    if vRP.getInventoryWeight(user_id)+vRP.getItemWeight("metanfetamina") <= vRP.getInventoryMaxWeight(user_id) then
-                        if vRP.getInventoryItemAmount(user_id,"pseudoefedrina") >= 2 then
-                            if vRP.getInventoryItemAmount(user_id,"nitrato-amonia") >= 15 then
-                                if vRP.getInventoryItemAmount(user_id,"plastico") >= 10 then
-                                    if vRP.tryGetInventoryItem(user_id,"pseudoefedrina",2) and vRP.tryGetInventoryItem(user_id,"nitrato-amonia",15) and vRP.tryGetInventoryItem(user_id,"plastico",10) then
-                                        TriggerClientEvent("fechar-nui-meta",source)
-                                        TriggerClientEvent("produzindo-true",source)
-
-                                        TriggerClientEvent("progress",source,15000,"Produzindo Metanfetamina")
-                                        vRPclient._playAnim(source,false,{{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"}},true)
-
-                                        SetTimeout(15000,function()
-                                            TriggerClientEvent("produzindo-false",source)
-                                            vRPclient._stopAnim(source,false)
-                                            vRP.giveInventoryItem(user_id,"metanfetamina",10)
-                                            TriggerClientEvent("Notify",source,"sucesso","Você produziu <b>METANFETAMINA</b>.")
-                                        end)
-                                    end
-                                else
-                                    TriggerClientEvent("Notify",source,"negado","Você precisa de <b>10x Plasticos</b>.")
-                                end
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Você precisa de <b>15x Nitrato de Amonia</b>.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Você não tem <b>Pseudoefedrina</b> na mochila.")
-                        end
-					else
-						TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
-                    end
-                elseif item == "meta-alta" then
-                    if vRP.getInventoryWeight(user_id)+vRP.getItemWeight("metanfetamina") <= vRP.getInventoryMaxWeight(user_id) then
-                        if vRP.getInventoryItemAmount(user_id,"pseudoefedrina") >= 3 then
-                            if vRP.getInventoryItemAmount(user_id,"nitrato-amonia") >= 20 then
-                                if vRP.getInventoryItemAmount(user_id,"plastico") >= 15 then
-                                    if vRP.tryGetInventoryItem(user_id,"pseudoefedrina",3) and vRP.tryGetInventoryItem(user_id,"nitrato-amonia",20) and vRP.tryGetInventoryItem(user_id,"plastico",15) then
-                                        TriggerClientEvent("fechar-nui-meta",source)
-                                        TriggerClientEvent("produzindo-true",source)
-
-                                        TriggerClientEvent("progress",source,20000,"Produzindo Metanfetamina")
-                                        vRPclient._playAnim(source,false,{{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"}},true)
-
-                                        SetTimeout(20000,function()
-                                            TriggerClientEvent("produzindo-false",source)
-                                            vRPclient._stopAnim(source,false)
-                                            vRP.giveInventoryItem(user_id,"metanfetamina",15)
-                                            TriggerClientEvent("Notify",source,"sucesso","Você produziu <b>METANFETAMINA</b>.")
-                                        end)
-                                    end
-                                else
-                                    TriggerClientEvent("Notify",source,"negado","Você precisa de <b>15x Plasticos</b>.")
-                                end
-                            else
-                                TriggerClientEvent("Notify",source,"negado","Você precisa de <b>20x Nitrato de Amonia</b>.")
-                            end
-                        else
-                            TriggerClientEvent("Notify",source,"negado","Você não tem <b>Pseudoefedrina</b> na mochila.")
-                        end
-					else
-						TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
-                    end
+                else
+                    TriggerClientEvent("Notify",source,"negado","Você não tem <b>"..config.lowquant[1].."</b> na mochila.")
                 end
-            end              
-		end
+            else
+                TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
+            end
+        elseif item == config.meta[2] then
+            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config.gmedquant[1])*config.gmedquant[2] <= vRP.getInventoryMaxWeight(user_id) then
+                if vRP.getInventoryItemAmount(user_id,config.medquant[1]) >= config.medquant[2] then
+                    if vRP.getInventoryItemAmount(user_id,config.medquant[3]) >= config.medquant[4] then
+                        if vRP.getInventoryItemAmount(user_id,config.medquant[5]) >= config.medquant[6] then
+                            if vRP.getInventoryItemAmount(user_id,config.medquant[7]) >= config.medquant[8] then
+                                if vRP.tryGetInventoryItem(user_id,config.medquant[1],config.medquant[2]) and vRP.tryGetInventoryItem(user_id,config.medquant[3],config.medquant[4]) and vRP.tryGetInventoryItem(user_id,config.medquant[5],config.medquant[6]) and vRP.tryGetInventoryItem(user_id,config.medquant[7],config.medquant[8]) then
+                                    TriggerClientEvent("fechar-nui",source)
+
+                                    TriggerClientEvent("progress",source,config.time,"Fazendo "..config.meta[2].."")
+                                    vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
+
+                                    SetTimeout(config.time,function()
+                                        vRPclient._stopAnim(source,false)
+                                        vRP.giveInventoryItem(user_id,config.gmedquant[1],config.gmedquant[2])
+                                        TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.meta[2].."</b>.")
+                                    end)
+                                end
+                            else
+                                TriggerClientEvent("Notify",source,"negado","Você não tem <b>"..config.medquant[7].."</b> na mochila.")
+                            end
+                        else
+                            TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..config.medquant[6].."x "..config.lowquant[5].."</b>.")
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..config.medquant[4].."x "..config.lowquant[3].."</b>.")
+                    end
+                else
+                    TriggerClientEvent("Notify",source,"negado","Você não tem <b>"..config.medquant[1].."</b> na mochila.")
+                end
+            else
+                TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
+            end
+        elseif item == config.meta[3] then
+            if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config.ghighquant[1])*config.ghighquant[2] <= vRP.getInventoryMaxWeight(user_id) then
+                if vRP.getInventoryItemAmount(user_id,config.highquant[1]) >= config.highquant[2] then
+                    if vRP.getInventoryItemAmount(user_id,config.highquant[3]) >= config.highquant[4] then
+                        if vRP.getInventoryItemAmount(user_id,config.highquant[5]) >= config.highquant[6] then
+                            if vRP.getInventoryItemAmount(user_id,config.highquant[7]) >= config.highquant[8] then
+                                if vRP.tryGetInventoryItem(user_id,config.highquant[1],config.highquant[2]) and vRP.tryGetInventoryItem(user_id,config.highquant[3],config.highquant[4]) and vRP.tryGetInventoryItem(user_id,config.highquant[5],config.highquant[6]) and vRP.tryGetInventoryItem(user_id,config.highquant[7],config.highquant[8]) then
+                                    TriggerClientEvent("fechar-nui",source)
+
+                                    TriggerClientEvent("progress",source,config.time,"Fazendo "..config.meta[3].."")
+                                    vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
+
+                                    SetTimeout(config.time,function()
+                                        vRPclient._stopAnim(source,false)
+                                        vRP.giveInventoryItem(user_id,config.ghighquant[1],config.ghighquant[2])
+                                        TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.meta[3].."</b>.")
+                                    end)
+                                end
+                            else
+                                TriggerClientEvent("Notify",source,"negado","Você não tem <b>"..config.highquant[7].."</b> na mochila.")
+                            end
+                        else
+                            TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..config.highquant[6].."x "..config.highquant[5].."</b>.")
+                        end
+                    else
+                        TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..config.highquant[4].."x "..config.highquant[3].."</b>.")
+                    end
+                else
+                    TriggerClientEvent("Notify",source,"negado","Você não tem <b>"..config.highquant[1].."</b> na mochila.")
+                end
+            else
+                TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
+            end
+        end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -130,7 +120,7 @@ end)
 function oC.checkPermissao()
     local source = source
     local user_id = vRP.getUserId(source)
-    if vRP.hasPermission(user_id,"medellin.permissao") or vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"lider-medellin.permissao") or vRP.hasPermission(user_id,"motoclub.permissao") or vRP.hasPermission(user_id,"lider-motoclub.permissao") then
+    if vRP.hasPermission(user_id,config.permissionMachine[1]) or vRP.hasPermission(user_id,config.permissionMachine[2]) or vRP.hasPermission(user_id,config.permissionMachine[3]) or vRP.hasPermission(user_id,config.permissionMachine[4]) or vRP.hasPermission(user_id,config.permissionMachine[5]) then
         return true
     end
 end

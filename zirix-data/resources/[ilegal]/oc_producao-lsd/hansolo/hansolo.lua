@@ -7,18 +7,10 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
 oC = Tunnel.getInterface("oc_producao-lsd")
--------------------------------------------------------------------------------------------------
---[ LOCAL ]--------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
-local prodMachine = {
-	{ ['x'] = -2469.54, ['y'] = 3700.93, ['z'] = 14.74 }, -- PADRAO
-}
--------------------------------------------------------------------------------------------------
---[ MENU ]---------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
+
+
 local menuactive = false
 local onmenu = false
-local produzindo = false
 
 function ToggleActionMenu()
 	menuactive = not menuactive
@@ -36,14 +28,14 @@ end
 --[ BOTÕES ]-------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
-	if data == "lsd-baixa" then
-		TriggerServerEvent("produzir-lsd","lsd-baixa")
+	if data == config.button1 then
+		TriggerServerEvent("produzir-lsd",config.lsd[1])
 
-	elseif data == "lsd-media" then
-		TriggerServerEvent("produzir-lsd","lsd-media")
+	elseif data == config.button2 then
+		TriggerServerEvent("produzir-lsd",config.lsd[2])
 
-	elseif data == "lsd-alta" then
-		TriggerServerEvent("produzir-lsd","lsd-alta")
+	elseif data == config.button3 then
+		TriggerServerEvent("produzir-lsd",config.lsd[3])
 
 	elseif data == "fechar" then
 		ToggleActionMenu()
@@ -51,25 +43,11 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 	end
 end)
 
-RegisterCommand("fechar",function()
+
+RegisterNetEvent("fechar-nui")
+AddEventHandler("fechar-nui", function()
 	ToggleActionMenu()
 	onmenu = false
-end)
-
-RegisterNetEvent("fechar-nui-lsd")
-AddEventHandler("fechar-nui-lsd", function()
-	ToggleActionMenu()
-	onmenu = false
-end)
-
-RegisterNetEvent("produzindo-true")
-AddEventHandler("produzindo-true", function()
-	produzindo = true
-end)
-
-RegisterNetEvent("produzindo-false")
-AddEventHandler("produzindo-false", function()
-	produzindo = false
 end)
 
 -------------------------------------------------------------------------------------------------
@@ -79,13 +57,13 @@ Citizen.CreateThread(function()
 	while true do
 		local idle = 1000
 
-		for k,v in pairs(prodMachine) do
+		for k,v in pairs(config.prodMachine) do
 			local ped = PlayerPedId()
 			local x,y,z = table.unpack(GetEntityCoords(ped))
 			local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
 			local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
-			local prodMachine = prodMachine[k]
-			local idBancada = prodMachine[id]
+			local prodMachine = config.prodMachine[k]
+			local idBancada = config.prodMachine[id]
 
 			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), prodMachine.x, prodMachine.y, prodMachine.z, true ) < 1.2 and not onmenu then
 				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE LSD~w~.",4,0.5,0.92,0.35,255,255,255,180)
@@ -94,11 +72,9 @@ Citizen.CreateThread(function()
 				DrawMarker(23, prodMachine.x, prodMachine.y, prodMachine.z-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
 				idle = 5
 				if distance <= 1.2 then
-					if not produzindo then
-						if IsControlJustPressed(0,38) and oC.checkPermissao() then
-							ToggleActionMenu()
-							onmenu = true
-						end
+					if IsControlJustPressed(0,38) and oC.checkPermissao() then
+						ToggleActionMenu()
+						onmenu = true
 					end
 				end
 			end
