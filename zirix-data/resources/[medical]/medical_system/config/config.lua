@@ -1,10 +1,14 @@
 config = {}
 
-config.medicpermission = "ems.permissao"
+config.medicpermission = "ems.permissao" --Permissão dos Medicos
 
+config.revive = "reanimar" --Comando para o Paramedico reanimar o cidadão
 
+config.diagnosticPlayer = "diagnostico" --Comando para o Paramedico fazer o diagnostico no cidadão
 
-config.stretchers = {
+config.treatment = "tratamento" --Comando para o Paramedico fazer o tratamento no cidadão
+
+config.stretchers = { --Macas do Hospital
 	{ ['x'] = 344.24, ['y'] = -582.21, ['z'] = 43.31, ['x2'] = 344.66, ['y2'] = -580.87, ['z2'] = 44.01, ['h'] = 70.0 },
 	{ ['x'] = 348.82, ['y'] = -583.36, ['z'] = 43.31, ['x2'] = 349.71, ['y2'] = -583.56, ['z2'] = 44.01, ['h'] = 330.0 },
 	{ ['x'] = 352.31, ['y'] = -584.43, ['z'] = 43.31, ['x2'] = 353.10, ['y2'] = -584.77, ['z2'] = 44.10, ['h'] = 330.0 },
