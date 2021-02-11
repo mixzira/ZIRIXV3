@@ -236,12 +236,9 @@ function funcClient.carroPrisao(id, tempo)
         async(function()
             while inTransport do
                 Citizen.Wait(1000)
-                if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) and IsPedDeadOrDying(pveh03) then
-                    --local veh = GetVehiclePedIsIn(ped, false)
-                    --TaskLeaveVehicle(ped,veh,4160)
+                if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) then
                     inTransport = false
                     npcsHealth = false
-                    --func.setFuga()
                 end
 
             -- while inTransport do
@@ -299,52 +296,21 @@ function funcClient.carroPrisao(id, tempo)
             end
         end)
     end
-end
-
-function funcClient.sendServer()
-    print(nveh)
-    print(npcsHealth)
     return nveh, npcsHealth
 end
 
--- Citizen.CreateThread(function()
---     while true do
---     if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) then
---             local coords = GetEntityCoords(PlayerPedId(-1))
---             local myCoords2 = GetEntityCoords(nveh)
---             local teste = GetClosestPed(myCoords2.x, myCoords2.y, myCoords2.z, 30, 0, 0, 0, 0, -1)
---             --print(teste)
---             local distancia2 = GetDistanceBetweenCoords(myCoords2.x, myCoords2.y, myCoords2.z, coords, true)
---             if vehicle == GetHashKey('riot') then
---             --local coordsCar = GetWorldPositionOfEntityBone(nveh, GetEntityBoneIndexByName(nveh,"door_dside_r"))
---                 if distancia2 <= 5 then
---                     draw3DText(myCoords2.x, myCoords2.y+1, myCoords2.z, "[~g~E~w~] PARA ABRIR")
---                     if IsControlJustPressed(1, 38) then
---                         local veh = GetVehiclePedIsIn(ped, false)
---                         TaskLeaveVehicle(ped,veh,4160)
---                         inTransport = false
---                         func.setFuga()
---                         npcsHealth = false
---                     end
---                 end
---             end
---         end
---         Citizen.Wait(5)
--- 	end
--- end)
-
-RegisterCommand('liberar',function(source,args,rawCommand)
-	local user_id = PlayerPedId(source)
-    if npcsHealth == false then
-        local prisioner = getNearestPlayer(source,3)
-        local veh = GetVehiclePedIsIn(prisioner, false)
-        if prisioner then
-            TaskLeaveVehicle(prisioner,veh,4160)
-            inTransport = false
-            func.setFuga()
+Citizen.CreateThread(function()
+    while true do
+        if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) then
+            npcsHealth = false
         end
-    end
+        Citizen.Wait(5)
+	end
 end)
+
+function funcClient.sendServer()
+    return npcsHealth
+end
 
 function setPedPropertys(npc,weapon)
 	SetPedShootRate(npc,700)

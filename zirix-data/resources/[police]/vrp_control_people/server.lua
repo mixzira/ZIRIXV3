@@ -36,6 +36,8 @@ vRP._prepare("vRP/delete_foragido",
 -- vRP._prepare("vRP/get_total_carros_tipo",
 --              "SELECT vehicle, count(1) total FROM vrp.vrp_user_vehicles GROUP BY vehicle")
 
+local nveh = nil
+local npcsHealth = true
 function func.setRegistro(passaporte, dkey, dvalue, img, valor, id_pai)
     local source = source
     local police_id = vRP.getUserId(source)
@@ -87,7 +89,7 @@ function func.setPrisao(id, tempo)
                 vRPclient.toggleHandcuff(player)
             end
             inPrisao[id] = tempo
-            funcCliente.carroPrisao(player, id, tempo)
+            nveh = funcCliente.carroPrisao(player, id, tempo)
         else
             func.setPrisao2(id, tempo)
         end
@@ -242,29 +244,24 @@ function func.markOcorrency(x,y,z)
 	end
 end
 
-function getOut()
-    local source = source
+RegisterCommand('liberar',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
-	local nplayer = vRPclient.getNearestPlayer(source,2)
-	local nuser_id = vRP.getUserId(nplayer)
-	if nplayer then
-		if npcsHealth == false then
-				
-				
-		end
-	end
-end
-
-
-
-RegisterCommand('teste2',function(source,args,rawCommand)
-	local user_id = vRP.getUserId(source)
-	local nplayer = vRPclient.getNearestPlayer(source,3)
+	local nplayer = vRPclient.getNearestPlayer(source,7)
     print(user_id)
     print(nplayer)
     if nplayer then
-        local veh, npcsHealth = funcCliente.sendServer()
-        print(veh)
+        local npcsHealth = funcCliente.sendServer(source)
+        print(nveh)
         print(npcsHealth)
+        if nveh then
+            if npcsHealth == false then
+                vRPclient.ejectVehicle(nplayer)
+            else
+			    TriggerClientEvent("Notify",source,"importante","Os seguranças ainda estão vivos!.")
+            end
+        end
     end
 end)
+
+-- Distancia do nveh
+-- Check item 
