@@ -25,12 +25,12 @@ function src.checkTimers()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.getInventoryItemAmount(user_id,"celular") >= 1 and vRP.tryGetInventoryItem(user_id,"celular",1) then -- Item necessário para hackear e pegar a loc do carro forte
-			-- local policia = vRP.getUsersByPermission("policia.permissao")
-			-- if #policia <= 0 then
-			-- 	TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais no momento.",8000)
-			-- 	return false
-			if parseInt(os.time()-timers) <= 1000 then
+		if vRP.getInventoryItemAmount(user_id,"cocaina") >= 1 and vRP.tryGetInventoryItem(user_id,"cocaina",1) then
+			local policia = vRP.getUsersByPermission("policia.permissao")
+			if #policia >= 1 then
+				TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais no momento.",8000)
+				return false
+			elseif parseInt(os.time()-timers) <= 1000 then
 				TriggerClientEvent("Notify",source,"aviso","O sistema foi hackeado, aguarde <b>"..vRP.format(parseInt((3600-(os.time()-timers)))).." segundos</b> até que o mesmo retorne a funcionar.",8000)
 				return false
 			else
@@ -38,7 +38,7 @@ function src.checkTimers()
 				return true
 			end
 		else
-			TriggerClientEvent("Notify",source,"negado","Precisa de um <b>Pendrive</b> para hackear o sistema.",8000)
+			TriggerClientEvent("Notify",source,"importante","Precisa de um <b>Pendrive</b> para hackear o sistema.",8000)
 			return false
 		end
 	end
@@ -58,7 +58,7 @@ end
 -- DROPAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.dropSystem(x,y,z)
-	TriggerEvent("DropSystem:create","dinheiro-sujo",math.random(420000,480000),x,y,z)
+	TriggerEvent("DropSystem:create","dinheirosujo",math.random(420000,480000),x,y,z)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DROPAR
@@ -85,19 +85,6 @@ function src.markOcorrency(x,y,z)
 					SetTimeout(15000,function() vRPclient.removeBlip(player,blips[id]) idgens:free(id) end)
 				end)
 			end
-		end
-	end
-end
-
-function src.checkExplosive()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		if vRP.getInventoryItemAmount(user_id,"celular") >= 1 and vRP.tryGetInventoryItem(user_id,"celular",1) then
-			return true
-		else
-			TriggerClientEvent("Notify",source,"negado","Precisa de uma <b>C4</b> para abrir a porta.",8000)
-			return false
 		end
 	end
 end

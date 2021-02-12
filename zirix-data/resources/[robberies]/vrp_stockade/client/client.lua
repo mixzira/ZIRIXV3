@@ -93,10 +93,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.startStockade()
 	pos = math.random(#locs)
-		-- src.spawnStockade(locs[pos].x,locs[pos].y,locs[pos].z,locs[pos].x2,locs[pos].y2,locs[pos].z2,locs[pos].h)
-		src.spawnStockade(739.73,1294.01,360.3,719.83, 1276.78, 360.3, 29.31)
-		-- 739.73, 1294.01, 360.3
-		-- 719.83, 1276.78, 360.3
+	src.spawnStockade(locs[pos].x,locs[pos].y,locs[pos].z,locs[pos].x2,locs[pos].y2,locs[pos].z2,locs[pos].h)
 	TriggerEvent("Notify","sucesso","Hackeado com sucesso, instalado o rastreador no carro forte.",8000)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -201,37 +198,27 @@ Citizen.CreateThread(function()
 
 			if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) and not DoesEntityExist(bomba) then
 				vSERVER.markOcorrency(x,y,z)
-				local coordsCar = GetWorldPositionOfEntityBone(nveh, GetEntityBoneIndexByName(nveh,"door_dside_r"))
-				local distancia = GetDistanceBetweenCoords(myCoords.x,myCoords.y, myCoords.z, coordsCar.x, coordsCar.y, coordsCar.z, true)
-
-				if distancia <= 5 then
-					idle = 1
-					draw3DText(coordsCar.x, coordsCar.y+1, coordsCar.z, "[~g~E~w~] PARA DETONAR")
-					if IsControlJustPressed(1,38) and vSERVER.checkExplosive() then
-						TriggerEvent("Notify","sucesso","C4 plantada com sucesso! Se afaste para a explosão!",10000)
-						TriggerEvent('iniciandoroubo',source)
-						bomba = CreateObject(GetHashKey("prop_c4_final_green"),x,y,z,true,true,false)
-						AttachEntityToEntity(bomba,nveh,GetEntityBoneIndexByName(nveh,"door_dside_r"),0.78,0.0,0.0,180.0,-90.0,180.0,false,false,false,true,2,true)
-						
-						SetTimeout(10000,function()
-							TriggerServerEvent("tryDeleteEntity",PedToNet(pveh01))
-							TriggerServerEvent("tryDeleteEntity",PedToNet(pveh02))
-							TriggerServerEvent("tryDeleteEntity",ObjToNet(bomba))
-							SetVehicleDoorOpen(nveh,2,0,0)
-							SetVehicleDoorOpen(nveh,3,0,0)
-							AddExplosion(GetEntityCoords(nveh),1,1.0,true,true,true)
-							vSERVER.dropSystem(x2,y2,z2)
-							pveh01 = nil
-							pveh02 = nil
-							if DoesBlipExist(blip) then
-								RemoveBlip(blip)
-								blip = nil
-							end
-						end)
+				bomba = CreateObject(GetHashKey("prop_c4_final_green"),x,y,z,true,true,false)
+				AttachEntityToEntity(bomba,nveh,GetEntityBoneIndexByName(nveh,"door_dside_r"),0.78,0.0,0.0,180.0,-90.0,180.0,false,false,false,true,2,true)
+				SetTimeout(5000,function()
+					TriggerServerEvent("tryDeleteEntity",PedToNet(pveh01))
+					TriggerServerEvent("tryDeleteEntity",PedToNet(pveh02))
+					TriggerServerEvent("tryDeleteEntity",ObjToNet(bomba))
+					SetVehicleDoorOpen(nveh,2,0,0)
+					SetVehicleDoorOpen(nveh,3,0,0)
+					AddExplosion(GetEntityCoords(nveh),1,1.0,true,true,true)
+					vSERVER.dropSystem(x2,y2,z2)
+					pveh01 = nil
+					pveh02 = nil
+					if DoesBlipExist(blip) then
+						RemoveBlip(blip)
+						blip = nil
 					end
+				end)
+			end
 
 			if Vdist2(locs[pos].x2,locs[pos].y2,locs[pos].z2,x,y,z) <= 30.0 then
-				TriggerServerEvent("tryDeleteVehicle",VehToNet(nveh))
+				--TriggerServerEvent("tryDeleteVehicle",VehToNet(nveh))
 				TriggerServerEvent("tryDeleteEntity",PedToNet(pveh01))
 				TriggerServerEvent("tryDeleteEntity",PedToNet(pveh02))
 				nveh = nil
@@ -269,19 +256,4 @@ function setBlipsStockade(entity)
 	BeginTextCommandSetBlipName("STRING")
 	AddTextComponentString("Carro Forte")
 	EndTextCommandSetBlipName(blip)
-end
-
-function draw3DText(x,y,z, text)
-	local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-	local px,py,pz=table.unpack(GetGameplayCamCoords())
-	SetTextScale(0.35, 0.35)
-	SetTextFont(4)
-	SetTextProportional(1)
-	SetTextColour(255, 255, 255, 215)
-	SetTextEntry("STRING")
-	SetTextCentre(1)
-	AddTextComponentString(text)
-	DrawText(_x,_y)
-	local factor = (string.len(text)) / 370
-	DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
