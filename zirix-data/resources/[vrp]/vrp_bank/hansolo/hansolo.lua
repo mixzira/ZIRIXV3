@@ -180,8 +180,10 @@ Citizen.CreateThread(function()
 			for k,v in pairs(config.atmrobbery) do
 				if Vdist(v.x,v.y,v.z,x,y,z) <= 1 and not andamento then
 					idle = 5
-					if IsControlJustPressed(0,47) and banK.checkPermission() then
-						bank.checkRobbery(v.id,v.x,v.y,v.z,v.h)
+					if IsControlJustPressed(1,47) then
+						if banK.checkPermission() then
+							banK.checkRobbery(v.id,v.x,v.y,v.z,v.h)
+						end
 					end
 				end
 			end
@@ -192,8 +194,8 @@ Citizen.CreateThread(function()
 				if IsControlJustPressed(0,244) or GetEntityHealth(ped) <= 100 or IsPedBeingStunned(ped) then
 					andamento = false
 					ClearPedTasks(ped)
-					bank.cancelRobbery()
-					bank.robberywebwook()
+					banK.cancelRobbery()
+					banK.robberywebwook()
 					TriggerEvent('cancelando',false)
 				end
 			end
@@ -217,7 +219,7 @@ Citizen.CreateThread(function()
 		if andamento then
 			segundos = segundos - 1
 			if segundos <= 0 then
-				bank.robberywebwook()
+				banK.robberywebwook()
 				andamento = false
 				ClearPedTasks(PlayerPedId())
 				TriggerEvent('cancelando',false)
