@@ -2,7 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 farm_meta = Tunnel.getInterface("farm_meta")
 
-local blips = true
+local blipsfmeta = true
 local servico = false
 local selecionado = 0
 local quantidade = 0
@@ -67,7 +67,7 @@ Citizen.CreateThread(function()
 							if porcentagem >= config4.percentage[1] and porcentagem <= config4.percentage[2] then
 								farm_meta.MarcarOcorrencia()
 							end
-							RemoveBlip(blips)
+							RemoveBlip(blipsfmeta)
 							
 							backentrega = selecionado
 							while true do
@@ -97,7 +97,7 @@ Citizen.CreateThread(function()
 			TriggerEvent("Notify","importante","Vá até o próximo local e colete o <b>Pacote</b>.")
 			elseif IsControlJustPressed(0,168) then
 				servico = false
-				RemoveBlip(blips)
+				RemoveBlip(blipsfmeta)
 				TriggerEvent("Notify","aviso","Você saiu de serviço.")
 			end
 		end
@@ -117,13 +117,13 @@ function drawTxt(text,font,x,y,scale,r,g,b,a)
 end
 
 function CriandoBlip(locs,selecionado)
-	blips = AddBlipForCoord(config4.locs[selecionado].x,config4.locs[selecionado].y,config4.locs[selecionado].z)
-	SetBlipSprite(blips,1)
-	SetBlipColour(blips,5)
-	SetBlipScale(blips,0.4)
-	SetBlipAsShortRange(blips,false)
-	SetBlipRoute(blips,true)
+	blipsfmeta = AddBlipForCoord(config4.locs[selecionado].x,config4.locs[selecionado].y,config4.locs[selecionado].z)
+	SetBlipSprite(blipsfmeta,1)
+	SetBlipColour(blipsfmeta,5)
+	SetBlipScale(blipsfmeta,0.4)
+	SetBlipAsShortRange(blipsfmeta,false)
+	SetBlipRoute(blipsfmeta,true)
 	BeginTextCommandSetBlipName("STRING")
 	AddTextComponentString("Coleta de Pacote")
-	EndTextCommandSetBlipName(blips)
+	EndTextCommandSetBlipName(blipsfmeta)
 end

@@ -2,7 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 farm_ammo = Tunnel.getInterface("farm_ammo")
 
-local blips = true
+local blipsfammo = true
 local servico = false
 local selecionado = 0
 local quantidade = 0
@@ -67,7 +67,7 @@ Citizen.CreateThread(function()
 							if porcentagem >= config1.percentage[1] and porcentagem <= config1.percentage[2] then
 								farm_ammo.MarcarOcorrencia()
 							end
-							RemoveBlip(blips)
+							RemoveBlip(blipsfammo)
 							
 							backentrega = selecionado
 							while true do
@@ -93,11 +93,11 @@ Citizen.CreateThread(function()
 		idle = 1000
 		if servico then
 			idle = 5
-			if IsControlJustPressed(0,121) then
+			if IsControlJustPressed(1,121) then
 			TriggerEvent("Notify","importante","Vá até o próximo local e colete o <b>Pacote</b>.")
-			elseif IsControlJustPressed(0,168) then
+			elseif IsControlJustPressed(1,168) then
 				servico = false
-				RemoveBlip(blips)
+				RemoveBlip(blipsfammo)
 				TriggerEvent("Notify","aviso","Você saiu de serviço.")
 			end
 		end
@@ -117,13 +117,13 @@ function drawTxt(text,font,x,y,scale,r,g,b,a)
 end
 
 function CriandoBlip(locs,selecionado)
-	blips = AddBlipForCoord(locs[selecionado].x,locs[selecionado].y,locs[selecionado].z)
-	SetBlipSprite(blips,1)
-	SetBlipColour(blips,5)
-	SetBlipScale(blips,0.4)
-	SetBlipAsShortRange(blips,false)
-	SetBlipRoute(blips,true)
+	blipsfammo = AddBlipForCoord(locs[selecionado].x,locs[selecionado].y,locs[selecionado].z)
+	SetBlipSprite(blipsfammo,1)
+	SetBlipColour(blipsfammo,5)
+	SetBlipScale(blipsfammo,0.4)
+	SetBlipAsShortRange(blipsfammo,false)
+	SetBlipRoute(blipsfammo,true)
 	BeginTextCommandSetBlipName("STRING")
 	AddTextComponentString("Coleta de Pacote")
-	EndTextCommandSetBlipName(blips)
+	EndTextCommandSetBlipName(blipsfammo)
 end
