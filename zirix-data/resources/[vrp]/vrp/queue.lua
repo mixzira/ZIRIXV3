@@ -2,7 +2,7 @@ local Config = {}
 
 vRP.prepare("vRP/get_priority","SELECT * FROM vrp_priority")
 
-Config.RequireSteam = true
+Config.RequireSteam = false
 Config.PriorityOnly = false
 
 Config.IsBanned = function(src,callback)
@@ -376,11 +376,11 @@ Citizen.CreateThread(function()
 			return
 		end
 
-		if not Queue:IsSteamRunning(src) then -- if Config.RequireSteam and not Queue:IsSteamRunning(src) then
-			done(Config.Language.steam)
-			CancelEvent()
-			return
-		end
+		-- if not Queue:IsSteamRunning(src) then -- if Config.RequireSteam and not Queue:IsSteamRunning(src) then
+		-- 	done(Config.Language.steam)
+		-- 	CancelEvent()
+		-- 	return
+		-- end
 
 		local banned
 

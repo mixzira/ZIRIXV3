@@ -16,23 +16,23 @@ local blips = {}
 function farm_weapon.checkPermission()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	return (vRP.hasPermission(user_id,config4.permission))
+	return (vRP.hasPermission(user_id,config5.permission))
 end
 
 function farm_weapon.checkPayment()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	local qtd = math.random(config4.qtd[1],config4.qtd[2])
+	local qtd = math.random(config5.qtd[1],config5.qtd[2])
 	if user_id then
-		if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config4.itens[1])*qtd <= vRP.getInventoryMaxWeight(user_id) then
-			vRP.giveInventoryItem(user_id,config4.itens[1],qtd)
-			TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[1].."</b>.")
-			if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config4.itens[2])*qtd <= vRP.getInventoryMaxWeight(user_id) then
-				vRP.giveInventoryItem(user_id,config4.itens[2],qtd)
-				TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[2].."</b>.")
-				if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config4.itens[3])*qtd <= vRP.getInventoryMaxWeight(user_id) then
-					vRP.giveInventoryItem(user_id,config4.itens[3],qtd)
-					TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[3].."</b>.")
+		if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config5.itens[1])*qtd <= vRP.getInventoryMaxWeight(user_id) then
+			vRP.giveInventoryItem(user_id,config5.itens[1],qtd)
+			TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config5.itens[1].."</b>.")
+			if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config5.itens[2])*qtd <= vRP.getInventoryMaxWeight(user_id) then
+				vRP.giveInventoryItem(user_id,config5.itens[2],qtd)
+				TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config5.itens[2].."</b>.")
+				if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config5.itens[3])*qtd <= vRP.getInventoryMaxWeight(user_id) then
+					vRP.giveInventoryItem(user_id,config5.itens[3],qtd)
+					TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config5.itens[3].."</b>.")
 				else
 					TriggerClientEvent("Notify",source,"negado","Você está sem espaço na sua mochila.")
 					return false
@@ -56,7 +56,7 @@ function farm_weapon.MarcarOcorrencia()
 	local x,y,z = vRPclient.getPosition(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if user_id then
-		local soldado = vRP.getUsersByPermission(config4.ppermission)
+		local soldado = vRP.getUsersByPermission(config5.ppermission)
 		for l,w in pairs(soldado) do
 			local player = vRP.getUserSource(parseInt(w))
 			if player then

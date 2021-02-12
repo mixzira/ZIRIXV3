@@ -3,7 +3,7 @@ config3 = {}
 --[ CONFIGURAÇÃO INICIAL DA COLETA ]-------------------------------------------------------------------------------------------------------------------------
 
 -- LOCAL ONDE PEGA A COLETA
-config3.start = { -455.01, -1689.59, 19.29 }
+config3.start = { -454.47, -1683.72, 19.03 }
 
 -- PERMISSAO PARA PODER COLETAR
 config3.permission = "manager.permissao"

@@ -2,7 +2,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 delivery_lsd = Tunnel.getInterface("delivery_lsd")
 
-local blips = true
+
 local servico = false
 local selecionado = 0
 local quantidade = 0

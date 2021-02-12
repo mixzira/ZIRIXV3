@@ -29,10 +29,10 @@ function farm_meta.checkPayment()
 			TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[1].."</b>.")
 			if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config4.itens[2])*qtd <= vRP.getInventoryMaxWeight(user_id) then
 				vRP.giveInventoryItem(user_id,config4.itens[2],qtd)
-				TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[1].."</b>.")
+				TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[2].."</b>.")
 				if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config4.itens[3])*qtd <= vRP.getInventoryMaxWeight(user_id) then
 					vRP.giveInventoryItem(user_id,config4.itens[3],qtd)
-					TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[1].."</b>.")
+					TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config4.itens[3].."</b>.")
 				else
 					TriggerClientEvent("Notify",source,"negado","Você está sem espaço na sua mochila.")
 					return false

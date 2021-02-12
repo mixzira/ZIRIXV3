@@ -2,7 +2,6 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 farm_meta = Tunnel.getInterface("farm_meta")
 
-local blipsfmeta = true
 local servico = false
 local selecionado = 0
 local quantidade = 0
@@ -19,10 +18,10 @@ Citizen.CreateThread(function()
 			local bowz,cdz = GetGroundZFor_3dCoord(config4.start[1],config4.start[2],config4.start[3])
 			local distance = GetDistanceBetweenCoords(config4.start[1],config4.start[2],cdz,x,y,z,true)
 
-			if distance <= 3 then
+			if distance <= 4 then
 				idle = 5
 				DrawMarker(23,config4.start[1],config4.start[2],config4.start[3]-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
-				if distance <= 1.2 then
+				if distance <= 1.5 then
 					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR A COLETA",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(0,38) and farm_meta.checkPermission() then						
 						servico = true						
@@ -67,7 +66,7 @@ Citizen.CreateThread(function()
 							if porcentagem >= config4.percentage[1] and porcentagem <= config4.percentage[2] then
 								farm_meta.MarcarOcorrencia()
 							end
-							RemoveBlip(blipsfmeta)
+							RemoveBlip(blips)
 							
 							backentrega = selecionado
 							while true do
@@ -97,7 +96,7 @@ Citizen.CreateThread(function()
 			TriggerEvent("Notify","importante","Vá até o próximo local e colete o <b>Pacote</b>.")
 			elseif IsControlJustPressed(0,168) then
 				servico = false
-				RemoveBlip(blipsfmeta)
+				RemoveBlip(blips)
 				TriggerEvent("Notify","aviso","Você saiu de serviço.")
 			end
 		end
@@ -117,13 +116,13 @@ function drawTxt(text,font,x,y,scale,r,g,b,a)
 end
 
 function CriandoBlip(locs,selecionado)
-	blipsfmeta = AddBlipForCoord(config4.locs[selecionado].x,config4.locs[selecionado].y,config4.locs[selecionado].z)
-	SetBlipSprite(blipsfmeta,1)
-	SetBlipColour(blipsfmeta,5)
-	SetBlipScale(blipsfmeta,0.4)
-	SetBlipAsShortRange(blipsfmeta,false)
-	SetBlipRoute(blipsfmeta,true)
+	blips = AddBlipForCoord(config4.locs[selecionado].x,config4.locs[selecionado].y,config4.locs[selecionado].z)
+	SetBlipSprite(blips,1)
+	SetBlipColour(blips,5)
+	SetBlipScale(blips,0.4)
+	SetBlipAsShortRange(blips,false)
+	SetBlipRoute(blips,true)
 	BeginTextCommandSetBlipName("STRING")
 	AddTextComponentString("Coleta de Pacote")
-	EndTextCommandSetBlipName(blipsfmeta)
+	EndTextCommandSetBlipName(blips)
 end

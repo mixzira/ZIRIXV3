@@ -1,15 +1,15 @@
-config4 = {}
+config5 = {}
 
 --[ CONFIGURAÇÃO INICIAL DA COLETA ]-------------------------------------------------------------------------------------------------------------------------
 
 -- LOCAL ONDE PEGA A COLETA
-config4.start = { -455.01, -1689.59, 19.29 }
+config5.start = { -456.25, -1684.39, 19.01 }
 
 -- PERMISSAO PARA PODER COLETAR
-config4.permission = "manager.permissao"
+config5.permission = "manager.permissao"
 
 -- LOCALIZAÇÃO DA COLETA DOS PACOTES
-config4.locs = {
+config5.locs = {
 	[1] = { ['x'] =  155.85, ['y'] = -43.10, ['z'] = 67.71},
 	[2] = { ['x'] =  313.35, ['y'] = -245.31, ['z'] = 53.89},
 	[3] = { ['x'] =  -52.17, ['y'] = -103.74, ['z'] = 57.63},
@@ -72,16 +72,16 @@ config4.locs = {
 --[ CONFIGURAÇÃO DE COLETA DOS PACOTES ]-------------------------------------------------------------------------------------------------------------------------
 
 -- ITENS DADOS AO COLETAR O PACOTE. (Somente 3)
-config4.itens = { "placa-metal", "molas", "gatilho"}
+config5.itens = { "placa-metal", "molas", "gatilho"}
 
 -- QUANTIDADE DE ITENS DADOS AO COLETAR O PACOTE.
 -- VALOR RANDOMICO, NECESSARIO 2 VALORES SETADOS.
-config4.qtd = { 2, 12 }
+config5.qtd = { 2, 12 }
 
 -- PERMISSAO DA POLICIA PARA SER AVISADO
-config4.ppermission = "policia.permissao"
+config5.ppermission = "policia.permissao"
 
 -- PORCENTAGEM DE CHANCE PARA CHAMAR A POLICIA.
 -- PRIMEIRO VALOR: SE MAIOR QUE
 -- SEGUNDO VALOR: SE MENOR QUE
-config4.percentage = { 1, 30 }      --EX: SE A PORCENTAGEM FOR MAIOR QUE 1 E MENOR QUE 30, A POLICIA SERA AVISADA. (RANDOM DE 0 À 100)
+config5.percentage = { 1, 30 }      --EX: SE A PORCENTAGEM FOR MAIOR QUE 1 E MENOR QUE 30, A POLICIA SERA AVISADA. (RANDOM DE 0 À 100)
