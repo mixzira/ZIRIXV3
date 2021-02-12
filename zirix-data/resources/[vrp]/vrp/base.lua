@@ -23,17 +23,6 @@ local cached_queries = {}
 local prepared_queries = {}
 local db_initialized = false
 
---[ WEBHOOK ]----------------------------------------------------------------------------------------------------------------------------
-
-local logEntrada = "https://discordapp.com/api/webhooks/762553866633478144/WzYW7DlzG2mwUGnITCszfkUSdR9nC3Nny6Fmd6SSmI5PlZTozVAmUUzJw5pNz6q8iJHv"
-local logSaida = "https://discordapp.com/api/webhooks/762554120061845504/FMofYG4rCcDMcryXcmNxHV3ifPfzVmt-pLRVmABvlkDWWJD9i2BWN6oiYwqRLhQimFZu"
-local policiaPonto = "https://discordapp.com/api/webhooks/763899170066268180/iL1NY5dSKG1sBotUaZhHGuOvFcS00-cz4PQNHLyeX7bUijyJYfm2wsC0Hw97orUlqGGC"
-local resgatePonto = "https://discordapp.com/api/webhooks/763900097061978122/55p3yo35sPMAxGq-ITzBLr-Ir6U_27Nw3MQN0wYrN3gtBFrp-MVLOjWCpU2DIW4tcgeS"
-local mechanicPonto = "https://discordapp.com/api/webhooks/763897068406177802/yg73Askax36EAzVna460Dg1ml-Z33MGhtX86wisdx-JuRicnPN83S_ZHiewgYLdshovE"
-local logAdmStatus = "https://discordapp.com/api/webhooks/763897002646962217/zNjezEN5f_fNvddMYvHMXf2IeuGSJ75zOgaF-jz42Xuvpr74JuBpGIc6G7rcDRWYQ8y5"
-
---[ BASE.LUA ]---------------------------------------------------------------------------------------------------------------------------
-
 function vRP.registerDBDriver(name,on_init,on_prepare,on_query)
 	if not db_drivers[name] then
 		db_drivers[name] = { on_init,on_prepare,on_query }
@@ -236,258 +225,37 @@ function vRP.dropPlayer(source)
 	vRPclient._removePlayer(-1,source)
 	if user_id then
 		if user_id and source then
-			TriggerEvent("vRP:playerLeave",user_id,source)
-
-			PerformHttpRequest(logSaida, function(err, text, headers) end, 'POST', json.encode({
-				embeds = {
-					{ 
-						title = "REGISTRO DE SAIDA:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
-						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
-						}, 
-						fields = {
-							{ 
-								name = "[ ID: **"..user_id.."** ][ IP: **"..GetPlayerEndpoint(source).."** ]",
-								value = "⠀\n⠀"
-							}
-						}, 
-						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"), 
-							icon_url = "https://i.imgur.com/CtQB816.png" 
-						},
-						color = 4402032 
-					}
-				}
-			}), { ['Content-Type'] = 'application/json' })
-			
 			local identity = vRP.getUserIdentity(user_id)
-
+			TriggerEvent("vRP:playerLeave",user_id,source)
+			PerformHttpRequest(base.exit, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE SAIDA:\n⠀",thumbnail = {url = base.icon}, fields = {{name = "[ ID: **"..user_id.."** ][ IP: **"..GetPlayerEndpoint(source).."** ]", value = "⠀\n⠀"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			if vRP.hasGroup(user_id,"policia") then
 				vRP.addUserGroup(user_id,"paisana-policia")
-
-				PerformHttpRequest(policiaPonto, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 
-							title = identity.name.." saiu de serviço.",
-							description = "Registro de Ponto do Departamento de Polícia de Los Anjos. Registro de saída de serviço.\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							}, 
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO DO COLABORADOR:**",
-									value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"
-								}
-							}, 
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032 
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
-
+				PerformHttpRequest(base.recordPolice, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = identity.name.." saiu de serviço.", description = "Registro de Ponto do Departamento de Polícia de Los Anjos. Registro de saída de serviço.\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO DO COLABORADOR:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			elseif vRP.hasGroup(user_id,"ems") then
 				vRP.addUserGroup(user_id,"paisana-ems")
-
-				PerformHttpRequest(resgatePonto, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 
-							title = identity.name.." saiu de serviço.",
-							description = "Registro de Ponto do Departamento Médico de Los Anjos. Registro de saída de serviço.\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							},
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO DO COLABORADOR:**",
-									value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"
-								}
-							},
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
-			
+				PerformHttpRequest(base.recordMedical, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = identity.name.." saiu de serviço.", description = "Registro de Ponto do Departamento Médico de Los Anjos. Registro de saída de serviço.\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO DO COLABORADOR:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			elseif vRP.hasGroup(user_id,"mecanico") then
 				vRP.addUserGroup(user_id,"paisana-mecanico")
-
-				PerformHttpRequest(mechanicPonto, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 
-							title = identity.name.." saiu de serviço.",
-							description = "Registro da ponto da Los Santos Customs. Registro de saída de serviço.\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							},
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO DO COLABORADOR:**",
-									value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"
-								}
-							},
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
-
+				PerformHttpRequest(base.recordMechanic, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = identity.name.." saiu de serviço.", description = "Registro da ponto da Los Santos Customs. Registro de saída de serviço.\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO DO COLABORADOR:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]\n⠀"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			elseif vRP.hasGroup(user_id,"manager") then
 				vRP.addUserGroup(user_id,"off-manager")
-				local cargo = "Manager"
-
-				PerformHttpRequest(logAdmStatus, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 	------------------------------------------------------------
-							title = "REGISTRO ADMINISTRATIVO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							},
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]",
-									value = "⠀"
-								},
-								{ 
-									name = "**CARGO: **"..cargo,
-									value = "⠀",
-									inline = true
-								},
-								{ 
-									name = "**STATUS: **Saiu do modo administrativo.",
-									value = "⠀",
-									inline = true
-								}
-							},
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
-
+				local office = "Manager"
+				PerformHttpRequest(base.staffStats, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO ADMINISTRATIVO:\n⠀", thumbnail = {url = base.icon }, fields = {{name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]", value = "⠀"}, {name = "**CARGO: **"..office, value = "⠀", inline = true }, {name = "**STATUS: **Saiu do modo administrativo.", value = "⠀", inline = true }}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			elseif vRP.hasGroup(user_id,"administrador") then
 				vRP.addUserGroup(user_id,"off-administrador")
-				local cargo = "Administrador"
-
-				PerformHttpRequest(logAdmStatus, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 	------------------------------------------------------------
-							title = "REGISTRO ADMINISTRATIVO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							},
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]",
-									value = "⠀"
-								},
-								{ 
-									name = "**CARGO: **"..cargo,
-									value = "⠀",
-									inline = true
-								},
-								{ 
-									name = "**STATUS: **Saiu do modo administrativo.",
-									value = "⠀",
-									inline = true
-								}
-							},
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
-
+				local office = "Administrador"
+				PerformHttpRequest(base.staffStats, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO ADMINISTRATIVO:\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]", value = "⠀"}, {name = "**CARGO: **"..office, value = "⠀", inline = true}, {name = "**STATUS: **Saiu do modo administrativo.", value = "⠀", inline = true}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			elseif vRP.hasGroup(user_id,"moderador") then
 				vRP.addUserGroup(user_id,"off-moderador")
-				local cargo = "Moderador"
-
-				PerformHttpRequest(logAdmStatus, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 	------------------------------------------------------------
-							title = "REGISTRO ADMINISTRATIVO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							},
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]",
-									value = "⠀"
-								},
-								{ 
-									name = "**CARGO: **"..cargo,
-									value = "⠀",
-									inline = true
-								},
-								{ 
-									name = "**STATUS: **Saiu do modo administrativo.",
-									value = "⠀",
-									inline = true
-								}
-							},
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
-				
+				local office = "Moderador"
+				PerformHttpRequest(base.staffStats, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO ADMINISTRATIVO:\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]", value = "⠀"}, {name = "**CARGO: **"..office, value = "⠀", inline = true}, {name = "**STATUS: **Saiu do modo administrativo.", value = "⠀", inline = true}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			elseif vRP.hasGroup(user_id,"suporte") then
 				vRP.addUserGroup(user_id,"off-suporte")
-				local cargo = "Suporte"
-
-				PerformHttpRequest(logAdmStatus, function(err, text, headers) end, 'POST', json.encode({
-					embeds = {
-						{ 	------------------------------------------------------------
-							title = "REGISTRO ADMINISTRATIVO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
-							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
-							},
-							fields = {
-								{ 
-									name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]",
-									value = "⠀"
-								},
-								{ 
-									name = "**CARGO: **"..cargo,
-									value = "⠀",
-									inline = true
-								},
-								{ 
-									name = "**STATUS: **Saiu do modo administrativo.",
-									value = "⠀",
-									inline = true
-								}
-							},
-							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
-							},
-							color = 4402032
-						}
-					}
-				}), { ['Content-Type'] = 'application/json' })
+				local office = "Suporte"
+				PerformHttpRequest(base.staffStats, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO ADMINISTRATIVO:\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO: "..identity.name.." "..identity.firstname.."** [**"..user_id.."**]", value = "⠀"}, {name = "**CARGO: **"..office, value = "⠀", inline = true}, {name = "**STATUS: **Saiu do modo administrativo.", value = "⠀", inline = true}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			end
 		end
-		
 		vRP.setUData(user_id,"vRP:datatable",json.encode(vRP.getUserDataTable(user_id)))
-
 		vRP.users[vRP.rusers[user_id]] = nil
 		vRP.rusers[user_id] = nil
 		vRP.user_tables[user_id] = nil

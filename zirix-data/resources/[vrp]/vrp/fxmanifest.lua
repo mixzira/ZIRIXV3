@@ -12,6 +12,7 @@ server_scripts {
 	'zirix/groups.lua',
 	'zirix/items.lua',
 	'zirix/vehicles.lua',
+	'zirix/base.lua',
 
 	'base.lua',
 	'queue.lua',
@@ -36,6 +37,7 @@ client_scripts {
 	'zirix/groups.lua',
 	'zirix/items.lua',
 	'zirix/vehicles.lua',
+	'zirix/base.lua',
 
 	'client/keymappings.lua',
 	'client/base.lua',
