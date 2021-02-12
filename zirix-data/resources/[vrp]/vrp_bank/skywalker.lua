@@ -307,7 +307,7 @@ function banK.checkRobbery(id,x,y,z,head)
 	local policia = vRP.getUsersByPermission(config.permissao)
 	local identity = vRP.getUserIdentity(user_id)
 	if user_id then
-		if #policia >= config.qtdpolicia then
+		if #policia <= config.qtdpolicia then
 			TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais em patrulha no momento.",8000)
 		else
 			if timers[id] == 0 or not timers[id] then
