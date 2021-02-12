@@ -1,6 +1,12 @@
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
-vRP = Proxy.getInterface("vRP")
+local Tunnel = module('vrp','lib/Tunnel')
+local Proxy = module('vrp','lib/Proxy')
+local Tools = module("vrp","lib/Tools")
+vRP = Proxy.getInterface('vRP')
+vRPclient = Tunnel.getInterface('vRP')
+
+src = {}
+Tunnel.bindInterface('medical_items',src)
+vCLIENT = Tunnel.getInterface('medical_items')
 
 local valores = {
 	{ item = "headblock", quantidade = 1, compra = 0 },
@@ -8,6 +14,15 @@ local valores = {
 	{ item = "bandagem", quantidade = 1, compra = 0 },
 	{ item = "cinta", quantidade = 1, compra = 0 },
 }
+
+function src.checkPermission(permission)
+	local src = source
+    local user_id = vRP.getUserId(src)
+    if user_id then
+        return vRP.hasPermission(user_id,permission)
+    end
+end
+
 RegisterServerEvent("medical-pegar")
 AddEventHandler("medical-pegar",function(item)
 	local source = source

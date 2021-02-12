@@ -1,13 +1,25 @@
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
-vRP = Proxy.getInterface("vRP")
+local Tunnel = module('vrp','lib/Tunnel')
+local Proxy = module('vrp','lib/Proxy')
+local Tools = module("vrp","lib/Tools")
+vRP = Proxy.getInterface('vRP')
+vRPclient = Tunnel.getInterface('vRP')
 
 src = {}
-Tunnel.bindInterface("lscustoms_items",src)
+Tunnel.bindInterface('lscustoms_items',src)
+vCLIENT = Tunnel.getInterface('lscustoms_items')
 
 local valores = {
 	{ item = "repairkit", quantidade = 1, compra = 0 },
 }
+
+function src.checkPermission(permission)
+	local src = source
+    local user_id = vRP.getUserId(src)
+    if user_id then
+        return vRP.hasPermission(user_id,permission)
+    end
+end
+
 RegisterServerEvent("mecanic-pegar")
 AddEventHandler("mecanic-pegar",function(item)
 	local source = source
@@ -29,12 +41,3 @@ AddEventHandler("mecanic-pegar",function(item)
 		end
 	end
 end)
-
-function src.checkPermissao()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id,"mecanico.permissao") then
-		return true
-	end
-	return false
-end
