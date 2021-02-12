@@ -7,30 +7,30 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 oC = {}
-Tunnel.bindInterface("oc_producao-meta",oC)
+Tunnel.bindInterface("oc_production-lsd",oC)
 
 -----------------------------------------------------------------------------------------------------------------------------------
 --[ EVENTOS ]----------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("produzir-meta")
-AddEventHandler("produzir-meta",function(item)
+RegisterServerEvent("produzir-lsd")
+AddEventHandler("produzir-lsd",function(item)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-        if item == config.meta[1] then
+        if item == config.lsd[1] then
             if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config.glowquant[1])*config.glowquant[2] <= vRP.getInventoryMaxWeight(user_id) then
                 if vRP.getInventoryItemAmount(user_id,config.lowquant[1]) >= config.lowquant[2] then
                     if vRP.getInventoryItemAmount(user_id,config.lowquant[3]) >= config.lowquant[4] then
                         if vRP.getInventoryItemAmount(user_id,config.lowquant[5]) >= config.lowquant[6] then
                             if vRP.tryGetInventoryItem(user_id,config.lowquant[1],config.lowquant[2]) and vRP.tryGetInventoryItem(user_id,config.lowquant[3],config.lowquant[4]) and vRP.tryGetInventoryItem(user_id,config.lowquant[5],config.lowquant[6]) and vRP.tryGetInventoryItem(user_id,config.lowquant[7],config.lowquant[8]) then
                                 TriggerClientEvent("fechar-nui",source)
-                                TriggerClientEvent("progress",source,config.time,"Fazendo "..config.meta[1].."")
+                                TriggerClientEvent("progress",source,config.time,"Fazendo "..config.lsd[1].."")
                                 vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                                 SetTimeout(config.time,function()
                                     vRPclient._stopAnim(source,false)
                                     vRP.giveInventoryItem(user_id,config.glowquant[1],config.glowquant[2])
-                                    TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.meta[1].."</b>.")
+                                    TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.lsd[1].."</b>.")
                                 end)
                             end
                         else
@@ -45,7 +45,7 @@ AddEventHandler("produzir-meta",function(item)
             else
                 TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
             end
-        elseif item == config.meta[2] then
+        elseif item == config.lsd[2] then
             if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config.gmedquant[1])*config.gmedquant[2] <= vRP.getInventoryMaxWeight(user_id) then
                 if vRP.getInventoryItemAmount(user_id,config.medquant[1]) >= config.medquant[2] then
                     if vRP.getInventoryItemAmount(user_id,config.medquant[3]) >= config.medquant[4] then
@@ -54,13 +54,13 @@ AddEventHandler("produzir-meta",function(item)
                                 if vRP.tryGetInventoryItem(user_id,config.medquant[1],config.medquant[2]) and vRP.tryGetInventoryItem(user_id,config.medquant[3],config.medquant[4]) and vRP.tryGetInventoryItem(user_id,config.medquant[5],config.medquant[6]) and vRP.tryGetInventoryItem(user_id,config.medquant[7],config.medquant[8]) then
                                     TriggerClientEvent("fechar-nui",source)
 
-                                    TriggerClientEvent("progress",source,config.time,"Fazendo "..config.meta[2].."")
+                                    TriggerClientEvent("progress",source,config.time,"Fazendo "..config.lsd[2].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                                     SetTimeout(config.time,function()
                                         vRPclient._stopAnim(source,false)
                                         vRP.giveInventoryItem(user_id,config.gmedquant[1],config.gmedquant[2])
-                                        TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.meta[2].."</b>.")
+                                        TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.lsd[2].."</b>.")
                                     end)
                                 end
                             else
@@ -78,7 +78,7 @@ AddEventHandler("produzir-meta",function(item)
             else
                 TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
             end
-        elseif item == config.meta[3] then
+        elseif item == config.lsd[3] then
             if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config.ghighquant[1])*config.ghighquant[2] <= vRP.getInventoryMaxWeight(user_id) then
                 if vRP.getInventoryItemAmount(user_id,config.highquant[1]) >= config.highquant[2] then
                     if vRP.getInventoryItemAmount(user_id,config.highquant[3]) >= config.highquant[4] then
@@ -87,13 +87,13 @@ AddEventHandler("produzir-meta",function(item)
                                 if vRP.tryGetInventoryItem(user_id,config.highquant[1],config.highquant[2]) and vRP.tryGetInventoryItem(user_id,config.highquant[3],config.highquant[4]) and vRP.tryGetInventoryItem(user_id,config.highquant[5],config.highquant[6]) and vRP.tryGetInventoryItem(user_id,config.highquant[7],config.highquant[8]) then
                                     TriggerClientEvent("fechar-nui",source)
 
-                                    TriggerClientEvent("progress",source,config.time,"Fazendo "..config.meta[3].."")
+                                    TriggerClientEvent("progress",source,config.time,"Fazendo "..config.lsd[3].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                                     SetTimeout(config.time,function()
                                         vRPclient._stopAnim(source,false)
                                         vRP.giveInventoryItem(user_id,config.ghighquant[1],config.ghighquant[2])
-                                        TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.meta[3].."</b>.")
+                                        TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.lsd[3].."</b>.")
                                     end)
                                 end
                             else

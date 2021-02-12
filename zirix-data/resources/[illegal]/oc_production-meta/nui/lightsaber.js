@@ -70,7 +70,7 @@ $(function() {
   }
   
   function sendData(name, data) {
-	$.post("http://oc_producao-coca/" + name, JSON.stringify(data), function(
+	$.post("http://oc_production-meta/" + name, JSON.stringify(data), function(
 	  datab
 	) {
 	  if (datab != "ok") {

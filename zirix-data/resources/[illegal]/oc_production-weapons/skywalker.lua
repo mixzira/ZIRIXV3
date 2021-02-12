@@ -7,7 +7,7 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 oC = {}
-Tunnel.bindInterface("oc_producao-weapons",oC)
+Tunnel.bindInterface("oc_production-weapons",oC)
 
 -----------------------------------------------------------------------------------------------------------------------------------
 --[ EVENTOS ]----------------------------------------------------------------------------------------------------------------------

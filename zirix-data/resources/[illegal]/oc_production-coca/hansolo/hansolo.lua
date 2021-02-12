@@ -6,7 +6,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-oC = Tunnel.getInterface("oc_producao-lsd")
+oC = Tunnel.getInterface("oc_production-coca")
 
 
 local menuactive = false
@@ -29,13 +29,13 @@ end
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == config.button1 then
-		TriggerServerEvent("produzir-lsd",config.lsd[1])
+		TriggerServerEvent("produzir-coca",config.coca[1])
 
 	elseif data == config.button2 then
-		TriggerServerEvent("produzir-lsd",config.lsd[2])
+		TriggerServerEvent("produzir-coca",config.coca[2])
 
 	elseif data == config.button3 then
-		TriggerServerEvent("produzir-lsd",config.lsd[3])
+		TriggerServerEvent("produzir-coca",config.coca[3])
 
 	elseif data == "fechar" then
 		ToggleActionMenu()
@@ -66,7 +66,7 @@ Citizen.CreateThread(function()
 			local idBancada = config.prodMachine[id]
 
 			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), prodMachine.x, prodMachine.y, prodMachine.z, true ) < 1.2 and not onmenu then
-				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE LSD~w~.",4,0.5,0.92,0.35,255,255,255,180)
+				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE COCAINA~w~.",4,0.5,0.92,0.35,255,255,255,180)
 			end
 			if distance <= 5 then
 				DrawMarker(23, prodMachine.x, prodMachine.y, prodMachine.z-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)

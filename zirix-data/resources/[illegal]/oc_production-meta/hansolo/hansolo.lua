@@ -6,7 +6,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-oC = Tunnel.getInterface("oc_producao-meta")
+oC = Tunnel.getInterface("oc_production-meta")
 
 
 local menuactive = false

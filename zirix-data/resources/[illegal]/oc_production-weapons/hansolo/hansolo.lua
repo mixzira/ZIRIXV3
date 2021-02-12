@@ -6,7 +6,7 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-oC = Tunnel.getInterface("oc_producao-coca")
+oC = Tunnel.getInterface("oc_production-weapons")
 
 
 local menuactive = false
@@ -29,13 +29,19 @@ end
 -------------------------------------------------------------------------------------------------
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == config.button1 then
-		TriggerServerEvent("produzir-coca",config.coca[1])
+		TriggerServerEvent("produzir-weapon",config.weapons[1])
 
 	elseif data == config.button2 then
-		TriggerServerEvent("produzir-coca",config.coca[2])
+		TriggerServerEvent("produzir-weapon",config.weapons[2])
 
 	elseif data == config.button3 then
-		TriggerServerEvent("produzir-coca",config.coca[3])
+		TriggerServerEvent("produzir-weapon",config.weapons[3])
+
+	elseif data == config.button4 then
+		TriggerServerEvent("produzir-weapon",config.weapons[4])
+
+	elseif data == config.button5 then
+		TriggerServerEvent("produzir-weapon",config.weapons[5])
 
 	elseif data == "fechar" then
 		ToggleActionMenu()
@@ -66,7 +72,7 @@ Citizen.CreateThread(function()
 			local idBancada = config.prodMachine[id]
 
 			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), prodMachine.x, prodMachine.y, prodMachine.z, true ) < 1.2 and not onmenu then
-				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE COCAINA~w~.",4,0.5,0.92,0.35,255,255,255,180)
+				drawTxt("Pressione [~r~E~w~] para acessar a ~r~PRODUÇÃO DE ARMAS~w~.",4,0.5,0.92,0.35,255,255,255,180)
 			end
 			if distance <= 5 then
 				DrawMarker(23, prodMachine.x, prodMachine.y, prodMachine.z-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
