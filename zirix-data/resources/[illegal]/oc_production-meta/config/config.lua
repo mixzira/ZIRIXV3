@@ -4,7 +4,7 @@ config = { }
 
 -- LOCAL ONDE FICA A MAQUINA DE PRODUÇÃO.
 config.prodMachine = {
-    [1] = { ['x'] = 605.99, ['y'] = -3093.01, ['z'] = 6.07 },
+    [1] = { ['x'] = 612.8, ['y'] = -3091.26, ['z'] = 6.07 },
 }
 
 -- PERMISSÕES PARA ACESSAR A MAQUINA.
@@ -14,13 +14,6 @@ config.permissionMachine = {
 }
 
 --[ CONFIGURAÇÃO DA PRODUÇÃO ]-------------------------------------------------------------------------------------------------------------------------
-
--- DROGA A SER FABRICADOS.
-config.meta = {
-    "metanfetamina",  -- BAIXA QUANTIDADE
-	"metanfetamina",  -- MEDIA QUANTIDADE
-	"metanfetamina",  -- ALTA QUANTIDADE
-}
 
 -- ITENS NECESSARIOS PARA CADA DROGA.
 -- ITEM,QUANTIDADE
@@ -47,3 +40,10 @@ config.time = 10000 -- 10 segundos
 config.button1 = "meta-baixa"
 config.button2 = "meta-media"
 config.button3 = "meta-alta"
+
+-- DROGA A SER FABRICADOS.
+config.meta = {
+    "meta-baixa",  -- BAIXA QUANTIDADE
+	"meta-media",  -- MEDIA QUANTIDADE
+	"meta-alta",  -- ALTA QUANTIDADE
+}

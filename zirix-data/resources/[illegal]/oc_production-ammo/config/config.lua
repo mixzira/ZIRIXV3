@@ -16,29 +16,20 @@ config.permissionMachine = {
 
 --[ CONFIGURAÇÃO DA PRODUÇÃO ]-------------------------------------------------------------------------------------------------------------------------
 
--- MUNICAO A SEREM FABRICADOS.
-config.weapons = {
-    "m-ak47",
-	"m-ak74u",
-	"m-uzi",
-	"m-magnum44",
-	"m-glock"
-}
-
--- ITENS NECESSARIOS PARA CADA MUNICAO.
+-- ITENS NECESSARIOS PARA MUNICAO.
 -- ITEM,QUANTIDADE
 config.weapon1 = { "capsulas",30, "polvora",30 }
-config.weapon2 = { "capsulas",30, "polvora",30 }
-config.weapon3 = { "capsulas",30, "polvora",30 }
-config.weapon4 = { "capsulas",30, "polvora",30 }
-config.weapon5 = { "capsulas",30, "polvora",30 }
+config.weapon2 = { "capsulas",30, "polvora",20 }
+config.weapon3 = { "capsulas",30, "polvora",15 }
+config.weapon4 = { "capsulas",6, "polvora",6 }
+config.weapon5 = { "capsulas",12, "polvora",6 }
 
 -- INDEX DA MUNICAO e QUANTIDADE PARA ADICIONAR AO INVENTARIO APÓS FABRICAR.
 config.gweapon1 = { "wammoWEAPON_ASSAULTRIFLE_MK2", 30}
 config.gweapon2 = { "wammoWEAPON_COMPACTRIFLE", 30 }
 config.gweapon3 = { "wammoWEAPON_MICROSMG", 30 }
-config.gweapon4 = { "wammoWEAPON_REVOLVER_MK2", 30 }
-config.gweapon5 = { "wammoWEAPON_COMBATPISTOL", 30 }
+config.gweapon4 = { "wammoWEAPON_REVOLVER_MK2", 6 }
+config.gweapon5 = { "wammoWEAPON_COMBATPISTOL", 12 }
 
 --[ CONFIGURAÇÃO DA ANIMAÇÃO ]-------------------------------------------------------------------------------------------------------------------------
 
@@ -56,3 +47,12 @@ config.button2 = "produzir-m-ak74u"
 config.button3 = "produzir-m-uzi"
 config.button4 = "produzir-m-magnum44"
 config.button5 = "produzir-m-glock"
+
+-- MUNICAO A SEREM FABRICADOS.
+config.weapons = {
+    "m-ak47",
+	"m-ak74u",
+	"m-uzi",
+	"m-magnum44",
+	"m-glock"
+}

@@ -50,8 +50,8 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 
-RegisterNetEvent("fechar-nui")
-AddEventHandler("fechar-nui", function()
+RegisterNetEvent("fechar-nui-weapons")
+AddEventHandler("fechar-nui-weapons", function()
 	ToggleActionMenu()
 	onmenu = false
 end)

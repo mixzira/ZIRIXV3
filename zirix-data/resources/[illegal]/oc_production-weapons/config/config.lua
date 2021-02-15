@@ -4,7 +4,7 @@ config = { }
 
 -- LOCAL ONDE FICA A MAQUINA DE PRODUÇÃO.
 config.prodMachine = {
-    [1] = { ['x'] = 605.99, ['y'] = -3093.01, ['z'] = 6.07 },
+    [1] = { ['x'] = 610.45, ['y'] = -3094.44, ['z'] = 6.07 },
     --[2] = { ['x'] = 605.99, ['y'] = -3093.01, ['z'] = 6.07 },
 }
 
@@ -16,22 +16,13 @@ config.permissionMachine = {
 
 --[ CONFIGURAÇÃO DA PRODUÇÃO ]-------------------------------------------------------------------------------------------------------------------------
 
--- ARMAS A SEREM FABRICADOS.
-config.weapons = {
-    "ak47",
-	"ak74u",
-	"uzi",
-	"magnum44",
-	"glock"
-}
-
 -- ITENS NECESSARIOS PARA CADA ARMA.
 -- ITEM,QUANTIDADE
 config.weapon1 = { "corpo-ak47",1, "placa-metal",10, "molas",3, "gatilho",1 }
-config.weapon2 = { "corpo-aks74u",1, "placa-metal",6, "molas",2, "gatilho",1 }
-config.weapon3 = { "corpo-uzi",1, "placa-metal",6, "molas",2, "gatilho",1 }
-config.weapon4 = { "corpo-magnum",1, "placa-metal",6, "molas",2, "gatilho",1 }
-config.weapon5 = { "corpo-glock",1, "placa-metal",6, "molas",2, "gatilho",1 }
+config.weapon2 = { "corpo-aks",1, "placa-metal",6, "molas",2, "gatilho",1 }
+config.weapon3 = { "corpo-uzi",1, "placa-metal",3, "molas",2, "gatilho",1 }
+config.weapon4 = { "corpo-magnum44",1, "placa-metal",1, "molas",1, "gatilho",1 }
+config.weapon5 = { "corpo-glock",1, "placa-metal",1, "molas",1, "gatilho",1 }
 
 -- INDEX DA ARMA e QUANTIDADE PARA ADICIONAR AO INVENTARIO APÓS FABRICAR.
 config.gweapon1 = { "wbodyWEAPON_ASSAULTRIFLE_MK2", 1 }
@@ -56,3 +47,12 @@ config.button2 = "produzir-ak74u"
 config.button3 = "produzir-uzi"
 config.button4 = "produzir-magnum44"
 config.button5 = "produzir-glock"
+
+-- ARMAS A SEREM FABRICADOS.
+config.weapons = {
+    "ak47",
+	"ak74u",
+	"uzi",
+	"magnum44",
+	"glock"
+}

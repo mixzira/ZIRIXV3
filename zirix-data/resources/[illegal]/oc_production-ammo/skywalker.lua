@@ -23,13 +23,13 @@ AddEventHandler("produzir-ammo",function(item)
                     if vRP.getInventoryItemAmount(user_id,config.weapon1[3]) >= config.weapon1[4] then
                         if vRP.tryGetInventoryItem(user_id,config.weapon1[1],config.weapon1[2]) and vRP.tryGetInventoryItem(user_id,config.weapon1[3],config.weapon1[4]) then
                             TriggerClientEvent("fechar-nui-ammo",source)
-                            TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[1].."")
+                            TriggerClientEvent("progress",source,config.time,"Fazendo "..config.weapons[1].."")
                             vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                             SetTimeout(config.time,function()
                                 vRPclient._stopAnim(source,false)
                                 vRP.giveInventoryItem(user_id,config.gweapon1[1],config.gweapon1[2])
-                                TriggerClientEvent("Notify",source,"sucesso","Você montou uma <b>"..config.weapons[1].."</b>.")
+                                TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.weapons[1].."</b>.")
                             end)
                         end                         
                     else
@@ -48,13 +48,13 @@ AddEventHandler("produzir-ammo",function(item)
                         if vRP.tryGetInventoryItem(user_id,config.weapon2[1],config.weapon2[2]) and vRP.tryGetInventoryItem(user_id,config.weapon2[3],config.weapon2[4]) then
                             TriggerClientEvent("fechar-nui-ammo",source)
 
-                            TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[2].."")
+                            TriggerClientEvent("progress",source,config.time,"Fazendo "..config.weapons[2].."")
                             vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                             SetTimeout(config.time,function()
                                 vRPclient._stopAnim(source,false)
                                 vRP.giveInventoryItem(user_id,config.gweapon2[1],config.gweapon2[2])
-                                TriggerClientEvent("Notify",source,"sucesso","Você montou uma <b>"..config.weapons[2].."</b>.")
+                                TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.weapons[2].."</b>.")
                             end)
                         end
                     else
@@ -73,13 +73,13 @@ AddEventHandler("produzir-ammo",function(item)
                         if vRP.tryGetInventoryItem(user_id,config.weapon3[1],config.weapon3[2]) and vRP.tryGetInventoryItem(user_id,config.weapon3[3],config.weapon3[4]) then
                             TriggerClientEvent("fechar-nui-ammo",source)
 
-                            TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[3].."")
+                            TriggerClientEvent("progress",source,config.time,"Fazendo "..config.weapons[3].."")
                             vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                             SetTimeout(config.time,function()
                                 vRPclient._stopAnim(source,false)
                                 vRP.giveInventoryItem(user_id,config.gweapon3[1],config.gweapon3[2])
-                                TriggerClientEvent("Notify",source,"sucesso","Você montou uma <b>"..config.weapons[3].."</b>.")
+                                TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.weapons[3].."</b>.")
                             end)
                         end
                     else
@@ -98,7 +98,7 @@ AddEventHandler("produzir-ammo",function(item)
                         if vRP.tryGetInventoryItem(user_id,config.weapon4[1],config.weapon4[2]) and vRP.tryGetInventoryItem(user_id,config.weapon4[3],config.weapon4[4]) then
                             TriggerClientEvent("fechar-nui-ammo",source)
 
-                            TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[4].."")
+                            TriggerClientEvent("progress",source,config.time,"Fazendo "..config.weapons[4].."")
                             vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                             SetTimeout(config.time,function()
@@ -123,13 +123,13 @@ AddEventHandler("produzir-ammo",function(item)
                         if vRP.tryGetInventoryItem(user_id,config.weapon5[1],config.weapon5[2]) and vRP.tryGetInventoryItem(user_id,config.weapon5[3],config.weapon5[4]) then
                             TriggerClientEvent("fechar-nui-ammo",source)
 
-                            TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[5].."")
+                            TriggerClientEvent("progress",source,config.time,"Fazendo "..config.weapons[5].."")
                             vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
                             SetTimeout(config.time,function()
                                 vRPclient._stopAnim(source,false)
                                 vRP.giveInventoryItem(user_id,config.gweapon5[1],config.gweapon5[2])
-                                TriggerClientEvent("Notify",source,"sucesso","Você montou uma <b>"..config.weapons[5].."</b>.")
+                                TriggerClientEvent("Notify",source,"sucesso","Você fez <b>"..config.weapons[5].."</b>.")
                             end)
                         end
                     else

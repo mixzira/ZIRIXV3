@@ -24,7 +24,7 @@ AddEventHandler("produzir-weapon",function(item)
                         if vRP.getInventoryItemAmount(user_id,config.weapon1[5]) >= config.weapon1[6] then
                             if vRP.getInventoryItemAmount(user_id,config.weapon1[7]) >= config.weapon1[8] then
                                 if vRP.tryGetInventoryItem(user_id,config.weapon1[1],config.weapon1[2]) and vRP.tryGetInventoryItem(user_id,config.weapon1[3],config.weapon1[4]) and vRP.tryGetInventoryItem(user_id,config.weapon1[5],config.weapon1[6]) and vRP.tryGetInventoryItem(user_id,config.weapon1[7],config.weapon1[8]) then
-                                    TriggerClientEvent("fechar-nui",source)
+                                    TriggerClientEvent("fechar-nui-weapons",source)
                                     TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[1].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
 
@@ -56,7 +56,7 @@ AddEventHandler("produzir-weapon",function(item)
                         if vRP.getInventoryItemAmount(user_id,config.weapon2[5]) >= config.weapon2[6] then
                             if vRP.getInventoryItemAmount(user_id,config.weapon2[7]) >= config.weapon2[8] then
                                 if vRP.tryGetInventoryItem(user_id,config.weapon2[1],config.weapon2[2]) and vRP.tryGetInventoryItem(user_id,config.weapon2[3],config.weapon2[4]) and vRP.tryGetInventoryItem(user_id,config.weapon2[5],config.weapon2[6]) and vRP.tryGetInventoryItem(user_id,config.weapon2[7],config.weapon2[8]) then
-                                    TriggerClientEvent("fechar-nui",source)
+                                    TriggerClientEvent("fechar-nui-weapons",source)
 
                                     TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[2].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
@@ -89,7 +89,7 @@ AddEventHandler("produzir-weapon",function(item)
                         if vRP.getInventoryItemAmount(user_id,config.weapon3[5]) >= config.weapon3[6] then
                             if vRP.getInventoryItemAmount(user_id,config.weapon3[7]) >= config.weapon3[8] then
                                 if vRP.tryGetInventoryItem(user_id,config.weapon3[1],config.weapon3[2]) and vRP.tryGetInventoryItem(user_id,config.weapon3[3],config.weapon3[4]) and vRP.tryGetInventoryItem(user_id,config.weapon3[5],config.weapon3[6]) and vRP.tryGetInventoryItem(user_id,config.weapon3[7],config.weapon3[8]) then
-                                    TriggerClientEvent("fechar-nui",source)
+                                    TriggerClientEvent("fechar-nui-weapons",source)
 
                                     TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[3].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
@@ -122,7 +122,7 @@ AddEventHandler("produzir-weapon",function(item)
                         if vRP.getInventoryItemAmount(user_id,config.weapon4[5]) >= config.weapon4[6] then
                             if vRP.getInventoryItemAmount(user_id,config.weapon4[7]) >= config.weapon4[8] then
                                 if vRP.tryGetInventoryItem(user_id,config.weapon4[1],config.weapon4[2]) and vRP.tryGetInventoryItem(user_id,config.weapon4[3],config.weapon4[4]) and vRP.tryGetInventoryItem(user_id,config.weapon4[5],config.weapon4[6]) and vRP.tryGetInventoryItem(user_id,config.weapon4[7],config.weapon4[8]) then
-                                    TriggerClientEvent("fechar-nui",source)
+                                    TriggerClientEvent("fechar-nui-weapons",source)
 
                                     TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[4].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)
@@ -155,7 +155,7 @@ AddEventHandler("produzir-weapon",function(item)
                         if vRP.getInventoryItemAmount(user_id,config.weapon5[5]) >= config.weapon5[6] then
                             if vRP.getInventoryItemAmount(user_id,config.weapon5[7]) >= config.weapon5[8] then
                                 if vRP.tryGetInventoryItem(user_id,config.weapon5[1],config.weapon5[2]) and vRP.tryGetInventoryItem(user_id,config.weapon5[3],config.weapon5[4]) and vRP.tryGetInventoryItem(user_id,config.weapon5[5],config.weapon5[6]) and vRP.tryGetInventoryItem(user_id,config.weapon5[7],config.weapon5[8]) then
-                                    TriggerClientEvent("fechar-nui",source)
+                                    TriggerClientEvent("fechar-nui-weapons",source)
 
                                     TriggerClientEvent("progress",source,config.time,"Montando "..config.weapons[5].."")
                                     vRPclient._playAnim(source,false,{{config.anim[1],config.anim[2]}},true)

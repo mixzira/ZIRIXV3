@@ -44,8 +44,8 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 
-RegisterNetEvent("fechar-nui")
-AddEventHandler("fechar-nui", function()
+RegisterNetEvent("fechar-nui-meta")
+AddEventHandler("fechar-nui-meta", function()
 	ToggleActionMenu()
 	onmenu = false
 end)
