@@ -25,7 +25,7 @@ Citizen.CreateThread(function()
 		local bowz,cdz = GetGroundZFor_3dCoord(config.start[1],config.start[2],config.start[3])
         local distance = GetDistanceBetweenCoords(config.start[1],config.start[2],config.start[3],x,y,z,true)
         local security = GetDistanceBetweenCoords(config.start[1],config.start[2],config.start[3],config.securitypoint[1],config.securitypoint[2],config.securitypoint[3],true)
-        if security <= config.security then
+        if security <= config.security and not roubando then
             func.npcspawn()
 			if distance <= 5.0 and not roubando then
                 idle = 5			
@@ -81,6 +81,18 @@ end
 
 Citizen.CreateThread(function()
 	while true do
+		idle = 1000
+			if roubo then
+				if item1 and item2 and item3 and item4 and item5 and item6 and item7 and item8 and item9 then
+					vSERVER.sendMessageAll("ATUALIZAÇÃO: O Roubo terminou, os assaltantes estão fugindo.")												
+				end
+			end
+		Citizen.Wait(idle)
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
 		local idle = 1000
 		local ped = PlayerPedId()
 		local x,y,z = table.unpack(GetEntityCoords(ped))
@@ -97,7 +109,7 @@ Citizen.CreateThread(function()
 							if k == 1 then
 								if not item1 then
 									item1 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -109,7 +121,7 @@ Citizen.CreateThread(function()
 							elseif k == 2 then
 								if not item2 then
 									item2 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -121,7 +133,7 @@ Citizen.CreateThread(function()
 							elseif k == 3 then
 								if not item3 then
 									item3 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -135,7 +147,7 @@ Citizen.CreateThread(function()
 							elseif k == 4 then
 								if not item4 then
 									item4 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -149,7 +161,7 @@ Citizen.CreateThread(function()
 							elseif k == 5 then
 								if not item5 then
 									item5 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -163,7 +175,7 @@ Citizen.CreateThread(function()
 							elseif k == 6 then
 								if not item6 then
 									item6 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -177,7 +189,7 @@ Citizen.CreateThread(function()
 							elseif k == 7 then
 								if not item7 then
 									item7 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -191,7 +203,7 @@ Citizen.CreateThread(function()
 							elseif k == 8 then
 								if not item8 then
 									item8 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -205,7 +217,7 @@ Citizen.CreateThread(function()
 							elseif k == 9 then
 								if not item9 then
 									item9 = true
-									vRP._playAnim(true,{{config.anim}},false)	
+									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
 									FreezeEntityPosition(ped, true)
 									TriggerEvent("progress", config.timerob)
 									SetTimeout(config.timerob,function()
@@ -258,7 +270,6 @@ Citizen.CreateThread(function()
 		if timedown >= 1 then
 			timedown = timedown - 1
 			if timedown == 0 then
-				robbery = false
 				item1 = false
 				item2 = false
 				item3 = false
@@ -268,6 +279,8 @@ Citizen.CreateThread(function()
 				item7 = false
 				item8 = false
 				item9 = false
+				roubo = false
+				roubando = false
 			end
 		end
 	end
@@ -317,7 +330,7 @@ function func.spawnNpc(x,y,z)
 
     pveh01 = CreatePed(PED_TYPE_MISSION, phash, x, y, z, 0.0, true,false)           
 
-    setPedPropertys(pveh01,config.weapon)
+    setPedPropertys(pveh01,config.weapon)	
 
     SetEntityAsMissionEntity(pveh01,true,true)  
 end
