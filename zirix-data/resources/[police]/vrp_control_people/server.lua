@@ -38,6 +38,9 @@ vRP._prepare("vRP/delete_foragido",
 
 local nveh = nil
 local npcsHealth = true
+local car = nil
+local player = nil
+
 function func.setRegistro(passaporte, dkey, dvalue, img, valor, id_pai)
     local source = source
     local police_id = vRP.getUserId(source)
@@ -128,7 +131,6 @@ function func.setPrisao2(id, tempo)
     end
 end
 
-
 function func.setFuga(id)
     local source = source
     local nuser_id = vRP.getUserId(source)
@@ -218,11 +220,6 @@ function func.isPolice()
     local user_id = vRP.getUserId(source)
     return vRP.hasPermission(user_id, "policia.permissao")
 end
---[[function emP.checkPermission()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	return vRP.hasPermission(user_id,"dpla.permissao")
-end--]]
 
 function func.markOcorrency(x,y,z)
 	local source = source
@@ -247,23 +244,26 @@ end
 RegisterCommand('liberar',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local nplayer = vRPclient.getNearestPlayer(source,7)
-    print(user_id)
-    print(nplayer)
+    local distancia = funcCliente.teste(source)
     if nplayer then
         local npcsHealth = funcCliente.sendServer(source)
-        print(nveh)
-        print(npcsHealth)
         if nveh then
-            if npcsHealth == false then
-                vRPclient.ejectVehicle(nplayer)
-            else
-			    TriggerClientEvent("Notify",source,"importante","Os seguranças ainda estão vivos!.")
+            if distancia <= 21 then
+                if npcsHealth == false then
+                    if vRP.tryGetInventoryItem(user_id, "lockpick", 2) then
+                        vRPclient.ejectVehicle(nplayer)
+                    else
+                        TriggerClientEvent("Notify","negado","Você não possui os itens necessarios")
+                    end
+                else
+			        TriggerClientEvent("Notify","importante","Os seguranças ainda estão vivos!.")
+                end
             end
         end
     end
 end)
 
--- Checar se o carro que o user_id esta perto é o nveh
--- Checar a distancia do nveh e o user_id para abrir
--- Checar se ele tem item necessário
+-- Checar se o carro que o user_id esta perto é o nveh -- ok
+-- Checar a distancia do nveh e o user_id para abrir -- ok
+-- Checar se ele tem item necessário -- ok
 -- Adicionar uma função que depois de X tempo deletar o carro 

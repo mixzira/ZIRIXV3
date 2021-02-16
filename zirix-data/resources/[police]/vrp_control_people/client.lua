@@ -239,27 +239,18 @@ function funcClient.carroPrisao(id, tempo)
                 if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) then
                     inTransport = false
                     npcsHealth = false
+                    func.teste(source)
+
+                    SetTimeout(100,function()
+                        TriggerServerEvent("DeleteEntity",PedToNet(pveh01))
+                        TriggerServerEvent("DeleteEntity",PedToNet(pveh02))
+                        TriggerServerEvent("DeleteVehicle",VehToNet(nveh))
+                        pveh01 = nil
+                        pveh02 = nil
+                        nveh = nil
+                    end)
                 end
-
-            -- while inTransport do
-            --     Citizen.Wait(1000)
-            --     if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) then
-            --         local myCoords = GetEntityCoords(GetPlayerPed(-1))
-            --         local coordsCar = GetWorldPositionOfEntityBone(nveh, GetEntityBoneIndexByName(nveh,"door_dside_r"))
-            --         local distancia2 = GetDistanceBetweenCoords(myCoords.x,myCoords.y, myCoords.z, coordsCar.x, coordsCar.y, coordsCar.z, true)
-            --         if distancia2 <= 5 then
-            --             draw3DText(coordsCar.x, coordsCar.y+1, coordsCar.z, "[~g~E~w~] PARA ABRIR")
-            --                 if IsControlJustPressed(1, 38) then
-            --                     local veh = GetVehiclePedIsIn(ped, false)
-            --                     TaskLeaveVehicle(ped,veh,4160)
-            --                     inTransport = false
-            --                     func.setFuga()
-            --                 end
-            --         end
-            --     end
                 
-
-
                 local x,y,z = table.unpack(GetEntityCoords(ped))
                 local street = GetStreetNameFromHashKey(GetStreetNameAtCoord(x,y,z))
                 if street == "Route 68" then
@@ -280,15 +271,16 @@ function funcClient.carroPrisao(id, tempo)
                             
                             func.setPrisao2(id, tempo-1)
 
-                            TriggerServerEvent("trydeleteped",PedToNet(pveh01))
-                            TriggerServerEvent("trydeleteped",PedToNet(pveh02))
-                            TriggerServerEvent("trydeleteped",PedToNet(pveh03))
+                            TriggerServerEvent("tryDeleteEntity",PedToNet(pveh01))
+                            TriggerServerEvent("tryDeleteEntity",PedToNet(pveh02))
+                            TriggerServerEvent("tryDeleteVehicle",VehToNet(nveh))
+                            pveh01 = nil
+                            pveh02 = nil
+                            nveh = nil
                             vRP._DeletarObjeto()
-
                             SetEntityAsNoLongerNeeded(pveh01)
                             SetEntityAsNoLongerNeeded(pveh02)
-                            SetEntityAsNoLongerNeeded(pveh03)
-                            
+                            SetEntityAsNoLongerNeeded(nveh)
                             inTransport = false
                         end)
                     end
@@ -310,6 +302,23 @@ end)
 
 function funcClient.sendServer()
     return npcsHealth
+end
+
+RegisterCommand('liberar2',function(source,args,rawCommand)
+    funcClient.teste(source)
+end)
+
+function funcClient.teste()
+    local ply = GetPlayerPed(-1)
+    local plyCoords = GetEntityCoords(ply, 0)
+    print(plyCoords)
+    local entityWorld = GetOffsetFromEntityInWorldCoords(ply, 0.0, 20.0, 0.0)
+    print(entityWorld)
+
+    local distancia = GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, ply, 0)
+    print(distancia)
+    return distancia
+    
 end
 
 function setPedPropertys(npc,weapon)
