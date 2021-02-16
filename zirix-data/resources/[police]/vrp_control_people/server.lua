@@ -263,6 +263,23 @@ RegisterCommand('liberar',function(source,args,rawCommand)
     end
 end)
 
+function func.takeit(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	local player = vRP.getUserSource(parseInt(args[1]))
+	if player then
+		vRP.setUData(parseInt(args[1]),"vRP:prisao",json.encode(parseInt(args[2])))
+		vRPclient.setHandcuffed(player,false)
+		TriggerClientEvent('prisioneiro',player,true)
+		vRPclient.teleport(player,1680.1,2513.0,45.5)
+		prison_lock(parseInt(args[1]))
+		TriggerClientEvent('removealgemas',player)
+		TriggerClientEvent("vrp_sound:source",player,'jaildoor',0.7)
+        TriggerClientEvent("Notify",nplayer,"importante","Você foi preso por <b>"..vRP.format(parseInt(args[2])).." meses</b>.")
+		local oficialid = vRP.getUserIdentity(user_id)
+		local identity = vRP.getUserIdentity(parseInt(args[1]))
+		local nplayer = vRP.getUserSource(parseInt(args[1]))
+	end 
+end
 -- Checar se o carro que o user_id esta perto é o nveh -- ok
 -- Checar a distancia do nveh e o user_id para abrir -- ok
 -- Checar se ele tem item necessário -- ok

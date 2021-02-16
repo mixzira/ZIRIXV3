@@ -321,6 +321,29 @@ function funcClient.teste()
     
 end
 
+RegisterNetEvent('prisioneiro')
+AddEventHandler('prisioneiro',function(status)
+	prisioneiro = status
+	reducaopenal = false
+	local ped = PlayerPedId()
+	if prisioneiro then
+		SetEntityInvincible(ped,false)--mqcu
+		FreezeEntityPosition(ped,true)
+		SetEntityVisible(ped,false,false)
+		SetTimeout(10000,function()
+			SetEntityInvincible(ped,false)
+			FreezeEntityPosition(ped,false)
+			SetEntityVisible(ped,true,false)
+		end)
+	end
+end)
+local prisioneiro = false
+local reducaopenal = false
+RegisterNetEvent("removealgemas")
+AddEventHandler("removealgemas",function()
+	SetPedComponentVariation(PlayerPedId(),7,0,0,2)
+end)
+
 function setPedPropertys(npc,weapon)
 	SetPedShootRate(npc,700)
 	SetPedAlertness(npc,100)
@@ -356,3 +379,167 @@ function draw3DText(x,y,z, text)
     local factor = (string.len(text)) / 370
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
+
+RegisterNetEvent('prisioneiro')
+AddEventHandler('prisioneiro',function(status)
+	prisioneiro = status
+	reducaopenal = false
+	local ped = PlayerPedId()
+	if prisioneiro then
+		SetEntityInvincible(ped,false)--mqcu
+		FreezeEntityPosition(ped,true)
+		SetEntityVisible(ped,false,false)
+		SetTimeout(10000,function()
+			SetEntityInvincible(ped,false)
+			FreezeEntityPosition(ped,false)
+			SetEntityVisible(ped,true,false)
+		end)
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(5000)
+		if prisioneiro then
+			local distance = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()),1700.5,2605.2,45.5,true)
+			if distance >= 150 then
+				SetEntityCoords(PlayerPedId(),1680.1,2513.0,45.5)
+				TriggerEvent("Notify","aviso","O agente penitenciário encontrou você tentando escapar.")
+			end
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		local idle = 1000
+		if prisioneiro then
+			idle = 500
+			local distance1 = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()),1691.59,2566.05,45.56,true)
+			local distance2 = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()),1669.51,2487.71,45.82,true)
+
+			if GetEntityHealth(PlayerPedId()) <= 100 then
+				reducaopenal = false
+				vRP._DeletarObjeto()
+			end
+
+			if distance1 <= 100 and not reducaopenal then
+				DrawMarker(21,1691.59,2566.05,45.56,0,0,0,0,180.0,130.0,1.0,1.0,0.5,136, 96, 240, 180,1,0,0,1)
+				if distance1 <= 1.2 then
+					drawTxt("PRESSIONE  ~r~E~w~  PARA PEGAR A CAIXA",4,0.5,0.93,0.50,255,255,255,180)
+					if IsControlJustPressed(0,38) then
+						reducaopenal = true
+						ResetPedMovementClipset(PlayerPedId(),0)
+						SetRunSprintMultiplierForPlayer(PlayerId(),1.0)
+						vRP._CarregarObjeto("anim@heists@box_carry@","idle","hei_prop_heist_box",50,28422)
+					end
+				end
+			end
+
+			if distance2 <= 100 and reducaopenal then
+				DrawMarker(21,1669.51,2487.71,45.82,0,0,0,0,180.0,130.0,1.0,1.0,0.5,136, 96, 240, 180,1,0,0,1)
+				if distance2 <= 1.2 then
+					drawTxt("PRESSIONE  ~r~E~w~  PARA ENTREGAR A CAIXA",4,0.5,0.93,0.50,255,255,255,180)
+					if IsControlJustPressed(0,38) then
+						reducaopenal = false
+						TriggerServerEvent("diminuirpena78")
+						vRP._DeletarObjeto()
+					end
+				end
+			end
+		end
+		Citizen.Wait(idle)
+	end
+end)
+
+local maquina = {
+	{ ['x'] = -1094.83, ['y'] = -830.26, ['z'] = 10.28, ['h'] = 125.71 }
+}
+
+Citizen.CreateThread(function()
+	SetNuiFocus(false,false)
+	while true do
+		local idle = 1000
+		for k,v in pairs(maquina) do
+			local ped = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(ped))
+			local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
+			local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
+			local maquina = maquina[k]
+			
+			if distance < 5.1 then
+				DrawMarker(23, maquina.x, maquina.y, maquina.z-0.99, 0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
+				idle = 5
+				if distance < 1.2 then
+					if IsControlJustPressed(0,38) and src.checkPermissao() then
+						src.periciaDinheiro()
+					end
+				end
+			end
+		end
+		Citizen.Wait(idle)
+	end
+end)
+
+RegisterNetEvent('checando:dinheiro')
+AddEventHandler('checando:dinheiro',function(status)
+	local ped = PlayerPedId()
+	FreezeEntityPosition(ped,true)
+	SetEntityHeading(ped, 125.71)
+	SetEntityCoords(ped, -1094.83, -830.26, 10.28-0.95, false, false, false, false)
+	SetTimeout(25000,function()
+		FreezeEntityPosition(ped,false)
+	end)
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		local idle = 1000
+		if reducaopenal then
+			idle = 5
+			BlockWeaponWheelThisFrame()
+			DisableControlAction(0,21,true)
+			DisableControlAction(0,22,true)
+			DisableControlAction(0,24,true)
+			DisableControlAction(0,25,true)
+			DisableControlAction(0,29,true)
+			DisableControlAction(0,32,true)
+			DisableControlAction(0,33,true)
+			DisableControlAction(0,34,true)
+			DisableControlAction(0,35,true)
+			DisableControlAction(0,56,true)
+			DisableControlAction(0,58,true)
+			DisableControlAction(0,73,true)
+			DisableControlAction(0,75,true)
+			DisableControlAction(0,140,true)
+			DisableControlAction(0,141,true)
+			DisableControlAction(0,142,true)
+			DisableControlAction(0,143,true)
+			DisableControlAction(0,166,true)
+			DisableControlAction(0,167,true)
+			DisableControlAction(0,170,true)
+			DisableControlAction(0,177,true)
+			DisableControlAction(0,182,true)
+			DisableControlAction(0,187,true)
+			DisableControlAction(0,188,true)
+			DisableControlAction(0,189,true)
+			DisableControlAction(0,190,true)
+			DisableControlAction(0,243,true)
+			DisableControlAction(0,245,true)
+			DisableControlAction(0,246,true)
+			DisableControlAction(0,257,true)
+			DisableControlAction(0,263,true)
+			DisableControlAction(0,264,true)
+			DisableControlAction(0,268,true)
+			DisableControlAction(0,269,true)
+			DisableControlAction(0,270,true)
+			DisableControlAction(0,271,true)
+			DisableControlAction(0,288,true)
+			DisableControlAction(0,289,true)
+			DisableControlAction(0,303,true)
+			DisableControlAction(0,311,true)
+			DisableControlAction(0,344,true)
+		end
+		Citizen.Wait(idle)
+	end
+end)
