@@ -8,27 +8,6 @@ Tunnel.bindInterface("vrp_admin",vRPidd)
 Proxy.addInterface("vrp_admin",vRPidd)
 IDDclient = Tunnel.getInterface("vrp_admin")
 
-
-local logAdminEstoque = "https://discordapp.com/api/webhooks/762555672033230858/LB_QDLQhfNCUSCNou1WW5FBiCpwU9KO0i3vgNfw2LQJAYcVC455TwefCfsvb6xVccvBQ"
-local logAdminWhitelist = "https://discordapp.com/api/webhooks/762554515714867232/23GZxyxiWBtuyf7DipsOkrP6q8_yYGDuJcb1p59k0VhFF8f5ii2UnheAuDcUF3suLiL_"
-local logAdminUnWhitelist = "https://discordapp.com/api/webhooks/762554689618837514/AFtptXD_befrUulyjeWgJd9TKXuAkVm24_0Ekg8GLZg8FTnwNGMgHklEZazpZDxni4qX"
-local logAdminBan = "https://discordapp.com/api/webhooks/762554255004925963/a9jE99jV9ZzF4YT6EiLyCg--yz4m8CWBORF-RQr6aRgsMo6rCT28i6DpRGV86QDhgRk6"
-local logAdminUnBan = "https://discordapp.com/api/webhooks/762554405132042240/AqPO_6bHxy4BcWTRMwu30aumHzIK9B515VbQBGgnq1f1DYO4g1cvbj9nBaSXu5M4ahG-"
-local logAdminRenomear = "https://discordapp.com/api/webhooks/762555480773885964/fe7oRx9h5YNVigO2KNJ5B4lWr-rHT3EVc6GBIyG2C30ZvwBhibfrIy8Q50picvYdODRR"
-local logAdminAnuncio = "https://discordapp.com/api/webhooks/762556537042108426/m3HgUVSQaBY_CVhxJ21d-_21k-qq9DIwho4DY-AwQAo2r2jjDzyJ8WCwG-mZ1RrwUSKL"
-local logAdminAddcar = "https://discordapp.com/api/webhooks/762556674678063115/JyU18FJLY06xljzNDj9pslJDfnPxkxWaNn-ytgpR66sbVQSkLNrJcOXyUsn5HH04LOGz"
-local logAdminRemcar = "https://discordapp.com/api/webhooks/762555827633782805/JY8rxRrARUTtacvf04eeRb_dTNJDH1VuRbq4VUuyIXBpwMnXwPsYWLQXgUrtVzBYgHIq"
-local logAdminGroup = "https://discordapp.com/api/webhooks/762556111949660183/ZzZ2DrsVT495B8X3cnErx_UxGdIrXDp6115L-0wKd7O2KxlsfffpnJDyx0gbNUebRkOi"
-local logAdminUnGroup = "https://discordapp.com/api/webhooks/792849847300522014/Va1zP-AzQ3rvpuEQ_5J8c90Ln_vI5a4PWbWaM0qRtBh5NADGQAIjQtj9npXJ6WOCHT8x"
-local logAdminReviver = "https://discordapp.com/api/webhooks/762556783243690051/XhWqRHss1Rvz9HxQFsr7-PWwT4csGfuxeZ_x-sLmYj2tT-5oyqq9NL5FbdiWSiNgQq2c"
-local logAdminKick = "https://discordapp.com/api/webhooks/762556262021726209/WODOaaVYl3tnFOijR3Gd_PtBBpyk-aEmxiye9tsdsEgMewFDeY2cWrvVIX7QUtUUHqtd"
-local logAdminFix = "https://discordapp.com/api/webhooks/762557436930031616/MWcoTnEFRBurJ0WdXflVY5dReJWhcaF7H3NZ4AVJmgv6dZa2MfZqNuvtvI2or8O9VBEv"
-local logAdminNc = "https://discordapp.com/api/webhooks/762557544102625292/55kNmfE0CCANwzrMka__VRjBuiX9Ta97UmfYoS-Wv4fRO2A-aJTYKwOK-qoPPTNHb2Me"
-local logAdminTps = "https://discordapp.com/api/webhooks/762557744351281165/BjV5zyQDugzkdJcacorIMtvwX-bZWVv2XjdS0I-B5eEV_on_EBeFPx8GGNbMpl31-Kom"
-local logAdminOrg = "https://discordapp.com/api/webhooks/762556417701183490/ShVX6PPb3pGvsKxoFg5ARVvHqYeZJVWRpya3UYz3Ofc44A7hMseyfT6ruyjsZeIRFFSk"
-local logAdmCorno = "https://discordapp.com/api/webhooks/762557852719775774/F5SGySSrV_4qBVjNNbNDUNPnrfVKGaQoCKiDlNAwBz3IoqE0UOn0hMUrU9CaR39oOph3"
-local logAdmStatus = "https://discordapp.com/api/webhooks/763897002646962217/zNjezEN5f_fNvddMYvHMXf2IeuGSJ75zOgaF-jz42Xuvpr74JuBpGIc6G7rcDRWYQ8y5"
-
 RegisterCommand('renomear',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -49,12 +28,12 @@ RegisterCommand('renomear',function(source,args,rawCommand)
             phone = nuidentity.phone
 		})
 		
-		PerformHttpRequest(logAdminRenomear, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.Rename, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	------------------------------------------------------------
 					title = "REGISTRO DE ALTERAÇÃO IDENTIDADE⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
-						url = "https://i.imgur.com/CtQB816.png"
+						url = config.webhookIcon
 					}, 
 					fields = {
 						{ 
@@ -67,10 +46,10 @@ RegisterCommand('renomear',function(source,args,rawCommand)
 						}
 					}, 
 					footer = { 
-						text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-						icon_url = "https://i.imgur.com/CtQB816.png"
+						text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+						icon_url = config.webhookIcon
 					},
-					color = 4402032 
+					color = config.webhookColor 
 				}
 			}
 		}), { ['Content-Type'] = 'application/json' })
@@ -105,12 +84,12 @@ RegisterCommand('estoque',function(source,args,rawCommand)
     if vRP.hasPermission(user_id,"manager.permissao") then
 		if args[1] and args[2] then
 			
-			PerformHttpRequest(logAdminEstoque, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Stock, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	------------------------------------------------------------
 						title = "REGISTRO DE ALTERAÇÃO DE ESTOQUE⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -123,10 +102,10 @@ RegisterCommand('estoque',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -147,12 +126,12 @@ RegisterCommand('addcar',function(source,args,rawCommand)
             local nuser_id = vRP.getUserId(nplayer)
 			local identitynu = vRP.getUserIdentity(nuser_id)
 			
-			PerformHttpRequest(logAdminAddcar, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Addcar, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	------------------------------------------------------------
 						title = "REGISTRO DE CARRO ADICIONADO A PLAYER⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -165,10 +144,10 @@ RegisterCommand('addcar',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -189,12 +168,12 @@ RegisterCommand('remcar',function(source,args,rawCommand)
             local nuser_id = vRP.getUserId(nplayer)
 			local identitynu = vRP.getUserIdentity(nuser_id)
 			
-			PerformHttpRequest(logAdminRemcar, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Remcar, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	------------------------------------------------------------
 						title = "REGISTRO DE CARRO REMOVIDO DE PLAYER⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -207,10 +186,10 @@ RegisterCommand('remcar',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -297,12 +276,12 @@ RegisterCommand('fix',function(source,args,rawCommand)
 	if vehicle then
 		if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 			
-			PerformHttpRequest(logAdminFix, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Fix, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	------------------------------------------------------------
 						title = "REGISTRO DE FIX⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -311,10 +290,10 @@ RegisterCommand('fix',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032
+						color = config.webhookColor
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -335,12 +314,12 @@ RegisterCommand('reviver',function(source,args,rawCommand)
 				local nuser_id = vRP.getUserId(nplayer)
 				local identitynu = vRP.getUserIdentity(nuser_id)
 
-				PerformHttpRequest(logAdminReviver, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.Revive, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 	
 							title = "REGISTRO DE REVIVER⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
+								url = config.webhookIcon
 							}, 
 							fields = {
 								{ 
@@ -353,10 +332,10 @@ RegisterCommand('reviver',function(source,args,rawCommand)
 								}
 							}, 
 							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
+								text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+								icon_url = config.webhookIcon
 							},
-							color = 4402032 
+							color = config.webhookColor 
 						}
 					}
 				}), { ['Content-Type'] = 'application/json' })
@@ -370,12 +349,12 @@ RegisterCommand('reviver',function(source,args,rawCommand)
 				vRP.varyHunger(nplayer,-15)
             end
 		else
-			PerformHttpRequest(logAdminReviver, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Revive, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	
 						title = "REGISTRO DE REVIVER⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -384,10 +363,10 @@ RegisterCommand('reviver',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -418,12 +397,12 @@ RegisterCommand('reviverall',function(source,args,rawCommand)
             end
 		end
 		
-		PerformHttpRequest(logAdminReviver, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.Revive, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	
 					title = "REGISTRO DE REVIVER TODOS⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
-						url = "https://i.imgur.com/CtQB816.png"
+						url = config.webhookIcon
 					}, 
 					fields = {
 						{ 
@@ -432,10 +411,10 @@ RegisterCommand('reviverall',function(source,args,rawCommand)
 						}
 					}, 
 					footer = { 
-						text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-						icon_url = "https://i.imgur.com/CtQB816.png"
+						text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+						icon_url = config.webhookIcon
 					},
-					color = 4402032 
+					color = config.webhookColor 
 				}
 			}
 		}), { ['Content-Type'] = 'application/json' })
@@ -462,12 +441,12 @@ RegisterCommand('wl',function(source,args,rawCommand)
     if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"suporte.permissao") or vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"aprovador-wl.permissao") then
 		if args[1] then
 			
-			PerformHttpRequest(logAdminWhitelist, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Whitelist, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	
 						title = "NOVO ID ADICIONADO A WHITELIST⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -480,10 +459,10 @@ RegisterCommand('wl',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -500,12 +479,12 @@ RegisterCommand('unwl',function(source,args,rawCommand)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"suporte.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		if args[1] then
 
-			PerformHttpRequest(logAdminUnWhitelist, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.UnWhitelist, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 
 						title = "ID REMOVIDO DA WHITELIST⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -518,10 +497,10 @@ RegisterCommand('unwl',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -540,12 +519,12 @@ RegisterCommand('kick',function(source,args,rawCommand)
 			local id = vRP.getUserSource(parseInt(args[1]))
 			if id then
 
-				PerformHttpRequest(logAdminKick, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.Kick, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 	
 							title = "REGISTRO DE KICK⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
+								url = config.webhookIcon
 							}, 
 							fields = {
 								{ 
@@ -558,10 +537,10 @@ RegisterCommand('kick',function(source,args,rawCommand)
 								}
 							}, 
 							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
+								text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+								icon_url = config.webhookIcon
 							},
-							color = 4402032 
+							color = config.webhookColor 
 						}
 					}
 				}), { ['Content-Type'] = 'application/json' })
@@ -586,12 +565,12 @@ RegisterCommand('kickall',function(source,args,rawCommand)
             end
 		end
 		
-		PerformHttpRequest(logAdminKick, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.Kick, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	
 					title = "REGISTRO DE KICKAR TODOS⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
-						url = "https://i.imgur.com/CtQB816.png"
+						url = config.webhookIcon
 					}, 
 					fields = {
 						{ 
@@ -600,10 +579,10 @@ RegisterCommand('kickall',function(source,args,rawCommand)
 						}
 					}, 
 					footer = { 
-						text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-						icon_url = "https://i.imgur.com/CtQB816.png"
+						text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+						icon_url = config.webhookIcon
 					},
-					color = 4402032 
+					color = config.webhookColor 
 				}
 			}
 		}), { ['Content-Type'] = 'application/json' })
@@ -618,12 +597,12 @@ RegisterCommand('ban',function(source,args,rawCommand)
 		if args[1] then
 			local nuser_id = vRP.getUserSource(parseInt(args[1]))
 
-			PerformHttpRequest(logAdminBan, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Ban, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 
 						title = "REGISTRO DE BANIMENTO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -636,10 +615,10 @@ RegisterCommand('ban',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -658,12 +637,12 @@ RegisterCommand('unban',function(source,args,rawCommand)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		if args[1] then
 
-			PerformHttpRequest(logAdminUnBan, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.UnBan, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 
 						title = "REGISTRO DE DESBANIMENTO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -676,10 +655,10 @@ RegisterCommand('unban',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -696,12 +675,12 @@ RegisterCommand('nc',function(source,args,rawCommand)
 
 	if vRP.hasPermission(user_id, "lider-corretor.permissao") or vRP.hasPermission(user_id, "suporte.permissao") or vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		
-		PerformHttpRequest(logAdminNc, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.Nc, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	
 					title = "REGISTRO DE NC⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
-						url = "https://i.imgur.com/CtQB816.png"
+						url = config.webhookIcon
 					}, 
 					fields = {
 						{ 
@@ -710,10 +689,10 @@ RegisterCommand('nc',function(source,args,rawCommand)
 						}
 					}, 
 					footer = { 
-						text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-						icon_url = "https://i.imgur.com/CtQB816.png"
+						text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+						icon_url = config.webhookIcon
 					},
-					color = 4402032
+					color = config.webhookColor
 				}
 			}
 		}), { ['Content-Type'] = 'application/json' })
@@ -780,12 +759,12 @@ RegisterCommand('group',function(source,args,rawCommand)
 			
 			TriggerClientEvent("Notify",source,"sucesso","Voce setou o passaporte <b>"..parseInt(args[1]).."</b> no grupo <b>"..args[2].."</b>.")
 
-			PerformHttpRequest(logAdminGroup, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Group, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 
 						title = "REGISTRO DE GROUP:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -798,10 +777,10 @@ RegisterCommand('group',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -820,12 +799,12 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
 
 			TriggerClientEvent("Notify",source,"sucesso","Voce removeu o passaporte <b>"..parseInt(args[1]).."</b> do grupo <b>"..args[2].."</b>.")
 
-			PerformHttpRequest(logAdminUnGroup, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.UnGroup, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 
 						title = "REGISTRO DE UNGROUP:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -838,10 +817,10 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -860,12 +839,12 @@ RegisterCommand('tptome',function(source,args,rawCommand)
 			local x,y,z = vRPclient.getPosition(source)
 			if tplayer then
 
-				PerformHttpRequest(logAdminTps, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.Tps, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 	------------------------------------------------------------
 							title = "REGISTRO DE TPTOME⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
+								url = config.webhookIcon
 							}, 
 							fields = {
 								{ 
@@ -878,10 +857,10 @@ RegisterCommand('tptome',function(source,args,rawCommand)
 								}
 							}, 
 							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
+								text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+								icon_url = config.webhookIcon
 							},
-							color = 4402032
+							color = config.webhookColor
 						}
 					}
 				}), { ['Content-Type'] = 'application/json' })
@@ -899,12 +878,12 @@ RegisterCommand('tpto',function(source,args,rawCommand)
 		if args[1] then
 			local tplayer = vRP.getUserSource(parseInt(args[1]))
 			if tplayer then
-				PerformHttpRequest(logAdminTps, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.Tps, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 	------------------------------------------------------------
 							title = "REGISTRO DE TPTO⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
+								url = config.webhookIcon
 							}, 
 							fields = {
 								{ 
@@ -917,10 +896,10 @@ RegisterCommand('tpto',function(source,args,rawCommand)
 								}
 							}, 
 							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
+								text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+								icon_url = config.webhookIcon
 							},
-							color = 4402032
+							color = config.webhookColor
 						}
 					}
 				}), { ['Content-Type'] = 'application/json' })
@@ -937,12 +916,12 @@ RegisterCommand('tpway',function(source,args,rawCommand)
 
 	if vRP.hasPermission(user_id, "suporte.permissao") or vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"manager.permissao") then
 		
-		PerformHttpRequest(logAdminTps, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.Tps, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	------------------------------------------------------------
 					title = "REGISTRO DE TPWAY⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
-						url = "https://i.imgur.com/CtQB816.png"
+						url = config.webhookIcon
 					}, 
 					fields = {
 						{ 
@@ -951,10 +930,10 @@ RegisterCommand('tpway',function(source,args,rawCommand)
 						}
 					}, 
 					footer = { 
-						text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-						icon_url = "https://i.imgur.com/CtQB816.png"
+						text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+						icon_url = config.webhookIcon
 					},
-					color = 4402032
+					color = config.webhookColor
 				}
 			}
 		}), { ['Content-Type'] = 'application/json' })
@@ -1137,12 +1116,12 @@ RegisterCommand('org',function(source,args,rawCommand)
 						end
 					end
 
-					PerformHttpRequest(logAdminOrg, function(err, text, headers) end, 'POST', json.encode({
+					PerformHttpRequest(config.Org, function(err, text, headers) end, 'POST', json.encode({
 						embeds = {
 							{ 
 								title = "REGISTRO DE CONTRATAÇÃO ORG⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 								thumbnail = {
-									url = "https://i.imgur.com/CtQB816.png"
+									url = config.webhookIcon
 								}, 
 								fields = {
 									{ 
@@ -1155,10 +1134,10 @@ RegisterCommand('org',function(source,args,rawCommand)
 									}
 								}, 
 								footer = { 
-									text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-									icon_url = "https://i.imgur.com/CtQB816.png"
+									text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+									icon_url = config.webhookIcon
 								},
-								color = 4402032
+								color = config.webhookColor
 							}
 						}
 					}), { ['Content-Type'] = 'application/json' })
@@ -1302,12 +1281,12 @@ RegisterCommand('org',function(source,args,rawCommand)
 						end
 					end
 
-					PerformHttpRequest(logAdminOrg, function(err, text, headers) end, 'POST', json.encode({
+					PerformHttpRequest(config.Org, function(err, text, headers) end, 'POST', json.encode({
 						embeds = {
 							{ 
 								title = "REGISTRO DE DEMISSÃO ORG⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 								thumbnail = {
-									url = "https://i.imgur.com/CtQB816.png"
+									url = config.webhookIcon
 								}, 
 								fields = {
 									{ 
@@ -1320,10 +1299,10 @@ RegisterCommand('org',function(source,args,rawCommand)
 									}
 								}, 
 								footer = { 
-									text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-									icon_url = "https://i.imgur.com/CtQB816.png"
+									text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+									icon_url = config.webhookIcon
 								},
-								color = 4402032
+								color = config.webhookColor
 							}
 						}
 					}), { ['Content-Type'] = 'application/json' })
@@ -1361,12 +1340,12 @@ function vRPidd.logID()
 	local identity = vRP.getUserIdentity(user_id)
 	local x,y,z = vRPclient.getPosition(source)
 
-	PerformHttpRequest(logAdmCorno, function(err, text, headers) end, 'POST', json.encode({
+	PerformHttpRequest(config.Corno, function(err, text, headers) end, 'POST', json.encode({
 		embeds = {
 			{ 	
 				title = "REGISTRO DE ID VISIVEL:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 				thumbnail = {
-				url = "https://i.imgur.com/CtQB816.png"
+				url = config.webhookIcon
 				}, 
 				fields = {
 					{ 
@@ -1380,9 +1359,9 @@ function vRPidd.logID()
 				}, 
 				footer = { 
 					text = "DIAMOND"..os.date("%d/%m/%Y |: %H:%M:%S"), 
-					icon_url = "https://i.imgur.com/CtQB816.png" 
+					icon_url = config.webhookIcon 
 				},
-				color = 4402032 
+				color = config.webhookColor 
 			}
 		}
 	}), { ['Content-Type'] = 'application/json' })
@@ -1444,12 +1423,12 @@ RegisterCommand('staff',function(source,args,rawCommand)
 
 	end
 
-	PerformHttpRequest(logAdmStatus, function(err, text, headers) end, 'POST', json.encode({
+	PerformHttpRequest(config.Status, function(err, text, headers) end, 'POST', json.encode({
         embeds = {
             { 	
                 title = "REGISTRO ADMINISTRATIVO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
                 thumbnail = {
-                    url = "https://i.imgur.com/CtQB816.png"
+                    url = config.webhookIcon
                 },
                 fields = {
                     { 
@@ -1468,10 +1447,10 @@ RegisterCommand('staff',function(source,args,rawCommand)
                     }
                 },
                 footer = { 
-                    text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-                    icon_url = "https://i.imgur.com/CtQB816.png"
+                    text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+                    icon_url = config.webhookIcon
                 },
-                color = 4402032
+                color = config.webhookColor
             }
         }
     }), { ['Content-Type'] = 'application/json' })

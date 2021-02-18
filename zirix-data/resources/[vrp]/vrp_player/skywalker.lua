@@ -8,9 +8,6 @@ src = {}
 Tunnel.bindInterface("vrp_player",src)
 local idgens = Tools.newIDGenerator()
 
-local logAdminItem = "https://discordapp.com/api/webhooks/762557007957327903/v7NaPuZf37nzTY72VYbuyhC_7l4UGXw2jiTVhMKiGHPJT-ts1Ll2gKuFgC2rbWrKmq2P"
-local logPegaTroxa = "https://discordapp.com/api/webhooks/762560794562134017/uH2JSuamSt3DI2aeCp5MsjZKFoj70OWP9yeuSrafkIU7atu89MIAebM55wqhR1GSn7Ud"
-
 function src.checkChapeu()
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -68,12 +65,12 @@ RegisterCommand('item',function(source,args,rawCommand)
 				local itemName = vRP.itemNameList(args[1])
 				vRP.giveInventoryItem(user_id,args[1],parseInt(args[2]))
 
-				PerformHttpRequest(logAdminItem, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.Item, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 	------------------------------------------------------------
 							title = "REGISTRO DE ITEM GERADO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 							}, 
 							fields = {
 								{ 
@@ -86,10 +83,10 @@ RegisterCommand('item',function(source,args,rawCommand)
 								}
 							}, 
 							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y |: %H:%M:%S"), 
-								icon_url = "https://i.imgur.com/CtQB816.png" 
+								text = config.webhookBottomText..os.date("%d/%m/%Y |: %H:%M:%S"), 
+								icon_url = config.webhookIcon 
 							},
-							color = 4402032 
+							color = config.webhookColor 
 						}
 					}
 				}), { ['Content-Type'] = 'application/json' })
@@ -137,46 +134,6 @@ RegisterCommand('id',function(source,rawCommand)
 	end
 end)
 
-local salarios = {
-
-
-	{ ['permissao'] = "juiz.permissao", ['nome'] = "Juiz(a)", ['payment'] = 7000 },
-	{ ['permissao'] = "procurador.permissao", ['nome'] = "Procurador(a)", ['payment'] = 4900 },
-	{ ['permissao'] = "promotor.permissao", ['nome'] = "Promotor(a)", ['payment'] = 4900 },
-	{ ['permissao'] = "defensor.permissao", ['nome'] = "Defensor(a) Público(a)", ['payment'] = 3430 },
-
-	{ ['permissao'] = "chefe-policia.permissao", ['nome'] = "Chefe de Polícia", ['payment'] = 5950 },
-	{ ['permissao'] = "sub-chefe-policia.permissao", ['nome'] = "Sub Chefe de Polícia", ['payment'] = 5060 },
-	{ ['permissao'] = "inspetor.permissao", ['nome'] = "Inspetor de Polícia", ['payment'] = 4300 },
-	{ ['permissao'] = "capitao.permissao", ['nome'] = "Capitão", ['payment'] = 3650 },
-	{ ['permissao'] = "tenente.permissao", ['nome'] = "Tenente", ['payment'] = 3100 },
-	{ ['permissao'] = "sub-tenente.permissao", ['nome'] = "Sub Tenente", ['payment'] = 2170 },
-	{ ['permissao'] = "um-sargento.permissao", ['nome'] = "1º Sargento", ['payment'] = 2480 },
-	{ ['permissao'] = "dois-sargento.permissao", ['nome'] = "2º Sargento", ['payment'] = 1950 },
-	{ ['permissao'] = "agente-policia.permissao", ['nome'] = "Agente de Polícia", ['payment'] = 1650 },
-	{ ['permissao'] = "recruta-policia.permissao", ['nome'] = "Recruta", ['payment'] = 900 },
-
-	{ ['permissao'] = "diretor-geral.permissao", ['nome'] = "Diretor Geral", ['payment'] = 6000 },
-	{ ['permissao'] = "diretor-auxiliar.permissao", ['nome'] = "Diretor Auxiliar", ['payment'] = 5500 },
-	{ ['permissao'] = "medico-chefe.permissao", ['nome'] = "Médico Chefe", ['payment'] = 5000 },
-	{ ['permissao'] = "medico-aulixiar.permissao", ['nome'] = "Médico Auxiliar", ['payment'] = 4500 },
-	{ ['permissao'] = "medico-cirurgiao.permissao", ['nome'] = "Médico Cirurgião", ['payment'] = 4000 },
-	{ ['permissao'] = "medico.permissao", ['nome'] = "Médico", ['payment'] = 3500 },
-	{ ['permissao'] = "residente.permissao", ['nome'] = "Enfermeiro", ['payment'] = 3000 },
-	{ ['permissao'] = "paramedico.permissao", ['nome'] = "Paramédico", ['payment'] = 2500 },
-	{ ['permissao'] = "socorrista.permissao", ['nome'] = "Socorrista", ['payment'] = 2000 },
-	{ ['permissao'] = "estagiario.permissao", ['nome'] = "Estágiario", ['payment'] = 900 },
-
-	{ ['permissao'] = "mecanico.permissao", ['nome'] = "Mecânico(a)", ['payment'] = 2000 },
-	{ ['permissao'] = "corretor.permissao", ['nome'] = "Corretor(a)", ['payment'] = 2000 },
-
-	{ ['permissao'] = "ultimate.permissao", ['nome'] = "Ultimate Pass", ['payment'] = 5600 },
-	{ ['permissao'] = "platinum.permissao", ['nome'] = "Platinum Pass", ['payment'] = 4400 },
-	{ ['permissao'] = "gold.permissao", ['nome'] = "Gold Pass", ['payment'] = 3200 },
-	{ ['permissao'] = "standard.permissao", ['nome'] = "Standard Pass", ['payment'] = 2000 },
-	{ ['permissao'] = "booster.permissao", ['nome'] = "Booster Pass", ['payment'] = 1000 }
-}
-
 local timers = {}
 Citizen.CreateThread(function()
 	while true do
@@ -199,7 +156,7 @@ AddEventHandler('salario:pagamento',function()
 	if timers[user_id] == 0 or not timers[user_id] then
 		timers[user_id] = 5
 		if user_id then
-			for k,v in pairs(salarios) do
+			for k,v in pairs(config.payments) do
 				if vRP.hasPermission(user_id,v.permissao) then
 					TriggerClientEvent("vrp_sound:source",source,'coins',0.5)
 					TriggerClientEvent("Notify",source,"importante","Obrigado por colaborar com a cidade, seu salario de <b>$"..vRP.format(parseInt(v.payment)).." dólares</b> foi depositado.")
@@ -208,12 +165,12 @@ AddEventHandler('salario:pagamento',function()
 			end
 		end
 	else
-		PerformHttpRequest(logPegaTroxa, function(err, text, headers) end, 'POST', json.encode({
+		PerformHttpRequest(config.Dumb, function(err, text, headers) end, 'POST', json.encode({
 			embeds = {
 				{ 	
 					title = "REGISTRO DE BANIMENTO POR CHEAT:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 					thumbnail = {
-						url = "https://i.imgur.com/CtQB816.png"
+						url = config.webhookIcon
 					}, 
 					fields = {
 						{
@@ -223,7 +180,7 @@ AddEventHandler('salario:pagamento',function()
 					}, 
 					footer = { 
 						text = "Los Anjos RP - "..os.date("%d/%m/%Y | %H:%M:%S"),
-						icon_url = "https://i.imgur.com/CtQB816.png"
+						icon_url = config.webhookIcon
 					},
 					color = 15906321 
 				}

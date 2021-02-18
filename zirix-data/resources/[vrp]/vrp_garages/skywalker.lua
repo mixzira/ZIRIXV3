@@ -23,9 +23,6 @@ vRP._prepare("losanjos/get_estoque","SELECT * FROM vrp_estoque WHERE vehicle = @
 vRP._prepare("losanjos/set_estoque","UPDATE vrp_estoque SET quantidade = @quantidade WHERE vehicle = @vehicle")
 vRP._prepare("losanjos/get_users","SELECT * FROM vrp_users WHERE id = @user_id")
 
-local logAdminCar = "https://discordapp.com/api/webhooks/762557171267141663/riNjMOzbFzUjggesmwo3_XptfIkHTLtANhFjQMajYKB5qMnM2UEwGKLYy_I8WPKPTMye"
-local logAdminDv = "https://discordapp.com/api/webhooks/762557286153453588/CSKA7TL1jeorRYHNjl056wJ1zQEAycTXIO6tiduXoL9epDyuYnyHhAhTwozsTZQ8ZPrj"
-
 local police = {}
 local vehlist = {}
 local trydoors = {}
@@ -670,12 +667,12 @@ RegisterCommand('dv',function(source,args,rawCommand)
 		local vehicle = vRPclient.getNearestVehicle(source,7)
 		if vehicle then
 
-			PerformHttpRequest(logAdminDv, function(err, text, headers) end, 'POST', json.encode({
+			PerformHttpRequest(config.Dv, function(err, text, headers) end, 'POST', json.encode({
 				embeds = {
 					{ 	------------------------------------------------------------
 						title = "REGISTRO DE DV⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 						thumbnail = {
-							url = "https://i.imgur.com/CtQB816.png"
+							url = config.webhookIcon
 						}, 
 						fields = {
 							{ 
@@ -684,10 +681,10 @@ RegisterCommand('dv',function(source,args,rawCommand)
 							}
 						}, 
 						footer = { 
-							text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-							icon_url = "https://i.imgur.com/CtQB816.png"
+							text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+							icon_url = config.webhookIcon
 						},
-						color = 4402032 
+						color = config.webhookColor 
 					}
 				}
 			}), { ['Content-Type'] = 'application/json' })
@@ -852,12 +849,12 @@ RegisterCommand('car',function(source,args,rawCommand)
 		if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
 			if args[1] then
 
-				PerformHttpRequest(logAdminCar, function(err, text, headers) end, 'POST', json.encode({
+				PerformHttpRequest(config.Car, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 
 							title = "REGISTRO DE SPAWNCAR⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 							thumbnail = {
-								url = "https://i.imgur.com/CtQB816.png"
+								url = config.webhookIcon
 							}, 
 							fields = {
 								{ 
@@ -870,10 +867,10 @@ RegisterCommand('car',function(source,args,rawCommand)
 								}
 							}, 
 							footer = { 
-								text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-								icon_url = "https://i.imgur.com/CtQB816.png"
+								text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+								icon_url = config.webhookIcon
 							},
-							color = 4402032 
+							color = config.webhookColor 
 						}
 					}
 				}), { ['Content-Type'] = 'application/json' })

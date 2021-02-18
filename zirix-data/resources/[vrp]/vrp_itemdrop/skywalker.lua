@@ -7,8 +7,6 @@ vRPclient = Tunnel.getInterface("vRP","vrp_itemdrop")
 local markers_ids = Tools.newIDGenerator()
 local items = {}
 
-local logInvPegar = ""
-
 AddEventHandler('DropSystem:create',function(item,count,px,py,pz,tempo)
 	local id = markers_ids:gen()
 	if id then
@@ -58,12 +56,12 @@ AddEventHandler('DropSystem:take33',function(id)
 					vRPclient._playAnim(source,true,{{"pickup_object","pickup_low"}},false)
 					local identity = vRP.getUserIdentity(user_id)
 					
-					PerformHttpRequest(logInvPegar, function(err, text, headers) end, 'POST', json.encode({
+					PerformHttpRequest(config.Take, function(err, text, headers) end, 'POST', json.encode({
 						embeds = {
 							{ 
 								title = "REGISTRO DE INVENTÁRIO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
 								thumbnail = {
-									url = "https://i.imgur.com/CtQB816.png"
+									url = config.webhookIcon
 								},
 								fields = {
 									{ 
@@ -80,10 +78,10 @@ AddEventHandler('DropSystem:take33',function(id)
 									}
 								},
 								footer = { 
-									text = "DIAMOND - "..os.date("%d/%m/%Y | %H:%M:%S"),
-									icon_url = "https://i.imgur.com/CtQB816.png"
+									text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"),
+									icon_url = config.webhookIcon
 								},
-								color = 16431885
+								color = config.webhookColor
 							}
 						}
 					}), { ['Content-Type'] = 'application/json' })

@@ -6,12 +6,14 @@ contact 'E-mail: contato@ziraflix.com - Discord: discord.gg/ziraflix'
 
 client_scripts {
 	'@vrp/lib/utils.lua',
+	'config/config.lua',
 	'hansolo/*.lua'
 }
 
 server_scripts {
 	'@vrp/lib/utils.lua',
 	'@mysql-async/lib/MySQL.lua',
+	'config/config.lua',
 	'skywalker.lua'
 }
 
