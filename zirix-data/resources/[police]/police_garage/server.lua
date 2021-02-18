@@ -8,21 +8,20 @@ vRP = Proxy.getInterface("vRP")
 func = {}
 Tunnel.bindInterface("police_garage", func)
 
-vRP._prepare("vRP/add_vehicle",
-             "INSERT IGNORE INTO vrp_user_vehicles(user_id,vehicle) VALUES(@user_id,@vehicle)")
-vRP._prepare("vRP/remove_vehicle",
+vRP._prepare("zirix/add_vehicle","INSERT IGNORE INTO vrp_user_vehicles(user_id,vehicle,ipva) VALUES(@user_id,@vehicle,@ipva)")
+vRP._prepare("zirix/remove_vehicle",
              "DELETE FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
-vRP._prepare("vRP/remove_vrp_srv_data",
+vRP._prepare("zirix/remove_vrp_srv_data",
              "DELETE FROM vrp_srv_data WHERE dkey = @dkey")
-vRP._prepare("vRP/get_vehicles",
+vRP._prepare("zirix/get_vehicles",
              "SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id")
-vRP._prepare("vRP/get_vehicle",
+vRP._prepare("zirix/get_vehicle",
              "SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
-vRP._prepare("vRP/count_vehicle",
+vRP._prepare("zirix/count_vehicle",
              "SELECT COUNT(*) as qtd FROM vrp_user_vehicles WHERE vehicle = @vehicle")
-vRP._prepare("vRP/get_maxcars",
+vRP._prepare("zirix/get_maxcars",
              "SELECT COUNT(vehicle) as quantidade FROM vrp_user_vehicles WHERE user_id = @user_id")
-vRP._prepare("vRP/get_total_carros_tipo",
+vRP._prepare("zirix/get_total_carros_tipo",
              "SELECT vehicle, count(1) total FROM vrp_user_vehicles GROUP BY vehicle")
 
 -- function func.init() 
@@ -124,10 +123,7 @@ function func.comprarVeiculo(categoria, modelo)
                         local consulta = vRP.getUData(15,"vRP:empresa") 
                         local resultado = json.decode(consulta) or 0
                         vRP.setUData(15,"vRP:empresa",json.encode(parseInt(resultado+valor*0.2)))
-                        vRP.execute("vRP/add_vehicle", {
-                            user_id = user_id,
-                            vehicle = veiculo.model
-                        })
+                        vRP.execute("losanjos/add_vehicle", { user_id = parseInt(user_id), vehicle = veiculo.model, ipva = os.time() })
                         TriggerClientEvent("vrp_concessionaria:notify", source,
                                            "Oba!", "Pagou <b>$" ..
                                                vRP.format(parseInt(valor)) ..

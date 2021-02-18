@@ -234,7 +234,7 @@ function src.buyDealer(name)
 						vRP.execute("losanjos/set_estoque",{ vehicle = name, quantidade = parseInt(rows2[1].quantidade) - 1 })
 						vRP.execute("losanjos/add_vehicle",{ user_id = parseInt(user_id), vehicle = name, ipva = os.time() })
 
-						TriggerClientEvent("Notify",source,"sucesso","Você comprou um <b>"..vRP.vehicleName(name).."</b> por <b>$ "..vRP.format(parseInt(pagamento)).." dólares</b>.",10000)
+						TriggerClientEvent("Notify",source,"sucesso","Você comprou um <b>"..vRP.vehicleName(name).."</b> por <b>$ "..vRP.format(parseInt(preco)).." dólares</b>.",10000)
 						
 						src.updateVehicles(name,vRP.vehicleType(name))
 						
