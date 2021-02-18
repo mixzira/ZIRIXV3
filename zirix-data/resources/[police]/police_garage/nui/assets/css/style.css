@@ -25,7 +25,7 @@ body {
     position: absolute;
 	font-size:14px;
 	color: #222222;
-	background: rgba(0, 0, 0, 0.11);
+	background: rgb(255, 255, 255);
 	font-family: 'Poppins', sans-serif;
     margin:0 auto;
     /* overflow:hidden; */
@@ -117,9 +117,7 @@ html,body{
     z-index: 2;
     transition:.7s;
 }
-.is-sticky .header-area{
-
-}
+.is-sticky .header-area{}
 .is-sticky .header-area:after{
     position:absolute;
     content:'';
@@ -301,7 +299,7 @@ html,body{
     width: 200px;
     height: 60px;
     white-space: nowrap;
-    color: #fff;
+    color: rgb(255, 255, 255);
     font-size:16px;
     font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
@@ -340,7 +338,9 @@ html,body{
 .single-package-item{
     margin-bottom: 30px;
     padding-bottom: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    height: 170px;
     -webkit-transition: .5s; 
     -moz-transition:.5s; 
     -ms-transition:.5s; 
@@ -349,7 +349,9 @@ html,body{
 }
 .single-package-item-txt{
     padding: 0 25px;
-    background: #FFF;
+    background: rgb(255, 255, 255);
+    width: 220px;
+    height: 170px;
 }
 .single-package-item img {
     width: 100%;

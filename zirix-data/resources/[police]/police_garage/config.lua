@@ -7,10 +7,10 @@ Config.Veiculos = {
     {
         categoria = {title="Carros", id="carros"},
         veiculos = {
-			{title = "Youga", model="youga", mala=100, preco=12000, estoque = 25},
-			{title = "Youga 2", model="youga2", mala=100, preco=12000, estoque = 25},
-			{title = "Huntley", model="huntley", mala=30, preco=9000, estoque = 25},
-			{title = "Landstalker", model="landstalker", mala=30, preco=8000, estoque = 25},
+			{title = "Adder", model="adder", mala=100, preco=1, estoque = 25},
+			{title = "Policia 2", model="voltic", mala=100, preco=1, estoque = 25},
+			{title = "Policia 3", model="police3", mala=30, preco=1, estoque = 25},
+			{title = "Policia 4", model="police4", mala=30, preco=1, estoque = 25},
 		
         }
     },
