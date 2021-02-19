@@ -33,33 +33,37 @@ Citizen.CreateThread(function()
 				if distance <= 1.5 then
 					drawTxt("Pressione [~r~E~w~] para iniciar o ~r~ROUBO~w~.",4,0.5,0.92,0.35,255,255,255,180)
 					if IsControlJustPressed(0,38) and vSERVER.checkHacker() and not IsPedInAnyVehicle(ped) and vSERVER.checkPermission() then
-						if vSERVER.checkPolice(config.start[1],config.start[2],config.start[3]) then 					
-							vSERVER.sendMessageAll("ATUALIZAÇÃO: Os assaltantes estão hackeando a rede do laboratório.")
-							vSERVER.robberywebwook()
-							TriggerEvent("status:hacker_digital",true)
-							TriggerEvent('cancelando',true)
-							
-							prop = GetHashKey("prop_cs_hand_radio")
-							object = CreateObject(GetHashKey("prop_police_radio_main"), GetEntityCoords(PlayerPedId()), true)	
-							AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 28422), -0.03, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
+						if vSERVER.checkAuth() then
+							if vSERVER.checkPolice(config.start[1],config.start[2],config.start[3]) then 					
+								vSERVER.sendMessageAll("ATUALIZAÇÃO: Os assaltantes estão hackeando a rede do laboratório.")
+								vSERVER.robberywebwook()
+								TriggerEvent("status:hacker_digital",true)
+								TriggerEvent('cancelando',true)
+								
+								prop = GetHashKey("prop_cs_hand_radio")
+								object = CreateObject(GetHashKey("prop_police_radio_main"), GetEntityCoords(PlayerPedId()), true)	
+								AttachEntityToEntity(object, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 28422), -0.03, 0.0, 0.0, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
 
-							RequestAnimDict('weapons@projectile@sticky_bomb')
-							while not HasAnimDictLoaded('weapons@projectile@sticky_bomb') do
-							Citizen.Wait(100)
+								RequestAnimDict('weapons@projectile@sticky_bomb')
+								while not HasAnimDictLoaded('weapons@projectile@sticky_bomb') do
+								Citizen.Wait(100)
+								end
+
+								vRP._playAnim(true,{{"weapons@projectile@sticky_bomb","plant_vertical"}},false)		
+								TriggerEvent("progress", 1900, "CONECTANDO AO DISPOSITIVO...")
+								Citizen.Wait(1000)
+								DeleteEntity(object)
+								Citizen.Wait(700)
+								ClearPedTasksImmediately(GetPlayerPed(-1))
+								Citizen.Wait(200)
+								TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)						
+								TriggerEvent("progress", 5000, "ACESSANDO O SISTEMA...")
+								Citizen.Wait(7100)
+								TriggerEvent("mhacking:show")
+								TriggerEvent("mhacking:start",3,20,mycallback)           
 							end
-
-							vRP._playAnim(true,{{"weapons@projectile@sticky_bomb","plant_vertical"}},false)		
-							TriggerEvent("progress", 1900, "CONECTANDO AO DISPOSITIVO...")
-							Citizen.Wait(1000)
-							DeleteEntity(object)
-							Citizen.Wait(700)
-							ClearPedTasksImmediately(GetPlayerPed(-1))
-							Citizen.Wait(200)
-							TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_STAND_MOBILE", 0, true)						
-							TriggerEvent("progress", 5000, "ACESSANDO O SISTEMA...")
-							Citizen.Wait(7100)
-							TriggerEvent("mhacking:show")
-							TriggerEvent("mhacking:start",3,20,mycallback)           
+						else
+							TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
 						end
 					end
 				end
@@ -106,128 +110,132 @@ Citizen.CreateThread(function()
 					if distance <= 1 then
 						drawTxt("Pressione [~r~E~w~] para pegar os ~r~ITENS~w~.",4,0.5,0.92,0.35,255,255,255,180)
 						if IsControlJustPressed(0,38) then
-							if k == 1 then
-								if not item1 then
-									item1 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
+							if vSERVER.checkAuth() then
+								if k == 1 then
+									if not item1 then
+										item1 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									end
+								elseif k == 2 then
+									if not item2 then
+										item2 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									end
+								elseif k == 3 then
+									if not item3 then
+										item3 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
+								elseif k == 4 then
+									if not item4 then
+										item4 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
+								elseif k == 5 then
+									if not item5 then
+										item5 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
+								elseif k == 6 then
+									if not item6 then
+										item6 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
+								elseif k == 7 then
+									if not item7 then
+										item7 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
+								elseif k == 8 then
+									if not item8 then
+										item8 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
+								elseif k == 9 then
+									if not item9 then
+										item9 = true
+										vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
+										FreezeEntityPosition(ped, true)
+										TriggerEvent("progress", config.timerob)
+										SetTimeout(config.timerob,function()
+											vSERVER.Start(k)
+											FreezeEntityPosition(ped, false)
+											vRP.stopAnim(ped,false)
+										end)
+									else
+										TriggerEvent("Notify","negado","Armarios vazios.") 
+									end
 								end
-							elseif k == 2 then
-								if not item2 then
-									item2 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								end
-							elseif k == 3 then
-								if not item3 then
-									item3 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
-							elseif k == 4 then
-								if not item4 then
-									item4 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
-							elseif k == 5 then
-								if not item5 then
-									item5 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
-							elseif k == 6 then
-								if not item6 then
-									item6 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
-							elseif k == 7 then
-								if not item7 then
-									item7 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
-							elseif k == 8 then
-								if not item8 then
-									item8 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
-							elseif k == 9 then
-								if not item9 then
-									item9 = true
-									vRP._playAnim(true,{{config.anim[1],config.anim[2]}},false)	
-									FreezeEntityPosition(ped, true)
-									TriggerEvent("progress", config.timerob)
-									SetTimeout(config.timerob,function()
-										vSERVER.Start(k)
-										FreezeEntityPosition(ped, false)
-										vRP.stopAnim(ped,false)
-									end)
-								else
-									TriggerEvent("Notify","negado","Armarios vazios.") 
-								end
+							else
+								TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
 							end
 						end
 					end
