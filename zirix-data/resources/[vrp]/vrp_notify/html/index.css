@@ -1,0 +1,203 @@
+body {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	src: url('z-arista/Arista2.0light.otf');
+	font-family: 'Theme Font';
+}
+
+.theme-text {
+	position: relative;
+	top: 10px;
+	font-size: 10px;
+	font-family: 'Montserrat';
+	left: 60px;
+	text-transform: uppercase;
+}
+
+/* .text-now {
+	font-family: 'Montserrat';
+	opacity: 30%;
+	float: right;
+	margin-right: 20px;
+	top: -5px;
+	position: relative;
+} */
+
+.mensage {
+	margin: 0px;
+	text-align:left;
+	margin-left: 20px;
+	left: 40px;
+	font-size: 10px;
+	font-family: 'Montserrat';
+	position: relative;
+	color: rgba(255, 255, 255, 0.589);
+	top: -30px;
+}
+
+#containera {
+	position: absolute;
+	height: 50%;
+	width: 150px;
+	margin-left: 2px;
+	margin-top: -3px;
+	transition: 1s;
+	right: 240px;
+	top: 100px;
+}
+
+.notification {
+	width: 350px;
+	max-height: 640px;
+	background: linear-gradient(90deg,#000000d3,transparent);
+	border-radius: 10px;
+	border-style: solid;
+	margin: 10px;
+	right: 10px;
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+	background-repeat: no-repeat;
+	margin-left: 20px;
+	position: relative;
+	top: -10px;
+}
+
+/* THEMES*/
+
+.icon.sucesso {
+	background-image: url(images/1.png)
+}
+.icon.negado {
+	background-image: url(images/2.png)
+}
+.icon.sangramento {
+	background-image: url(images/6.png)
+}
+.icon.importante {
+	background-image: url(images/3.png)
+}
+.icon.aviso {
+	background-image: url(images/4.png)
+}
+.icon.policia {
+	background-image: url(images/5.png)
+}
+
+.overlay.sucesso {
+	background-color: #00b006;
+	-webkit-box-shadow: 0px 0px 15px 5px #00b006; 
+	box-shadow: 0px 0px 15px 5px #00b006;
+}
+.overlay.negado {
+	background-color: #b00000;
+	-webkit-box-shadow: 0px 0px 15px 5px #b00000; 
+	box-shadow: 0px 0px 15px 5px #b00000;
+}
+.overlay.sangramento {
+	background-color: #b00000;
+	-webkit-box-shadow: 0px 0px 15px 5px #b00000; 
+	box-shadow: 0px 0px 15px 5px #b00000;
+}
+.overlay.importante {
+	background-color: #b0a100;
+	-webkit-box-shadow: 0px 0px 15px 5px #b0a100; 
+	box-shadow: 0px 0px 15px 5px #b0a100;
+}
+.overlay.aviso {
+	background-color: #006db0;
+	-webkit-box-shadow: 0px 0px 15px 5px #006db0; 
+	box-shadow: 0px 0px 15px 5px #006db0;
+}
+.overlay.policia {
+	background-color: #b00055;
+	-webkit-box-shadow: 0px 0px 15px 5px #b00055; 
+	box-shadow: 0px 0px 15px 5px #b00055;
+}
+
+.theme-text.sucesso {
+	color: #00b006;
+	text-shadow: 0px 0px 13px #00b006;
+}
+.theme-text.negado {
+	color: #b00000;
+	text-shadow: 0px 0px 13px #b00000;
+}
+.theme-text.sangramento {
+	color: #b00000;
+	text-shadow: 0px 0px 13px #b00000;
+}
+.theme-text.importante {
+	color: #b0a100;
+	text-shadow: 0px 0px 13px #b0a100;
+}
+.theme-text.aviso {
+	color: #006db0;
+	text-shadow: 0px 0px 13px #006db0;
+}
+.theme-text.policia {
+	color: #b00055;
+	text-shadow: 0px 0px 13px #b00055;
+}
+
+.mensage.sucesso b {
+	color: #00b006;
+	text-shadow: 0px 0px 13px #00b006;
+}
+.mensage.negado b {
+	color: #b00000;
+	text-shadow: 0px 0px 13px #b00000;
+}
+.mensage.sangramento b {
+	color: #b00000;
+	text-shadow: 0px 0px 13px #b00000;
+}
+.mensage.importante b {
+	color: #b0a100;
+	text-shadow: 0px 0px 13px #b0a100;
+}
+.mensage.aviso b {
+	color: #006db0;
+	text-shadow: 0px 0px 13px #006db0;
+}
+.mensage.policia b {
+	color: #b00055;
+	text-shadow: 0px 0px 13px #b00055;
+}
+
+.animate__delay-2s {
+	--animate-delay: 0.3s;
+}
+
+.animate__delay-3s {
+	--animate-delay: 0.4s;
+}
+/* END */
+
+/* ----------------------------------------------------------------------------------------------------*/
+
+/* KEY FRAMES*/
+
+@keyframes Thread {
+	0% {transform: rotate(0deg)}
+	25% {transform: rotate(15deg)}
+	50% {transform: rotate(-15deg)}
+	75% {transform: rotate(15deg)}
+	100% {transform: rotate(0deg)}
+}
+
+@keyframes Entry {
+	0% {transform: translateZ(10px)}
+	10% {transform: translateZ(30px)}
+	30% {transform: translateZ(30px)}
+	50% {transform: translateZ(30px)}
+	70% {transform: translateZ(30px)}
+	80% {transform: translateZ(40px)}
+	100% {transform: translateZ(10px)}
+}

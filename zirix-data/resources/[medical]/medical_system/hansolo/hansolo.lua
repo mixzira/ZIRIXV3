@@ -103,7 +103,7 @@ Citizen.CreateThread(function()
  			end
  			
  			if bleeding >= 1 and GetEntityHealth(ped) > 101 then
- 				TriggerEvent("Notify","negado","Sangramento <b>"..bleedtype.."</b> encontrado.",3000)
+ 				TriggerEvent("Notify","sangramento","Sangramento <b>"..bleedtype.."</b> encontrado.",3000)
  			end
 
  			if bleeding >= 4 and GetEntityHealth(ped) > 101 then

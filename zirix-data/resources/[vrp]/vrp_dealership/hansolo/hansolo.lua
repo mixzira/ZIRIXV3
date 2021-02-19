@@ -49,6 +49,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
+
 function src.buyRent(vehname)
 	if vehicle[vehname] == nil then
 		local mhash = GetHashKey(vehname)
