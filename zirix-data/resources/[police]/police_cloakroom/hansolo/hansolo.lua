@@ -56,7 +56,11 @@ Citizen.CreateThread(function()
 				if distance <= 1.2 then
 					idle = 5
 					if IsControlJustPressed(0,38) and vRPex.checkOfficer() then
-						ToggleActionMenu()
+						if vRPex.checkAuth() then
+							ToggleActionMenu()
+						else
+							TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+						end
 					end
 				end
 			end

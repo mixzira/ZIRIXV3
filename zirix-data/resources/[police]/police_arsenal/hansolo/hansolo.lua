@@ -6,8 +6,6 @@ vRPex = Tunnel.getInterface("police_arsenal")
 local menuactive = false
 local system = {{ ['x'] = 452.15, ['y'] = -980.11, ['z'] = 30.69},}
 
-
-
 RegisterNUICallback("ButtonClick",function(data,cb)
 	local ped = PlayerPedId()
 	if data == "mk1" then
@@ -144,7 +142,11 @@ Citizen.CreateThread(function()
 				DrawMarker(23, system.x, system.y, system.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
 				if distance <= 1.2 then
 					if IsControlJustPressed(0,38) and vRPex.checkOfficer() then
-						ToggleActionMenu()
+						if vRPex.checkAuth() then
+							ToggleActionMenu()
+						else
+							TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+						end
 					end
 				end
 			end

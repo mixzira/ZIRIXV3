@@ -7,3 +7,5 @@ config.pistols = "policia.permissao"
 config.vest = "policia.permissao"
 config.basicKit = "policia.permissao"
 
+
+config.location = {452.15, -980.11, 30.69}
