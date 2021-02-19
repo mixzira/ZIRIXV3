@@ -23,7 +23,6 @@ Citizen.CreateThread(function()
         local distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)),-1078.81,-856.44,5.05 - 0.97, true)
 			if distance <= 50 then
 				DrawMarker(23,-1078.81,-856.44,5.05-0.97,0,0,0,0.0,0,0,0.8,0.8,0.8,0,0,0,300,0,0,0,1)
-				DrawMarker(36,-1078.81,-856.44,5.05-0.50,0,0,0,0.0,0,0,0.8,0.8,0.8,255,255,255,200,1,0,0,1)
 				if distance <= 2 then
 					if not open then
 						if IsControlJustPressed(1, 38) then
@@ -62,12 +61,12 @@ Citizen.CreateThread(function()
                                 TriggerEvent("Notify", "aviso",
                                              "Buscando veículo!")
 
-                                local tentativas = 0
-                                while tentativas < 350 and
+                                local attempts = 0
+                                while attempts < 350 and
                                     not HasModelLoaded(mhash) do
                                     RequestModel(mhash)
                                     Citizen.Wait(10)
-                                    tentativas = tentativas + 1
+                                    attempts = attempts + 1
                                 end
                                 if not HasModelLoaded(mhash) then
                                     TriggerEvent("Notify", "negado",
@@ -80,14 +79,14 @@ Citizen.CreateThread(function()
                                                       GetEntityHeading(ped),
                                                       true, false)
 
-                                    local placa = vRP.getRegistrationNumber()
+                                    local platecar = vRP.getRegistrationNumber()
                                     SetVehicleOnGroundProperly(nveh)
-                                    SetVehicleNumberPlateText(nveh, placa)
+                                    SetVehicleNumberPlateText(nveh, platecar)
                                     SetEntityAsMissionEntity(nveh, true, false) -- Torna a entidade especificada (ped, veículo ou objeto) persistente. Entidades persistentes não serão removidas automaticamente pelo mecanismo.
                                     TaskWarpPedIntoVehicle(ped, nveh, -1)
 
                                     SetModelAsNoLongerNeeded(mhash)
-                                    carros[name] = placa
+                                    carros[name] = platecar
                                 end
 
                             else
@@ -148,23 +147,23 @@ RegisterNUICallback("ButtonClick", function(data, cb)
     end
 end)
 
-RegisterNetEvent('vrp_concessionaria:closeAll')
-AddEventHandler('vrp_concessionaria:closeAll', function()
+RegisterNetEvent('police_garage:closeAll')
+AddEventHandler('police_garage:closeAll', function()
     open = false
     SetNuiFocus(false, false)
     SendNUIMessage({type = 'closeAll'})
 end)
 
-RegisterNetEvent("vrp_concessionaria:deletarveiculo")
-AddEventHandler('vrp_concessionaria:deletarveiculo', function(distance)
+RegisterNetEvent("police_garage:deletarveiculo")
+AddEventHandler('police_garage:deletarveiculo', function(distance)
     local vehicle = vRP.getNearestVehicle(distance)
     if IsEntityAVehicle(vehicle) then
         -- local veh = VehToNet(vehicle)
 
         local vehicleLabel = GetDisplayNameFromVehicleModel(
                                  GetEntityModel(vehicle))
-        local placa = GetVehicleNumberPlateText(vehicle)
-        if carros[string.lower(vehicleLabel)] == placa then
+        local platecar = GetVehicleNumberPlateText(vehicle)
+        if carros[string.lower(vehicleLabel)] == platecar then
             carros[string.lower(vehicleLabel)] = nil
         end
         TriggerServerEvent("vrp_adv_garages_id", veh,
@@ -175,7 +174,7 @@ AddEventHandler('vrp_concessionaria:deletarveiculo', function(distance)
     end
 end)
 
-RegisterNetEvent("vrp_concessionaria:notify")
-AddEventHandler('vrp_concessionaria:notify', function(title, msg, type)
+RegisterNetEvent("police_garage:notify")
+AddEventHandler('police_garage:notify', function(title, msg, type)
     SendNUIMessage({type = 'alert', title = title, msg = msg, typeMsg = type})
 end)

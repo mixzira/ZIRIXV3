@@ -8,13 +8,13 @@ ui_page "nui/ui.html"
 
 client_scripts {
 	"@vrp/lib/utils.lua",
-	"config.lua",
-	"hansolo.lua",
+	"config/config.lua",
+	"hansolo/hansolo.lua",
 }
 
 server_scripts {
 	"@vrp/lib/utils.lua",
-	"config.lua",
+	"config/config.lua",
 	"skywalker.lua",
 }
 
