@@ -73,7 +73,7 @@ function func.comprarVeiculo(categoria, modelo)
                 local rows = vRP.query("vRP/count_vehicle",
                                        {vehicle = veiculo.model})
                 if parseInt(rows[1].qtd) >= veiculo.estoque then
-                    TriggerClientEvent("vrp_concessionaria:notify", source,
+                    TriggerClientEvent("police_garage:notify", source,
                                        "Ops!", "Fale com um vendedor.", "error")
                     return
                 else
@@ -108,7 +108,7 @@ function func.comprarVeiculo(categoria, modelo)
                     end
 
                     if parseInt(totalv[1].quantidade) >= totalGaragens then
-                        TriggerClientEvent("vrp_concessionaria:notify", source,
+                        TriggerClientEvent("police_garage:notify", source,
                                            "Ops!",
                                            "Atingiu o número máximo de veículos em sua garagem.",
                                            "error")
@@ -124,30 +124,30 @@ function func.comprarVeiculo(categoria, modelo)
                         local resultado = json.decode(consulta) or 0
                         vRP.setUData(15,"vRP:empresa",json.encode(parseInt(resultado+valor*0.2)))
                         vRP.execute("losanjos/add_vehicle", { user_id = parseInt(user_id), vehicle = veiculo.model, ipva = os.time() })
-                        TriggerClientEvent("vrp_concessionaria:notify", source,
+                        TriggerClientEvent("police_garage:notify", source,
                                            "Oba!", "Pagou <b>$" ..
                                                vRP.format(parseInt(valor)) ..
                                                " dólares</b>.", "success")
                         return true
                     else
-                        TriggerClientEvent("vrp_concessionaria:notify", source,
+                        TriggerClientEvent("police_garage:notify", source,
                                            "Ops!", "Dinheiro insuficiente.",
                                            "error")
                         return
                     end
                 end
             else
-                TriggerClientEvent("vrp_concessionaria:notify", source, "Ops!",
+                TriggerClientEvent("police_garage:notify", source, "Ops!",
                                    "Você já possui este veículo!", "error")
                 return
             end
         else
-            TriggerClientEvent("vrp_concessionaria:notify", source, "Ops!",
+            TriggerClientEvent("police_garage:notify", source, "Ops!",
                                "Veículo inválido!", "error")
             return
         end
     else
-        TriggerClientEvent("vrp_concessionaria:notify", source, "Ops!",
+        TriggerClientEvent("police_garage:notify", source, "Ops!",
                            "Somente o dono da concessionária pode executar está ação!",
                            "error")
         return
@@ -174,12 +174,12 @@ function func.venderVeiculo(categoria, modelo)
         local rows = vRP.query("vRP/get_vehicle",
                                {user_id = user_id, vehicle = veiculo.model})
         if #rows <= 0 then
-            TriggerClientEvent("vrp_concessionaria:notify", source, "Ops!",
+            TriggerClientEvent("police_garage:notify", source, "Ops!",
                                "Não encontrado", "error")
             return false
         end
         if parseInt(rows[1].detido) >= 1 then
-            TriggerClientEvent("vrp_concessionaria:notify", source, "Ops!",
+            TriggerClientEvent("police_garage:notify", source, "Ops!",
                                "Acione a seguradora antes de vender.", "error")
 
             return false
@@ -195,7 +195,7 @@ function func.venderVeiculo(categoria, modelo)
 
         vRP.giveMoney(user_id, parseInt(price))
         if parseInt(price) > 0 then
-            TriggerClientEvent("vrp_concessionaria:notify", source, "Oba!",
+            TriggerClientEvent("police_garage:notify", source, "Oba!",
                                "Recebeu <b>$" .. vRP.format(parseInt(price)) ..
                                    " dólares</b>.", "success")
         end
@@ -203,7 +203,7 @@ function func.venderVeiculo(categoria, modelo)
 
         return true
     else
-        TriggerClientEvent("vrp_concessionaria:notify", source, "Ops!",
+        TriggerClientEvent("police_garage:notify", source, "Ops!",
                            "Veículo inválido!", "error")
 
         return false
