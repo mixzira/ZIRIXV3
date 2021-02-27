@@ -42,7 +42,7 @@ RegisterKeyMapping('vrp_inventory:openInv', 'Inventário', 'keyboard', config.op
 
 RegisterCommand('vrp_inventory:openInv', function()
     local ped = PlayerPedId()
-    if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) and vRPNserver.checkAuth() then
+    if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) then
         if not invOpen then
             StartScreenEffect("MenuMGSelectionIn", 0, true)
             invOpen = true

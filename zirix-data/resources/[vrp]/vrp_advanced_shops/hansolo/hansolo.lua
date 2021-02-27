@@ -292,13 +292,9 @@ AddEventHandler('vrp_advanced_shops:use',function()
 				local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
 				local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
 				if distance < 1.2 then
-					if vSERVER.checkAuth() then
-						dShop = tShop
-						toggleActionMenu(dShop)
-						openShop = tShop
-					else
-						TriggerEvent('chatMessage','[ ZIRAFLIX: '..GetCurrentResourceName()..' - Script não autenticado/vazado ]',{255,0,0},'Adquira já o seu em http://www.ziraflix.com')
-					end
+					dShop = tShop
+					toggleActionMenu(dShop)
+					openShop = tShop
 				end
 			end
 			local bowz,cdz = GetGroundZFor_3dCoord(vault.position.x, vault.position.y, vault.position.z)
