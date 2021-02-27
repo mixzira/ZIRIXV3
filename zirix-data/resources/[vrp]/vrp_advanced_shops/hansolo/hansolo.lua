@@ -300,20 +300,12 @@ AddEventHandler('vrp_advanced_shops:use',function()
 			local bowz,cdz = GetGroundZFor_3dCoord(vault.position.x, vault.position.y, vault.position.z)
 			local distance = GetDistanceBetweenCoords(vault.position.x, vault.position.y, cdz, x, y, z, true)
 			if distance < 1.2 and not inRobbery then
-				if vSERVER.checkAuth() then
-					vSERVER.vaultRobbery(tShop)
-				else
-					TriggerEvent('chatMessage','[ ZIRAFLIX: '..GetCurrentResourceName()..' - Script não autenticado/vazado ]',{255,0,0},'Adquira já o seu em http://www.ziraflix.com')
-				end
+				vSERVER.vaultRobbery(tShop)
 			end
 			local bowz2, cdz2 = GetGroundZFor_3dCoord(info.x, info.y, info.z)
 			local distance2 = GetDistanceBetweenCoords(info.x, info.y, cdz2, x, y, z, true)
 			if distance2 < 1.2 then
-				if vSERVER.checkAuth() then
-					vSERVER.buyStore(tShop)
-				else
-					TriggerEvent('chatMessage','[ ZIRAFLIX: '..GetCurrentResourceName()..' - Script não autenticado/vazado ]',{255,0,0},'Adquira já o seu em http://www.ziraflix.com')
-				end
+				vSERVER.buyStore(tShop)
 			end
 		end
 	end
