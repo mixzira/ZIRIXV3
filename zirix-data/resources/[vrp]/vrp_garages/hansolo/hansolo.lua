@@ -1365,7 +1365,7 @@ RegisterNetEvent("vrp_garages:lock")
 AddEventHandler("vrp_garages:lock",function()
 	local ped = PlayerPedId()
 	local vehicle = vRP.getNearestVehicle(5)
-	if vehicle and not IsPedInAnyVehicle(ped) then
+	if vehicle then
 		if cooldown < 1 then
 			cooldown = 3
 			vSERVER.vehicleLock()
