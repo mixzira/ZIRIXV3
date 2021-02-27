@@ -37,14 +37,10 @@ Citizen.CreateThread(function()
 					idle = 5
 					DrawMarker(23,v.x,v.y,v.z-0.98,0,0,0,0,0,0,0.7,0.7,0.5, 255, 255, 255, 180,0,0,0,0)
 					if distance <= 1.5 and IsControlJustPressed(0,38) then
-						if vSERVER.checkAuth() then
-							SetNuiFocus(true,true)
-							SendNUIMessage({ action = "showMenu" })
-							dealerOpen = true
-							vRP._CarregarObjeto("amb@code_human_in_bus_passenger_idles@female@tablet@idle_a","idle_b","prop_cs_tablet",49,28422)
-						else
-							TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-						end
+						SetNuiFocus(true,true)
+						SendNUIMessage({ action = "showMenu" })
+						dealerOpen = true
+						vRP._CarregarObjeto("amb@code_human_in_bus_passenger_idles@female@tablet@idle_a","idle_b","prop_cs_tablet",49,28422)
 					end
 				end
 			end
