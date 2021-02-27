@@ -848,8 +848,9 @@ RegisterCommand('car',function(source,args,rawCommand)
 		local identity = vRP.getUserIdentity(user_id)
 		if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
 			if args[1] then
-
-				PerformHttpRequest(config.Car, function(err, text, headers) end, 'POST', json.encode({
+				
+				
+				PerformHttpRequest(config.spawnvehicle, function(err, text, headers) end, 'POST', json.encode({
 					embeds = {
 						{ 
 							title = "REGISTRO DE SPAWNCAR⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀",
