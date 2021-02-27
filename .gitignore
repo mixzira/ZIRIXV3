@@ -2,7 +2,9 @@ build/*
 build/**/*
 zirix-data/cache/**/*
 zirix-data/cache/*
-zirix-data/resources/[sistema]/[builders]/webpack/**/*
-zirix-data/resources/[sistema]/[builders]/webpack/*
-zirix-data/resources/[sistema]/[builders]/yarn/**/*
-zirix-data/resources/[sistema]/[builders]/yarn/*
+zirix-data/resources/[system]/[builders]/webpack/**/*
+zirix-data/resources/[system]/[builders]/webpack/*
+zirix-data/resources/[system]/[builders]/yarn/**/*
+zirix-data/resources/[system]/[builders]/yarn/*
+zirix-data/resources/[system]/screenshot-basic/**/*
+zirix-data/resources/[system]/screenshot-basic/*
