@@ -32,17 +32,8 @@ end)
 RegisterNUICallback("requestChest",function(data,cb)
 	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight, slots, nuslots = vSERVER.openChest()
 	local ip = config.imageServer
-	if ip == '' then
-		if vSERVER.checkStreaming() then
-			ip = '192.99.251.232:3501'
-		end
-	end
-	if vSERVER.checkAuth() then
-		if inventory then
-			cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, slots = slots, nuslots = nuslots, ip = ip })
-		end
-	else
-		TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+	if inventory then
+		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, slots = slots, nuslots = nuslots, ip = ip })
 	end
 end)
 

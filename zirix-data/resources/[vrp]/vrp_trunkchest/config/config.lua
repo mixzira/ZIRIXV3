@@ -1,6 +1,6 @@
 config = {}
 
-config.imageServer = '' -- Deixe vazio caso você ultilize o serviço de imagens da ZIRAFLIX;
+config.imageServer = ''
 
 config.webhookIcon = 'https://i.imgur.com/CtQB816.png'
 config.webhookBottomText = 'CLEAN TWO - '

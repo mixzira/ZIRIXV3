@@ -114,17 +114,8 @@ end)
 RegisterNUICallback("requestInventory",function(data,cb)
     local inventario, peso, maxpeso, slots = vRPNserver.Inventory()
     local ip = config.imageServer
-    if ip == '' then
-        if vRPNserver.checkAuth() then
-            ip = '192.99.251.232:3501'
-        end
-    end
-    if vRPNserver.checkAuth()  then
-        if inventario then
-            cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, ip = ip })
-        end
-    else
-        TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
+    if inventario then
+        cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, ip = ip })
     end
 end)
 

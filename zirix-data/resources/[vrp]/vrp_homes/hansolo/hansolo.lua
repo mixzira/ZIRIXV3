@@ -34,11 +34,6 @@ end)
 RegisterNUICallback("requestVault",function(data,cb)
 	local inventory, chest, weight, maxweight, weightchest, maxweightchest, slots, slotschest = vSERVER.openChest(tostring(houseOpen))
 	local ip = config.imageServer
-	if ip == '' then
-		if vSERVER.checkStreaming() then
-			ip = '192.99.251.232:3501'
-		end
-	end	
 	if inventory then
 		cb({ inventory = inventory, chest = chest, weight = weight, maxweight = maxweight, weightchest = weightchest, maxweightchest = maxweightchest, slots = slots, slotschest = slotschest, ip = ip })
 	end

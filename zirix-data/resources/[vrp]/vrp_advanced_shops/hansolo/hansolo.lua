@@ -53,13 +53,8 @@ RegisterNUICallback('requestShops',function(data,cb)
 	local sname = dShop
 	local inventory, weight, maxweight, slots, fslots, fshopslots, shop, vault, maxvault, options, maxstock, security = vSERVER.openNav(sname)
 	local ip = config.imageServer
-	if ip == '' then
-		if vSERVER.checkStreaming() then
-			ip = '192.99.251.232:3501'
-		end
-	end
 	if inventory then
-		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, shop = shop, sname = sname, ip = ip, vault = vault, maxvault = maxvault, options = options, maxstock = maxstock, security = security })
+		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, shop = shop, sname = sname, vault = vault, maxvault = maxvault, options = options, maxstock = maxstock, security = security, ip = ip })
 	end
 end)
 

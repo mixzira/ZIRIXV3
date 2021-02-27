@@ -56,11 +56,6 @@ RegisterNUICallback('requestShops',function(data,cb)
 	local shopName = dShop
 	local inventory, weight, maxweight, slots, fslots, fshopslots, itemsshop = vSERVER.openNav(dShop)
 	local ip = config.imageServer
-	if ip == '' then
-		if vSERVER.checkStreaming() then
-			ip = '192.99.251.232:3501'
-		end
-	end
 	if inventory then
 		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, itemsshop = itemsshop, shopName = shopName, ip = ip })
 	end
@@ -76,13 +71,9 @@ AddEventHandler("vrp_shops:open",function()
 			local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
 			local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
 			if distance < 1.2 then
-				if vSERVER.checkAuth() then
-					dShop = tShop
-					ToggleActionMenu(tShop)
-					openShop = tShop
-				else
-					TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-				end
+				dShop = tShop
+				ToggleActionMenu(tShop)
+				openShop = tShop
 			end
 		end
 	end
