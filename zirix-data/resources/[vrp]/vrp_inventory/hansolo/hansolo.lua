@@ -38,8 +38,6 @@ end)
 
 --[ INVOPEN ]----------------------------------------------------------------------------------------------------------------------------
 
-RegisterKeyMapping('vrp_inventory:openInv', 'Inventário', 'keyboard', config.openKey)
-
 RegisterCommand('vrp_inventory:openInv', function()
     local ped = PlayerPedId()
     if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) then
