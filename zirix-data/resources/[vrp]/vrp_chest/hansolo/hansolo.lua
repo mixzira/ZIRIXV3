@@ -49,14 +49,10 @@ AddEventHandler("vrp_chest:use",function()
 		local nuser_id = vRP.getNearestPlayer(3)
 		if distance < 0.8 and not nuser_id then
 			if vSERVER.checkIntPermissions(v.perm) and not chestTimer then
-				if vSERVER.checkAuth() then
-					TransitionToBlurred(1000)
-					SetNuiFocus(true,true)
-					SendNUIMessage({ action = "showMenu" })
-					chestOpen = tostring(k)
-				else
-					TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-				end
+				TransitionToBlurred(1000)
+				SetNuiFocus(true,true)
+				SendNUIMessage({ action = "showMenu" })
+				chestOpen = tostring(k)
 			end
 		end
 	end
