@@ -47,18 +47,14 @@ AddEventHandler("vrp_homes:join",function()
 		local _,i = GetGroundZFor_3dCoord(v["enter"][1],v["enter"][2],v["enter"][3])
 		local distance = Vdist(x,y,z,v["enter"][1],v["enter"][2],i)
 		if distance <= 1.5 and vSERVER.checkPermissions(k) then
-			if vSERVER.checkAuth() then
-				DoScreenFadeOut(1000)
-				TriggerEvent("vrp_sound:source","enterexithouse",0.7)
-				SetTimeout(1400,function()
-					SetEntityCoords(ped,v["exit"][1]+0.0001,v["exit"][2]+0.0001,v["exit"][3]+0.0001-1,1,0,0,1)
-					Citizen.Wait(750)
-					DoScreenFadeIn(1000)
-					houseOpen = tostring(k)
-				end)
-			else
-				TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-			end
+			DoScreenFadeOut(1000)
+			TriggerEvent("vrp_sound:source","enterexithouse",0.7)
+			SetTimeout(1400,function()
+				SetEntityCoords(ped,v["exit"][1]+0.0001,v["exit"][2]+0.0001,v["exit"][3]+0.0001-1,1,0,0,1)
+				Citizen.Wait(750)
+				DoScreenFadeIn(1000)
+				houseOpen = tostring(k)
+			end)
 		end
 	end
 end)
@@ -72,18 +68,14 @@ AddEventHandler("vrp_homes:exit",function()
 		local _,i = GetGroundZFor_3dCoord(v["exit"][1],v["exit"][2],v["exit"][3])
 		local distance = Vdist(x,y,z,v["exit"][1],v["exit"][2],i)
 		if distance <= 1.5 then
-			if vSERVER.checkAuth() then
-				DoScreenFadeOut(1000)
-				TriggerEvent("vrp_sound:source","enterexithouse",0.5)
-				SetTimeout(1300,function()
-					SetEntityCoords(ped,v["enter"][1]+0.0001,v["enter"][2]+0.0001,v["enter"][3]+0.0001-1,1,0,0,1)
-					Citizen.Wait(750)
-					DoScreenFadeIn(1000)
-					houseOpen = ""
-				end)
-			else
-				TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-			end
+			DoScreenFadeOut(1000)
+			TriggerEvent("vrp_sound:source","enterexithouse",0.5)
+			SetTimeout(1300,function()
+				SetEntityCoords(ped,v["enter"][1]+0.0001,v["enter"][2]+0.0001,v["enter"][3]+0.0001-1,1,0,0,1)
+				Citizen.Wait(750)
+				DoScreenFadeIn(1000)
+				houseOpen = ""
+			end)
 		end
 	end
 end)
@@ -97,14 +89,10 @@ AddEventHandler("vrp_homes:chest",function()
 		local _,i = GetGroundZFor_3dCoord(v["vault"][1],v["vault"][2],v["vault"][3])
 		local distance = Vdist(x,y,z,v["vault"][1],v["vault"][2],i)
 		if distance <= 2.0 and vSERVER.checkIntPermissions(k) and not nuser_id then
-			if vSERVER.checkAuth() then
-				TriggerEvent("vrp_sound:source","mochila",0.5)
-				SetNuiFocus(true,true)
-				SendNUIMessage({ action = "showMenu" })
-				houseOpen = tostring(k)
-			else
-				TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-			end
+			TriggerEvent("vrp_sound:source","mochila",0.5)
+			SetNuiFocus(true,true)
+			SendNUIMessage({ action = "showMenu" })
+			houseOpen = tostring(k)
 		end
 	end
 end)

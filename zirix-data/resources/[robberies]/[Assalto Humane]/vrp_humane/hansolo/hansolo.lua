@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
 					if distance <= 1 then
 						drawTxt("Pressione [~r~E~w~] para pegar os ~r~ITENS~w~.",4,0.5,0.92,0.35,255,255,255,180)
 						if IsControlJustPressed(0,38) then
-							if vSERVER.checkAuth() then
+							
 								if k == 1 then
 									if not item1 then
 										item1 = true
@@ -230,9 +230,6 @@ Citizen.CreateThread(function()
 										TriggerEvent("Notify","negado","Armarios vazios.") 
 									end
 								end
-							else
-								TriggerEvent('chatMessage',"[ ZIRAFLIX: "..GetCurrentResourceName().." - Script não autenticado/vazado ]",{255,0,0},"Adquira já o seu em http://www.ziraflix.com")
-							end
 						end
 					end
 				end
