@@ -38,7 +38,8 @@ end)
 
 --[ INVOPEN ]----------------------------------------------------------------------------------------------------------------------------
 
-RegisterCommand('vrp_inventory:openInv', function()
+RegisterNetEvent('vrp_inventory:openInv')
+AddEventHandler('vrp_inventory:openInv',function()
     local ped = PlayerPedId()
     if GetEntityHealth(ped) > 101 and not vRP.isHandcuffed() and not IsPedBeingStunned(ped) and not IsPlayerFreeAiming(ped) then
         if not invOpen then
@@ -55,7 +56,7 @@ RegisterCommand('vrp_inventory:openInv', function()
             TriggerEvent("status:celular",false)
         end
     end
-end, false)
+end)
 
 --[ CLONEPLATES ]------------------------------------------------------------------------------------------------------------------------
 
