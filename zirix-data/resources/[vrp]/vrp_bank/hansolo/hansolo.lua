@@ -42,7 +42,7 @@ if bankMenu then
 				if IsControlJustPressed(1, 47) then
 					CalculateTimeToDisplay()
 					if parseInt(hora) >= 07 and parseInt(hora) <= 17 then
-						bank.giveDebitCard()
+						banK.giveDebitCard()
 					else
 						TriggerEvent("Notify","negado","O funcionamento dos bancos é das <b>07:00</b> às <b>18:00</b>.") 
 					end
