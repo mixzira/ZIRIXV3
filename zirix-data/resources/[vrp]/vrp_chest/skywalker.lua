@@ -16,17 +16,14 @@ function src.checkIntPermissions(perm)
 			if not timer then
 				timer = true
 				if vRP.hasPermission(user_id,config.policePermission) then
-					SetTimeout(3000,function()
-						timer = false
-					end)
 					return true
 				end
 				if vRP.hasPermission(user_id,perm) then
-					SetTimeout(3000,function()
-						timer = false
-					end)
 					return true
 				end
+				SetTimeout(3000,function()
+					timer = false
+				end)
 			end
 		end
 	end
@@ -93,7 +90,7 @@ function src.storeItem(chestName,itemName,amount)
         local source = source
         local user_id = vRP.getUserId(source)
         if user_id then
-			if vRP.storeChestItem(user_id,"chest:"..tostring(chestName),itemName,amount,config.chest[tostring(chestName)].weight,config.chest[tostring(chestName)].slots) then
+			if vRP.storeChestItem(user_id,"chest:"..tostring(chestName),itemName,amount,config.chest[tostring(chestName)].weight,config.chestInfos[tostring(chestName)].slots) then
 				local identity = vRP.getUserIdentity(user_id)
 				TriggerClientEvent("Chest:UpdateChest",source,"updateChest")
 				TriggerClientEvent("itensNotify",source,"sucesso","Guardou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
