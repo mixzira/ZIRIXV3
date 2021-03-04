@@ -81,8 +81,10 @@ function src.buyItem(itemName,amount,shopName)
                                         if vRP.tryPayment(user_id,parseInt(v.itemPrice*amount)) then
                                             vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*amount))
                                             local rows = vRP.query("vRP/get_points",{ name = shopName })
-                                            local resultado = json.encode(rows[1].points)
-
+                                            local resultado = 0
+                                            if #rows > 0 then
+                                                resultado = json.encode(rows[1].points)
+                                            end
                                             local newPoints = resultado + amount
 
                                             vRP.execute("vRP/set_points", { name = shopName, points = newPoints })
@@ -102,7 +104,10 @@ function src.buyItem(itemName,amount,shopName)
                                                 vRP.tryGetInventoryItem(user_id,v.itemRequire,amount)
                                                 vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*amount))
                                                 local rows = vRP.query("vRP/get_points",{ name = shopName })
-                                                local resultado = json.encode(rows[1].points)
+                                                local resultado = 0
+                                                if #rows > 0 then
+                                                    resultado = json.encode(rows[1].points)
+                                                end
     
                                                 local newPoints = resultado + amount
     
@@ -120,7 +125,10 @@ function src.buyItem(itemName,amount,shopName)
                                         if vRP.tryPayment(user_id,parseInt(v.itemPrice*amount)) then
                                             vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*amount))
                                             local rows = vRP.query("vRP/get_points",{ name = shopName })
-                                            local resultado = json.encode(rows[1].points)
+                                            local resultado = 0
+                                            if #rows > 0 then
+                                                resultado = json.encode(rows[1].points)
+                                            end
 
                                             local newPoints = resultado + amount
 

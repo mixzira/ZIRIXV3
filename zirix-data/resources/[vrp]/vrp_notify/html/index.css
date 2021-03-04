@@ -12,8 +12,9 @@ body {
 .theme-text {
 	position: relative;
 	top: 10px;
-	font-size: 10px;
+	font-size: 12px;
 	font-family: 'Montserrat';
+	font-weight: bold;
 	left: 60px;
 	text-transform: uppercase;
 }
@@ -28,11 +29,12 @@ body {
 } */
 
 .mensage {
+	max-width: 300px;
 	margin: 0px;
 	text-align:left;
 	margin-left: 20px;
 	left: 40px;
-	font-size: 10px;
+	font-size: 12px;
 	font-family: 'Montserrat';
 	position: relative;
 	color: rgba(255, 255, 255, 0.589);
