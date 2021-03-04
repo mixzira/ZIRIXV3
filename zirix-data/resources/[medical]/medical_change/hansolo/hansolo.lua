@@ -1,8 +1,9 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
-
-Resg = Tunnel.getInterface("medical_change")
+src = {}
+Tunnel.bindInterface("medical_change",src)
+vSERVER = Tunnel.getInterface("medical_change")
 
 local menuactive = false
 
@@ -37,23 +38,20 @@ Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
 	while true do
 		local idle = 1000
-
 		for k,v in pairs(ponto) do
 			local ped = PlayerPedId()
 			local x,y,z = table.unpack(GetEntityCoords(ped))
 			local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
 			local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
 			local ponto = ponto[k]
-
 			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), ponto.x, ponto.y, ponto.z, true ) < 1.2 then
-				DrawText3D(ponto.x, ponto.y, ponto.z, "Pressione [~g~E~w~] para acessar o ~g~registro de ponto~w~.")
+				DrawText3D(ponto.x, ponto.y, ponto.z, "~g~E~w~ para acessar o ~g~REGISTRO DE PONTO~w~.")
 			end
-			
 			if distance <= 5 then
 				DrawMarker(23,ponto.x,ponto.y,ponto.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
 				idle = 5
 				if distance <= 1.2 then
-					if IsControlJustPressed(0,38) and Resg.checkPermissao() then
+					if IsControlJustPressed(0,38) and vSERVER.checkPermissao() then
 						ToggleActionMenu()
 					end
 				end

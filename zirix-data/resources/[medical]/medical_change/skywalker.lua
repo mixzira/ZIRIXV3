@@ -1,11 +1,12 @@
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
+local Tunnel = module('vrp','lib/Tunnel')
+local Proxy = module('vrp','lib/Proxy')
 local Tools = module("vrp","lib/Tools")
-vRP = Proxy.getInterface("vRP")
-vRPclient = Tunnel.getInterface("vRP")
+vRP = Proxy.getInterface('vRP')
+vRPclient = Tunnel.getInterface('vRP')
 
-Resg = {}
-Tunnel.bindInterface("medical_change",Resg)
+src = {}
+Tunnel.bindInterface('medical_change',src)
+vCLIENT = Tunnel.getInterface('medical_change')
 
 RegisterServerEvent("entrar-servico")
 AddEventHandler("entrar-servico",function()
@@ -31,7 +32,7 @@ AddEventHandler("sair-servico",function()
     end
 end)
 
-function Resg.checkPermissao()
+function src.checkPermissao()
 	local source = source
 	local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"ems.permissao") or vRP.hasPermission(user_id,"paisana-ems.permissao") then
