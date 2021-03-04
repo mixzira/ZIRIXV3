@@ -8,7 +8,28 @@ src = {}
 Tunnel.bindInterface('medical_change',src)
 vCLIENT = Tunnel.getInterface('medical_change')
 
-RegisterServerEvent("entrar-servico")
+function src.enterService()
+    local user_id = vRP.getUserId(source)
+
+    if vRP.hasPermission(user_id,"ems.permissao") then
+        TriggerClientEvent("Notify",source,"negado","Você já está em serviço.")
+    else
+        vRP.addUserGroup(user_id,"ems")
+        TriggerClientEvent("Notify",source,"sucesso","Você entrou em serviço.")
+    end
+end
+
+function src.exitService()
+    local user_id = vRP.getUserId(source)
+
+    if vRP.hasPermission(user_id,"paisana-ems.permissao") then
+        TriggerClientEvent("Notify",source,"negado","Você já está fora de serviço.")
+    else
+        vRP.addUserGroup(user_id,"paisana-ems")
+        TriggerClientEvent("Notify",source,"sucesso","Você saiu de serviço.")
+    end
+end
+--[[RegisterServerEvent("entrar-servico")
 AddEventHandler("entrar-servico",function()
     local user_id = vRP.getUserId(source)
 
@@ -30,7 +51,7 @@ AddEventHandler("sair-servico",function()
         vRP.addUserGroup(user_id,"paisana-ems")
         TriggerClientEvent("Notify",source,"sucesso","Você saiu de serviço.")
     end
-end)
+end)--]]
 
 function src.checkPermissao()
 	local source = source

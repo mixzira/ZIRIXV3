@@ -20,10 +20,10 @@ end
 
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "entrar-servico" then
-		TriggerServerEvent("entrar-servico")
+		vSERVER.enterService()
 	
 	elseif data == "sair-servico" then
-		TriggerServerEvent("sair-servico")
+		vSERVER.exitService()
 
 	elseif data == "fechar" then
 		ToggleActionMenu()
