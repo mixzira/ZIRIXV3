@@ -227,7 +227,7 @@ function vRP.dropPlayer(source)
 		if user_id and source then
 			local identity = vRP.getUserIdentity(user_id)
 			TriggerEvent("vRP:playerLeave",user_id,source)
-			PerformHttpRequest(base.exit, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE SAIDA:\n⠀",thumbnail = {url = base.icon}, fields = {{name = "[ ID: **"..user_id.."** ][ IP: **"..GetPlayerEndpoint(source).."** ]", value = "⠀\n⠀"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
+			PerformHttpRequest(base.exit, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE SAIDA:\n⠀",thumbnail = {url = base.icon}, fields = {{name = "[ ID: **"..user_id.."** ][ IP: **"..vRP.getPlayerEndpoint(source).."** ]", value = "⠀\n⠀"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
 			if vRP.hasGroup(user_id,"policia") then
 				vRP.addUserGroup(user_id,"paisana-policia")
 				PerformHttpRequest(base.recordPolice, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = identity.name.." saiu de serviço.", description = "Registro de Ponto do Departamento de Polícia de Los Anjos. Registro de saída de serviço.\n⠀", thumbnail = {url = base.icon}, fields = {{name = "**IDENTIFICAÇÃO DO COLABORADOR:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}}, footer = {text = base.bottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = base.icon}, color = base.color}}}), { ['Content-Type'] = 'application/json' })
