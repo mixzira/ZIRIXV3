@@ -313,7 +313,6 @@ end)
 
 RegisterNetEvent("notallowArmour")
 AddEventHandler("notallowArmour",function()
-    print("foi")
     armour = true
 end)
 
