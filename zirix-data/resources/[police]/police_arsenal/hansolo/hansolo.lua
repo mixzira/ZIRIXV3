@@ -100,6 +100,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		
 	elseif data == "onarmor" then
 		if vRPex.checkPermission(config.vest) then
+			SetPedArmour(ped,100)
 			TriggerServerEvent('flix:onarmor')
 		else
 			TriggerEvent("Notify","negado","Você precisa entrar em serviço para pegar qualquer equipamento do arsenal.",9000)
@@ -107,6 +108,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		
 	elseif data == "offarmor" then
 		TriggerServerEvent('flix:offarmor')
+		SetPedArmour(ped,0)
 	
 	elseif data == "close" then
 		ToggleActionMenu()
