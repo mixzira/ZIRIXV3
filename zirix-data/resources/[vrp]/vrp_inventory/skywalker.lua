@@ -1277,6 +1277,7 @@ RegisterCommand('garmas',function(source,args,rawCommand)
 	end)
 end)
 
+--[[
 RegisterCommand('gcolete',function(source,args,rawCommand)
 	local source = source
 	local user_id = vRP.getUserId(source)
@@ -1301,7 +1302,33 @@ RegisterCommand('gcolete',function(source,args,rawCommand)
 			TriggerClientEvent("itensNotify",source,'use',"Desequipou","Colete")
 		end)
 	end
-end)
+end)--]]
+
+function vRPN.armourOff()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	local identity = vRP.getUserIdentity(user_id)
+	local rtime = math.random(3,5)
+
+	if vRPclient.getArmour(source) <= 99 then
+		TriggerClientEvent("Notify",source,"negado","Você não pode desequipar um <b>colete danificado</b>.")
+	else
+		if vRP.getInventoryWeight(user_id)+vRP.getItemWeight("colete") <= vRP.getInventoryMaxWeight(user_id) then
+			TriggerClientEvent("notallowArmour",source)
+			TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando seu colete.",9000)
+			TriggerClientEvent("progress",source,1000*rtime,"guardando")
+			SetTimeout(1000*rtime,function()
+				PerformHttpRequest(config.webhookUnequip, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE ITEM DESEQUIPADO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{ name = "**QUEM DESEQUIPOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM DESEQUIPADO:**", value = "[ **Item: Colete** ][ **Quantidade: 1** ]"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
+				vRP.giveInventoryItem(user_id,"colete",1)
+			end)
+			SetTimeout(1000*rtime+2000, function()
+				TriggerClientEvent("allowArmour",source)
+			end)
+		else
+			TriggerClientEvent("Notify",source,"negado","Espaço insuficiente na mochila.")
+		end
+	end
+end
 
 function vRPN.unEquip()
 	local source = source

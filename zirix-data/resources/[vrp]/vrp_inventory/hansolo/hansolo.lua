@@ -9,6 +9,7 @@ vRPNserver = Tunnel.getInterface("vrp_inventory")
 vRPC = {}
 Tunnel.bindInterface("vrp_inventory",vRPC)
 Proxy.addInterface("vrp_inventory",vRPC)
+armour = false
 
 --[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
@@ -294,3 +295,26 @@ AddEventHandler("inventory:checkDrunk",function()
 
     end
 end)
+
+RegisterCommand('gcolete',function(source,args,rawCommand)
+
+	if not armour then
+		vRPNserver.armourOff()
+	else
+		TriggerEvent("Notify","negado","Você já está desequipando um colete.",9000)
+	end
+end)
+
+RegisterNetEvent("allowArmour")
+AddEventHandler("allowArmour",function()
+    armour = false
+    SetPedArmour(PlayerPedId(), 0)
+end)
+
+RegisterNetEvent("notallowArmour")
+AddEventHandler("notallowArmour",function()
+    print("foi")
+    armour = true
+end)
+
+
