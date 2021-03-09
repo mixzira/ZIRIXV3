@@ -30,6 +30,10 @@ RegisterCommand(config.fines,function(source,args,rawCommand)
 			end
 		elseif args[1] == config.pay then
 			local valorpay = vRP.prompt(source,"Saldo de multas: $"..multas.." - Valor de multas a pagar:","")
+			if string.len(valorpay) >= 20 or parseInt(valorpay) < 0 then
+				TriggerClientEvent("Notify",source,"negado","Valor inválido",8000)
+				return
+			end
 			if bank >= parseInt(valorpay) then
 				if parseInt(valorpay) <= parseInt(multas) then
 					vRP.setBankMoney(user_id,parseInt(bank-valorpay))
