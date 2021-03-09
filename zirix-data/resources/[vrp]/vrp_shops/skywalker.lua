@@ -81,8 +81,10 @@ function src.buyItem(itemName,amount,shopName)
                                         if vRP.tryPayment(user_id,parseInt(v.itemPrice*amount)) then
                                             vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*amount))
                                             local rows = vRP.query("vRP/get_points",{ name = shopName })
-                                            local resultado = json.encode(rows[1].points)
-
+                                            local resultado = 0
+                                            if #rows > 0 then
+                                                resultado = json.encode(rows[1].points)
+                                            end
                                             local newPoints = resultado + amount
 
                                             vRP.execute("vRP/set_points", { name = shopName, points = newPoints })
@@ -102,8 +104,10 @@ function src.buyItem(itemName,amount,shopName)
                                                 vRP.tryGetInventoryItem(user_id,v.itemRequire,amount)
                                                 vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*amount))
                                                 local rows = vRP.query("vRP/get_points",{ name = shopName })
-                                                local resultado = json.encode(rows[1].points)
-    
+                                                local resultado = 0
+                                                if #rows > 0 then
+                                                    resultado = json.encode(rows[1].points)
+                                                end
                                                 local newPoints = resultado + amount
     
                                                 vRP.execute("vRP/set_points", { name = shopName, points = newPoints })
@@ -120,8 +124,10 @@ function src.buyItem(itemName,amount,shopName)
                                         if vRP.tryPayment(user_id,parseInt(v.itemPrice*amount)) then
                                             vRP.giveInventoryItem(user_id,v.itemName,parseInt(v.itemAmount*amount))
                                             local rows = vRP.query("vRP/get_points",{ name = shopName })
-                                            local resultado = json.encode(rows[1].points)
-
+                                            local resultado = 0
+                                            if #rows > 0 then
+                                                resultado = json.encode(rows[1].points)
+                                            end
                                             local newPoints = resultado + amount
 
                                             vRP.execute("vRP/set_points", { name = shopName, points = newPoints })
@@ -167,7 +173,7 @@ function src.sellItem(itemName,amount,shopName)
                                     TriggerClientEvent("itensNotify",source,"sucesso","Vendeu",""..vRP.itemIndexList(v.itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(amount)).."")
                                     TriggerClientEvent("itensNotify",source,"sucesso","Recebeu",""..vRP.itemIndexList("dinheiro").."",""..vRP.format(parseInt(v.saleValue*amount)).."",""..vRP.format(vRP.getItemWeight(v.itemName)*parseInt(amount)).."")
                                     TriggerClientEvent('vrp_shops:Update',source,'updateShop')
-                                    PerformHttpRequest(config.webhook, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE LOJA:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM VENDEU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM VENDIDO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ][ **Quantidade: "..parseInt(amount).."** ][ **Valor: " ..parseInt(v.saleValue)"** ]\n⠀⠀"}, {name = "**LOJA:**", value = "[ **"..nShop.."** ]\n⠀⠀"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
+                                    PerformHttpRequest(config.webhook, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE LOJA:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM VENDEU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM VENDIDO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ][ **Quantidade: "..parseInt(amount).."** ][ **Valor: " ..parseInt(v.saleValue).."** ]\n⠀⠀"}, {name = "**LOJA:**", value = "[ **"..nShop.."** ]\n⠀⠀"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
                                 else
                                     TriggerClientEvent("Notify",source,"negado","Você precisa de <b>"..amount.."x "..v.itemName.."</b>.")
                                 end
