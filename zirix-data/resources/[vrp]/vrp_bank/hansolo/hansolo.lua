@@ -12,6 +12,7 @@ local atbank = false
 local bankMenu	= true
 local blip = nil
 local hora = 0	
+local cx,cy,cz = 0,0,0
 
 function CalculateTimeToDisplay()
 	hora = GetClockHours()
@@ -210,12 +211,20 @@ AddEventHandler("iniciandocaixaeletronico",function(x,y,z,secs,head)
 	andamento = true
 	SetEntityHeading(PlayerPedId(),head)
 	SetEntityCoords(PlayerPedId(),x,y,z-1,false,false,false,false)
+	cx,cy,cz = x,y,z
 	TriggerEvent('cancelando',true)
 end)
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
+		if andamento and GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), cx,cy,cz, true) > 2 then
+			andamento = false
+			ClearPedTasks(PlayerPedId())
+			banK.cancelRobbery()
+			banK.robberywebwook()
+			TriggerEvent('cancelando',false)
+		end
 		if andamento then
 			segundos = segundos - 1
 			if segundos <= 0 then
