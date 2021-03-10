@@ -73,7 +73,7 @@ end)
 
 function src.getDiagnostic()
 	for k,v in pairs(damaged) do
-		print(".")
+		
 	end	
 	return damaged
 end
@@ -137,7 +137,7 @@ AddEventHandler("resetWarfarina",function()
 	until bleeding <= 0
 		TriggerEvent("Notify","importante","Sangramento paralisado.",8000)
 end)
-
+local tratamento2 = false
 Citizen.CreateThread(function()
 	while true do
 		local idle = 1000
@@ -147,7 +147,6 @@ Citizen.CreateThread(function()
 			local x,y,z = table.unpack(GetEntityCoords(ped))
 			local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
 			local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
-
 			if distance <= 1.1 then
 				drawTxt("~g~E~w~  DEITAR    ~g~G~w~  TRATAMENTO",4,0.5,0.93,0.50,255,255,255,180)
 				idle = 5
@@ -159,6 +158,7 @@ Citizen.CreateThread(function()
 				end
 				if IsControlJustPressed(0,47) then
 					if vSERVER.checkServices() then
+						TriggerEvent('cancelando',true)
 						TriggerEvent('tratamento-macas')
 						TriggerEvent('resetDiagnostic')
 						TriggerEvent('resetWarfarina')
@@ -177,7 +177,6 @@ end)
 
 RegisterNetEvent('tratamento-macas')
 AddEventHandler('tratamento-macas',function()
-	TriggerEvent("cancelando",true)
 	repeat
 		SetEntityHealth(PlayerPedId(),GetEntityHealth(PlayerPedId())+1)
 		Citizen.Wait(900)

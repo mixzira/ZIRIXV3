@@ -1589,11 +1589,11 @@ RegisterCommand("vip", function(source,args)
 end)
 
 RegisterCommand('bvida',function(source,rawCommand)
-	if not vRP.getCancelando() then
+	if not vRPclient.getCancelando(source) then
 		local user_id = vRP.getUserId(source)		
 		vRPclient._setCustomization(source,vRPclient.getCustomization(source))
 		vRP.removeCloak(source)	
 	else
-		TriggerClientEvent("Notify", "negado", "Você não pode dar bvida pois está em tratamento")
+		TriggerClientEvent("Notify", source,"negado", "Você não pode dar bvida pois está em tratamento")
 	end		
 end)
