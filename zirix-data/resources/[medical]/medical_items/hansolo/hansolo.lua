@@ -38,7 +38,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 local lojas = {
-	{ ['x'] = 342.23, ['y'] = -586.48, ['z'] = 43.32 },
+	{ ['x'] = -443.37, ['y'] = -310.54, ['z'] = 34.92 },
 }
 
 Citizen.CreateThread(function()
