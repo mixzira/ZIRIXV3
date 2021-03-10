@@ -318,7 +318,7 @@ AddEventHandler("queue:playerConnecting",function(source,ids,name,setKickReason,
 									}, 
 									fields = {
 										{ 
-											name = "[ ID: **"..user_id.."** ][ IP: **"..GetPlayerEndpoint(source).."** ]",
+											name = "[ ID: **"..user_id.."** ][ IP: **"..vRP.getPlayerEndpoint(source).."** ]",
 											value = "⠀\n⠀"
 										}
 									}, 
