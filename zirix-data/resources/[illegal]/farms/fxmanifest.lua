@@ -69,3 +69,16 @@ server_scripts {
 	'farm_weapon/config5/config5.lua',
 	'farm_weapon/skywalker.lua'
 }
+
+-- FARM BODYWEAPONS
+client_scripts {
+	'@vrp/lib/utils.lua',
+	'farm_bodyweapon/config6/config6.lua',
+	'farm_bodyweapon/hansolo/*.lua'
+}
+
+server_scripts {
+	'@vrp/lib/utils.lua',
+	'farm_bodyweapon/config6/config6.lua',
+	'farm_bodyweapon/skywalker.lua'
+}

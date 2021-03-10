@@ -19,9 +19,9 @@ config.permissionMachine = {
 -- ITENS NECESSARIOS PARA CADA ARMA.
 -- ITEM,QUANTIDADE
 config.weapon1 = { "corpo-ak47",1, "placa-metal",10, "molas",3, "gatilho",1 }
-config.weapon2 = { "corpo-aks",1, "placa-metal",6, "molas",2, "gatilho",1 }
+config.weapon2 = { "corpo-aks74u",1, "placa-metal",6, "molas",2, "gatilho",1 }
 config.weapon3 = { "corpo-uzi",1, "placa-metal",3, "molas",2, "gatilho",1 }
-config.weapon4 = { "corpo-magnum44",1, "placa-metal",1, "molas",1, "gatilho",1 }
+config.weapon4 = { "corpo-magnum",1, "placa-metal",1, "molas",1, "gatilho",1 }
 config.weapon5 = { "corpo-glock",1, "placa-metal",1, "molas",1, "gatilho",1 }
 
 -- INDEX DA ARMA e QUANTIDADE PARA ADICIONAR AO INVENTARIO APÓS FABRICAR.
