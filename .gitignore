@@ -9,3 +9,5 @@ zirix-data/resources/[system]/[builders]/yarn/**/*
 zirix-data/resources/[system]/[builders]/yarn/*
 zirix-data/resources/[system]/screenshot-basic/**/*
 zirix-data/resources/[system]/screenshot-basic/*
+zirix-data/resources/[naoenviar]/**/*
+zirix-data/resources/[naoenviar]/*
