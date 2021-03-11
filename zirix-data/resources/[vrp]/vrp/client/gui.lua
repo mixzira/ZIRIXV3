@@ -51,6 +51,7 @@ end
 RegisterNetEvent('cancelando')
 AddEventHandler('cancelando',function(status)
     cancelando = status
+	
 end)
 
 Citizen.CreateThread(function()

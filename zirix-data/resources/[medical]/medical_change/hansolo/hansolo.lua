@@ -31,7 +31,7 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 end)
 
 local ponto = {
-	{ ['x'] = 308.72, ['y'] = -597.0, ['z'] = 43.3 }
+	{ ['x'] = -435.29, ['y'] = -324.04, ['z'] = 34.92 }
 }
 
 Citizen.CreateThread(function()
