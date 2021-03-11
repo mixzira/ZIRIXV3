@@ -44,6 +44,10 @@ function tvRP.getAgachar()
     return agachar
 end	
 
+function tvRP.getCancelando()
+	return cancelando
+end
+
 RegisterNetEvent('cancelando')
 AddEventHandler('cancelando',function(status)
     cancelando = status
