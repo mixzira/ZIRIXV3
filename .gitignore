@@ -2,6 +2,7 @@ build/*
 build/**/*
 zirix-data/cache/**/*
 zirix-data/cache/*
+zirix-data/config/int.cfg
 zirix-data/resources/[system]/[builders]/webpack/**/*
 zirix-data/resources/[system]/[builders]/webpack/*
 zirix-data/resources/[system]/[builders]/yarn/**/*
