@@ -16,14 +16,17 @@ function src.checkIntPermissions(perm)
 			if not timer then
 				timer = true
 				if vRP.hasPermission(user_id,config.policePermission) then
+					SetTimeout(3000,function()
+						timer = false
+					end)
 					return true
 				end
 				if vRP.hasPermission(user_id,perm) then
+					SetTimeout(3000,function()
+						timer = false
+					end)
 					return true
 				end
-				SetTimeout(3000,function()
-					timer = false
-				end)
 			end
 		end
 	end

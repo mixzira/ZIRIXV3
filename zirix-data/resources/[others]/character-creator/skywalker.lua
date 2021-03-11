@@ -42,6 +42,9 @@ AddEventHandler("character-creator:finishedCharacter",function(characterNome,cha
 		end
 
 		vRP.execute("vRP/update_user_first_spawn",{ user_id = user_id, firstname = characterSobrenome, name = characterNome, age = characterIdade })
+		if vRP.getInventoryItemAmount(user_id,"passaporte") <= 0 then
+			vRP.giveInventoryItem(user_id,"passaporte",1)
+		end
 		doSpawnPlayer(source,user_id,true)
 	end
 end)
