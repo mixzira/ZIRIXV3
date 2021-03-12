@@ -70,7 +70,7 @@ function src.openChest(chestName)
 				end
 			end
 		end
-		return hsinventory,myinventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id),vRP.computeItemsWeight(result),parseInt(config.chest[tostring(chestName)][1]),parseInt(tSlot),parseInt(tcSlot)
+		return hsinventory,myinventory,vRP.getInventoryWeight(user_id),vRP.getInventoryMaxWeight(user_id),vRP.computeItemsWeight(result),parseInt(config.chest[tostring(chestName)].weight),parseInt(tSlot),parseInt(tcSlot)
 	end
 	return false
 end
