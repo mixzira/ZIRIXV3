@@ -93,7 +93,7 @@ function src.storeItem(chestName,itemName,amount)
         local source = source
         local user_id = vRP.getUserId(source)
         if user_id then
-			if vRP.storeChestItem(user_id,"chest:"..tostring(chestName),itemName,amount,config.chest[tostring(chestName)].weight,config.chestInfos[tostring(chestName)].slots) then
+			if vRP.storeChestItem(user_id,"chest:"..tostring(chestName),itemName,amount,config.chest[tostring(chestName)].weight,config.chest[tostring(chestName)].slots) then
 				local identity = vRP.getUserIdentity(user_id)
 				TriggerClientEvent("Chest:UpdateChest",source,"updateChest")
 				TriggerClientEvent("itensNotify",source,"sucesso","Guardou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
