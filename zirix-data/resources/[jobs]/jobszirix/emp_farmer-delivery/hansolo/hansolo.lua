@@ -4,7 +4,7 @@ vRP = Proxy.getInterface("vRP")
 
 --[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
 
-emp3 = Tunnel.getInterface("vrp_farmer-delivery")
+empfarmer = Tunnel.getInterface("vrp_farmer-delivery")
 
 --[ VARIABLES ]-----------------------------------------------------------------------------------------------------------------
 
@@ -39,8 +39,8 @@ Citizen.CreateThread(function()
 				if distance <= 1.2 then
 					drawTexts("PRESSIONE  ~b~E~w~  PARA INICIAR ENTREGAS",4,0.5,0.92,0.35,255,255,255,180)
 					if IsControlJustPressed(1,38) then
-						if lastVehicle == configfarmerd.lastve and emp3.checkPlate(lastVehicle) then
-							if emp3.checkCrimeRecord() then
+						if lastVehicle == configfarmerd.lastve and empfarmer.checkPlate(lastVehicle) then
+							if empfarmer.checkCrimeRecord() then
 								if not working then
 									CalculateTimeToDisplay3()
 									if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
@@ -82,11 +82,11 @@ Citizen.CreateThread(function()
 					DrawMarker(21,configfarmerd.deliverys[check][1],configfarmerd.deliverys[check][2],configfarmerd.deliverys[check][3]-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,136, 96, 240, 180,0,0,0,1)
 					if distance <= 1.2 then
 						drawTexts("PRESSIONE  ~b~E~w~  PARA ENTREGAR GRAOS",4,0.5,0.93,0.50,255,255,255,180)
-						if IsControlJustPressed(1,38) and lastVehicle == 1026149675 and emp3.checkPlate(lastVehicle) and emp3.checkCrimeRecord() then
+						if IsControlJustPressed(1,38) and lastVehicle == 1026149675 and empfarmer.checkPlate(lastVehicle) and empfarmer.checkCrimeRecord() then
 							
 							CalculateTimeToDisplay3()
 							if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
-								if emp3.startPayments() then
+								if empfarmer.startPayments() then
 									RemoveBlip(blips)
 									check = math.random(#configfarmerd.deliverys)
 									makeBlipsServices2()

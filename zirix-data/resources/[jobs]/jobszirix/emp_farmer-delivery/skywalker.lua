@@ -5,8 +5,8 @@ vRPclient = Tunnel.getInterface("vRP")
 
 --[ CONNECTION ]----------------------------------------------------------------------------------------------------------------
 
-emp3 = {}
-Tunnel.bindInterface("vrp_farmer-delivery",emp3)
+empfarmer = {}
+Tunnel.bindInterface("vrp_farmer-delivery",empfarmer)
 
 --[ VARIABLES ]-----------------------------------------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ local amount = {}
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
-function emp3.startPayments()
+function empfarmer.startPayments()
 	local source = source
 
 	if amount[source] == nil then
@@ -44,7 +44,7 @@ end
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
-function emp3.checkPlate(modelo)
+function empfarmer.checkPlate(modelo)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	local veh,vhash,vplaca,vname = vRPclient.vehListHash(source,4)
@@ -61,7 +61,7 @@ end
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
-function emp3.checkCrimeRecord()
+function empfarmer.checkCrimeRecord()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
