@@ -15,7 +15,7 @@ local hour = 0
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
-function CalculateTimeToDisplay3()
+function CalculateTimeToDisplay()
 	hour = GetClockHours()
 	if hour <= 9 then
 		hour = "0" .. hour
@@ -40,11 +40,11 @@ Citizen.CreateThread(function()
 					drawTexts("PRESSIONE  ~b~E~w~  PARA INICIAR ENTREGAS",4,0.5,0.92,0.35,255,255,255,180)
 					if IsControlJustPressed(1,38) and lastVehicle == configmilkmand.lastve and emp3.checkPlate(lastVehicle) and emp3.checkCrimeRecord() then
 						if not working then
-							CalculateTimeToDisplay3()
+							CalculateTimeToDisplay()
 							if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
 								working = true
 								check = math.random(#configmilkmand.deliverys)
-								makeBlipsServices2()
+								makeBlipsServicesMilk()
 								TriggerEvent("Notify","sucesso","Entregas iniciada com <b>sucesso</b>.",8000)
 							else
 								TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
@@ -76,12 +76,12 @@ Citizen.CreateThread(function()
 						drawTexts("PRESSIONE  ~b~E~w~  PARA ENTREGAR GARRAFAS DE LEITE",4,0.5,0.93,0.50,255,255,255,180)
 						if IsControlJustPressed(1,38) and lastVehicle == 1026149675 and emp3.checkPlate(lastVehicle) and emp3.checkCrimeRecord() then
 							
-							CalculateTimeToDisplay3()
+							CalculateTimeToDisplay()
 							if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
 								if emp3.startPayments() then
 									RemoveBlip(blips)
 									check = math.random(#configmilkmand.deliverys)
-									makeBlipsServices2()
+									makeBlipsServicesMilk()
 								end
 							else
 								TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
@@ -121,7 +121,7 @@ function drawTexts(text,font,x,y,scale,r,g,b,a)
 	DrawText(x,y)
 end
 
-function makeBlipsServices2()
+function makeBlipsServicesMilk()
 	blips = AddBlipForCoord(configmilkmand.deliverys[check][1],configmilkmand.deliverys[check][2],configmilkmand.deliverys[check][3])
 	SetBlipSprite(blips,1)
 	SetBlipColour(blips,27)

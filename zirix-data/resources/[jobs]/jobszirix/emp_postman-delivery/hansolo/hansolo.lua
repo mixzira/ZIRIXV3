@@ -15,7 +15,7 @@ local time = 0
 
 --[ TIME | FUNCTION ]-----------------------------------------------------------------------------------------------------------
 
-function CalculateTimeToDisplay()
+function CalculateTimeToDisplays()
 	time = GetClockHours()
 	if time <= 9 then
 		time = "0" .. time
@@ -41,7 +41,7 @@ Citizen.CreateThread(function()
 					end
 					if IsControlJustPressed(1,38) and emp5.checkCrimeRecord() and not inService then
 						if lastVehicle == config.postmanveh and emp5.checkPlate(lastVehicle) then
-							CalculateTimeToDisplay()
+							CalculateTimeToDisplays()
 							if parseInt(time) >= 06 and parseInt(time) <= 22 then
 								inService = true
 								check = math.random(#config.postmandeliverys)
@@ -81,7 +81,7 @@ Citizen.CreateThread(function()
 						end
 						if IsControlJustPressed(1,38) then
 							if lastVehicle == -233098306 and emp5.checkPlate(lastVehicle) then
-								CalculateTimeToDisplay()
+								CalculateTimeToDisplays()
 								if parseInt(time) >= 06 and parseInt(time) <= 20 then
 									if emp5.startPayments() then
 										RemoveBlip(blips)
