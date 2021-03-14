@@ -1207,7 +1207,7 @@ function vRPN.useItem(itemName,type,ramount)
 				local identity = vRP.getUserIdentity(user_id)
 				
 				weapons[string.gsub(itemName,"wbody","")] = { ammo = 0 }
-				print(weapons)
+				--print(weapons)
 				vRPclient._giveWeapons(source,weapons)
 				PerformHttpRequest(config.webhookEquip, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE ITEM EQUIPADO:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM EQUIPOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM EQUIPADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ]"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
 				TriggerClientEvent("itensNotify",source,'use',"Equipou",""..vRP.itemIndexList(itemName).."")
@@ -1218,7 +1218,7 @@ function vRPN.useItem(itemName,type,ramount)
 			local uweapons = vRPclient.getWeapons(source)
       		local weaponuse = string.gsub(itemName,"wammo","")
 			local weaponusename = "wammo"..weaponuse
-			print(weaponuse)
+			--print(weaponuse)
 			local identity = vRP.getUserIdentity(user_id)
       		if uweapons[weaponuse] then
         		local itemAmount = 0
