@@ -156,7 +156,7 @@ Citizen.CreateThread(function()
 			end
 
 			if IsEntityAVehicle(vehicle) and DoesEntityExist(passageiro) then
-				if math.ceil(vehiclespeed) >= 110 and timers <= 0 and payment > 0 then
+				if math.ceil(vehiclespeed) >= configtaxi.maxvel and timers <= 0 and payment > 0 then
 					timers = 5
 					payment = payment - 1
 				end
