@@ -27,6 +27,7 @@ function src.checkIntPermissions(perm)
 					end)
 					return true
 				end
+				timer = false
 			end
 		end
 	end
