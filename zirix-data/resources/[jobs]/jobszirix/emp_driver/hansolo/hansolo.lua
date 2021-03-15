@@ -100,12 +100,16 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5)
-		if emservico and IsControlJustPressed(1,121) then
-			emservico = false
-			RemoveBlip(blip)
-			TriggerEvent("Notify","importante","Você saiu de serviço",8000)
+		local idle=1000
+		if emservico then
+			idle=5
+			if IsControlJustPressed(0,168) then
+					emservico = false
+					RemoveBlip(blip)
+					TriggerEvent("Notify","importante","Você saiu de serviço.",8000)
+			end
 		end
+		Citizen.Wait(idle)
 	end
 end)
 

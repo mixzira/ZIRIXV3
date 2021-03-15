@@ -196,7 +196,6 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if not IsEntityInWater(ped) then
 			if GetEntityHealth(ped) <= 199 then
-				idle = 5
 				setHurt()
 			elseif hurt and GetEntityHealth(ped) > 200 then
 				setNotHurt()
@@ -227,7 +226,7 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(100)
+        Citizen.Wait(1000)
         if bunnyhop > 0 then
             bunnyhop = bunnyhop - 5
         end
@@ -302,7 +301,7 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		
 		if IsEntityInWater(ped) then
-			idle = 100
+			--idle = 100
 			if IsPedSwimming(ped) and not IsPedSwimmingUnderWater(ped) then
 				misc.damageItem()
 			end
