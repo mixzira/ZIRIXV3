@@ -369,6 +369,8 @@ local garages = {
 
 	[623] = { ['name'] = "Caminhoneiro", ['payment'] = false, ['public'] = true },
 	[624] = { ['name'] = "Farmer", ['payment'] = false, ['public'] = true },
+	[625] = { ['name'] = "Motorista", ['payment'] = false, ['public'] = true },
+
 }
 
 --[ GARAGEMS ]---------------------------------------------------------------------------------------------------------------------------
@@ -418,6 +420,10 @@ local workgarage = {
 	["Farmer"] = {
 		"tractor2",
 		"youga2"
+	},
+	["Motorista"] = {
+		"coach",
+		"bus"
 	}
 }
 
