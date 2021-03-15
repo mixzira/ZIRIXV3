@@ -16,6 +16,8 @@ local wood = false
 local gas = false
 local criado = false
 local servehicle = nil
+local entrega = 0
+local pay = 0
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
@@ -52,11 +54,14 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		else
 			for k,v in pairs(configtrucker.trailer) do
 				if k == 1 then
-				TriggerEvent("Notify","sucesso","Carga de <b>Combustível</b> liberada.")
-				spawnVehicle("tanker2",v.x,v.y,v.z)
-				servehicle = 1956216962
-				emservico = true
-				gas = true
+					TriggerEvent("Notify","sucesso","Carga de <b>Combustível</b> liberada.")
+					spawnVehicle("tanker2",v.x,v.y,v.z)
+					servehicle = 1956216962
+					emservico = true
+					gas = true
+					entrega = 1
+					pay = configtrucker.routegas[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -71,6 +76,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = 1956216962
 					emservico = true
 					gas = true
+					entrega = 2
+					pay = configtrucker.routegas[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -85,6 +93,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = 1956216962
 					emservico = true
 					gas = true
+					entrega = 3
+					pay = configtrucker.routegas[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -99,6 +110,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					emservico = true
 					TriggerEvent("Notify","sucesso","Carga de <b>Madeiras</b> liberada.")
 					wood = true
+					entrega = 1
+					pay = configtrucker.routewood[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -113,6 +127,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					emservico = true
 					TriggerEvent("Notify","sucesso","Carga de <b>Madeiras</b> liberada.")
 					wood = true
+					entrega = 2
+					pay = configtrucker.routewood[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -127,6 +144,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					emservico = true
 					TriggerEvent("Notify","sucesso","Carga de <b>Madeiras</b> liberada.")
 					wood = true
+					entrega = 3
+					pay = configtrucker.routewood[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -156,11 +176,11 @@ Citizen.CreateThread(function()
 							if IsControlJustPressed(1,38) then
 								CalculateTimeToDisplay6()
                                 --if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
-                                    if lastVehicle == GetHashKey(configtrucker.truck) or lastVehicle == GetHashKey(configtrucker.truck1) then
+                                    --if lastVehicle == GetHashKey(configtrucker.truck) or lastVehicle == GetHashKey(configtrucker.truck1) then
 										ToggleActionMenu()
-									else
-                                        TriggerEvent("Notify","importante","Necessario um caminhao para iniciar.",8000)
-                                    end
+									--else
+                                     --   TriggerEvent("Notify","importante","Necessario um caminhao para iniciar.",8000)
+                                    --end
 								--else
 									--TriggerEvent("Notify","importante","Funcionamento é das <b>06:00</b> as <b>20:00</b>.",8000)
 								--end
@@ -180,8 +200,6 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if gas then
 			if emservico then
-				local entrega = math.random(#configtrucker.routegas)
-				local pay = configtrucker.routegas[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
 				local bowz,cdz = GetGroundZFor_3dCoord(configtrucker.routegas[entrega].x, configtrucker.routegas[entrega].y, configtrucker.routegas[entrega].z)
 				local distance = GetDistanceBetweenCoords(GetEntityCoords(ped),configtrucker.routegas[entrega].x,configtrucker.routegas[entrega].y,configtrucker.routegas[entrega].z,true)
@@ -201,7 +219,8 @@ Citizen.CreateThread(function()
 									emp15.checkPaymentGas(pay)
 									RemoveBlip(blip)
 									emservico = false
-									criado = false	
+									criado = false
+									gas = false	
 								end
 							else	
 								TriggerEvent("Notify","importante","Saia do caminhao e vá ao lado da carga para entregar.",8000)					
@@ -221,8 +240,6 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if wood then
 			if emservico then
-				local entrega = math.random(#configtrucker.routewood)
-				local pay = configtrucker.routewood[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
 				local bowz,cdz = GetGroundZFor_3dCoord(configtrucker.routewood[entrega].x, configtrucker.routewood[entrega].y, configtrucker.routewood[entrega].z)
 				local distance = GetDistanceBetweenCoords(configtrucker.routewood[entrega].x, configtrucker.routewood[entrega].y, configtrucker.routewood[entrega].z,cdz,x,y,z,true)
@@ -242,6 +259,7 @@ Citizen.CreateThread(function()
 								RemoveBlip(blip)
 								emservico = false
 								criado = false	
+								wood = false
 							end
 						else	
 							TriggerEvent("Notify","importante","Saia do caminhao e vá ao lado da carga para entregar.",8000)					
@@ -259,17 +277,19 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5)
-		if IsControlJustPressed(0,168) then
-			if emservico then
-				emservico = false
-				RemoveBlip(blip)
-				TriggerEvent("Notify","importante","Você cancelou o serviço.",8000)
-				wood = false
-				gas = false
-				criado = false
+		local idle=1000
+		if emservico then
+			idle=5
+			if IsControlJustPressed(0,168) then
+					emservico = false
+					RemoveBlip(blip)
+					TriggerEvent("Notify","importante","Você cancelou o serviço.",8000)
+					wood = false
+					gas = false
+					criado = false
 			end
 		end
+		Citizen.Wait(idle)
 	end
 end)
 
