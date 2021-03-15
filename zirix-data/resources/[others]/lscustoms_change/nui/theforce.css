@@ -1,0 +1,46 @@
+div { border: 0; outline: 0; vertical-align: baseline; background: transparent; margin: 0; padding: 0; }
+:focus { outline: 0; }
+::selection { background: transparent; }
+
+#actionmenu {
+	top: 50%;
+	left: 50%;
+	display: none;
+	position: fixed;
+	transform: translate(-50%,-50%);
+}
+
+#actionmenu button {
+	background: rgba(20,20,20,0.95);
+	width: 250px;
+	height: 40px;
+	border: 0;
+	color: #fff;
+	display: block;
+	font-weight: 700;
+	margin-top: 10px;
+	text-align: center;
+	border-radius: 3px;
+	letter-spacing: 0.5px;
+	text-shadow: 1px 1px #000;
+	padding: 0 20px;
+	border-bottom: 1px solid rgba(5,5,5,0.9);
+}
+
+#actionmenu button:hover {
+	background: #a8244e;
+	border-bottom: 1px solid rgba(5,5,5,0.9);
+}
+
+l {
+	width: 75%;
+	text-align: left;
+	float: left;
+}
+
+r {
+	color: rgba(255,255,255,0.5);
+	width: 25%;
+	text-align: right;
+	float: left;
+}
