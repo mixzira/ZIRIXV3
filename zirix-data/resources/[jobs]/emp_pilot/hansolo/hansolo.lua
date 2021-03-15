@@ -16,6 +16,8 @@ local wood = false
 local gas = false
 local criado = false
 local servehicle = nil
+local entrega = 0
+local pay = 0
 
 --[ FUNCTION ]------------------------------------------------------------------------------------------------------------------
 
@@ -52,11 +54,14 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		else
 			for k,v in pairs(configpilot.spawn) do
 				if k == 1 then
-				TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
-				spawnVehicle(configpilot.plane,v.x,v.y,v.z)
-				servehicle = GetEntityModel(configpilot.plane)
-				emservico = true
-				gas = true
+					TriggerEvent("Notify","sucesso","Avião liberado para decolagem.")
+					spawnVehicle(configpilot.plane,v.x,v.y,v.z)
+					servehicle = GetEntityModel(configpilot.plane)
+					emservico = true
+					gas = true
+					entrega = 1
+					pay = configpilot.routeshamal[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -71,6 +76,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = GetEntityModel(configpilot.plane)
 					emservico = true
 					gas = true
+					entrega = 2
+					pay = configpilot.routeshamal[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -85,6 +93,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = GetEntityModel(configpilot.plane)
 					emservico = true
 					gas = true
+					entrega = 3
+					pay = configpilot.routeshamal[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -99,6 +110,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = GetEntityModel(configpilot.plane1)
 					emservico = true
 					wood = true
+					entrega = 1
+					pay = configpilot.routemiljet[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -113,6 +127,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = GetEntityModel(configpilot.plane1)
 					emservico = true
 					wood = true
+					entrega = 2
+					pay = configpilot.routemiljet[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -127,6 +144,9 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 					servehicle = GetEntityModel(configpilot.plane1)
 					emservico = true
 					wood = true
+					entrega = 3
+					pay = configpilot.routemiljet[entrega].pay
+					ToggleActionMenu()
 				end
 			end
 		end
@@ -176,8 +196,6 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if gas then
 			if emservico then
-				local entrega = math.random(#configpilot.routeshamal)
-				local pay = configpilot.routeshamal[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
 				local bowz,cdz = GetGroundZFor_3dCoord(configpilot.routeshamal[entrega].x, configpilot.routeshamal[entrega].y, configpilot.routeshamal[entrega].z)
 				local distance = GetDistanceBetweenCoords(GetEntityCoords(ped),configpilot.routeshamal[entrega].x,configpilot.routeshamal[entrega].y,configpilot.routeshamal[entrega].z,true)
@@ -190,7 +208,7 @@ Citizen.CreateThread(function()
 					DrawMarker(23,configpilot.routeshamal[entrega].x, configpilot.routeshamal[entrega].y, configpilot.routeshamal[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
 					if distance <= 10.0 then
 						if IsControlJustPressed(0,38) then
-							if not IsPedInAnyVehicle(ped) then
+							--if not IsPedInAnyVehicle(ped) then
 								local vehicle = getVehicleInDirection(GetEntityCoords(PlayerPedId()),GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,5.0,0.0))
 								if GetEntityModel(vehicle) == servehicle then
 									vSERVER.deleteVehicles(vehicle)
@@ -198,10 +216,11 @@ Citizen.CreateThread(function()
 									RemoveBlip(blip)
 									emservico = false
 									criado = false	
+									gas = false
 								end
-							else	
-								TriggerEvent("Notify","importante","Saia do <b>Avião</b>.",8000)					
-							end
+							--else	
+							--	TriggerEvent("Notify","importante","Saia do <b>Avião</b>.",8000)					
+							--end
 						end
 					end
 				end
@@ -217,8 +236,6 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 		if wood then
 			if emservico then
-				local entrega = math.random(#configpilot.routemiljet)
-				local pay = configpilot.routemiljet[entrega].pay
 				local x,y,z = table.unpack(GetEntityCoords(ped))
 				local bowz,cdz = GetGroundZFor_3dCoord(configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y, configpilot.routemiljet[entrega].z)
 				local distance = GetDistanceBetweenCoords(configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y,cdz,x,y,false)
@@ -231,7 +248,7 @@ Citizen.CreateThread(function()
 				DrawMarker(23,configpilot.routemiljet[entrega].x, configpilot.routemiljet[entrega].y, configpilot.routemiljet[entrega].z-0.96,0, 0, 0, 0, 0, 0, 10.0, 10.0, 1.0, 136, 96, 240, 180, 0, 0, 0, 0)
 					if distance <= 10.0 then						
 						if IsControlJustPressed(0,38) then
-							if IsPedInAnyVehicle(ped) then
+							--if IsPedInAnyVehicle(ped) then
 								local vehicle = GetEntityModel(GetPlayersLastVehicle())
 								if GetEntityModel(vehicle) == servehicle then
 									vSERVER.deleteVehicles(vehicle)
@@ -239,10 +256,11 @@ Citizen.CreateThread(function()
 									RemoveBlip(blip)
 									emservico = false
 									criado = false	
+									wood = false
 								end
-							else	
-								TriggerEvent("Notify","importante","Entre no <b>Avião</b> para terminar o serviço.",8000)					
-							end
+							--else	
+							--	TriggerEvent("Notify","importante","Entre no <b>Avião</b> para terminar o serviço.",8000)					
+							--end
 						end
 					end
 				end
@@ -257,17 +275,19 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5)
-		if IsControlJustPressed(0,168) then
-			if emservico then
-				emservico = false
-				RemoveBlip(blip)
-				TriggerEvent("Notify","importante","Você cancelou o serviço.",8000)
-				wood = false
-				gas = false
-				criado = false
+		local idle=1000
+		if emservico then
+			idle=5
+			if IsControlJustPressed(0,168) then
+					emservico = false
+					RemoveBlip(blip)
+					TriggerEvent("Notify","importante","Você cancelou o serviço.",8000)
+					wood = false
+					gas = false
+					criado = false
 			end
 		end
+		Citizen.Wait(idle)
 	end
 end)
 
