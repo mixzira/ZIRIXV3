@@ -11,7 +11,7 @@ local timers = {}
 local idgens = Tools.newIDGenerator()
 local blips = {}
 
-vRP._prepare('vRP/insert_shops','INSERT INTO vrp_shops(owner, name, security, price, forsale, stock, maxstock, vault, maxvault) VALUES(@owner, @name, @security, @price, @forsale, @stock, @maxstock, @vault, @maxvault)')
+vRP._prepare('vRP/insert_shops','INSERT INTO vrp_shops(owner, name, security, price, forsale, stock, maxstock, vault, maxvault,fantasy) VALUES(@owner, @name, @security, @price, @forsale, @stock, @maxstock, @vault, @maxvault, @fantasy)')
 vRP._prepare('vRP/get_stock_shop','SELECT stock FROM vrp_shops WHERE name = @name')
 vRP._prepare('vRP/set_stock_shop','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
 vRP._prepare('vRP/get_maxstock_shop','SELECT * FROM vrp_shops WHERE name = @name')
@@ -26,23 +26,29 @@ vRP._prepare('vRP/set_security_shop','UPDATE vrp_shops SET security = @security 
 vRP._prepare('vRP/get_owner_shop','SELECT * FROM vrp_shops WHERE name = @name')
 vRP._prepare('vRP/update_product','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
 vRP._prepare('vRP/set_fantasy_shop','UPDATE vrp_shops SET fantasy = @fantasy WHERE name = @name')
+vRP._prepare('vRP/get_owner','SELECT * FROM vrp_shops WHERE owner = @owner')
 
 function createShop()
     local rows = vRP.query('vRP/select_shop')
+    local i = 0
     for k,v in pairs(config.shops) do
-      if #rows == 0 then
-        vRP.execute('vRP/insert_shops', {
-          ['owner'] = 0,
-          ['name'] = k,
-          ['security'] = v.security,
-          ['price'] = v.price,
-          ['forsale'] = v.forsale,
-          ['stock'] = json.encode(v.stock),
-          ['maxstock'] = v.maxstock,
-          ['vault'] = 0,
-          ['maxvault'] = v.vault.limit
-        })
-      end
+        i = i + 1
+    end
+    if i ~= #rows then
+        for k,v in pairs(config.shops) do
+                vRP.execute('vRP/insert_shops', {
+                ['owner'] = 0,
+                ['name'] = k,
+                ['security'] = v.security,
+                ['price'] = v.price,
+                ['forsale'] = v.forsale,
+                ['stock'] = json.encode(v.stock),
+                ['maxstock'] = v.maxstock,
+                ['vault'] = 0,
+                ['maxvault'] = v.vault.limit,
+                ['fantasy'] = ""
+                })
+        end
     end
     return false
 end
@@ -414,7 +420,7 @@ function src.upgradeShop(item,stock,security,shop)
     if user_id then
         if stock ~= 0 then
             if astock ~= stock then
-                if stock > astock then
+                if stock > parseInt(astock) then
                     for k,v in pairs(config.options) do
                         if k == item then
                             if vRP.tryPayment(user_id,parseInt(v.price)) then
@@ -568,7 +574,7 @@ function src.buyStore(shop)
         if forsale then
             for k,v in pairs(config.shops) do
                 if k == shop then
-                    local fantasyName = vRP.prompt(source,'Qual é o novo nome da sua lógica?', '')
+                    local fantasyName = vRP.prompt(source,'Qual é o novo nome da sua loja?', '')
                     if fantasyName == '' or fantasyName == nil then
                         TriggerClientEvent('Notify',source,'negado','Informe um <b>nome</b> para sua loja.')
                     else
@@ -592,23 +598,47 @@ end
 RegisterCommand('loja',function(source,args,rawCommand)
     local source = source
     local user_id = vRP.getUserId(source)
+    local rows = vRP.query('vRP/get_owner', { owner = user_id })
+    local shop = ""
+    if #rows > 0 then
+        shop = rows[1].name
+    end
     if user_id then
         if args[1] == 'renomear' then
-            local fantasyName = vRP.prompt(source,'Qual é o novo nome da sua lógica?', '')
+            local fantasyName = vRP.prompt(source,'Qual é o novo nome da sua loja?', '')
             if fantasyName == '' or fantasyName == nil then
                 TriggerClientEvent('Notify',source,'negado','Informe um <b>nome</b> para sua loja.')
             else
                 local price = 50000
-                local confirmation = vRP.request(user_id,"Deseja realmente alterar o nome da sua loja para <b>"..fantasyName..'</b> por <b>$'..price..'</b>.',30)
+                local confirmation = vRP.request(source,"Deseja realmente alterar o nome da sua loja para <b>"..fantasyName..'</b> por <b>$'..price..'</b>.',30)
                 if confirmation then
                     if vRP.tryPayment(user_id,parseInt(price)) then
                         setFantasy(shop,fantasyName)
                         TriggerClientEvent('vrp_advanced_shops:updateBlip',source)
+                        TriggerClientEvent('Notify',source,'sucesso','Troca de nome realizada.')
                     else
                         TriggerClientEvent('Notify',source,'negado','Dinheiro insuficiente.')
                     end
                 end
-            end  
+            end
+        elseif args[1] == 'sacar' then
+            local shopMoney = vRP.prompt(source,'Quanto deseja sacar?', '')
+            local rows = vRP.query('vRP/get_vault_shop', { name = shop })
+            local available = ""
+            if #rows > 0 then
+                available = rows[1].vault
+            end
+            if string.len(shopMoney) >= 20 or parseInt(shopMoney) < 0 or type(shopMoney) ~= number then
+                TriggerClientEvent('Notify',source,'negado','Valor inválido.')
+            else
+                if parseInt(shopMoney) <= available then
+                    vRP.giveBankMoney(user_id,parseInt(shopMoney))
+                    vRP.query('vRP/set_vault_shop', {vault = available - parseInt(shopMoney), name = shop})
+                    TriggerClientEvent('Notify',source,'sucesso','Você sacou $'..shopMoney..".")
+                else
+                    TriggerClientEvent('Notify',source,'negado','Você não possui esse dinheiro no cofre.')
+                end
+            end
         end
     end
 end)
