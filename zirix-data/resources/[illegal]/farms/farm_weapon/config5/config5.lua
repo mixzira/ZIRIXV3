@@ -76,7 +76,7 @@ config5.itens = { "placa-metal", "molas", "gatilho"}
 
 -- QUANTIDADE DE ITENS DADOS AO COLETAR O PACOTE.
 -- VALOR RANDOMICO, NECESSARIO 2 VALORES SETADOS.
-config5.qtd = { 2, 12 }
+config5.qtd = { 2, 8 }
 
 -- PERMISSAO DA POLICIA PARA SER AVISADO
 config5.ppermission = "policia.permissao"

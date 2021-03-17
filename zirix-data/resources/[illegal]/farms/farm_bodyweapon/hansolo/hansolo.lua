@@ -1,6 +1,6 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
-farm_weapon = Tunnel.getInterface("farm_bodyweapon")
+farm_bodyweapon = Tunnel.getInterface("farm_bodyweapon")
 
 local servico = false
 local selecionado = 0
@@ -22,8 +22,8 @@ Citizen.CreateThread(function()
 				idle = 5
 				DrawMarker(23,config6.start[1],config6.start[2],config6.start[3]-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
 				if distance <= 1.2 then
-					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR A COLETA",4,0.5,0.93,0.50,255,255,255,180)
-					if IsControlJustPressed(0,38) and farm_weapon.checkPermission() then						
+					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR A COLETA DE CORPO DE ARMA",4,0.5,0.93,0.50,255,255,255,180)
+					if IsControlJustPressed(0,38) and farm_bodyweapon.checkPermission() then						
 						servico = true									
 						
 						TriggerEvent("Notify","sucesso","Você entrou em serviço.")
@@ -60,12 +60,12 @@ Citizen.CreateThread(function()
 				if distance <= 1.5 then
 					drawTxt("PRESSIONE  ~r~E~w~  PARA COLETAR O PACOTE",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(0,38) then
-						if farm_weapon.checkPayment() then
+						if farm_bodyweapon.checkPayment() then
 							
 							porcentagem = math.random(1,100)
 
 							if porcentagem >= config6.percentage[1] and porcentagem <= config6.percentage[2] then
-								farm_weapon.MarcarOcorrencia()
+								farm_bodyweapon.MarcarOcorrencia()
 							end
 							RemoveBlip(blips)
 							
@@ -99,6 +99,8 @@ Citizen.CreateThread(function()
 				servico = false
 				RemoveBlip(blips)
 				TriggerEvent("Notify","aviso","Você saiu de serviço.")
+				criado = false
+				selec = false
 			end
 		end
 		Citizen.Wait(idle)

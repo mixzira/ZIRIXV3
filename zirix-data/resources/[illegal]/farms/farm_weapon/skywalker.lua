@@ -10,6 +10,7 @@ Tunnel.bindInterface("farm_weapon",farm_weapon)
 
 local idgens = Tools.newIDGenerator()
 local blips = {}
+local qtd = 0
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -22,15 +23,17 @@ end
 function farm_weapon.checkPayment()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	local qtd = math.random(config5.qtd[1],config5.qtd[2])
 	if user_id then
 		if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config5.itens[1])*qtd <= vRP.getInventoryMaxWeight(user_id) then
+			qtd = math.random(config5.qtd[1],config5.qtd[2])
 			vRP.giveInventoryItem(user_id,config5.itens[1],qtd)
 			TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config5.itens[1].."</b>.")
 			if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config5.itens[2])*qtd <= vRP.getInventoryMaxWeight(user_id) then
+				qtd = math.random(config5.qtd[1],config5.qtd[2])
 				vRP.giveInventoryItem(user_id,config5.itens[2],qtd)
 				TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config5.itens[2].."</b>.")
 				if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(config5.itens[3])*qtd <= vRP.getInventoryMaxWeight(user_id) then
+					qtd = math.random(config5.qtd[1],config5.qtd[2])
 					vRP.giveInventoryItem(user_id,config5.itens[3],qtd)
 					TriggerClientEvent("Notify",source,"sucesso","Você coletou "..qtd.." de <b>"..config5.itens[3].."</b>.")
 				else

@@ -22,11 +22,10 @@ Citizen.CreateThread(function()
 				idle = 5
 				DrawMarker(23,config1.start[1],config1.start[2],config1.start[3]-0.97,0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 136, 96, 240, 180, 0, 0, 0, 0)
 				if distance <= 1.2 then
-					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR A COLETA",4,0.5,0.93,0.50,255,255,255,180)
+					drawTxt("PRESSIONE  ~r~E~w~  PARA INICIAR A COLETA DE MUNIÇÃO",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(0,38) and farm_ammo.checkPermission() then						
 						servico = true						
 						porcentagem = math.random(100)					
-						
 						TriggerEvent("Notify","sucesso","Você entrou em serviço.")
 						TriggerEvent("Notify","importante","Vá até o próximo local e colete o pacote</b>.")
 					end
@@ -98,6 +97,8 @@ Citizen.CreateThread(function()
 				servico = false
 				RemoveBlip(blips)
 				TriggerEvent("Notify","aviso","Você saiu de serviço.")
+				criado = false
+				selec = false
 			end
 		end
 		Citizen.Wait(idle)
