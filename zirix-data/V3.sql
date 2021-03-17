@@ -214,6 +214,7 @@ CREATE TABLE IF NOT EXISTS `vrp_shops` (
   `maxstock` int(11) DEFAULT NULL,
   `vault` int(11) DEFAULT NULL,
   `maxvault` int(11) DEFAULT NULL,
+  `fantasy` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
