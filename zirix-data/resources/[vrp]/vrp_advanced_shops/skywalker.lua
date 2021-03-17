@@ -512,7 +512,7 @@ function src.vaultRobbery(shop)
                     elseif security == 3 then
                         alarm = 5000
                     end
-                    if #police <= config.contingentPolice then
+                    if #police >= config.contingentPolice then
                         if timers[shop] == 0 or not timers[shop] then
                             timers[shop] = 600
                             TriggerClientEvent('vrp_advanced_shops:startRobbery',source,shop,security)
