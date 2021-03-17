@@ -28,15 +28,19 @@ vRP._prepare('vRP/update_product','UPDATE vrp_shops SET stock = @stock WHERE nam
 vRP._prepare('vRP/set_fantasy_shop','UPDATE vrp_shops SET fantasy = @fantasy WHERE name = @name')
 vRP._prepare('vRP/get_owner','SELECT * FROM vrp_shops WHERE owner = @owner')
 
+
 function createShop()
     local rows = vRP.query('vRP/select_shop')
-    local i = 0
     for k,v in pairs(config.shops) do
-        i = i + 1
-    end
-    if i ~= #rows then
-        for k,v in pairs(config.shops) do
-                vRP.execute('vRP/insert_shops', {
+        local create = false
+        for x,y in pairs(rows) do
+            if rows[x].name == k then
+                create = true
+                break
+            end
+        end
+        if not create then
+            vRP.execute('vRP/insert_shops', {
                 ['owner'] = 0,
                 ['name'] = k,
                 ['security'] = v.security,
@@ -47,7 +51,7 @@ function createShop()
                 ['vault'] = 0,
                 ['maxvault'] = v.vault.limit,
                 ['fantasy'] = ""
-                })
+            })
         end
     end
     return false
