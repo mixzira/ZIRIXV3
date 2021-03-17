@@ -185,7 +185,7 @@ function tvRP.giveWeapons(weapons,clear_before)
 end
 
 function tvRP.setArmour(amount)
-	--SetPedArmour(PlayerPedId(),amount)
+	SetPedArmour(PlayerPedId(),amount)
 	TriggerEvent("rainda",amount)
 end
 
