@@ -1495,6 +1495,7 @@ function tD(n)
 end
 
 local run = {}
+local UTC = 0
 
 RegisterCommand("vip", function(source,args)
 	local source = source
@@ -1504,87 +1505,118 @@ RegisterCommand("vip", function(source,args)
 		local vip = args[3]
 		if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
 			if vip == "ultimate" then
+				if vRP.getUserIdentity(nuser_id, 0) == nil then
+					TriggerClientEvent("Notify",source, "negado", "Id inexistente.")
+					return
+				end
 				vRP.addUserGroup(nuser_id,"ultimate")
-				TriggerClientEvent("Notify", source, "sucesso","ID "..args[1].." setado de Ultimate pass.")
-				if vRP.getUserSource(tonumber(args[2])) then
-					if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
-						local consulta = vRP.getUData(tonumber(args[2]),"vRP:vip")
-						local resultado = json.decode(consulta) or {}
-						resultado.tempo = (resultado.tempo or 0)+tonumber(args[4])*1440
-						run[vRP.getUserId(source)] = resultado.tempo
-						vRP.setUData(tonumber(args[2]), "vRP:vip", json.encode(resultado))
-					end
+				TriggerClientEvent("Notify", source, "sucesso","ID "..nuser_id.." setado de Ultimate pass.")
+				local consulta = vRP.getUData(nuser_id,"vRP:vip")
+				local resultado = json.decode(consulta) or {}
+				if next(resultado) == nil then
+					resultado.tempo = os.time() + 60*60*24*tonumber(args[4]) + 60*60*UTC
+				else
+					resultado.tempo = (resultado.tempo or 0) + 60*60*24*tonumber(args[4]) + 60*60*UTC
 				end
+				vRP.setUData(nuser_id, "vRP:vip", json.encode(resultado))
 			elseif 	vip == "platina" then
+				if vRP.getUserIdentity(nuser_id, 0) == nil then
+					TriggerClientEvent("Notify",source, "negado", "Id inexistente.")
+					return
+				end
 				vRP.addUserGroup(nuser_id,"platinum")
-				TriggerClientEvent("Notify", source, "sucesso","ID "..args[1].." setado de Platina pass.")
-				if vRP.getUserSource(tonumber(args[2])) then
-					if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
-						local consulta = vRP.getUData(tonumber(args[2]),"vRP:vip")
-						local resultado = json.decode(consulta) or {}
-						resultado.tempo = (resultado.tempo or 0)+tonumber(args[4])*1440
-						run[vRP.getUserId(source)] = resultado.tempo
-						vRP.setUData(tonumber(args[2]), "vRP:vip", json.encode(resultado))
-					end
+				TriggerClientEvent("Notify", source, "sucesso","ID "..nuser_id.." setado de Platina pass.")
+				local consulta = vRP.getUData(nuser_id,"vRP:vip")
+				local resultado = json.decode(consulta) or {}
+				if next(resultado) == nil then
+					resultado.tempo = os.time() + 60*60*24*tonumber(args[4]) + 60*60*UTC
+				else
+					resultado.tempo = (resultado.tempo or 0) + 60*60*24*tonumber(args[4]) + 60*60*UTC
 				end
-			elseif 	vip == "ouro" then
+				vRP.setUData(nuser_id, "vRP:vip", json.encode(resultado))
+			elseif 	vip == "gold" then
+				if vRP.getUserIdentity(nuser_id, 0) == nil then
+					TriggerClientEvent("Notify",source, "negado", "Id inexistente.")
+					return
+				end
 				vRP.addUserGroup(nuser_id,"gold")
-				TriggerClientEvent("Notify", source, "sucesso","ID "..args[1].." setado de Ouro pass.")
-				if vRP.getUserSource(tonumber(args[2])) then
-					if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
-						local consulta = vRP.getUData(tonumber(args[2]),"vRP:vip")
-						local resultado = json.decode(consulta) or {}
-						resultado.tempo = (resultado.tempo or 0)+tonumber(args[4])*1440
-						run[vRP.getUserId(source)] = resultado.tempo
-						vRP.setUData(tonumber(args[2]), "vRP:vip", json.encode(resultado))
-					end
+				TriggerClientEvent("Notify", source, "sucesso","ID "..nuser_id.." setado de Gold pass.")
+				local consulta = vRP.getUData(nuser_id,"vRP:vip")
+				local resultado = json.decode(consulta) or {}
+				if next(resultado) == nil then
+					resultado.tempo = os.time() + 60*60*24*tonumber(args[4]) + 60*60*UTC
+				else
+					resultado.tempo = (resultado.tempo or 0) + 60*60*24*tonumber(args[4]) + 60*60*UTC
 				end
+				vRP.setUData(nuser_id, "vRP:vip", json.encode(resultado))
 			elseif 	vip == "standard" then
-				vRP.addUserGroup(nuser_id,"standard")
-				TriggerClientEvent("Notify", source, "sucesso","ID "..args[1].." setado de Standard pass.")
-				if vRP.getUserSource(tonumber(args[2])) then
-					if vRP.hasPermission(user_id,"manager.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
-						local consulta = vRP.getUData(tonumber(args[2]),"vRP:vip")
-						local resultado = json.decode(consulta) or {}
-						resultado.tempo = (resultado.tempo or 0)+tonumber(args[4])*1440
-						run[vRP.getUserId(source)] = resultado.tempo
-						vRP.setUData(tonumber(args[2]), "vRP:vip", json.encode(resultado))
-					end
+				if vRP.getUserIdentity(nuser_id, 0) == nil then
+					TriggerClientEvent("Notify",source, "negado", "Id inexistente.")
+					return
 				end
-
+				vRP.addUserGroup(nuser_id,"standard")
+				TriggerClientEvent("Notify", source, "sucesso","ID "..nuser_id.." setado de Standard pass.")
+				local consulta = vRP.getUData(nuser_id,"vRP:vip")
+				local resultado = json.decode(consulta) or {}
+				if next(resultado) == nil then
+					resultado.tempo = os.time() + 60*60*24*tonumber(args[4]) + 60*60*UTC
+				else
+					resultado.tempo = (resultado.tempo or 0) + 60*60*24*tonumber(args[4]) + 60*60*UTC
+				end
+				vRP.setUData(nuser_id, "vRP:vip", json.encode(resultado))
 			end
 		end
 	elseif args[1] == "rem" then
-		if vRP.getUserSource(tonumber(args[2])) then
 			if vRP.hasPermission(vRP.getUserId(source),"manager.permissao") or vRP.hasPermission(vRP.getUserId(source),"administrador.permissao") then
-				local consulta = vRP.getUData(tonumber(args[2]),"vRP:vip")
+				if vRP.getUserIdentity(nuser_id, 0) == nil then
+					TriggerClientEvent("Notify",source, "negado", "Id inexistente.")
+					return
+				end
+				local consulta = vRP.getUData(nuser_id,"vRP:vip")
 				local resultado = json.decode(consulta) or {}
-				resultado.tempo = (resultado.tempo or 0)-tonumber(args[3])*1440
-				if resultado.tempo < 0 then resultado.tempo = 0 end
-				run[vRP.getUserId(source)] = resultado.tempo
-				vRP.setUData(tonumber(args[2]), "vRP:vip", json.encode(resultado))
+				resultado.tempo = nil
+				--run[vRP.getUserId(source)] = resultado.tempo
+				vRP.setUData(nuser_id, "vRP:vip", json.encode(resultado))
+				TriggerClientEvent("Notify",source, "sucesso", "Você removeu o VIP do ID: "..nuser_id)
+				if vRP.hasPermission(nuser_id,"ultimate.permissao") then	
+					vRP.removeUserGroup(nuser_id,"ultimate")
+				elseif vRP.hasPermission(nuser_id,"platinum.permissao") then	
+					vRP.removeUserGroup(nuser_id,"platinum")
+				elseif vRP.hasPermission(nuser_id,"gold.permissao") then	
+					vRP.removeUserGroup(nuser_id,"gold")
+				elseif vRP.hasPermission(nuser_id,"standard.permissao") then	
+					vRP.removeUserGroup(nuser_id,"standard")
+				end		
 			end
-		end
 	elseif args[1] == "status" then
-		local user_id = vRP.getUserId(source)
+		local pass = ""
 		local consulta = vRP.getUData(vRP.getUserId(source),"vRP:vip")
 		local resultado = json.decode(consulta) or {}
-		local pass = ""
-		
+		if next(resultado) == nil then
+			TriggerClientEvent("Notify",source,"negado", "Voce não possui VIP")
+			return
+		end
+
+		local v = (resultado.tempo - os.time())/86400
+		if v >= 1.0 then
+			dias = ""..math.ceil((resultado.tempo - os.time())/86400).." dia(s)"
+		else
+			dias = ""..math.floor((resultado.tempo - os.time())/3600).." hora(s) "
+		end
+
+		dias = os.date("%d/%m/%Y - %X", resultado.tempo)
+
 		if vRP.hasPermission(user_id,"ultimate.permissao") then	
 			pass = "Ultimate"
-		elseif vRP.hasPermission(user_id,"platina.permissao") then	
+		elseif vRP.hasPermission(user_id,"platinum.permissao") then	
 			pass = "Platina"
-		elseif vRP.hasPermission(user_id,"ouro.permissao") then	
-			pass = "Ouro"
+		elseif vRP.hasPermission(user_id,"gold.permissao") then	
+			pass = "Gold"
 		elseif vRP.hasPermission(user_id,"standard.permissao") then
 			pass = "Standard"
 		end
-		
-		resultado.tempo = resultado.tempo or 0
-		resultado = resultado.tempo/1440 or 0
 
-		TriggerClientEvent("Notify",source,"importante","<b>Pass:</b> "..pass.." | <b>Dias Restantes:</b> "..math.ceil(resultado))
+		TriggerClientEvent("Notify",source,"importante","<b>Pass:</b> "..pass.." | <b>Validade: </b> "..dias)
 	end
 end)
 
