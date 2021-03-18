@@ -181,10 +181,10 @@ config.shops = {
             { itemName = 'serra', itemPrice = 650, itemAmount = 1, saleValue = 26 },
             { itemName = 'pa-jardinagem', itemPrice = 100, itemAmount = 1, saleValue = 40 },
             { itemName = 'furadeira', itemPrice = 450, itemAmount = 1, saleValue = 180 },
-            { itemName = 'wbody|WEAPON_HAMMER', itemPrice = 300, itemAmount = 1, saleValue = 120 },
-            { itemName = 'wbody|WEAPON_CROWBAR', itemPrice = 300, itemAmount = 1, saleValue = 120 },
-            { itemName = 'wbody|WEAPON_WEAPON_HATCHET', itemPrice = 300, itemAmount = 1, saleValue = 120 },
-            { itemName = 'wbody|WEAPON_WHENCH', itemPrice = 300, itemAmount = 1, saleValue = 120 }
+            { itemName = 'wbodyWEAPON_HAMMER', itemPrice = 300, itemAmount = 1, saleValue = 120 },
+            { itemName = 'wbodyWEAPON_CROWBAR', itemPrice = 300, itemAmount = 1, saleValue = 120 },
+            { itemName = 'wbodyWEAPON_HATCHET', itemPrice = 300, itemAmount = 1, saleValue = 120 },
+            { itemName = 'wbodyWEAPON_WRENCH', itemPrice = 300, itemAmount = 1, saleValue = 120 }
         }
     }
 }

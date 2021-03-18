@@ -268,7 +268,7 @@ items.list = {
 	['wbodyWEAPON_MACHETE'] = { ['index'] = 'machete', ['name'] = 'Taco de Baseball', ['type'] = 'equip', ['weight'] = 1.0 },
 	['wbodyWEAPON_SWITCHBLADE'] = { ['index'] = 'canivete', ['name'] = 'Canivete', ['type'] = 'equip', ['weight'] = 1.0 },
 	['wbodyWEAPON_NIGHTSTICK'] = { ['index'] = 'cassetete', ['name'] = 'Cassetete', ['type'] = 'equip', ['weight'] = 1.0 },
-	['wbodyWEAPON_WHENCH'] = { ['index'] = 'grifo', ['name'] = 'Grifo', ['type'] = 'equip', ['weight'] = 1.0 },
+	['wbodyWEAPON_WRENCH'] = { ['index'] = 'grifo', ['name'] = 'Grifo', ['type'] = 'equip', ['weight'] = 1.0 },
 	['wbodyWEAPON_BATTLEAXE'] = { ['index'] = 'machadodebatalha', ['name'] = 'Machado De Batalha', ['type'] = 'equip', ['weight'] = 1.0 },
 	['wbodyWEAPON_POOLCUE'] = { ['index'] = 'tacosinuca', ['name'] = 'Taco de Sinuca', ['type'] = 'equip', ['weight'] = 1.0 },
 	['wbodyWEAPON_STONE_HATCHET'] = { ['index'] = 'machadopedra', ['name'] = 'Machado de Pedra', ['type'] = 'equip', ['weight'] = 1.0 },

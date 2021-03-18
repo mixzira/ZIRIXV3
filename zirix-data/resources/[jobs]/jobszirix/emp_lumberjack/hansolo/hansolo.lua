@@ -36,7 +36,7 @@ Citizen.CreateThread(function()
 					idle = 5
 					DrawMarker(21,x,y,z,0,0,0,0,180.0,130.0,0.5,0.5,0.5,136, 96, 240,180,1,0,0,1)
 					if distancia <= 1.2 then
-						if GetSelectedPedWeapon(ped) == GetHashKey(configlumberjack.axe) or GetSelectedPedWeapon(ped) == GetHashKey(configlumberjack.axe) then
+						if GetSelectedPedWeapon(ped) == GetHashKey(configlumberjack.axe) or GetSelectedPedWeapon(ped) == GetHashKey(configlumberjack.axe1) then
 							if IsControlJustPressed(0,38) and emp7.checkPayment() then
 								CalculateTimeToDisplay7()
 								--if parseInt(hour) >= 06 and parseInt(hour) <= 20 then
