@@ -79,7 +79,7 @@ function emp11.checkCrimeRecord()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.checkCrimeRecord(user_id) > 0 then
+		if parseInt(vRP.checkCrimeRecord(user_id)) > 0 then
 			TriggerClientEvent("Notify",source,"negado","Não contratamos pessoas com <b>Ficha Criminal</b>.",10000)
 			return false
 		else
