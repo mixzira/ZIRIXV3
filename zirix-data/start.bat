@@ -1,7 +1,7 @@
 @echo off
 
 echo ===-------------------------------===
-echo     ZIRIX V3 (3.0.1)
+echo     ZIRIX V3 (3.2.0)
 echo     Developed by: ZIRAFLIX
 echo     Discord: discord.gg/ziraflix
 echo     Contact: contato@ziraflix.com
