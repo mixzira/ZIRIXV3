@@ -709,7 +709,8 @@ RegisterCommand('tpcds',function(source,args,rawCommand)
 			return
 		end
 		local coords = {}
-		for coord in string.gmatch(fcoords or "0,0,0","[^,]+") do
+		local a = fcoords:gsub( "[%a='%[%]]", "" )
+		for coord in string.gmatch(a or "0,0,0","[^,]+") do
 			table.insert(coords,parseInt(coord))
 		end
 		vRPclient.teleport(source,coords[1] or 0,coords[2] or 0,coords[3] or 0)
