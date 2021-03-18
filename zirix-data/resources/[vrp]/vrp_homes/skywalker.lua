@@ -148,13 +148,12 @@ RegisterCommand('homes',function(source,args,rawCommand)
 					end
 				end
 			end
-		elseif args[1] == "tax" and config.homes[tostring(args[2])] then
+		elseif args[1] == "tax" and config.homes[args[2]] then
 			local ownerHomes = vRP.query("homes/get_homeuseridowner",{ home = tostring(args[2]) })
 			if ownerHomes[1] then
-				local house_price = parseInt(config.homes[tostring(args[2])][1])
+				local house_price = parseInt(config.homes[args[2]].infos[1])
 				local house_tax = 0.03
-				
-				if vRP.tryFullPayment(user_id,parseInt(house_price * house_tax)) then
+				if vRP.tryPayment(user_id,parseInt(house_price * house_tax)) then
 					vRP.execute("homes/rem_permissions",{ home = tostring(args[2]), user_id = parseInt(ownerHomes[1].user_id) })
 					vRP.execute("homes/buy_permissions",{ home = tostring(args[2]), user_id = parseInt(ownerHomes[1].user_id), tax = parseInt(os.time()) })
 					TriggerClientEvent("Notify",source,"sucesso","Pagamento de <b>$"..vRP.format(parseInt(house_price * house_tax)).." dólares</b> efetuado com sucesso.",10000)
