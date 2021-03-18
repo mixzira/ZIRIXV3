@@ -95,7 +95,6 @@ Citizen.CreateThread(function()
 			idle = 5
 			if IsControlJustPressed(1,168) then
 				servico = false
-				print(blips)
 				RemoveBlip(blips)
 				TriggerEvent("Notify","aviso","Você saiu de serviço.")
 				criado = false
