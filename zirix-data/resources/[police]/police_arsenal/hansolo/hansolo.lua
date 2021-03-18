@@ -12,7 +12,6 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		if vRPex.checkPermission(config.assault) then
 			RemoveWeaponFromPed(ped,GetHashKey("WEAPON_CARBINERIFLE"))
 			GiveWeaponToPed(ped,GetHashKey("weapon_carbinerifle_mk2"),150,0,0)
-			vRP.tryFullPayment(source,100)
 		else
 			TriggerEvent("Notify","negado","Você precisa entrar em serviço para pegar qualquer equipamento do arsenal",9000)
 		end

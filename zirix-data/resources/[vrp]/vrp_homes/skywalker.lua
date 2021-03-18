@@ -100,7 +100,7 @@ RegisterCommand('homes',function(source,args,rawCommand)
 			if myHomes[1] then
 				local userHomes = vRP.query("homes/get_homeuser",{ user_id = parseInt(args[3]), home = tostring(args[2]) })
 				if userHomes[1] then
-					if vRP.tryFullPayment(user_id,50000) then
+					if vRP.tryPayment(user_id,50000) then
 						vRP.execute("homes/upd_permissions",{ home = tostring(args[2]), user_id = parseInt(args[3]) })
 						local identity = vRP.getUserIdentity(parseInt(args[3]))
 						if identity then
