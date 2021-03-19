@@ -174,6 +174,7 @@ config.shops = {
         },
         ['itens'] = {
             { itemName = 'garrafa-vazia', itemPrice = 12, itemAmount = 1, saleValue = 4 },
+            { itemName = 'borrifador', itemPrice = 50, itemAmount = 1, saleValue = 10 },
             { itemName = 'caixa-vazia', itemPrice = 5, itemAmount = 1, saleValue = 2 },
             { itemName = 'paninho', itemPrice = 29, itemAmount = 1, saleValue = 11 },
             { itemName = 'ponta-britadeira', itemPrice = 45, itemAmount = 1, saleValue = 18 },

@@ -46,6 +46,8 @@ items.list = {
 	['capuz'] = { ['index'] = 'capuz', ['name'] = 'Capuz', ['type'] = 'use', ['weight'] = 0.5 },
 	['placa'] = { ['index'] = 'placa', ['name'] = 'Placa', ['type'] = 'use', ['weight'] = 0.5 },
 	['plastico'] = { ['index'] = 'plastico', ['name'] = 'Plastico', ['type'] = 'use', ['weight'] = 0.1 },
+	['borrifador'] = { ['index'] = 'borrifador', ['name'] = 'Borrifador', ['type'] = 'use', ['weight'] = 0.1 },
+	['alvejante'] = { ['index'] = 'alvejante', ['name'] = 'Alvejante', ['type'] = 'use', ['weight'] = 1.0 },
 	
 	--[ Tools ] -------------------------------------------------------------------------------------------------------
 	
