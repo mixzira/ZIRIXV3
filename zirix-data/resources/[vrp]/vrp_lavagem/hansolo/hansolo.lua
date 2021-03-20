@@ -36,8 +36,8 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 	elseif data == "clean-money-50k" then
 		TriggerServerEvent("dirty-money-clean","50k")
 
-	elseif data == "clean-money-100k" then
-		TriggerServerEvent("dirty-money-clean","100k")
+	elseif data == "clean-money-75k" then
+		TriggerServerEvent("dirty-money-clean","75k")
 
 	elseif data == "clean-money-500k" then
 		TriggerServerEvent("dirty-money-clean","500k")
@@ -90,6 +90,35 @@ Citizen.CreateThread(function()
 				if distance <= 1.2 then
 					if IsControlJustPressed(0,38) then
 						ToggleActionMenu()
+					end
+				end
+			end
+		end
+		Citizen.Wait(idle)
+	end
+end)
+
+--[BUY WASH CAN] ----------------------------
+Citizen.CreateThread(function()
+	while true do
+		local idle = 1000
+		for k,v in pairs(config.washDealer) do
+			local ped = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(ped))
+			local bowz,cdz = GetGroundZFor_3dCoord(v.x,v.y,v.z)
+			local distance = GetDistanceBetweenCoords(v.x,v.y,cdz,x,y,z,true)
+			local washDealer = config.washDealer[k]
+			
+			if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), washDealer.x, washDealer.y, washDealer.z, true ) <= 1.5 then
+				DrawText3D(washDealer.x, washDealer.y, washDealer.z, "PRESSIONE ~r~E~w~ PARA COMPRAR UM ~r~ALVEJANTE~w~ POR ~r~$"..config.WashCan.."~w~")
+			end
+
+			if distance < 5.1 then
+				DrawMarker(23, washDealer.x, washDealer.y, washDealer.z-0.97, 0, 0, 0, 0, 0, 0, 0.7, 0.7, 0.5, 178, 34, 34, 180, 0, 0, 0, 0)
+				idle = 5
+				if distance <= 2.0 then
+					if IsControlJustPressed(0,38) then
+						mW.checkPayment()
 					end
 				end
 			end

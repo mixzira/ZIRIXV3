@@ -25,7 +25,11 @@ local pedlist = {
 
 	{ ['x'] = -139.14, ['y'] = -633.85, ['z'] = 168.83, ['h'] = 6.66, ['hash'] = 0x2799EFD8, ['hash2'] = "a_f_y_business_01" }, -- Agência de empregos;
 
-	{ ['x'] = -553.76, ['y'] = -189.24, ['z'] = 38.22, ['h'] = 207.79, ['hash'] = 0x7E6A64B7, ['hash2'] = "a_m_m_business_01" } -- Prefeitura;
+	{ ['x'] = -553.76, ['y'] = -189.24, ['z'] = 38.22, ['h'] = 207.79, ['hash'] = 0x7E6A64B7, ['hash2'] = "a_m_m_business_01" }, -- Prefeitura;
+
+	-- Lavagem de dinheiro;
+
+	{ ['x'] = 25.24, ['y'] = 6490.75, ['z'] = 31.43, ['h'] = 47.38, ['hash'] = 0xED0CE4C6, ['hash2'] = "s_m_m_migrant_01" } -- Venda de alvejante;
 	
 }
 
