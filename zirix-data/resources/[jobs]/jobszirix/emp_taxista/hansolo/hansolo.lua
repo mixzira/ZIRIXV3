@@ -108,6 +108,7 @@ Citizen.CreateThread(function()
 							Citizen.Wait(1100)
 							SetVehicleDoorShut(vehicle,3,0)
 							Citizen.Wait(1000)
+							removePeds()
 						end
 
 						if checkped then
