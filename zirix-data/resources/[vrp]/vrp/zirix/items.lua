@@ -458,7 +458,7 @@ items.list = {
 
 	--[ Miscellaneous ]------------------------------------------------------------------------------------------------
 
-	['wammoWEAPON_PETROLCAN'] = { ['index'] = 'galaogasolina', ['name'] = 'Galão de Gasolina', ['type'] = 'equip', ['weight'] = 1.0 },
-	['wammoGADGET_PARACHUTE'] = { ['index'] = 'paraquedas', ['name'] = 'Paraquédas', ['type'] = 'equip', ['weight'] = 1.0 },
-	['wammoWEAPON_FIREEXTINGUISHER'] = { ['index'] = 'extintor', ['name'] = 'Extintor', ['type'] = 'equip', ['weight'] = 1.0 }
+	['wbodyWEAPON_PETROLCAN'] = { ['index'] = 'galaogasolina', ['name'] = 'Galão de Gasolina', ['type'] = 'equip', ['weight'] = 1.0 },
+	['wbodyGADGET_PARACHUTE'] = { ['index'] = 'paraquedas', ['name'] = 'Paraquedas', ['type'] = 'equip', ['weight'] = 1.0 },
+	['wbodyWEAPON_FIREEXTINGUISHER'] = { ['index'] = 'extintor', ['name'] = 'Extintor', ['type'] = 'equip', ['weight'] = 1.0 }
 }
