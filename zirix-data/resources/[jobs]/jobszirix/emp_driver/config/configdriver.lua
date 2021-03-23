@@ -5,7 +5,7 @@ configdriver = {}
 -- ONIBUS QUE PODEM FAZER A ROTA
 
 configdriver.bus = "coach"
-configdriver.bus1 = "airbus"
+configdriver.bus1 = "bus"
 
 --[ PAYMENT RANDOM ]----------------------------------------------------------------------------------------------------------------------------
 
