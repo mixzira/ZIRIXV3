@@ -294,6 +294,7 @@ AddEventHandler('vrp_advanced_shops:use',function()
 		for k,v in pairs(config.shops) do
 			local vault = v.vault
 			local info = v.info
+			local purchase = v.purchase
 			tShop = k
 			for k,v in pairs(v.coords) do
 				local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
@@ -309,8 +310,8 @@ AddEventHandler('vrp_advanced_shops:use',function()
 			if distance < 1.2 and not inRobbery then
 				vSERVER.vaultRobbery(tShop)
 			end
-			local bowz2, cdz2 = GetGroundZFor_3dCoord(info.x, info.y, info.z)
-			local distance2 = GetDistanceBetweenCoords(info.x, info.y, cdz2, x, y, z, true)
+			local bowz2, cdz2 = GetGroundZFor_3dCoord(purchase.x, purchase.y, purchase.z)
+			local distance2 = GetDistanceBetweenCoords(purchase.x, purchase.y, cdz2, x, y, z, true)
 			if distance2 < 1.2 then
 				vSERVER.buyStore(tShop)
 			end
