@@ -1630,3 +1630,20 @@ RegisterCommand('bvida',function(source,rawCommand)
 		TriggerClientEvent("Notify", source,"negado", "Você não pode dar bvida pois está em tratamento")
 	end		
 end)
+
+RegisterCommand('status',function(source,rawCommand)
+	local police, mec, ems = 0,0,0
+	for k,v in pairs(vRP.getUsers()) do
+		id = vRP.getUserId(v)
+		if vRP.hasPermission(id, "policia.permissao") then
+			police = police + 1
+		elseif vRP.hasPermission(id, "ems.permissao") then
+			ems = ems + 1
+		elseif vRP.hasPermission(id, "mecanico.permissao") then
+			mec = mec + 1
+		end
+	end
+	TriggerClientEvent("Notify", source, "importante", "<b>Policiais</b> online: "..police)
+	TriggerClientEvent("Notify", source, "importante", "<b>Medicos</b> online: "..ems)
+	TriggerClientEvent("Notify", source, "importante", "<b>Mecanicos</b> online: "..mec)
+end)
