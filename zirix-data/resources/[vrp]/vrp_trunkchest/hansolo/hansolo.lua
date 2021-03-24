@@ -5,7 +5,8 @@ vRP = Proxy.getInterface("vRP")
 --[ CONECTION ]--------------------------------------------------------------------------------------------------------------------------
 
 vRPNserver = Tunnel.getInterface("vrp_trunkchest")
-
+local vehicle = 0
+local open = false
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
@@ -19,7 +20,7 @@ RegisterNUICallback("invClose",function(data)
 	TransitionFromBlurred(1000)
 	SetNuiFocus(false,false)
 	SendNUIMessage({ action = "hideMenu" })
-
+	open = false
 	local vehicle = vRP.getNearestVehicle(7)
 	if IsEntityAVehicle(vehicle) then
 		TriggerServerEvent("trytrunk",VehToNet(vehicle))
@@ -31,13 +32,17 @@ end)
 RegisterNetEvent("trunkchest:Open")
 AddEventHandler("trunkchest:Open",function()
 	local ped = PlayerPedId()
-	if not IsPedInAnyVehicle(ped) then
+	vehicle = vRP.getNearestVehicle(7)
+	local nuser_id = vRP.getNearestPlayer(5)
+	local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "boot"))
+	local playerpos = GetEntityCoords(GetPlayerPed(-1))
+	local distanceToTrunk = GetDistanceBetweenCoords(trunkpos, playerpos, 1)
+	if not IsPedInAnyVehicle(ped) and distanceToTrunk < 1.85 and not nuser_id then
 		TransitionToBlurred(1000)
 		SetNuiFocus(true,true)
 		SendNUIMessage({ action = "showMenu" })
-
-		local vehicle = vRP.getNearestVehicle(7)
-		if IsEntityAVehicle(vehicle) then
+		open = true
+		if IsEntityAVehicle(vehicle)  then
 			TriggerServerEvent("trytrunk",VehToNet(vehicle))
 		end
 	end
@@ -89,4 +94,24 @@ AddEventHandler("synctrunk",function(index)
 			end
 		end
 	end
+end)
+
+Citizen.CreateThread(function()
+
+	while true do
+		if open then
+			if not IsVehicleSeatFree(vehicle, -1) then
+				vRPNserver.chestClose()
+				TransitionFromBlurred(1000)
+				SetNuiFocus(false,false)
+				SendNUIMessage({ action = "hideMenu" })
+				open = false
+				if IsEntityAVehicle(vehicle) then
+					TriggerServerEvent("trytrunk",VehToNet(vehicle))
+				end
+			end
+		end
+		Citizen.Wait(1000)
+	end
+
 end)
