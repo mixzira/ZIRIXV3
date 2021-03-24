@@ -300,12 +300,16 @@ function src.buyItem(item,amount,shop)
             for k,v in pairs(products) do
                 if stock[v].amount >= amount then
                     if owner == user_id then
-                        stock[v].amount = stock[v].amount - amount
-                        setStock(shop,stock)
-                        vRP.giveInventoryItem(user_id,v,amount)
-                        TriggerClientEvent('itensNotify',source,'sucesso','- estoque',''..vRP.itemIndexList(v)..'',''..vRP.format(parseInt(amount))..'',''..vRP.format(vRP.getItemWeight(v)*parseInt(amount))..'')
-                        TriggerClientEvent('vrp_advanced_shops:Update',source,'updateShop')
-                        PerformHttpRequest(config.webhook, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE LOJA:\n⠀', thumbnail = {url = config.webhookIcon}, fields = {{name = '**QUEM RETIROU:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**ITEM RETIRADO:**', value = '[ **Item: '..vRP.itemNameList(item)..'** ][ **Quantidade: '..parseInt(amount)..'** ]\n⠀⠀'}, {name = '**LOJA:**', value = '[ **'..shop..'** ]\n⠀⠀'}}, footer = {text = config.webhookBottomText..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
+                        if vRP.getInventoryWeight(user_id)+vRP.getItemWeight(v)*amount <= vRP.getInventoryMaxWeight(user_id) and vRP.getRemaingSlots(user_id) >= 1 then
+                            stock[v].amount = stock[v].amount - amount
+                            setStock(shop,stock)
+                            vRP.giveInventoryItem(user_id,v,amount)
+                            TriggerClientEvent('itensNotify',source,'sucesso','- estoque',''..vRP.itemIndexList(v)..'',''..vRP.format(parseInt(amount))..'',''..vRP.format(vRP.getItemWeight(v)*parseInt(amount))..'')
+                            TriggerClientEvent('vrp_advanced_shops:Update',source,'updateShop')
+                            PerformHttpRequest(config.webhook, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = 'REGISTRO DE LOJA:\n⠀', thumbnail = {url = config.webhookIcon}, fields = {{name = '**QUEM RETIROU:**', value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]'}, {name = '**ITEM RETIRADO:**', value = '[ **Item: '..vRP.itemNameList(item)..'** ][ **Quantidade: '..parseInt(amount)..'** ]\n⠀⠀'}, {name = '**LOJA:**', value = '[ **'..shop..'** ]\n⠀⠀'}}, footer = {text = config.webhookBottomText..os.date('%d/%m/%Y | %H:%M:%S'), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
+                        else 
+                            TriggerClientEvent('Notify',source,'negado','Mochila <b>cheia</b>.')
+                        end
                     else
                         local newvault = vault + tonumber(stock[v].price) * amount
                         if vault < maxvault and newvault <= maxvault then
