@@ -28,6 +28,12 @@ vRP._prepare('vRP/update_product','UPDATE vrp_shops SET stock = @stock WHERE nam
 vRP._prepare('vRP/set_fantasy_shop','UPDATE vrp_shops SET fantasy = @fantasy WHERE name = @name')
 vRP._prepare('vRP/get_owner','SELECT * FROM vrp_shops WHERE owner = @owner')
 
+function dist ( x1, y1, z1, x2, y2, z2 )
+	local dx = x1 - x2
+	local dy = y1 - y2
+	local dz = z1 - z2
+	return math.sqrt ( dx * dx + dy * dy + dz*dz )
+end
 
 function createShop()
     local rows = vRP.query('vRP/select_shop')
@@ -50,7 +56,7 @@ function createShop()
                 ['maxstock'] = v.maxstock,
                 ['vault'] = 0,
                 ['maxvault'] = v.vault.limit,
-                ['fantasy'] = ""
+                ['fantasy'] = "Loja"
             })
         end
     end
@@ -120,6 +126,19 @@ end
 
 function setSecurity(name,security)
     vRP.execute('vRP/set_security_shop', { name = name, security = security })
+end
+
+function src.getOwnerName(name)
+    local rows = vRP.query('vRP/get_owner_shop', { name = name })
+    if #rows > 0 then
+        local user_id = rows[1].owner
+        local identity = vRP.getUserIdentity(user_id)
+        if identity then
+            return identity.name
+        end
+    else
+        return {}
+    end
 end
 
 function getOwner(name)
@@ -514,6 +533,12 @@ function src.vaultRobbery(shop)
                     end
                     if #police >= config.contingentPolice then
                         if timers[shop] == 0 or not timers[shop] then
+                            if config.requireBomb then
+                                if not vRP.tryGetInventoryItem(user_id, config.bombName, config.bombAmount) then
+                                    TriggerClientEvent('Notify',source,'negado','Você não possui '..config.bombName..'',8000)
+                                    return
+                                end
+                            end
                             timers[shop] = 600
                             TriggerClientEvent('vrp_advanced_shops:startRobbery',source,shop,security)
                             for l,w in pairs(police) do
@@ -626,22 +651,56 @@ RegisterCommand('loja',function(source,args,rawCommand)
                 end
             end
         elseif args[1] == 'sacar' then
-            local shopMoney = vRP.prompt(source,'Quanto deseja sacar?', '')
-            local rows = vRP.query('vRP/get_vault_shop', { name = shop })
-            local available = ""
-            if #rows > 0 then
-                available = rows[1].vault
-            end
-            if string.len(shopMoney) >= 20 or parseInt(shopMoney) < 0 or type(shopMoney) ~= number then
-                TriggerClientEvent('Notify',source,'negado','Valor inválido.')
-            else
-                if parseInt(shopMoney) <= available then
-                    vRP.giveBankMoney(user_id,parseInt(shopMoney))
-                    vRP.query('vRP/set_vault_shop', {vault = available - parseInt(shopMoney), name = shop})
-                    TriggerClientEvent('Notify',source,'sucesso','Você sacou $'..shopMoney..".")
-                else
-                    TriggerClientEvent('Notify',source,'negado','Você não possui esse dinheiro no cofre.')
+            local x,y,z = vRPclient.getPosition(source)
+            local x2,y2,z2 = config.shops[shop].vault.position.x,config.shops[shop].vault.position.y,config.shops[shop].vault.position.z 
+            local distance = dist(x,y,z,x2,y2,z2)
+            if distance < 2 then
+                local shopMoney = vRP.prompt(source,'Quanto deseja sacar?', '')
+                local rows = vRP.query('vRP/get_vault_shop', { name = shop })
+                local available = ""
+                if #rows > 0 then
+                    available = rows[1].vault
                 end
+                if string.len(shopMoney) >= 20 or parseInt(shopMoney) <= 0  or shopMoney == '' then
+                    TriggerClientEvent('Notify',source,'negado','Valor inválido.')
+                else
+                    if parseInt(shopMoney) <= available then
+                        if vRP.getInventoryWeight(user_id) + vRP.getItemWeight("dinheiro")*parseInt(shopMoney) <= vRP.getInventoryMaxWeight(user_id) then
+                            vRP.giveInventoryItem(user_id,"dinheiro",parseInt(shopMoney))
+                            vRP.query('vRP/set_vault_shop', {vault = available - parseInt(shopMoney), name = shop})
+                            TriggerClientEvent('Notify',source,'sucesso','Você sacou $'..shopMoney..".")
+                        else
+                            TriggerClientEvent('Notify',source,'negado','Espaço no inventário insuficiente.')
+                        end
+                    else
+                        TriggerClientEvent('Notify',source,'negado','Você não possui esse dinheiro no cofre.')
+                    end
+                end
+            else
+                TriggerClientEvent('Notify',source,'negado','Você está longe do cofre da sua loja.')
+            end
+        elseif args[1] == 'vender' then
+            if args[2] then
+                local nuser_id = parseInt(args[2])
+                if vRP.getUserSource(nuser_id) then
+                    if args[3] then
+                        identity = vRP.getUserIdentity(user_id)
+                        if vRP.request(vRP.getUserSource(nuser_id),"Deseja comprar a loja de "..identity.name.." por: <b>$"..args[3].."</b> ?",30) then
+                            if vRP.tryPayment(nuser_id,parseInt(args[3])) then
+                                purchaseShop(shop,nuser_id,0)
+                            else
+                                TriggerClientEvent('Notify',vRP.getUserSource(nuser_id),'negado','Dinheiro insuficiente.')
+                            end
+                        end
+                    else
+                        TriggerClientEvent('Notify',source,'negado','Digite o valor que deseja vender.')
+                    end
+
+                else
+                    TriggerClientEvent('Notify',source,'negado','Este jogador não está online.')
+                end
+            else
+                TriggerClientEvent('Notify',source,'negado','Digite o ID do jogador que deseja vender.')
             end
         end
     end

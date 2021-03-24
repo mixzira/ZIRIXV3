@@ -10,6 +10,9 @@ config.webhookColor = 16431885
 
 config.policePermission = 'policia.permissao'
 config.contingentPolice = 2
+config.requireBomb = false
+config.bombName = "c4"
+config.bombAmount = 1
 
 config.shops = { 
     ['shop1'] = {
@@ -38,15 +41,15 @@ config.shops = {
             ['sprunk'] = { ['amount'] = 100, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
             ['energetico'] = { ['amount'] = 100, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
             ['leite'] = { ['amount'] = 100, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
-            ['barracho'] = { ['amount'] = 100, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
-            ['patriot'] = { ['amount'] = 100, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
-            ['pibwassen'] = { ['amount'] = 100, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false }
+            ['barracho'] = { ['amount'] = 0, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
+            ['patriot'] = { ['amount'] = 0, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false },
+            ['pibwassen'] = { ['amount'] = 0, ['price'] = 30, ['require'] = nil, ['gunlicense'] = false }
         },
         ['maxstock'] = 100,
         ['price'] = 1958000,
         ['robbery'] = { 50000, 10000 },
         ['forsale'] = true
-    }
+    },
 }
 
 config.options = {
