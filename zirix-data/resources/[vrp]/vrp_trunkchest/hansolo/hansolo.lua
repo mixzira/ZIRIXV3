@@ -33,17 +33,42 @@ RegisterNetEvent("trunkchest:Open")
 AddEventHandler("trunkchest:Open",function()
 	local ped = PlayerPedId()
 	vehicle = vRP.getNearestVehicle(7)
-	local nuser_id = vRP.getNearestPlayer(5)
-	local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "boot"))
-	local playerpos = GetEntityCoords(GetPlayerPed(-1))
-	local distanceToTrunk = GetDistanceBetweenCoords(trunkpos, playerpos, 1)
-	if not IsPedInAnyVehicle(ped) and distanceToTrunk < 1.85 and not nuser_id then
-		TransitionToBlurred(1000)
-		SetNuiFocus(true,true)
-		SendNUIMessage({ action = "showMenu" })
-		open = true
-		if IsEntityAVehicle(vehicle)  then
-			TriggerServerEvent("trytrunk",VehToNet(vehicle))
+	
+
+	if config.realism then
+		local nuser_id = vRP.getNearestPlayer(5)
+		local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "boot"))
+		local playerpos = GetEntityCoords(GetPlayerPed(-1))
+		local distanceToTrunk = GetDistanceBetweenCoords(trunkpos, playerpos, 1)
+		if not IsPedInAnyVehicle(ped) and distanceToTrunk < 1.85 then
+			if not nuser_id then
+				TransitionToBlurred(1000)
+				SetNuiFocus(true,true)
+				SendNUIMessage({ action = "showMenu" })
+				open = true
+				if IsEntityAVehicle(vehicle)  then
+					TriggerServerEvent("trytrunk",VehToNet(vehicle))
+				end
+			else
+				TriggerEvent("Notify", "negado", "Não pode abrir o porta-malas com jogadores próximos a você")
+			end
+		end
+	else
+		local nuser_id = vRP.getNearestPlayer(6)
+		local playerpos = GetEntityCoords(GetPlayerPed(-1))
+		local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(vehicle), playerpos, 1)
+		if not IsPedInAnyVehicle(ped) and distanceToVeh < 3 then
+			if not nuser_id then
+				TransitionToBlurred(1000)
+				SetNuiFocus(true,true)
+				SendNUIMessage({ action = "showMenu" })
+				open = true
+				if IsEntityAVehicle(vehicle)  then
+					TriggerServerEvent("trytrunk",VehToNet(vehicle))
+				end
+			else
+				TriggerEvent("Notify", "negado", "Não pode abrir o porta-malas com jogadores próximos a você")
+			end
 		end
 	end
 end)
