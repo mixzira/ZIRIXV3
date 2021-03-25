@@ -56,36 +56,16 @@ RegisterCommand('homes',function(source,args,rawCommand)
 	if user_id then
 		if args[1] == "add" and config.homes[tostring(args[2])] then
 			local myHomes = vRP.query("homes/get_homeuserowner",{ user_id = parseInt(user_id), home = tostring(args[2]) })
-			local myCoHomes = vRP.query("homes/get_homeuserco_owner",{ co_owner = parseInt(user_id), home = tostring(args[2]) })
-			if myHomes[1] or myCoHomes[1] then
-				local totalResidents = vRP.query("homes/count_homepermissions",{ home = tostring(args[2]) })
-				
-				if parseInt(totalResidents[1].qtd) >= parseInt(homes[tostring(args[2])][2]) then
-					TriggerClientEvent("Notify",source,"negado","A residência "..tostring(args[2]).." atingiu o máximo de moradores.",10000)
-					return
-				end
-
+			if myHomes[1] and parseInt(args[3]) ~= user_id then
 				vRP.execute("homes/add_permissions",{ home = tostring(args[2]), user_id = parseInt(args[3]) })
-				
 				local identity = vRP.getUserIdentity(parseInt(args[3]))
 				if identity then
 					TriggerClientEvent("Notify",source,"sucesso","Permissão na residência <b>"..tostring(args[2]).."</b> adicionada para <b>"..identity.name.." "..identity.firstname.."</b>.",10000)
 				end
 			end
-		elseif args[1] == "addco" and config.homes[tostring(args[2])] then
-				local myHomes = vRP.query("homes/get_homeuserowner",{ user_id = parseInt(user_id), home = tostring(args[2]) })
-				if myHomes[1] then
-					vRP.execute("homes/set_permissions",{ home = tostring(args[2]), co_owner = parseInt(args[3]) })
-
-					local identity = vRP.getUserIdentity(parseInt(args[3]))
-					if identity then
-						TriggerClientEvent("Notify",source,"sucesso","Permissão na residência <b>"..tostring(args[2]).."</b> adicionada para <b>"..identity.name.." "..identity.firstname.."</b>.",10000)
-					end
-				end
 		elseif args[1] == "rem" and config.homes[tostring(args[2])] then
 			local myHomes = vRP.query("homes/get_homeuserowner",{ user_id = parseInt(user_id), home = tostring(args[2]) })
-			local myCoHomes = vRP.query("homes/get_homeuserco_owner",{ co_owner = parseInt(user_id), home = tostring(args[2]) })
-			if myHomes[1] or myCoHomes[1] then
+			if myHomes[1] and parseInt(args[3]) ~= user_id then
 				local userHomes = vRP.query("homes/get_homeuser",{ user_id = parseInt(args[3]), home = tostring(args[2]) })
 				if userHomes[1] then
 					vRP.execute("homes/rem_permissions",{ home = tostring(args[2]), user_id = parseInt(args[3]) })
@@ -115,8 +95,7 @@ RegisterCommand('homes',function(source,args,rawCommand)
 			vCLIENT.setBlipsHomes(source,blipHomes)
 		elseif args[1] == "check" and config.homes[tostring(args[2])] then
 			local myHomes = vRP.query("homes/get_homeuserowner",{ user_id = parseInt(user_id), home = tostring(args[2]) })
-			local myCoHomes = vRP.query("homes/get_homeuserco_owner",{ co_owner = parseInt(user_id), home = tostring(args[2]) })
-			if myHomes[1] or myCoHomes[1] then
+			if myHomes[1]then
 				local userHomes = vRP.query("homes/get_homepermissions",{ home = tostring(args[2]) })
 				if parseInt(#userHomes) > 1 then
 					local permissoes = ""
@@ -287,17 +266,13 @@ function src.checkPermissions(homeName)
 				else
 					local ok = vRP.request(source,"Deseja efetuar a compra da residência <b>"..tostring(homeName).."</b> por <b>$"..vRP.format(parseInt(config.homes[tostring(homeName)]['infos'][1])).."</b> ?",30)
 					if ok then
-						if vRP.hasPermission(user_id,config.brokerPerm) then
-							local preco = parseInt(config.homes[tostring(homeName)]['infos'][1])
-				
-							if vRP.tryPayment(user_id,parseInt(preco)) then
-								vRP.execute("homes/buy_permissions",{ home = tostring(homeName), user_id = parseInt(user_id), tax = parseInt(os.time()) })
-								TriggerClientEvent("Notify",source,"sucesso","A residência <b>"..tostring(homeName).."</b> foi comprada com sucesso.",10000)
-							else
-								TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.",10000)		
-							end
+						local preco = parseInt(config.homes[tostring(homeName)]['infos'][1])
+			
+						if vRP.tryPayment(user_id,parseInt(preco)) then
+							vRP.execute("homes/buy_permissions",{ home = tostring(homeName), user_id = parseInt(user_id), tax = parseInt(os.time()) })
+							TriggerClientEvent("Notify",source,"sucesso","A residência <b>"..tostring(homeName).."</b> foi comprada com sucesso.",10000)
 						else
-							TriggerClientEvent("Notify",source,"negado","Apenas corretores podem fazer isso.",10000)	
+							TriggerClientEvent("Notify",source,"negado","Dinheiro insuficiente.",10000)		
 						end
 					end
 					return false
