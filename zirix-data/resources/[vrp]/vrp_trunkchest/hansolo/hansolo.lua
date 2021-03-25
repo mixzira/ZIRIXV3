@@ -29,19 +29,17 @@ end)
 
 --[ TRUNK ]------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("trunkchest:Open")
-AddEventHandler("trunkchest:Open",function()
+RegisterNetEvent("vrp_trunkchest:Open")
+AddEventHandler("vrp_trunkchest:Open",function()
 	local ped = PlayerPedId()
 	vehicle = vRP.getNearestVehicle(7)
-	
-
 	if config.realism then
 		local nuser_id = vRP.getNearestPlayer(5)
 		local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "boot"))
 		local playerpos = GetEntityCoords(GetPlayerPed(-1))
 		local distanceToTrunk = GetDistanceBetweenCoords(trunkpos, playerpos, 1)
 		if not IsPedInAnyVehicle(ped) and distanceToTrunk < 1.85 then
-			if not nuser_id then
+			if not nuser_id and vRPNserver.trytrunk() then
 				TransitionToBlurred(1000)
 				SetNuiFocus(true,true)
 				SendNUIMessage({ action = "showMenu" })
@@ -58,7 +56,7 @@ AddEventHandler("trunkchest:Open",function()
 		local playerpos = GetEntityCoords(GetPlayerPed(-1))
 		local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(vehicle), playerpos, 1)
 		if not IsPedInAnyVehicle(ped) and distanceToVeh < 3 then
-			if not nuser_id then
+			if not nuser_id and vRPNserver.trytrunk() then
 				TransitionToBlurred(1000)
 				SetNuiFocus(true,true)
 				SendNUIMessage({ action = "showMenu" })

@@ -21,7 +21,7 @@ RegisterCommand('vrp_trunkchest:trunk',function(source, args, rawCommand)
 	if IsPedInAnyVehicle(ped) then
 		TriggerEvent('Notify','negado','Você não pode fazer isso dentro do carro.')
 	else
-		TriggerServerEvent('trytrunk:trunk')
+		TriggerEvent('vrp_trunkchest:Open')
 	end
 end)
 

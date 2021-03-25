@@ -122,10 +122,10 @@ function vRPN.chestClose()
 	return false
 end
 
-RegisterServerEvent("trytrunk:trunk")
-AddEventHandler("trytrunk:trunk",function()
+function vRPN.trytrunk()
 	local source = source
 	local user_id = vRP.getUserId(source)
+	print('teste')
 	if user_id then
 		local vehicle, vnetid, placa, vname, lock, banned, trunk = vRPclient.vehList(source,7)
 		if vehicle then	
@@ -135,12 +135,12 @@ AddEventHandler("trytrunk:trunk",function()
 				end
 				local placa_user_id = vRP.getUserByRegistration(placa)
 				if placa_user_id then
-					TriggerClientEvent("trunkchest:Open",source)
+					return true
 				end
 			end
 		end
 	end
-end)
+end
 
 RegisterServerEvent("trytrunk")
 AddEventHandler("trytrunk",function(nveh)
