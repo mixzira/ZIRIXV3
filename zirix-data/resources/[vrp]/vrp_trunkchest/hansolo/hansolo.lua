@@ -33,19 +33,22 @@ RegisterNetEvent("vrp_trunkchest:Open")
 AddEventHandler("vrp_trunkchest:Open",function()
 	local ped = PlayerPedId()
 	vehicle = vRP.getNearestVehicle(7)
+
 	if config.realism then
 		local nuser_id = vRP.getNearestPlayer(5)
 		local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "boot"))
 		local playerpos = GetEntityCoords(GetPlayerPed(-1))
 		local distanceToTrunk = GetDistanceBetweenCoords(trunkpos, playerpos, 1)
 		if not IsPedInAnyVehicle(ped) and distanceToTrunk < 1.85 then
-			if not nuser_id and vRPNserver.trytrunk() then
-				TransitionToBlurred(1000)
-				SetNuiFocus(true,true)
-				SendNUIMessage({ action = "showMenu" })
-				open = true
-				if IsEntityAVehicle(vehicle)  then
-					TriggerServerEvent("trytrunk",VehToNet(vehicle))
+			if not nuser_id then
+				if vRPNserver.trytrunk() then
+					TransitionToBlurred(1000)
+					SetNuiFocus(true,true)
+					SendNUIMessage({ action = "showMenu" })
+					open = true
+					if IsEntityAVehicle(vehicle)  then
+						TriggerServerEvent("trytrunk",VehToNet(vehicle))
+					end
 				end
 			else
 				TriggerEvent("Notify", "negado", "Não pode abrir o porta-malas com jogadores próximos a você")
@@ -54,15 +57,27 @@ AddEventHandler("vrp_trunkchest:Open",function()
 	else
 		local nuser_id = vRP.getNearestPlayer(6)
 		local playerpos = GetEntityCoords(GetPlayerPed(-1))
-		local distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(vehicle), playerpos, 1)
+		local wheel = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "wheel_rr"))
+		local wheel2 = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "wheel_lr"))
+		local x,y,z = table.unpack(wheel)
+		local x2,y2,z2 = table.unpack(wheel2)
+		local x3,y3,z3 = (x+x2)/2,(y+y2)/2,(z+z2)/2
+		local distanceToVeh = 0
+		if GetVehicleClass(vehicle) == 8 or GetVehicleClass(vehicle) == 15 or GetVehicleClass(vehicle) == 16 then
+			distanceToVeh = GetDistanceBetweenCoords(GetEntityCoords(vehicle), playerpos, 1)
+		else
+			distanceToVeh = GetDistanceBetweenCoords(x3,y3,z3, playerpos, 1)
+		end
 		if not IsPedInAnyVehicle(ped) and distanceToVeh < 3 then
-			if not nuser_id and vRPNserver.trytrunk() then
-				TransitionToBlurred(1000)
-				SetNuiFocus(true,true)
-				SendNUIMessage({ action = "showMenu" })
-				open = true
-				if IsEntityAVehicle(vehicle)  then
-					TriggerServerEvent("trytrunk",VehToNet(vehicle))
+			if not nuser_id then
+				if vRPNserver.trytrunk() then
+					TransitionToBlurred(1000)
+					SetNuiFocus(true,true)
+					SendNUIMessage({ action = "showMenu" })
+					open = true
+					if IsEntityAVehicle(vehicle) then
+						TriggerServerEvent("trytrunk",VehToNet(vehicle))
+					end
 				end
 			else
 				TriggerEvent("Notify", "negado", "Não pode abrir o porta-malas com jogadores próximos a você")

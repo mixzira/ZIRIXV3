@@ -125,7 +125,6 @@ end
 function vRPN.trytrunk()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	print('teste')
 	if user_id then
 		local vehicle, vnetid, placa, vname, lock, banned, trunk = vRPclient.vehList(source,7)
 		if vehicle then	
