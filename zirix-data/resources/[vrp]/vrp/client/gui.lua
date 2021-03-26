@@ -472,7 +472,7 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		local idle = 1000
+		local idle = 30
 		local ped = PlayerPedId()
 
 		if apontar then
