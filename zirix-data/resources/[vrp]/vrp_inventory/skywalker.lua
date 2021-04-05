@@ -15,7 +15,7 @@ local actived = {}
 local pick = {}
 local blips = {}
 
-function vRPN.Inventory()
+function vRPN.inventory()
 	local source = source
 	local user_id = vRP.getUserId(source)
 
@@ -36,7 +36,7 @@ function vRPN.Inventory()
 				tSlot = tSlot - 1
 				if vRP.itemBodyList(k) then
 					if tSlot >= 0 then
-						table.insert(inventory,{ amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, type = vRP.itemTypeList(k), peso = vRP.getItemWeight(k) })
+						table.insert(inventory, {amount = parseInt(v.amount), name = vRP.itemNameList(k), index = vRP.itemIndexList(k), key = k, type = vRP.itemTypeList(k), peso = vRP.getItemWeight(k)})
 					end
 				end
 			end
