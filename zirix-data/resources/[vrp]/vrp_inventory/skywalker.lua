@@ -15,7 +15,7 @@ local actived = {}
 local pick = {}
 local blips = {}
 
-function vRPN.inventory()
+function vRPN.Inventory()
 	local source = source
 	local user_id = vRP.getUserId(source)
 
