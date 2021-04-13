@@ -19,11 +19,14 @@ $(function() {
 	});
   
 	document.onkeyup = function(data) {
-	  if (data.which == 27) {
-		if (actionContainer.is(":visible")) {
-		  sendData("ButtonClick", "fechar");
+		if (data.which == 27) {
+		  if (actionContainer.is(":visible")) {
+			//sendData("ButtonClick", "close");
+		  }
+		  $('body').css('background-color', 'transparent')
+		  actionContainer.fadeOut();
+		  sendData("ButtonClick", "close");
 		}
-	  }
 	};
   });
   
