@@ -169,6 +169,8 @@ function src.raiox()
 	end
 end
 
+
+
 RegisterCommand(config.treatment,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local medico = user_id
@@ -258,10 +260,10 @@ RegisterCommand(config.revive,function(source,args,rawCommand)
 				TriggerClientEvent('cancelando',source,true)
 				vRPclient._playAnim(source,false,{{"amb@medic@standing@tendtodead@base","base"},{"mini@cpr@char_a@cpr_str","cpr_pumpchest"}},true)
 				TriggerClientEvent("progress",source,30000,"reanimando")
-				SetTimeout(30000,function()	
-					vCLIENT.zDiagnosticResetBleeding(nplayer)
-					vRPclient.setHealth(nplayer,115)			
+				SetTimeout(30000,function()				
+					vRPclient.killGod(nplayer)
 					vRPclient._stopAnim(source,false)
+					TriggerClientEvent("resetBleeding",nplayer)
 					TriggerClientEvent("Notify",source,"importante","O paciente foi reanimado.")
 					TriggerClientEvent('cancelando',source,false)
 				end)
