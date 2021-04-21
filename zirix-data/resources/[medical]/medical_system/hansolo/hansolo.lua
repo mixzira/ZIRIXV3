@@ -216,6 +216,10 @@ AddEventHandler("tratamento",function()
     end
 end)
 
+function src.zDiagnosticResetBleeding()
+	bleeding = 0
+end
+
 function src.killGod()
 	nocauteado = false
 	local ped = PlayerPedId()
