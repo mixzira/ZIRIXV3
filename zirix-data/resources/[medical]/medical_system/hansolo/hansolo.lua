@@ -216,16 +216,17 @@ AddEventHandler("tratamento",function()
     end
 end)
 
+function src.zDiagnosticResetBleeding()
+	bleeding = 0
+end
+
 function src.killGod()
-	nocauteado = false
 	local ped = PlayerPedId()
+	SetEntityInvincible(ped,false)
 	local x,y,z = table.unpack(GetEntityCoords(ped))
 	NetworkResurrectLocalPlayer(x,y,z,true,true,false)
-	ClearPedBloodDamage(ped)
-	SetEntityInvincible(ped,false)
-	SetEntityHealth(ped,110)
-	ClearPedTasks(ped)
-	ClearPedSecondaryTask(ped)
+	SetEntityHealth(ped,150)
+	bleeding = 0
 end
 
 function drawTxt(text,font,x,y,scale,r,g,b,a)
