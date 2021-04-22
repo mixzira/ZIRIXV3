@@ -206,7 +206,7 @@ AddEventHandler("vrp_policia:algemar",function()
 	local nplayer = vRPclient.getNearestPlayer(source,2)
 	if nplayer then
 		if not vRPclient.isHandcuffed(source) then
-			if vRP.getInventoryItemAmount(user_id,"algemas") >= 1 then
+			if vRP.getInventoryItemAmount(user_id,"algema") >= 1 then
 				if vRPclient.isHandcuffed(nplayer) then
 					TriggerClientEvent('carregar',nplayer,source)
 					vRPclient._playAnim(source,false,{{"mp_arresting","a_uncuff"}},false)
