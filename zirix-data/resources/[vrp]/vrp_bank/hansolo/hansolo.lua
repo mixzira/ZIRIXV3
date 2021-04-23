@@ -88,7 +88,7 @@ end)
 
 RegisterNetEvent('currentbalance2')
 AddEventHandler('currentbalance2', function()
-	TriggerServerEvent('bank:balance')
+	--TriggerServerEvent('bank:balance')
 end)
 
 RegisterNUICallback('depositar', function(data)

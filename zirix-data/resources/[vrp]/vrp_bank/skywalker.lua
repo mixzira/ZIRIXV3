@@ -227,7 +227,7 @@ AddEventHandler('bank:balance', function()
 	local multasbalance = vRP.getUData(user_id,"vRP:multas")
 
 	TriggerClientEvent("currentbalance1",_source,addComma(math.floor(getbankmoney)),multasbalance)
-	TriggerClientEvent("currentbalance2",_source)
+	--TriggerClientEvent("currentbalance2",_source)
 end)
 
 RegisterServerEvent('bank:transferir')
