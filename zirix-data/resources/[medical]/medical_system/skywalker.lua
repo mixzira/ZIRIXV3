@@ -273,3 +273,109 @@ RegisterCommand(config.revive,function(source,args,rawCommand)
 		end
 	end
 end)
+
+RegisterCommand('laudo',function(source,args,rawCommand)
+	local source = source
+	local user_id = vRP.getUserId(source)
+
+	if vRP.hasPermission(user_id,"ems.permissao") then
+		local source = source
+		local user_id = vRP.getUserId(source)
+		local identity = vRP.getUserIdentity(user_id)
+		
+		local nomep = vRP.prompt(source, "Nome completo do paciente:", "")
+		local idadep = vRP.prompt(source, "Idade do paciente:", "")
+		local rgp = vRP.prompt(source, "RG do paciente:", "")
+		local generop = vRP.prompt(source, "Gênero do paciente:", "")
+		local laudo = vRP.prompt(source, "Laudo Médico:", "")
+		local retorno = vRP.prompt(source, "Data de retorno:", "")
+		local data = vRP.prompt(source, "Data de atendimento:", "")
+		local receutuario = vRP.prompt(source, "Medicamento receitado:", "")
+		local crm = vRP.prompt(source, "CRM do médico:", "")
+		local webhookslaudomedico = config.webhook
+
+		if receutuario == "paracetamil" or receutuario == "Paracetamil"  then
+			vRP.giveInventoryItem(user_id,"r-paracetamil",1)
+
+		elseif receutuario == "voltarom" or receutuario == "Voltarom" then
+			vRP.giveInventoryItem(user_id,"r-voltarom",1)
+
+		elseif receutuario == "trandrylux" or receutuario == "Trandrylux" then
+			vRP.giveInventoryItem(user_id,"r-trandrylux",1)
+
+		elseif receutuario == "dorfrex" or receutuario == "Dorfrex" then
+			vRP.giveInventoryItem(user_id,"r-dorfrex",1)
+
+		elseif receutuario == "buscopom" or receutuario == "Buscopom"  then
+			vRP.giveInventoryItem(user_id,"r-buscopom",1)
+
+		end
+
+		PerformHttpRequest(webhookslaudomedico, function(err, text, headers) end, 'POST', json.encode({
+			embeds = {
+				{ 
+					title = "LAUDO MÉDICO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+					thumbnail = {
+					url = "https://cdn.discordapp.com/attachments/822137438537252894/834911395526082601/logotipo.png"
+					}, 
+					fields = {
+						{ 
+							name = "**NOME DO PACIENTE:**", 
+							value = nomep.." ",
+							inline = true
+						},
+						{ 
+							name = "**IDADE DO PACIENTE:**",
+							value = idadep.." \n⠀",
+							inline = true
+						},
+						{ 
+							name = "**RG DO PACIENTE:**",
+							value = rgp,
+							inline = true
+						},
+						{ 
+							name = "**SEXO DO PACIENTE:**",
+							value = generop.." \n⠀",
+							inline = true
+						},
+						{ 
+							name = "**LAUDO MÉDICO:**",
+							value = laudo.." \n⠀"
+						},
+						{ 
+							name = "**DATA E HORA DO ATENDIMENTO:**",
+							value = data,
+							inline = true
+						},
+						{ 
+							name = "**DATA DE RETORNO:**",
+							value = retorno.." \n⠀",
+							inline = true
+						},
+						{ 
+							name = "**RECEITUÁRIO:**",
+							value = receutuario.." \n⠀"
+						},
+						{ 
+							name = "**NOME DO MÉDICO:**",
+							value = identity.name.." "..identity.firstname,
+							inline = true
+						},
+						{ 
+							name = "**CRM:**",
+							value = crm.."\n⠀",
+							inline = true
+						},
+
+					}, 
+					footer = { 
+						text = os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"), 
+						icon_url = "https://cdn.discordapp.com/attachments/822137438537252894/834911395526082601/logotipo.png" 
+					},
+					color = 16384038 
+				}
+			}
+		}), { ['Content-Type'] = 'application/json' })
+	end
+end)

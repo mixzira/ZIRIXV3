@@ -8,6 +8,8 @@ config.diagnosticPlayer = "diagnostico" --Comando para o Paramedico fazer o diag
 
 config.treatment = "tratamento" --Comando para o Paramedico fazer o tratamento no cidadão
 
+config.webhook = "" --Coloque o webhook do seu servidor onde os laudos serão salvos
+
 config.stretchers = { --Macas do Hospital
 	{ ['x'] = -461.08, ['y'] = -289.06, ['z'] = 34.92, ['x2'] = -460.29, ['y2'] = -288.76, ['z2'] = 35.83, ['h'] = 200.14 },
 	{ ['x'] = -464.54, ['y'] = -290.41, ['z'] = 34.92, ['x2'] = -463.67, ['y2'] = -290.22, ['z2'] = 35.83, ['h'] = 194.08 },
