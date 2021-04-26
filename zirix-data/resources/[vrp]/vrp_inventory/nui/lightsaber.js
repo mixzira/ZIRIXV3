@@ -24,6 +24,19 @@ $(document).ready(function(){
 		}
 	};
 
+	$(document).on('mousedown', '.item', function(ev){
+		if(ev.which == 3) {
+		  	itemData = { key: $(ev.target ).closest('.item').data('item-key'), type: $(ev.target ).closest('.item').data('item-type') };
+			if (itemData.key === undefined || itemData.type === undefined) return;
+				$.post("http://vrp_inventory/useItem", JSON.stringify({
+					item: itemData.key,
+					type: itemData.type,
+					amount: Number($("#amount").val())
+				}))
+			document.getElementById("amount").value = "";
+		  	}
+	  	});
+
 	$(".use").each(function(i,obj){
 		$(this).click(function(){
 			$.post("http://vrp_inventory/useClick", JSON.stringify({
