@@ -277,6 +277,22 @@ function spawnPlayer(spawnIdx, cb)
 
         -- V requires setting coords as well
         SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
+        TriggerEvent("resetBleeding")
+        TriggerEvent("resetDiagnostic")
+        TriggerServerEvent("clearInventory")
+        SetPedComponentVariation(ped,7,0,0,2)
+        ClearPedBloodDamage(ped)
+        SetEntityInvincible(ped,false)
+        DoScreenFadeOut(1000)
+        SetEntityHealth(ped,240)
+        TriggerEvent("rainda",0)
+        Citizen.Wait(1000)
+        FreezeEntityPosition(ped,true)
+        SetTimeout(5000,function()
+            FreezeEntityPosition(ped,false)
+            Citizen.Wait(1000)
+            DoScreenFadeIn(1000)
+        end)
 
         NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
 
