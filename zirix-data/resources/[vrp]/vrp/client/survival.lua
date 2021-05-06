@@ -1,3 +1,5 @@
+local statsInterval = 5
+
 function tvRP.varyHealth(variation)
 	local ped = PlayerPedId()
 	local n = math.floor(GetEntityHealth(ped)+variation)
@@ -33,7 +35,7 @@ end
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5000)
+		Citizen.Wait(statsInterval*1000)
 
 		if IsPlayerPlaying(PlayerId()) then
 			local ped = GetPlayerPed(-1)
