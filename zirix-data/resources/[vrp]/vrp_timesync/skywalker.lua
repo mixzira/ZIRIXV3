@@ -48,3 +48,22 @@ RegisterCommand(config.climateCommand,function(source,args,rawCommand)
 		end
 	end
 end)
+
+RegisterCommand(config.changeHour,function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasPermission(user_id,config.timePermission) then
+			local hour = parseInt(args[1])
+			local minute = parseInt(args[2]) 
+			if hour and minute and hour >= 0 and hour < 24 and minute >= 0 and minute < 60 then
+				hours = hour
+				minutes = minute
+				TriggerClientEvent('vrp_timesync:syncTimers',-1,hour,minute)
+			else
+				TriggerClientEvent('Notify',source,"negado", "Valor invalido ou falta de argumentos")
+			end
+		else
+			TriggerClientEvent('Notify',source,"negado", "Voce nao possui permissao para isso")	
+		end
+	end
+end)
