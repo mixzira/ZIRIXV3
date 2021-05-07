@@ -171,7 +171,11 @@ const updateInventory = () => {
 			`)
 		}
         $('#inventory-amount').html(`
-            <div class="amount-bar"><span id="amount-bar" style="width: ${(data.peso*100/data.maxpeso).toFixed(2)}%;"></span></div>
+            <div class="amount-bar"><span id="amount-bar" style="width: ${
+				(data.peso*100/data.maxpeso).toFixed(2) <= 100 ? (data.peso*100/data.maxpeso).toFixed(2) : 100
+			}%; background-color: ${
+				(data.peso*100/data.maxpeso).toFixed(2) <= 100 ? "rgba(66, 236, 134, 1.0)" : "rgb(236, 48, 48)"
+			};"></span></div>
             <div class="amount-text"><b>${(data.peso).toFixed(2)}</b>Kg de <b>${(data.maxpeso).toFixed(2)}</b>Kg</div>
 		`);
 		updateDrag();
