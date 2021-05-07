@@ -8,6 +8,8 @@ config.webhookBottomText = 'ZIRIX V3 BY ZIRAFLIX - '
 config.webhookIcon = 'https://i.imgur.com/Y5Zktwm.png'
 config.webhookColor = 16431885
 
+config.showBlip = false
+
 config.shops = { 
     ['acessories'] = {
         ['name'] = 'acessories',
@@ -160,11 +162,11 @@ config.shops = {
             { ['x'] = -493.43, ['y'] = -339.9, ['z'] = 42.33 }
         },
         ['itens'] = {
-            { itemName = 'paracetamil', itemRequire = 'r-paracetamil', itemPrice = 67, itemAmount = 1 },
-            { itemName = 'voltarom', itemRequire = 'r-voltarom', itemPrice = 80, itemAmount = 1 },
-            { itemName = 'trandrylux', itemRequire = 'r-trandrylux', itemPrice = 95, itemAmount = 1 },
-            { itemName = 'dorfrex', itemRequire = 'r-dorfrex', itemPrice = 60, itemAmount = 1 },
-            { itemName = 'buscopom', itemRequire = 'r-buscopom', itemPrice = 73, itemAmount = 1 }
+            { itemName = 'paracetamil', itemRequire = nil, itemPrice = 67, itemAmount = 1 },
+            { itemName = 'voltarom', itemRequire = nil, itemPrice = 80, itemAmount = 1 },
+            { itemName = 'trandrylux', itemRequire = nil, itemPrice = 95, itemAmount = 1 },
+            { itemName = 'dorfrex', itemRequire = nil, itemPrice = 60, itemAmount = 1 },
+            { itemName = 'buscopom', itemRequire = nil, itemPrice = 73, itemAmount = 1 }
         }
     },
     ['toolshop'] = {

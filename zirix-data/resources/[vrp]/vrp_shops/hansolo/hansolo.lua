@@ -78,3 +78,22 @@ AddEventHandler("vrp_shops:open",function()
 		end
 	end
 end)
+
+Citizen.CreateThread(function()
+	while config.showBlip do
+		local idle = 1000
+		local ped = PlayerPedId()
+		local x,y,z = table.unpack(GetEntityCoords(ped))
+		for k,v in pairs(config.shops) do
+			for k,v in pairs(v.coords) do
+				local bowz,cdz = GetGroundZFor_3dCoord(v.x, v.y, v.z)
+				local distance = GetDistanceBetweenCoords(v.x, v.y, cdz, x, y, z, true)
+				if distance < 5.0 then
+					idle = 5
+					DrawMarker(23, v.x, v.y, v.z-0.97,0,0,0,0,0,0,0.7,0.7,0.5, 66, 236, 134, 150,0,0,0,0)
+				end
+			end
+		end
+		Citizen.Wait(idle)
+	end
+end)

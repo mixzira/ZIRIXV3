@@ -70,7 +70,7 @@ Citizen.CreateThread(function()
 
 		local publicId = searchPublicIdDoor()
 		if publicId ~= 0 then
-			if parseInt(hour) >= 07 and parseInt(hour) <= 21 then
+			if parseInt(hour) >= config.openTime and parseInt(hour) <= config.closeTime then
 				vRPNserver.timeOpen(publicId)
 			else
 				vRPNserver.timeClose(publicId)
