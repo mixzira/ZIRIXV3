@@ -15,5 +15,6 @@ config.climate = { --[ Climas disponíveis para troca automatica ]--
 config.climateCommand = 'clima' --[ Exemplo: /clima EXTRASUNNY | Comando para mudar o clima do servidor. ]--
 config.timePermission = 'manager.permissao' --[ Permissão para mudar as horas e o clima. ]--
 config.changeHour = 'hour'
+config.freeze = 'freeze'
 
 -- AvailableWeatherTypes: EXTRASUNNY, CLEAR, NEUTRAL, SMOG, FOGGY, OVERCAST, CLOUDS, CLEARING, RAIN, THUNDER, SNOW, BLIZZARD, SNOWLIGHT, XMAS, HALLOWEEN.
