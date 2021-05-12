@@ -16,5 +16,6 @@ config.climateCommand = 'clima' --[ Exemplo: /clima EXTRASUNNY | Comando para mu
 config.timePermission = 'manager.permissao' --[ Permissão para mudar as horas e o clima. ]--
 config.changeHour = 'hour'
 config.freeze = 'freeze'
+config.freezeWeather = 'freezeweather'
 
 -- AvailableWeatherTypes: EXTRASUNNY, CLEAR, NEUTRAL, SMOG, FOGGY, OVERCAST, CLOUDS, CLEARING, RAIN, THUNDER, SNOW, BLIZZARD, SNOWLIGHT, XMAS, HALLOWEEN.

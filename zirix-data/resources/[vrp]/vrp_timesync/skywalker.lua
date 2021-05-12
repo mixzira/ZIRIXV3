@@ -10,6 +10,7 @@ local hours = config.startHour
 local minutes = config.startMinutes
 local weather = config.standardWeather
 local freeze = false
+local freezeWeather = false
 
 RegisterServerEvent('vrp_timesync:requestSync')
 AddEventHandler('vrp_timesync:requestSync',function()
@@ -37,8 +38,10 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(600000)
-		weather = config.climate[math.random(5)][1]
-		TriggerClientEvent('vrp_timesync:updateWeather',-1,weather)
+		if not freezeWeather then
+			weather = config.climate[math.random(5)][1]
+			TriggerClientEvent('vrp_timesync:updateWeather',-1,weather)
+		end
 	end
 end)
 
@@ -80,6 +83,22 @@ RegisterCommand(config.freeze,function(source,args,rawCommand)
 				TriggerClientEvent('Notify',source,"sucesso", "Voce parou o tempo")
 			else
 				TriggerClientEvent('Notify',source,"sucesso", "Voce retomou o tempo")
+			end
+		else
+			TriggerClientEvent('Notify',source,"negado", "Voce nao possui permissao para isso")	
+		end
+	end
+end)
+
+RegisterCommand(config.freezeWeather,function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasPermission(user_id,config.timePermission) then
+			freezeWeather = not freezeWeather
+			if freezeWeather then
+				TriggerClientEvent('Notify',source,"sucesso", "Voce parou a troca de clima")
+			else
+				TriggerClientEvent('Notify',source,"sucesso", "Voce retomou a troca de clima")
 			end
 		else
 			TriggerClientEvent('Notify',source,"negado", "Voce nao possui permissao para isso")	

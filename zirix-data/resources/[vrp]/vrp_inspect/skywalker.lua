@@ -184,6 +184,12 @@ end
 function src.takeItem(itemName,amount)
 	local source = source
 	if itemName then
+		for k,v in pairs(config.blackList) do
+			if itemName == v then
+				TriggerClientEvent("Notify", source, "negado", "Nao é permitido pegar esse item")
+				return
+			end
+		end
 		local user_id = vRP.getUserId(source)
 		local nsource = vRP.getUserSource(parseInt(opened[user_id]))
 		local identity = vRP.getUserIdentity(user_id)
