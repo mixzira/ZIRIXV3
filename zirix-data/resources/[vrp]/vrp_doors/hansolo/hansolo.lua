@@ -3,9 +3,10 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
 vRPNserver = Tunnel.getInterface("vrp_doors")
-
+local cfg = module("vrp_doors","config/config")
 local doors = {}
 local hour = 0
+
 
 RegisterNetEvent('vrpdoorsystem:load')
 AddEventHandler('vrpdoorsystem:load',function(list)

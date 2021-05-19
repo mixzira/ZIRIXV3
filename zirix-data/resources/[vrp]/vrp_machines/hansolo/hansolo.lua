@@ -18,7 +18,7 @@ AddEventHandler("vrp_machines:use",function()
         if DoesEntityExist(machine) then
             tstMachine = GetEntityCoords(machine, 0)
             local distance = GetDistanceBetweenCoords(tstMachine['x'], tstMachine['y'], tstMachine['z'], pedCoords['x'], pedCoords['y'], pedCoords['z'], true)
-            if distance <= 0.9 and not IsPedInAnyVehicle(ped) then
+            if distance <= 1.2 and not IsPedInAnyVehicle(ped) then
                 machineCoords = GetEntityCoords(machine, 0)
                 propMachine = v.prop
                 machineItem = v.item
