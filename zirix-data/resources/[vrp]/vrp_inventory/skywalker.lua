@@ -171,7 +171,7 @@ function vRPN.useItem(itemName,type,ramount)
 					if vRP.tryGetInventoryItem(user_id,"mochilap",1) then
 						TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 						vRP.varyExp(user_id,"physical","strength",650)
-						TriggerClientEvent("inventory:mochilaon",source)
+						if config.equipBackpack then TriggerClientEvent("inventory:mochilaon",source) end
 						TriggerClientEvent("itensNotify",source,'use',"Equipou",""..itemName.."")
 					end
 				end
@@ -182,7 +182,7 @@ function vRPN.useItem(itemName,type,ramount)
 						if vRP.tryGetInventoryItem(user_id,"mochilam",1) then
 							TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 							vRP.varyExp(user_id,"physical","strength",1300)
-							TriggerClientEvent("inventory:mochilaon",source)
+							if config.equipBackpack then TriggerClientEvent("inventory:mochilaon",source) end
 							TriggerClientEvent("itensNotify",source,'use',"Equipou",""..itemName.."")
 						end
 					end
@@ -193,7 +193,7 @@ function vRPN.useItem(itemName,type,ramount)
 					if vRP.tryGetInventoryItem(user_id,"mochilag",1) then
 						TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
 						vRP.varyExp(user_id,"physical","strength",1900)
-						TriggerClientEvent("inventory:mochilaon",source)
+						if config.equipBackpack then TriggerClientEvent("inventory:mochilaon",source) end
 						TriggerClientEvent("itensNotify",source,'use',"Equipou",""..itemName.."")
 					end
 				end
