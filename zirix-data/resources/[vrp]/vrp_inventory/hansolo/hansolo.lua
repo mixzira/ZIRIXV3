@@ -10,6 +10,7 @@ vRPC = {}
 Tunnel.bindInterface("vrp_inventory",vRPC)
 Proxy.addInterface("vrp_inventory",vRPC)
 armour = false
+bag = false
 
 --[ VARIABLES ]--------------------------------------------------------------------------------------------------------------------------
 
@@ -34,7 +35,17 @@ RegisterNUICallback("invClose",function(data)
 end)
 
 RegisterNUICallback("unEquip",function(cb)
-    vRPNserver.unEquip()
+    if not bag then
+        --bag = true
+        if vRPNserver.unEquip() then 
+            bag = true
+            SetTimeout(10000,function()
+                bag = false
+            end)
+        end
+    else
+        TriggerEvent("Notify","negado","Você já está desequipando uma mochila.")
+    end
 end)
 
 --[ INVOPEN ]----------------------------------------------------------------------------------------------------------------------------
@@ -214,6 +225,10 @@ function vRPC.checkVida()
     return false
 end
 
+function vRPC.checkHasWeapon(itemName)
+    return HasPedGotWeapon(PlayerPedId(), GetHashKey(string.gsub(itemName,"wbody","")), false)
+end
+
 --[ DRUNK ]------------------------------------------------------------------------------------------------------------------------------
 
 local drunkStats = 0
@@ -314,6 +329,16 @@ end)
 RegisterNetEvent("notallowArmour")
 AddEventHandler("notallowArmour",function()
     armour = true
+end)
+
+RegisterNetEvent("notallowBag")
+AddEventHandler("notallowBag",function()
+    bag = true
+end)
+
+RegisterNetEvent("allowBag")
+AddEventHandler("allowBag",function()
+    bag = false
 end)
 
 

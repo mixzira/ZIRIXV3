@@ -1202,17 +1202,19 @@ function vRPN.useItem(itemName,type,ramount)
 				end
 			end
 		elseif type == 'equip' then
-			if vRP.tryGetInventoryItem(user_id,itemName,1) then
-				local weapons = {}
-				local identity = vRP.getUserIdentity(user_id)
-				
-				weapons[string.gsub(itemName,"wbody","")] = { ammo = 0 }
-				--print(weapons)
-				vRPclient._giveWeapons(source,weapons)
-				PerformHttpRequest(config.webhookEquip, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE ITEM EQUIPADO:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM EQUIPOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM EQUIPADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ]"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
-				TriggerClientEvent("itensNotify",source,'use',"Equipou",""..vRP.itemIndexList(itemName).."")
-				TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
-
+			if not vRPCclient.checkHasWeapon(source, itemName) then
+				if vRP.tryGetInventoryItem(user_id,itemName,1) then
+					local weapons = {}
+					local identity = vRP.getUserIdentity(user_id)
+					weapons[string.gsub(itemName,"wbody","")] = { ammo = 0 }
+					--print(weapons)
+					vRPclient._giveWeapons(source,weapons)
+					PerformHttpRequest(config.webhookEquip, function(err, text, headers) end, 'POST', json.encode({embeds = {{title = "REGISTRO DE ITEM EQUIPADO:\n⠀", thumbnail = {url = config.webhookIcon}, fields = {{name = "**QUEM EQUIPOU:**", value = "**"..identity.name.." "..identity.firstname.."** [**"..user_id.."**]"}, {name = "**ITEM EQUIPADO:**", value = "[ **Item: "..vRP.itemNameList(itemName).."** ]"}}, footer = {text = config.webhookBottomText..os.date("%d/%m/%Y | %H:%M:%S"), icon_url = config.webhookIcon}, color = config.webhookColor}}}), {['Content-Type'] = 'application/json'})
+					TriggerClientEvent("itensNotify",source,'use',"Equipou",""..vRP.itemIndexList(itemName).."")
+					TriggerClientEvent('vrp_inventory:Update',source,'updateInventory')
+				end
+			else
+				TriggerClientEvent("Notify", source, "negado", "Você ja possui essa arma equipada")
 			end
 		elseif type == 'reloading' then
 			local uweapons = vRPclient.getWeapons(source)
@@ -1340,6 +1342,7 @@ function vRPN.unEquip()
 			if vRP.getInventoryMaxWeight(user_id)-vRP.getInventoryWeight(user_id) >= 15 and vRPN.getRemaingSlots(user_id) > 17 then
 				TriggerClientEvent("progress",source,10000,"guardando")
 				TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando sua mochila.",9000)
+				TriggerClientEvent("notallowBag",source)
 				SetTimeout(1000*rtime,function()
 					vRP.varyExp(user_id,"physical","strength",-1880)
 					vRP.giveInventoryItem(user_id,"mochilag",1)
@@ -1347,6 +1350,7 @@ function vRPN.unEquip()
 				end)
 				SetTimeout(10000,function()
 					TriggerClientEvent("Notify",source,"sucesso","Você desequipou uma de suas mochilas.")
+					TriggerClientEvent("allowBag",source)
 				end)
 			else
 				TriggerClientEvent("Notify",source,"negado","Você precisa esvaziar a mochila antes de fazer isso.")
@@ -1355,6 +1359,7 @@ function vRPN.unEquip()
 			if vRP.getInventoryMaxWeight(user_id)-vRP.getInventoryWeight(user_id) >= 24 and vRPN.getRemaingSlots(user_id) > 11 then
 				TriggerClientEvent("progress",source,10000,"guardando")
 				TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando sua mochila.",9000)
+				TriggerClientEvent("notallowBag",source)
 				SetTimeout(1000*rtime,function()
 					vRP.varyExp(user_id,"physical","strength",-1300)
 					vRP.giveInventoryItem(user_id,"mochilam",1)
@@ -1362,6 +1367,7 @@ function vRPN.unEquip()
 				end)
 				SetTimeout(10000,function()
 					TriggerClientEvent("Notify",source,"sucesso","Você desequipou uma de suas mochilas.")
+					TriggerClientEvent("allowBag",source)
 				end)
 			else 
 				TriggerClientEvent("Notify",source,"negado","Você precisa esvaziar a mochila antes de fazer isso.")
@@ -1370,6 +1376,7 @@ function vRPN.unEquip()
 			if vRP.getInventoryMaxWeight(user_id)-vRP.getInventoryWeight(user_id) >= 45 and vRPN.getRemaingSlots(user_id) > 5 then
 				TriggerClientEvent("progress",source,10000,"guardando")
 				TriggerClientEvent("Notify",source,"aviso","<b>Aguarde!</b> Você está desequipando sua mochila.",9000)
+				TriggerClientEvent("notallowBag",source)
 				SetTimeout(1000*rtime,function()
 					vRP.varyExp(user_id,"physical","strength",-650)
 					vRP.giveInventoryItem(user_id,"mochilap",1)
@@ -1378,12 +1385,14 @@ function vRPN.unEquip()
 				end)
 				SetTimeout(10000,function()
 					TriggerClientEvent("itensNotify",source,'use',"Desequipou","Mochila")
+					TriggerClientEvent("allowBag",source)
 				end)
 			else
 				TriggerClientEvent("Notify",source,"negado","Você precisa esvaziar a mochila antes de fazer isso.")
 			end
 		elseif vRP.getExp(user_id,"physical","strength") == 20 then -- 6Kg
 			TriggerClientEvent("Notify",source,"negado","Você não tem mochilas equipadas.")
+			return false
 		end
 	end
 end
