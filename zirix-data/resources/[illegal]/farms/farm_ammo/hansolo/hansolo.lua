@@ -58,26 +58,24 @@ Citizen.CreateThread(function()
 				if distance <= 1.5 then
 					drawTxt("PRESSIONE  ~r~E~w~  PARA COLETAR O PACOTE",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(0,38) then
-						if farm_ammo.checkPayment() then
-							
-							porcentagem = math.random(1,100)
+						farm_ammo.checkPayment() 
+						porcentagem = math.random(1,100)
 
-							if porcentagem >= config1.percentage[1] and porcentagem <= config1.percentage[2] then
-								farm_ammo.MarcarOcorrencia()
-							end
-							RemoveBlip(blips)
-							
-							backentrega = selecionado
-							while true do
-								if backentrega == selecionado then
-									selecionado = math.random(#config1.locs)
-								else
-									break
-								end
-							end							
-							CriandoBlip(config1.locs,selecionado)
-							TriggerEvent("Notify","importante","Vá até o próximo local e colete o <b>Pacote</b>.")
+						if porcentagem >= config1.percentage[1] and porcentagem <= config1.percentage[2] then
+							farm_ammo.MarcarOcorrencia()
 						end
+						RemoveBlip(blips)
+						
+						backentrega = selecionado
+						while true do
+							if backentrega == selecionado then
+								selecionado = math.random(#config1.locs)
+							else
+								break
+							end
+						end							
+						CriandoBlip(config1.locs,selecionado)
+						TriggerEvent("Notify","importante","Vá até o próximo local e colete o <b>Pacote</b>.")
 					end
 				end
 			end
