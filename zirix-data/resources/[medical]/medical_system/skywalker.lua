@@ -135,7 +135,6 @@ function src.raiox()
 		for k,v in pairs(diagnostic) do
 			if morto == false then
 				if diagnostic then
-					print('[DEBUG] src.raiox diagnostic true')
 					if k == 31086 or k == 12844 or k == 65068 or k == 39317 then -- cabeca/pescoco
 						head = true
 						headTwo = true
