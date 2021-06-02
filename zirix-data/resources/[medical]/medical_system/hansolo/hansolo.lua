@@ -60,7 +60,7 @@ local teste = false
 Citizen.CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
-		if GetEntityHealth(ped) > 115 then
+		if GetEntityHealth(ped) > 101 then
 			local hit,bone = GetPedLastDamageBone(ped)						
 			if hit and not damaged[bone] and bone ~= 0 and not teste then
 				damaged[bone] = true
