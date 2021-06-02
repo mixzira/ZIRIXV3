@@ -63,6 +63,7 @@ Citizen.CreateThread(function()
 		if GetEntityHealth(ped) > 115 then
 			local hit,bone = GetPedLastDamageBone(ped)						
 			if hit and not damaged[bone] and bone ~= 0 and not teste then
+				print('[DEBUG] GetPedLastDamageBone triggered: '..bone)
 				damaged[bone] = true
 				bleeding = bleeding + 1
 			end
@@ -72,7 +73,7 @@ Citizen.CreateThread(function()
 end)
 
 function src.getDiagnostic()
-	for k,v in pairs(damaged) do
+	for k,v in pairs(damaged) do --loop sem nada dentro?
 		
 	end	
 	return damaged

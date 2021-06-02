@@ -3,6 +3,7 @@ build/**/*
 zirix-data/cache/**/*
 zirix-data/cache/*
 zirix-data/config/int.cfg
+zirix-data/config/keys.cfg
 zirix-data/resources/[system]/[builders]/webpack/**/*
 zirix-data/resources/[system]/[builders]/webpack/*
 zirix-data/resources/[system]/[builders]/yarn/**/*
@@ -12,3 +13,6 @@ zirix-data/resources/[system]/screenshot-basic/*
 zirix-data/resources/[naoenviar]/*
 zirix-data/resources/[naoenviar]/**/*
 zirix-data/resources/[naoenviar]/**
+zirix-data/config/keys.cfg
+.vscode/settings.json
+zirix-data/config/keys.cfg
