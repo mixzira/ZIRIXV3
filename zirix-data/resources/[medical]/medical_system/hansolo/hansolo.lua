@@ -37,9 +37,15 @@ function ToggleActionMenu()
 	end
 end
 
+local damaged = {}
+local bleeding = 0
+local bleedtype = "Superficial"
+
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "rem-kit" then
+		print('[DEBUG] diagnostic client: '.. json.encode(damaged, { indent = true }))
 		local head, legs, foot, breast = vSERVER.raiox()
+		print('[DEBUG] diagnostic server: '.. json.encode(vSERVER.raiox(), { indent = true }))
 		SendNUIMessage({
 			head = head,
 			legs = legs,
@@ -51,10 +57,6 @@ RegisterNUICallback("ButtonClick",function(data,cb)
 		ToggleActionMenu()
 	end
 end)
-
-local damaged = {}
-local bleeding = 0
-local bleedtype = "Superficial"
 
 local teste = false
 Citizen.CreateThread(function()
