@@ -250,7 +250,8 @@ end)
 
 RegisterCommand('testdiagnostic',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
-	print('[DEBUG] diagnostic id'..user_id..': '.. json.encode(vCLIENT.getDiagnostic(user_id), { indent = true }))
+	TriggerClientEvent("Notify",source,"importante","Verifique o console do servidor.")
+	print('[DEBUG] diagnostic id'..source..': '.. json.encode(vCLIENT.getDiagnostic(source), { indent = true }))
 end)
 
 RegisterCommand(config.revive,function(source,args,rawCommand)
