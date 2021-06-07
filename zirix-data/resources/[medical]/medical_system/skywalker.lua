@@ -248,6 +248,11 @@ RegisterCommand(config.treatment,function(source,args,rawCommand)
     end
 end)
 
+RegisterCommand('testdiagnostic',function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	print('[DEBUG] diagnostic id'..user_id..': '.. json.encode(vCLIENT.getDiagnostic(user_id), { indent = true }))
+end)
+
 RegisterCommand(config.revive,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,config.medicpermission) then
@@ -255,7 +260,6 @@ RegisterCommand(config.revive,function(source,args,rawCommand)
 		if nplayer then
 			if vRPclient.isInComa(nplayer) then
 				print('[DEBUG] diagnostic pre reanimar: '.. json.encode(vCLIENT.getDiagnostic(nplayer), { indent = true }))
-				vCLIENT.getDiagnostic(nplayer)
 				local identity_user = vRP.getUserIdentity(user_id)
 				local nuser_id = vRP.getUserId(nplayer)
 				local identity_coma = vRP.getUserIdentity(nuser_id)
