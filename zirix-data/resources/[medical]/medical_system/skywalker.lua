@@ -248,19 +248,12 @@ RegisterCommand(config.treatment,function(source,args,rawCommand)
     end
 end)
 
-RegisterCommand('testdiagnostic',function(source,args,rawCommand)
-	local user_id = vRP.getUserId(source)
-	TriggerClientEvent("Notify",source,"importante","Verifique o console do servidor.")
-	print('[DEBUG] diagnostic id'..source..': '.. json.encode(vCLIENT.getDiagnostic(source), { indent = true }))
-end)
-
 RegisterCommand(config.revive,function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,config.medicpermission) then
 		local nplayer = vRPclient.getNearestPlayer(source,2)
 		if nplayer then
 			if vRPclient.isInComa(nplayer) then
-				print('[DEBUG] diagnostic pre reanimar: '.. json.encode(vCLIENT.getDiagnostic(nplayer), { indent = true }))
 				local identity_user = vRP.getUserIdentity(user_id)
 				local nuser_id = vRP.getUserId(nplayer)
 				local identity_coma = vRP.getUserIdentity(nuser_id)
@@ -271,7 +264,6 @@ RegisterCommand(config.revive,function(source,args,rawCommand)
 					vRPclient._stopAnim(source,false)
 					vCLIENT.zDiagnosticResetBleeding(nplayer)
 					vRPclient.setHealth(nplayer,115)
-					print('[DEBUG] diagnostic pos reanimar: '.. json.encode(vCLIENT.getDiagnostic(nplayer), { indent = true }))
 					TriggerClientEvent("Notify",source,"importante","O paciente foi reanimado.")
 					TriggerClientEvent('cancelando',source,false)
 				end)
