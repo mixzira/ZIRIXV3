@@ -44,6 +44,13 @@ local bleedtype = "Superficial"
 RegisterNUICallback("ButtonClick",function(data,cb)
 	if data == "rem-kit" then
 		local head, legs, foot, breast = vSERVER.raiox()
+		if not head and not legs and not foot and not breast then
+			head = true
+			legs = true
+			foot = true
+			breast = true
+			vSERVER.setDamaged()
+		end
 		SendNUIMessage({
 			head = head,
 			legs = legs,

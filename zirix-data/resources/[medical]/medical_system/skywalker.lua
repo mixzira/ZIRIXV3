@@ -120,6 +120,13 @@ end
 	local breastTwo = false
 	local legsTwo = false
 	local footTwo = false
+
+function src.setDamaged()
+	headTwo = true
+	breastTwo = true
+	legsTwo = true
+	footTwo = true
+end
 	
 function src.raiox()
     local source = source
