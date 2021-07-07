@@ -194,6 +194,7 @@ end)
 
 
 local tratamento = false
+local breaked = false
 RegisterNetEvent("tratamento")
 AddEventHandler("tratamento",function()
     local ped = PlayerPedId()
@@ -205,11 +206,19 @@ AddEventHandler("tratamento",function()
 	tratamento = true   
 	if tratamento then
 		repeat
-			Citizen.Wait(600)
-			if GetEntityHealth(ped) > 101 then
-				SetEntityHealth(ped,GetEntityHealth(ped)+1)
+			if IsEntityPlayingAnim(ped,"amb@world_human_sunbathe@female@back@idle_a","idle_a",3) then
+				Citizen.Wait(600)
+				if GetEntityHealth(ped) > 101 then
+					SetEntityHealth(ped,GetEntityHealth(ped)+1)
+				end
+			else 
+				tratamento = false
+				breaked = true
+				break 
 			end
 		until GetEntityHealth(ped) >= 400 or GetEntityHealth(ped) <= 101
+
+		if not breaked then
 			TriggerEvent("Notify","sucesso","Tratamento concluido.",8000)
 			tratamento = false
 			NetworkResurrectLocalPlayer(x,y,z,true,true,false)
@@ -220,6 +229,10 @@ AddEventHandler("tratamento",function()
 			ClearPedSecondaryTask(ped)
 			Wait(1000)
 			damaged = {}
+		else
+			TriggerEvent("Notify","negado","Voce se levantou antes do tratamento ser finalizado.",8000)
+			breaked = false
+		end
     end
 end)
 
