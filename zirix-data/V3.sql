@@ -1,4 +1,4 @@
-﻿CREATE DATABASE IF NOT EXISTS `zirix`;
+CREATE DATABASE IF NOT EXISTS `zirix`;
 USE `zirix`;
 
 CREATE TABLE IF NOT EXISTS `phone_app_chat` (
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `vrp_priority` (
   `steam` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `vrp_shops` (
+CREATE TABLE IF NOT EXISTS `vrp_shops` (zirix
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -236,4 +236,4 @@ CREATE TABLE `web_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `web_login` (`id`, `login`, `senha`, `permissao`) VALUES
-(1, 'admin', 'admin', 99);
+(1, 'admin', 'admin', 99);zirixzirixvrp_user_ids
