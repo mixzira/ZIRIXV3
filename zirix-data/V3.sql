@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `vrp_priority` (
   `steam` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `vrp_shops` (zirix
+CREATE TABLE IF NOT EXISTS `vrp_shops` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -227,13 +227,3 @@ CREATE TABLE IF NOT EXISTS `vrp_estoque` (
   `vehicle` varchar(100) NOT NULL,
   `quantidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `web_login` (
-  `id` int(11) NOT NULL,
-  `login` varchar(30) NOT NULL,
-  `senha` varchar(30) NOT NULL,
-  `permissao` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `web_login` (`id`, `login`, `senha`, `permissao`) VALUES
-(1, 'admin', 'admin', 99);zirixzirixvrp_user_ids

@@ -402,7 +402,7 @@ vehs.vehglobal = {
 	["vagner"] = { ['name'] = "Vagner", ['price'] = 680000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = 1939284556, ['banned'] = false },
 	["visione"] = { ['name'] = "Visione", ['price'] = 690000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -998177792, ['banned'] = false },
 	["voltic"] = { ['name'] = "Voltic", ['price'] = 440000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -1622444098, ['banned'] = false },
-	["xa21"] = { ['name'] = "Xa21", ['price'] = 630000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = 917809321, ['banned'] = false },
+	["xa21"] = { ['name'] = "Xa21", ['price'] = 630000, ['tipo'] = "carros", ['mala'] = 500, ['slots'] = 25, ['hash'] = 917809321, ['banned'] = false },
 	["zentorno"] = { ['name'] = "Zentorno", ['price'] = 920000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -1403128555, ['banned'] = false },
 	["urus"] = { ['name'] = "Urus", ['price'] = 920000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -520214134, ['banned'] = false },
 	["divo"] = { ['name'] = "Divo", ['price'] = 920000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = 1503141430, ['banned'] = false },
