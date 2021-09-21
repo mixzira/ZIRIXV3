@@ -19,9 +19,9 @@ local nveh = nil
 local pveh01 = nil
 local pveh02 = nil
 -----------------------------------------------------------------------------------------------------------------------------------------
--- COORDENADAS
+-- COORDENADAS --750.85,1273.92,360.3
 -----------------------------------------------------------------------------------------------------------------------------------------
-local CoordenadaX, CoordenadaY, CoordenadaZ = 750.85,1273.92,360.3
+local CoordenadaX, CoordenadaY, CoordenadaZ = 750.85, 1273.92, 360.3
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LOCS
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -42,10 +42,10 @@ Citizen.CreateThread(function()
 		local RusherOtimizar = 1000
 		local ped = PlayerPedId()
 		local x,y,z = table.unpack(GetEntityCoords(ped))
-		if Vdist(CoordenadaX,CoordenadaY,CoordenadaZ,x,y,z) <= 3 then
+		if Vdist(750.85,1273.92,360.3,x,y,z) <= 3 then
 			RusherOtimizar = 5
-			DrawMarker(21,CoordenadaX,CoordenadaY,CoordenadaZ-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,255,255,255,25,0,0,0,1)
-			if Vdist(CoordenadaX,CoordenadaY,CoordenadaZ,x,y,z) <= 1 then
+			DrawMarker(21,750.85,1273.92,360.3-0.6,0,0,0,0.0,0,0,0.5,0.5,0.4,255,255,255,25,0,0,0,1)
+			if Vdist(750.85,1273.92,360.3,x,y,z) <= 1 then
 				RusherOtimizar = 4
 				drawTxt("~g~E~w~  PARA HACKEAR",4,0.5,0.93,0.50,255,255,255,180)
 				if IsControlJustPressed(0,38) and vSERVER.checkTimers() then
@@ -229,7 +229,9 @@ Citizen.CreateThread(function()
 							end
 						end)
 					end
-
+				end
+			end	
+					
 			if Vdist2(locs[pos].x2,locs[pos].y2,locs[pos].z2,x,y,z) <= 30.0 then
 				TriggerServerEvent("tryDeleteVehicle",VehToNet(nveh))
 				TriggerServerEvent("tryDeleteEntity",PedToNet(pveh01))
