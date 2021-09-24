@@ -7,7 +7,7 @@ config = {}
 ]]
 
 
-config.imageService = '191.96.79.96:3358/ziraflix-images-service/319321727630835712'
+config.imageService = ''
 
 config.webhook = ''
 
