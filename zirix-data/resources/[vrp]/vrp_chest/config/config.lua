@@ -1,6 +1,12 @@
 config = {}
 
-config.imageServer = ''
+--[[
+	ATENÇÃO!!!
+	1. Caso utilize o serviço de Straming de imagens da ZIRAFLIX, solicite via Ticket a ativação do seu serviço, para receber o endereçamento da sua rede de streaming;
+	2. Caso NÃO utilize, insira abaixo o IP da sua maquina e/ou serviço de images, seguindo do diretório. Exemplo: "127.0.0.1:3355/images".
+]]
+
+config.imageService = '191.96.79.96:3358/ziraflix-images-service/319321727630835712' 
 
 config.webhookBottomText = 'CLEAN TWO - '
 config.webhookIcon = 'https://i.imgur.com/CtQB816.png'
@@ -9,6 +15,7 @@ config.webhookColor = 16431885
 config.policePermission = 'policia.permissao'
 
 config.chest = {
+	['teste'] = { ['x'] = 26.68, ['y'] = -1352.85, ['z'] = 29.34, ['weight'] = 20, ['slots'] = 6, ['perm'] = 'ems.permissao', ['webhook'] = '' },
     ['ems'] = { ['x'] = -453.53, ['y'] = -308.39, ['z'] = 34.92, ['weight'] = 5000, ['slots'] = 500, ['perm'] = 'ems.permissao', ['webhook'] = '' },
 	['policia-arsenal'] = { ['x'] = -1098.8, ['y'] = -825.99, ['z'] = 14.29, ['weight'] = 5000, ['slots'] = 500, ['perm'] = 'policia.permissao', ['webhook'] = '' },
 	['policia-evidencias'] = { ['x'] = -1074.87, ['y'] = -821.42, ['z'] = 11.04, ['weight'] = 5000, ['slots'] = 500, ['perm'] = 'policia.permissao', ['webhook'] = '' },

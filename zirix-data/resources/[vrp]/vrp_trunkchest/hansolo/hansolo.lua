@@ -102,9 +102,9 @@ end)
 
 RegisterNUICallback("requestInventories",function(data,cb)
 	local inventory, trunkinventory, weight, maxweight, trunkweight, maxtrunkweight, tSlot, tcSlot = vRPNserver.Inventories()
-	local ip = config.imageServer
+	local imageService = config.imageService
 	if inventory then
-		cb({ inventory = inventory, trunkinventory = trunkinventory, weight = weight, maxweight = maxweight, trunkweight = trunkweight, maxtrunkweight = maxtrunkweight, tSlot = tSlot, tcSlot = tcSlot, ip = ip })	
+		cb({ inventory = inventory, trunkinventory = trunkinventory, weight = weight, maxweight = maxweight, trunkweight = trunkweight, maxtrunkweight = maxtrunkweight, tSlot = tSlot, tcSlot = tcSlot, imageService = imageService })	
 	end
 end)
 

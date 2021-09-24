@@ -55,9 +55,9 @@ end)
 RegisterNUICallback('requestShops',function(data,cb)
 	local sname = dShop
 	local inventory, weight, maxweight, slots, fslots, fshopslots, shop, vault, maxvault, options, maxstock, security = vSERVER.openNav(sname)
-	local ip = config.imageServer
+	local imageService = config.imageService
 	if inventory then
-		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, shop = shop, sname = sname, vault = vault, maxvault = maxvault, options = options, maxstock = maxstock, security = security, ip = ip })
+		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, shop = shop, sname = sname, vault = vault, maxvault = maxvault, options = options, maxstock = maxstock, security = security, imageService = imageService })
 	end
 end)
 

@@ -31,9 +31,9 @@ end)
 
 RegisterNUICallback("requestChest",function(data,cb)
 	local inventory, nuinventory, weight, maxweight, nuweight, numaxweight, slots, nuslots = vSERVER.openChest()
-	local ip = config.imageServer
+	local imageService = config.imageService
 	if inventory then
-		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, slots = slots, nuslots = nuslots, ip = ip })
+		cb({ inventory = inventory, nuinventory = nuinventory, weight = weight, maxweight = maxweight, nuweight = nuweight, numaxweight = numaxweight, slots = slots, nuslots = nuslots, imageService = imageService })
 	end
 end)
 

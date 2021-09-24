@@ -287,6 +287,18 @@ function vRP.verifySlots(user_id)
 	end
 end
 
+function vRP.checkExistentItem(user_id, item)
+	local data = vRP.getUserDataTable(user_id)
+	if data then
+		local haveItem = data.inventory[item]
+		if haveItem then
+			return true
+		else
+			return false
+		end
+	end
+end
+
 function vRP.getRemaingSlots(user_id)
 	local tSlot = vRP.verifySlots(user_id)
 
@@ -340,7 +352,6 @@ function vRP.storeChestItem(user_id, chestData, itemName, amount, chestWeight, c
 		local data = vRP.getSData(chestData)
 		local items = json.decode(data) or {}
 		if data and items ~= nil then
-
 			if parseInt(amount) > 0 then
 				activedAmount[user_id] = parseInt(amount)
 			else
@@ -349,16 +360,21 @@ function vRP.storeChestItem(user_id, chestData, itemName, amount, chestWeight, c
 
 			local new_weight = vRP.computeItemsWeight(items) + vRP.getItemWeight(itemName) * parseInt(activedAmount[user_id])
 
-			if new_weight <= parseInt(chestWeight) and vRP.getRemaingChestSlots(chestData, chestSlots) >= 1 then
-				if vRP.tryGetInventoryItem(parseInt(user_id), itemName, parseInt(activedAmount[user_id])) then
-					if items[itemName] ~= nil then
+			if items[itemName] ~= nil then
+				if new_weight <= parseInt(chestWeight) then
+					if vRP.tryGetInventoryItem(parseInt(user_id), itemName, parseInt(activedAmount[user_id])) then
 						items[itemName].amount = parseInt(items[itemName].amount) + parseInt(activedAmount[user_id])
-					else
-						items[itemName] = { amount = parseInt(activedAmount[user_id]) }
+						vRP.setSData(chestData, json.encode(items))
+						return true
 					end
-
-					vRP.setSData(chestData, json.encode(items))
-					return true
+				end
+			else
+				if new_weight <= parseInt(chestWeight) and vRP.getRemaingChestSlots(chestData, chestSlots) >= 1 then
+					if vRP.tryGetInventoryItem(parseInt(user_id), itemName, parseInt(activedAmount[user_id])) then
+						items[itemName] = { amount = parseInt(activedAmount[user_id]) }
+						vRP.setSData(chestData, json.encode(items))
+						return true
+					end
 				end
 			end
 		end
@@ -383,17 +399,33 @@ function vRP.tryChestItem(user_id, chestData, itemName, amount)
 				end
 
 				local new_weight = vRP.getInventoryWeight(parseInt(user_id)) + vRP.getItemWeight(itemName) * parseInt(activedAmount[user_id])
-				if new_weight <= vRP.getInventoryMaxWeight(parseInt(user_id)) and vRP.getRemaingSlots(parseInt(user_id)) >= 1 then
-					vRP.giveInventoryItem(parseInt(user_id), itemName, parseInt(activedAmount[user_id]))
 
-					items[itemName].amount = parseInt(items[itemName].amount) - parseInt(activedAmount[user_id])
-
-					if parseInt(items[itemName].amount) <= 0 then
-						items[itemName] = nil
+				if vRP.checkExistentItem(user_id, itemName) then
+					if new_weight <= vRP.getInventoryMaxWeight(parseInt(user_id)) then
+						vRP.giveInventoryItem(parseInt(user_id), itemName, parseInt(activedAmount[user_id]))
+	
+						items[itemName].amount = parseInt(items[itemName].amount) - parseInt(activedAmount[user_id])
+	
+						if parseInt(items[itemName].amount) <= 0 then
+							items[itemName] = nil
+						end
+	
+						vRP.setSData(chestData, json.encode(items))
+						return true
 					end
-
-					vRP.setSData(chestData, json.encode(items))
-					return true
+				else
+					if new_weight <= vRP.getInventoryMaxWeight(parseInt(user_id)) and vRP.getRemaingSlots(parseInt(user_id)) >= 1 then
+						vRP.giveInventoryItem(parseInt(user_id), itemName, parseInt(activedAmount[user_id]))
+	
+						items[itemName].amount = parseInt(items[itemName].amount) - parseInt(activedAmount[user_id])
+	
+						if parseInt(items[itemName].amount) <= 0 then
+							items[itemName] = nil
+						end
+	
+						vRP.setSData(chestData, json.encode(items))
+						return true
+					end
 				end
 			end
 		end

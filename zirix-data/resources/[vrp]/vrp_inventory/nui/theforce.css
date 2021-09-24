@@ -116,6 +116,17 @@ img {
     margin-bottom: 10px;
 }
 
+.fake-slot {
+	position: relative;
+	width: 110px;
+	height: 110px;
+	float: left;
+	background-color: rgba(0,0,0,0.06);
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
 .item s {
 	font-size: 9px;
 	text-decoration: none;
