@@ -24,7 +24,7 @@ RegisterNUICallback("shopClose",function(data)
 end)
 
 RegisterNUICallback("buyItem",function(data)
-	vSERVER.buyItem(data.item,data.amount,openShop)
+	vSERVER.buyItem(data.item, data.amount, openShop)
 end)
 
 RegisterNUICallback("sellItem",function(data)

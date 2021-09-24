@@ -1,10 +1,10 @@
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
-vRP = Proxy.getInterface("vRP")
+local Tunnel = module('vrp','lib/Tunnel')
+local Proxy = module('vrp','lib/Proxy')
+vRP = Proxy.getInterface('vRP')
 
 --[ CONECTION ]--------------------------------------------------------------------------------------------------------------------------
 
-vRPNserver = Tunnel.getInterface("vrp_trunkchest")
+vRPNserver = Tunnel.getInterface('vrp_trunkchest')
 local vehicle = 0
 local open = false
 --[ STARTFOCUS ]-------------------------------------------------------------------------------------------------------------------------
@@ -15,28 +15,28 @@ end)
 
 --[ INVCLOSE ]---------------------------------------------------------------------------------------------------------------------------
 
-RegisterNUICallback("invClose",function(data)
+RegisterNUICallback('invClose',function(data)
 	vRPNserver.chestClose()
 	TransitionFromBlurred(1000)
 	SetNuiFocus(false,false)
-	SendNUIMessage({ action = "hideMenu" })
+	SendNUIMessage({ action = 'hideMenu' })
 	open = false
 	local vehicle = vRP.getNearestVehicle(7)
 	if IsEntityAVehicle(vehicle) then
-		TriggerServerEvent("trytrunk",VehToNet(vehicle))
+		TriggerServerEvent('trytrunk',VehToNet(vehicle))
 	end
 end)
 
 --[ TRUNK ]------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("vrp_trunkchest:Open")
-AddEventHandler("vrp_trunkchest:Open",function()
+RegisterNetEvent('vrp_trunkchest:Open')
+AddEventHandler('vrp_trunkchest:Open', function()
 	local ped = PlayerPedId()
 	vehicle = vRP.getNearestVehicle(7)
 
 	if config.realism then
 		local nuser_id = vRP.getNearestPlayer(5)
-		local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "boot"))
+		local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, 'boot'))
 		local playerpos = GetEntityCoords(GetPlayerPed(-1))
 		local distanceToTrunk = GetDistanceBetweenCoords(trunkpos, playerpos, 1)
 		if not IsPedInAnyVehicle(ped) and distanceToTrunk < 1.85 then
@@ -44,21 +44,21 @@ AddEventHandler("vrp_trunkchest:Open",function()
 				if vRPNserver.trytrunk() then
 					TransitionToBlurred(1000)
 					SetNuiFocus(true,true)
-					SendNUIMessage({ action = "showMenu" })
+					SendNUIMessage({ action = 'showMenu' })
 					open = true
 					if IsEntityAVehicle(vehicle)  then
-						TriggerServerEvent("trytrunk",VehToNet(vehicle))
+						TriggerServerEvent('trytrunk',VehToNet(vehicle))
 					end
 				end
 			else
-				TriggerEvent("Notify", "negado", "Não pode abrir o porta-malas com jogadores próximos a você")
+				TriggerEvent('Notify', 'negado', 'Não pode abrir o porta-malas com jogadores próximos a você')
 			end
 		end
 	else
 		local nuser_id = vRP.getNearestPlayer(6)
 		local playerpos = GetEntityCoords(GetPlayerPed(-1))
-		local wheel = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "wheel_rr"))
-		local wheel2 = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, "wheel_lr"))
+		local wheel = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, 'wheel_rr'))
+		local wheel2 = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, 'wheel_lr'))
 		local x,y,z = table.unpack(wheel)
 		local x2,y2,z2 = table.unpack(wheel2)
 		local x3,y3,z3 = (x+x2)/2,(y+y2)/2,(z+z2)/2
@@ -73,14 +73,14 @@ AddEventHandler("vrp_trunkchest:Open",function()
 				if vRPNserver.trytrunk() then
 					TransitionToBlurred(1000)
 					SetNuiFocus(true,true)
-					SendNUIMessage({ action = "showMenu" })
+					SendNUIMessage({ action = 'showMenu' })
 					open = true
 					if IsEntityAVehicle(vehicle) then
-						TriggerServerEvent("trytrunk",VehToNet(vehicle))
+						TriggerServerEvent('trytrunk',VehToNet(vehicle))
 					end
 				end
 			else
-				TriggerEvent("Notify", "negado", "Não pode abrir o porta-malas com jogadores próximos a você")
+				TriggerEvent('Notify', 'negado', 'Não pode abrir o porta-malas com jogadores próximos a você')
 			end
 		end
 	end
@@ -88,19 +88,19 @@ end)
 
 --[ TAKEITEM ]---------------------------------------------------------------------------------------------------------------------------
 
-RegisterNUICallback("takeItem",function(data)
+RegisterNUICallback('takeItem',function(data)
 	vRPNserver.takeItem(data.item,data.amount)
 end)
 
 --[ STOREITEM ]--------------------------------------------------------------------------------------------------------------------------
 
-RegisterNUICallback("storeItem",function(data)
+RegisterNUICallback('storeItem',function(data)
 	vRPNserver.storeItem(data.item,data.amount,data.vehname)
 end)
 
 --[ REQUESTINVENTORIES ]-----------------------------------------------------------------------------------------------------------------
 
-RegisterNUICallback("requestInventories",function(data,cb)
+RegisterNUICallback('requestInventories',function(data,cb)
 	local inventory, trunkinventory, weight, maxweight, trunkweight, maxtrunkweight, tSlot, tcSlot = vRPNserver.Inventories()
 	local imageService = config.imageService
 	if inventory then
@@ -110,15 +110,15 @@ end)
 
 --[ AUTO ]-------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("Trunk:UpdateTrunk")
-AddEventHandler("Trunk:UpdateTrunk",function(action)
+RegisterNetEvent('Trunk:UpdateTrunk')
+AddEventHandler('Trunk:UpdateTrunk',function(action)
 	SendNUIMessage({ action = action })
 end)
 
 --[ OPEN/CLOSE TRUNK OF VEHICLE ]--------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("synctrunk")
-AddEventHandler("synctrunk",function(index)
+RegisterNetEvent('synctrunk')
+AddEventHandler('synctrunk',function(index)
 	if NetworkDoesNetworkIdExist(index) then
 		local v = NetToVeh(index)
 		local isopen = GetVehicleDoorAngleRatio(v,5)
@@ -142,10 +142,10 @@ Citizen.CreateThread(function()
 				vRPNserver.chestClose()
 				TransitionFromBlurred(1000)
 				SetNuiFocus(false,false)
-				SendNUIMessage({ action = "hideMenu" })
+				SendNUIMessage({ action = 'hideMenu' })
 				open = false
 				if IsEntityAVehicle(vehicle) then
-					TriggerServerEvent("trytrunk",VehToNet(vehicle))
+					TriggerServerEvent('trytrunk',VehToNet(vehicle))
 				end
 			end
 		end
