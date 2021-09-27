@@ -26,10 +26,11 @@ function src.checkTimers()
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.getInventoryItemAmount(user_id,"celular") >= 1 and vRP.tryGetInventoryItem(user_id,"celular",1) then -- Item necessário para hackear e pegar a loc do carro forte
-			-- local policia = vRP.getUsersByPermission("policia.permissao")
-			-- if #policia <= 0 then
-			-- 	TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais no momento.",8000)
-			-- 	return false
+			local policia = vRP.getUsersByPermission("policia.permissao")
+			if #policia <= -1 then
+				TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais no momento.",8000)
+				return false
+			end	
 			if parseInt(os.time()-timers) <= 1000 then
 				TriggerClientEvent("Notify",source,"aviso","O sistema foi hackeado, aguarde <b>"..vRP.format(parseInt((3600-(os.time()-timers)))).." segundos</b> até que o mesmo retorne a funcionar.",8000)
 				return false
@@ -58,10 +59,10 @@ end
 -- DROPAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.dropSystem(x,y,z)
-	TriggerEvent("DropSystem:create","dinheiro-sujo",math.random(420000,480000),x,y,z)
+	TriggerEvent("DropSystem:create","dinheiro-sujo",math.random(42000,48000),x,y,z)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- DROPAR
+-- RESET TIMER
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.resetTimer()
 	timers = 0
@@ -93,7 +94,7 @@ function src.checkExplosive()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.getInventoryItemAmount(user_id,"celular") >= 1 and vRP.tryGetInventoryItem(user_id,"celular",1) then
+		if vRP.getInventoryItemAmount(user_id,"wammoWEAPON_STICKYBOMB") >= 1 and vRP.tryGetInventoryItem(user_id,"wammoWEAPON_STICKYBOMB",1) then
 			return true
 		else
 			TriggerClientEvent("Notify",source,"negado","Precisa de uma <b>C4</b> para abrir a porta.",8000)

@@ -194,19 +194,22 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(1000)
+		local optimization = 1000
 		if DoesEntityExist(nveh) and DoesEntityExist(pveh01) and DoesEntityExist(pveh02) then
 			local x,y,z = table.unpack(GetEntityCoords(nveh))
 			local x2,y2,z2 = table.unpack(GetOffsetFromEntityInWorldCoords(nveh,0.0,-4.0,0.5))
+			local ped = PlayerPedId()
+		    local myCoords1,myCoords2,myCoords3 = table.unpack(GetEntityCoords(ped))
 
 			if IsPedDeadOrDying(pveh01) and IsPedDeadOrDying(pveh02) and not DoesEntityExist(bomba) then
 				vSERVER.markOcorrency(x,y,z)
 				local coordsCar = GetWorldPositionOfEntityBone(nveh, GetEntityBoneIndexByName(nveh,"door_dside_r"))
-				local distancia = GetDistanceBetweenCoords(myCoords.x,myCoords.y, myCoords.z, coordsCar.x, coordsCar.y, coordsCar.z, true)
-
+				local distancia = GetDistanceBetweenCoords(myCoords1,myCoords2,myCoords3, coordsCar.x, coordsCar.y, coordsCar.z, true)
+				
 				if distancia <= 5 then
-					idle = 1
+					optimization = 4
 					draw3DText(coordsCar.x, coordsCar.y+1, coordsCar.z, "[~g~E~w~] PARA DETONAR")
+					--drawTxt("~g~E~w~  PARA DETONAR",4,0.5,0.93,0.50,255,255,255,180)
 					if IsControlJustPressed(1,38) and vSERVER.checkExplosive() then
 						TriggerEvent("Notify","sucesso","C4 plantada com sucesso! Se afaste para a explosão!",10000)
 						TriggerEvent('iniciandoroubo',source)
@@ -245,6 +248,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
+		Citizen.Wait(optimization)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
