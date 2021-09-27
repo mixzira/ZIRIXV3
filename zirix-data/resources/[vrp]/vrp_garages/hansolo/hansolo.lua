@@ -1301,8 +1301,9 @@ end)
 
 RegisterNUICallback("myVehicles",function(data,cb)
 	local vehicles = vSERVER.myVehicles(workgarage)
+	local imageService = config.imageService
 	if vehicles then
-		cb({ vehicles = vehicles })
+		cb({ vehicles = vehicles, imageService = imageService })
 	end
 end)
 

@@ -50,34 +50,34 @@ const updateGarages = () => {
             
             ${nameList.map((item) => (`
 				<div class="carro" data-carro-name="${item.name}">
-                    <div class="imagem-carro"><img src="http://192.99.251.232:3555/images/vrp_vehicles/${item.name}.png"/></div>
+                    <div class="imagem-carro"><img src="http://${data.imageService}/vrp_vehicles/${item.name}.png"/></div>
                     <div class="nome-carro"><p>${item.name2}</p></div>
                     <div class="status">
                         <div class="status-titulo"><p>STATUS</p></div>
                         <div class="status-motor">
                             <div class="barra-motor"><span id="motor" style="width: ${item.engine}%;"></span></div>
-                            <div class="icone-motor"><img src="http://192.99.251.232:3555/images/vrp_vehicles/motor.png"/></div>
+                            <div class="icone-motor"><img src="http://${data.imageService}/vrp_vehicles/motor.png"/></div>
                             <div class="texto-motor"><p>${item.engine}%</p></div>
                         </div>
                         <div class="status-chassis">
                             <div class="barra-chassis"><span id="chassis" style="width: ${item.body}%;"></span></div>
-                            <div class="icone-chassis"><img src="http://192.99.251.232:3555/images/vrp_vehicles/chassis.png"/></div>
+                            <div class="icone-chassis"><img src="http://${data.imageService}/vrp_vehicles/chassis.png"/></div>
                             <div class="texto-chassis"><p>${item.body}%</p></div>
                         </div>
                         <div class="status-fuel">
                             <div class="barra-fuel"><span id="fuel" style="width: ${item.fuel}%;"></span></div>
-                            <div class="icone-fuel"><img src="http://192.99.251.232:3555/images/vrp_vehicles/combustivel.png"/></div>
+                            <div class="icone-fuel"><img src="http://${data.imageService}/vrp_vehicles/combustivel.png"/></div>
                             <div class="texto-fuel"><p>${item.fuel}%</p></div>
                         </div>
                     </div>
                     <div class="licenca">
                         <div class="licenca-titulo"><p>LICENÇA</p></div>
                         <div class="licenca-tax">
-                            <div class="icone-tax"><img src="http://192.99.251.232:3555/images/vrp_vehicles/tax.png"/></div>
+                            <div class="icone-tax"><img src="http://${data.imageService}/vrp_vehicles/tax.png"/></div>
                             <div class="texto-tax"><p>${item.ipva}</p></div>
                         </div>
                         <div class="licenca-valor">
-                            <div class="icone-valor"><img src="http://192.99.251.232:3555/images/vrp_vehicles/money.png"/></div>
+                            <div class="icone-valor"><img src="http://${data.imageService}/vrp_vehicles/money.png"/></div>
                             <div class="texto-valor"><p>${item.status}</p></div>
                         </div>
                     </div>

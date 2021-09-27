@@ -123,10 +123,10 @@ end)
 --[ INVENTORY ]--------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("requestInventory",function(data,cb)
-    local inventario, peso, maxpeso, slots = vRPNserver.Inventory()
-    local ip = config.imageServer
+    local inventario, peso, maxpeso, slots, fslots = vRPNserver.Inventory()
+    local imageService = config.imageService
     if inventario then
-        cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, ip = ip })
+        cb({ inventario = inventario, peso = peso, maxpeso = maxpeso, slots = slots, fslots = fslots, imageService = imageService })
     end
 end)
 

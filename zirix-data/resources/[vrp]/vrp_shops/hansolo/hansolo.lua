@@ -24,7 +24,7 @@ RegisterNUICallback("shopClose",function(data)
 end)
 
 RegisterNUICallback("buyItem",function(data)
-	vSERVER.buyItem(data.item,data.amount,openShop)
+	vSERVER.buyItem(data.item, data.amount, openShop)
 end)
 
 RegisterNUICallback("sellItem",function(data)
@@ -55,9 +55,9 @@ end
 RegisterNUICallback('requestShops',function(data,cb)
 	local shopName = dShop
 	local inventory, weight, maxweight, slots, fslots, fshopslots, itemsshop = vSERVER.openNav(dShop)
-	local ip = config.imageServer
+	local imageService = config.imageService
 	if inventory then
-		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, itemsshop = itemsshop, shopName = shopName, ip = ip })
+		cb({ inventory = inventory, weight = weight, maxweight = maxweight, slots = slots, fslots = fslots, fshopslots = fshopslots, itemsshop = itemsshop, shopName = shopName, imageService = imageService })
 	end
 end)
 

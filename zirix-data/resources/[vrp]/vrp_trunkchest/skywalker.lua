@@ -1,11 +1,11 @@
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
-vRP = Proxy.getInterface("vRP")
-vRPclient = Tunnel.getInterface("vRP")
+local Tunnel = module('vrp','lib/Tunnel')
+local Proxy = module('vrp','lib/Proxy')
+vRP = Proxy.getInterface('vRP')
+vRPclient = Tunnel.getInterface('vRP')
 
 vRPN = {}
-Tunnel.bindInterface("vrp_trunkchest",vRPN)
-Proxy.addInterface("vrp_trunkchest",vRPN)
+Tunnel.bindInterface('vrp_trunkchest',vRPN)
+Proxy.addInterface('vrp_trunkchest',vRPN)
 
 local uchests = {}
 local vchests = {}
@@ -21,6 +21,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(1000)
 	end
 end)
+
 
 slotsinv = 0
 slotsmala = 0
@@ -40,7 +41,7 @@ function vRPN.Inventories()
 				local myinventory = {}
 				local myvehicle = {}
 
-				local mala = "chest:u"..parseInt(placa_user_id).."veh_"..vname
+				local mala = 'chest:u'..parseInt(placa_user_id)..'veh_'..vname
 				local data = vRP.getSData(mala)
 				local sdata = json.decode(data) or {}
 				
@@ -80,19 +81,19 @@ function vRPN.storeItem(itemName,amount)
 		local user_id = vRP.getUserId(source)
 
 		if user_id and slotsmala > 0 then
-			if string.match(itemName,"dinheiro-sujo") then
-				TriggerClieDntEvent("Notify",source,"importante","Não pode guardar este item.",8000)
+			if string.match(itemName,'dinheiro-sujo') then
+				TriggerClieDntEvent('Notify',source,'importante','Não pode guardar este item.',8000)
 				return
 			end
 
-			if (vchests[parseInt(user_id)] == "armytanker" or vchests[parseInt(user_id)] == "tanker2") and itemName ~= "wammo|WEAPON_PETROLCAN" then
-				TriggerClientEvent("Notify",source,"importante","Não pode guardar este item em veículos.",8000)
+			if (vchests[parseInt(user_id)] == 'armytanker' or vchests[parseInt(user_id)] == 'tanker2') and itemName ~= 'wammo|WEAPON_PETROLCAN' then
+				TriggerClientEvent('Notify',source,'importante','Não pode guardar este item em veículos.',8000)
 				return
 			end
 
 			if vRP.storeChestItem(user_id,uchests[parseInt(user_id)], itemName, amount,parseInt(vRP.vehicleChest(vchests[user_id]))) then
 				TriggerClientEvent('Trunk:UpdateTrunk',source,'updateInventory')
-				TriggerClientEvent("itensNotify",source,"sucesso","Guardou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+				TriggerClientEvent('itensNotify',source,'sucesso','Guardou',''..vRP.itemIndexList(itemName)..'',''..vRP.format(parseInt(amount))..'',''..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount))..'')
 			end
 		end
 	end
@@ -105,7 +106,7 @@ function vRPN.takeItem(itemName,amount)
 		if user_id and slotsinv > 0 then
 			if vRP.tryChestItem(user_id,uchests[parseInt(user_id)],itemName,amount) then
 				TriggerClientEvent('Trunk:UpdateTrunk',source,'updateInventory')
-				TriggerClientEvent("itensNotify",source,"sucesso","Pegou",""..vRP.itemIndexList(itemName).."",""..vRP.format(parseInt(amount)).."",""..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount)).."")
+				TriggerClientEvent('itensNotify',source,'sucesso','Pegou',''..vRP.itemIndexList(itemName)..'',''..vRP.format(parseInt(amount))..'',''..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount))..'')
 			end
 		end
 	end
@@ -141,7 +142,7 @@ function vRPN.trytrunk()
 	end
 end
 
-RegisterServerEvent("trytrunk")
-AddEventHandler("trytrunk",function(nveh)
-	TriggerClientEvent("synctrunk",-1,nveh)
+RegisterServerEvent('trytrunk')
+AddEventHandler('trytrunk',function(nveh)
+	TriggerClientEvent('synctrunk',-1,nveh)
 end)

@@ -6,7 +6,7 @@ vSERVER = Tunnel.getInterface("vrp_homes")
 
 RegisterNetEvent("itensNotify")
 AddEventHandler("itensNotify",function(mode,mensagem,item,quantidade,peso)
-	local ip = config.imageServer
-    SendNUIMessage({ mode = mode, mensagem = mensagem, item = item, quantidade = quantidade, peso = peso, ip = ip })
+	local imageService = config.imageService
+    SendNUIMessage({ mode = mode, mensagem = mensagem, item = item, quantidade = quantidade, peso = peso, imageService = imageService })
 end)
 
