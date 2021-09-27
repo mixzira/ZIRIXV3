@@ -27,7 +27,7 @@ function src.checkTimers()
 	if user_id then
 		if vRP.getInventoryItemAmount(user_id,"celular") >= 1 and vRP.tryGetInventoryItem(user_id,"celular",1) then -- Item necessário para hackear e pegar a loc do carro forte
 			local policia = vRP.getUsersByPermission("policia.permissao")
-			if #policia <= -1 then
+			if #policia <= 2 then
 				TriggerClientEvent("Notify",source,"aviso","Número insuficiente de policiais no momento.",8000)
 				return false
 			end	

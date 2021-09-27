@@ -209,7 +209,7 @@ Citizen.CreateThread(function()
 				if distancia <= 5 then
 					optimization = 4
 					draw3DText(coordsCar.x, coordsCar.y+1, coordsCar.z, "[~g~E~w~] PARA DETONAR")
-					--drawTxt("~g~E~w~  PARA DETONAR",4,0.5,0.93,0.50,255,255,255,180)
+				
 					if IsControlJustPressed(1,38) and vSERVER.checkExplosive() then
 						TriggerEvent("Notify","sucesso","C4 plantada com sucesso! Se afaste para a explosão!",10000)
 						TriggerEvent('iniciandoroubo',source)
