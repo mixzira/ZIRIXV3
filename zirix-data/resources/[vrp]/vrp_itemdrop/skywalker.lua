@@ -31,14 +31,12 @@ AddEventHandler('DropSystem:take33', function(id)
 	local nplayer = vRPclient.getNearestPlayer(source, 2)
 	local nuser_id = vRP.getUserId(nplayer)
 	local x, y, z = vRPclient.getPosition(source)
-	local itemAmmount = items[id].count
-
 	if nuser_id then
 		TriggerClientEvent('Notify', source, 'negado', 'Você não consegue pegar os itens com pessoas por perto.')
 	else
 		if user_id then
 			local verifyAmount = vRP.prompt(source, 'Quantos '..items[id].name..' você deseja pegar?', '')
-			if verifyAmount ~= '' and verifyAmount <= itemAmmount then
+			if verifyAmount ~= '' and parseInt(verifyAmount) <= parseInt(items[id].count) then
 				local myinventory = {}
 				local tSlot = vRP.verifySlots(user_id)
 
