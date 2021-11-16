@@ -36,7 +36,7 @@ AddEventHandler('DropSystem:take33', function(id)
 	else
 		if user_id then
 			local verifyAmount = vRP.prompt(source, 'Quantos '..items[id].name..' você deseja pegar?', '')
-			if verifyAmount ~= '' then
+			if verifyAmount ~= '' and verifyAmount <= items[id].count then
 				local myinventory = {}
 				local tSlot = vRP.verifySlots(user_id)
 
