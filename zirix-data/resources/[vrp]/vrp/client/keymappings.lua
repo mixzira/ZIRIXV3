@@ -1,6 +1,6 @@
 RegisterKeyMapping('vrp:use', 'Interação', 'keyboard', binds.use)
 
-RegisterCommand('vrp:use', function()
+RegisterCommand('vrp:use', function(source, args, rawCommand)
     TriggerEvent('vrp_trash:use')
     TriggerEvent('vrp_machines:use')
     TriggerEvent('vrp_chest:use')
@@ -10,7 +10,7 @@ RegisterCommand('vrp:use', function()
     TriggerEvent('vrp_homes:invade')
     TriggerEvent('vrp_shops:open')
     TriggerEvent('vrp_advanced_shops:use')
-end, false)
+end)
 
 ----------------------------------------------------------------------------------------------------
 

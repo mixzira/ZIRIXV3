@@ -5,6 +5,6 @@
 	<setting key="MySQL:Port">3306</setting>
 	<setting key="MySQL:Database">zirix</setting>
 	<setting key="MySQL:Username">root</setting>
-	<setting key="MySQL:Password">#P0w$vjf{~eoZ)I</setting>
+	<setting key="MySQL:Password"></setting>
 	<setting key="MySQL:Debug">false</setting>
 </configuration>
