@@ -33,7 +33,6 @@ RegisterNetEvent('vrp_trunkchest:Open')
 AddEventHandler('vrp_trunkchest:Open', function()
 	local ped = PlayerPedId()
 	vehicle = vRP.getNearestVehicle(7)
-
 	if config.realism then
 		local nuser_id = vRP.getNearestPlayer(5)
 		local trunkpos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, 'boot'))
