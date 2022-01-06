@@ -632,12 +632,12 @@ function src.vaultRobbery(shop)
                         if timers[shop] == 0 or not timers[shop] then
                             if config.requireBomb then
                                 if not vRP.tryGetInventoryItem(user_id, config.bombName, config.bombAmount) then
-                                    TriggerClientEvent('Notify',source,'negado','Você não possui '..config.bombName..'',8000)
+                                    TriggerClientEvent('Notify',source,'negado','Você não possui '..config.bombName..'', 8000)
                                     return
                                 end
                             end
                             timers[shop] = 600
-                            TriggerClientEvent('vrp_advanced_shops:startRobbery',source,shop,security)
+                            TriggerClientEvent('vrp_advanced_shops:startRobbery',source, shop, security)
                             for l,w in pairs(police) do
                                 local player = vRP.getUserSource(parseInt(w))
                                 SetTimeout(alarm,function()

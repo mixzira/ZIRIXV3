@@ -16,8 +16,8 @@ config.webhookIcon = 'https://i.imgur.com/Y5Zktwm.png'
 config.webhookColor = 16431885
 
 config.policePermission = 'policia.permissao'
-config.contingentPolice = 2
-config.requireBomb = false
+config.contingentPolice = 0
+config.requireBomb = true
 config.bombName = "c4"
 config.bombAmount = 1
 

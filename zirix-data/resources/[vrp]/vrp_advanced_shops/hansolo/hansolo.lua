@@ -17,6 +17,7 @@ local tShop = ''
 local dShop = ''
 local tRobbery = 0
 local inRobbery = false
+local rShop = nil
 
 RegisterNUICallback('buyItem',function(data)
 	vSERVER.buyItem(data.item,data.amount,openShop)
@@ -79,166 +80,6 @@ function toggleActionMenu(type)
 		tShop = nil
 		TriggerEvent('cancelando',false)
 	end
-end
-
-function vRobbery(shop,security)
-	--Citizen.CreateThread(function()
-		local ped = PlayerPedId()
-		local x,y,z = GetEntityCoords(ped)
-		local deletProps = false
-		inRobbery = true
-		if security == 3 then
-			tRobbery = 50
-		elseif security == 2 then
-			tRobbery = 27
-		elseif security == 1 then
-			tRobbery = 13
-		end
-		local vault=0
-		local distance = 0
-		for k,v in pairs(config.shops) do
-			vault = v.vault
-			distance = GetDistanceBetweenCoords(vault.position.x, vault.position.y, vault.position.z, x,y,z,true)
-			if distance <= 3 then
-				break
-			end
-		end
-		TaskGoStraightToCoord(ped, vault.position.x,vault.position.y,vault.position.z,1.0, 100000, vault.position.h, 2.0)
-		if distance <= 0.3 then
-			ClearPedTasks(ped)
-			SetEntityHeading(ped, vault.position.h)
-		end
-		local thermal_hash = GetHashKey('hei_prop_heist_thermite_flash')
-		local bagHash4 = GetHashKey('p_ld_heist_bag_s_pro_o')
-		local coords = GetEntityCoords(ped)
-		LoadModel(thermal_hash)
-		Wait(10)
-		LoadModel(bagHash4)
-		Wait(10)
-		thermalentity = CreateObject(thermal_hash, (vault.position.x+vault.position.y+vault.position.z-0.20)-40, true, true)
-		local bagProp4 = CreateObject(bagHash4, coords-20, true, false)
-		SetEntityAsMissionEntity(thermalentity, true, true)
-		SetEntityAsMissionEntity(bagProp4, true, true)
-		termitacolocando = true
-		local boneIndexf1 = GetPedBoneIndex(PlayerPedId(), 28422)
-		local bagIndex1 = GetPedBoneIndex(PlayerPedId(), 57005)
-		Wait(500)
-		SetPedComponentVariation(PlayerPedId(), 5, 0, 0, 0)
-		AttachEntityToEntity(thermalentity, PlayerPedId(), boneIndexf1, 0.0, 0.0, 0.0, 180.0, 180.0, 0, 1, 1, 0, 1, 1, 1)
-		AttachEntityToEntity(bagProp4, PlayerPedId(), bagIndex1, 0.3, -0.25, -0.3, 300.0, 200.0, 300.0, true, true, false, true, 1, true)
-		RequestAnimDict('anim@heists@ornate_bank@thermal_charge')
-		while not HasAnimDictLoaded('anim@heists@ornate_bank@thermal_charge') do
-			Wait(100)
-		end
-		vRP._playAnim(false,{{'anim@heists@ornate_bank@thermal_charge','thermal_charge'}},false)
-		Wait(2500)
-		DetachEntity(bagProp4, 1, 1)
-		FreezeEntityPosition(bagProp4, true)
-		Wait(2500)
-		FreezeEntityPosition(bagProp4, false)
-		AttachEntityToEntity(bagProp4, PlayerPedId(), bagIndex1, 0.3, -0.25, -0.3, 300.0, 200.0, 300.0, true, true, false, true, 1, true)
-		Wait(1000)
-		DeleteEntity(bagProp4)
-		SetPedComponentVariation(PlayerPedId(), 5, 40, 0, 0)
-		DeleteEntity(thermalentity)
-		ClearPedTasks(ped)
-		TriggerEvent('Notify','importante','Você plantou a bomba, cuidado...')
-		local counter = 0
-		while counter <= tRobbery and inRobbery do
-			if tRobbery == 13 then
-				TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
-				Wait(25000)
-				counter = tRobbery + 1
-			elseif tRobbery == 27 then
-				if counter <= 14 then
-					TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
-					Wait(1000)
-				else
-					TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
-					Wait(25000)
-					counter = tRobbery + 1
-				end
-			elseif tRobbery == 50 then
-				if counter <= 25 then
-					TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
-					Wait(1000)
-				else
-					TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
-					Wait(25000)
-					counter = tRobbery + 1
-				end
-			end
-			counter = counter + 1
-		end
-		AddExplosion(vault.position.x, vault.position.y, vault.position.z, 2, 100.0, true, false, true)
-		local moneyProp = 'hei_prop_heist_cash_pile'
-		RequestModel(moneyProp)
-		while not HasModelLoaded(moneyProp) do
-			Citizen.Wait(10)
-		end
-		if not HasModelLoaded(moneyProp) then
-			SetModelAsNoLongerNeeded(moneyProp)
-		else
-			SetModelAsNoLongerNeeded(moneyProp)
-			local counterwell = 4
-			local amount = 5
-			local boneIndex = GetPedBoneIndex(PlayerPedId(), 57005)
-			while counterwell >= 0 and inRobbery do
-				Citizen.Wait(5)
-				x,y,z = table.unpack(GetEntityCoords(ped))
-				
-				local distancewell = GetDistanceBetweenCoords( vault.position.x, vault.position.y, vault.position.z, x, y, z,true)
-				local coord = GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,1.0,-0.94)
-				if amount >= 0 then
-					oMoney = CreateObjectNoOffset(moneyProp, vault.position.x2, vault.position.y2, vault.position.z2-0.94, 1, 0, 1)
-					PlaceObjectOnGroundProperly(oMoney)
-					SetModelAsNoLongerNeeded(oMoney)
-					Citizen.InvokeNative(0xAD738C3085FE7E11,oMoney,true,true)
-					FreezeEntityPosition(oMoney,true)
-					SetEntityAsNoLongerNeeded(oMoney)
-					x2,y2,z2 = table.unpack(GetEntityCoords(oMoney))
-					amount = amount - 1
-				end
-				if distancewell <= 1 then
-					drawText3D(x2,y2,z2,'~b~[E] ~w~PEGAR')
-					if IsControlJustPressed(0,38) and not IsPedInAnyVehicle(ped) and not IsEntityDead(ped) then
-						vRP._playAnim(false,{{'pickup_object','pickup_low'}},false)
-						Wait(1000)
-						SetEntityVisible(oMoney, true)
-						AttachEntityToEntity(oMoney, PlayerPedId(), boneIndex, 0.125, 0.0, -0.05, 360.0, 150.0, 360.0, true, true, false, true, 1, true)
-						Wait(800)
-						SetEntityVisible(oMoney, false)
-						vSERVER.paymentRobbery(shop)
-						if counterwell <= 1 then
-							local dAmount = 0
-							deletProps = true
-							if deletProps then
-								repeat
-									Wait(100)
-									if DoesObjectOfTypeExistAtCoords(vault.position.x2, vault.position.y2, vault.position.z2-0.94,0.9,GetHashKey(moneyProp),true) then
-										oMoney = GetClosestObjectOfType(vault.position.x2, vault.position.y2, vault.position.z2-0.94,0.9,GetHashKey(moneyProp),false,false,false)
-										Citizen.InvokeNative(0xAD738C3085FE7E11,oMoney,true,true)
-										SetObjectAsNoLongerNeeded(Citizen.PointerValueIntInitialized(oMoney))
-										DeleteObject(oMoney)
-										dAmount = dAmount + 1
-									end
-								until dAmount > 4 
-									deletProps = false
-									inRobbery = false
-							end
-						end
-						counterwell = counterwell - 1
-					end
-				end
-				if distancewell > 15 then
-					TriggerEvent('Notify','importante','Você fugiu do roubo e deixou tudo para trás')
-					counterwell = -1
-					inRobbery = false
-				end
-			end
-			DeleteEntity(oMoney)
-		end
-	--end)
 end
 
 function LoadModel(model)
@@ -308,7 +149,8 @@ AddEventHandler('vrp_advanced_shops:use',function()
 			local bowz,cdz = GetGroundZFor_3dCoord(vault.position.x, vault.position.y, vault.position.z)
 			local distance = GetDistanceBetweenCoords(vault.position.x, vault.position.y, cdz, x, y, z, true)
 			if distance < 1.2 and not inRobbery then
-				vSERVER.vaultRobbery(tShop)
+				rShop = k
+				vSERVER.vaultRobbery(rShop)
 			end
 			local bowz2, cdz2 = GetGroundZFor_3dCoord(purchase.x, purchase.y, purchase.z)
 			local distance2 = GetDistanceBetweenCoords(purchase.x, purchase.y, cdz2, x, y, z, true)
@@ -334,9 +176,14 @@ AddEventHandler('vrp_advanced_shops:Update',function(action)
 	SendNUIMessage({ action = action })
 end)
 
+local shopNameR = nil
+local shopSecurity = nil
+
 RegisterNetEvent('vrp_advanced_shops:startRobbery')
-AddEventHandler('vrp_advanced_shops:startRobbery',function(shop,security)
-	vRobbery(shop,security)
+AddEventHandler('vrp_advanced_shops:startRobbery',function(shop, security)
+	shopNameR = shop
+	shopSecurity = security
+	inRobbery = true
 end)
 
 RegisterNetEvent('vrp_advanced_shops:updateBlip')
@@ -350,4 +197,194 @@ end)
 
 Citizen.CreateThread(function()
 	SetNuiFocus(false,false)
+end)
+
+Citizen.CreateThread(function()
+    while true do
+		local idle = 1000
+		if inRobbery then
+			idle = 5
+			local ped = PlayerPedId()
+			local x,y,z = GetEntityCoords(ped)
+			local deletProps = false
+			
+			if shopSecurity == 3 then
+				tRobbery = 50
+			elseif shopSecurity == 2 then
+				tRobbery = 27
+			elseif shopSecurity == 1 then
+				tRobbery = 13
+			end
+
+			local vault = 0
+			local distance = 0
+
+			for k,v in pairs(config.shops) do
+				vault = v.vault
+				distance = GetDistanceBetweenCoords(vault.position.x, vault.position.y, vault.position.z, x,y,z,true)
+				if distance <= 3 then
+					break
+				end
+			end
+
+			TaskGoStraightToCoord(ped, vault.position.x,vault.position.y,vault.position.z,1.0, 100000, vault.position.h, 2.0)
+
+			if distance <= 0.3 then
+				ClearPedTasks(ped)
+				SetEntityHeading(ped, vault.position.h)
+			end
+
+			local thermal_hash = GetHashKey('hei_prop_heist_thermite_flash')
+			local bagHash4 = GetHashKey('p_ld_heist_bag_s_pro_o')
+			local coords = GetEntityCoords(ped)
+			
+			LoadModel(thermal_hash)
+			Citizen.Wait(10)
+			LoadModel(bagHash4)
+			Citizen.Wait(10)
+
+			thermalentity = CreateObject(thermal_hash, (vault.position.x+vault.position.y+vault.position.z-0.20)-40, true, true)
+			
+			local bagProp4 = CreateObject(bagHash4, coords-20, true, false)
+			
+			SetEntityAsMissionEntity(thermalentity, true, true)
+			SetEntityAsMissionEntity(bagProp4, true, true)
+			
+			termitacolocando = true
+			
+			local boneIndexf1 = GetPedBoneIndex(PlayerPedId(), 28422)
+			local bagIndex1 = GetPedBoneIndex(PlayerPedId(), 57005)
+			
+			Citizen.Wait(500)
+			
+			SetPedComponentVariation(PlayerPedId(), 5, 0, 0, 0)
+			AttachEntityToEntity(thermalentity, PlayerPedId(), boneIndexf1, 0.0, 0.0, 0.0, 180.0, 180.0, 0, 1, 1, 0, 1, 1, 1)
+			AttachEntityToEntity(bagProp4, PlayerPedId(), bagIndex1, 0.3, -0.25, -0.3, 300.0, 200.0, 300.0, true, true, false, true, 1, true)
+			RequestAnimDict('anim@heists@ornate_bank@thermal_charge')
+			
+			while not HasAnimDictLoaded('anim@heists@ornate_bank@thermal_charge') do
+				Citizen.Wait(100)
+			end
+			
+			vRP._playAnim(false,{{'anim@heists@ornate_bank@thermal_charge','thermal_charge'}},false)
+			
+			Citizen.Wait(2500)
+			
+			DetachEntity(bagProp4, 1, 1)
+			
+			FreezeEntityPosition(bagProp4, true)
+			
+			Citizen.Wait(2500)
+			FreezeEntityPosition(bagProp4, false)
+			AttachEntityToEntity(bagProp4, PlayerPedId(), bagIndex1, 0.3, -0.25, -0.3, 300.0, 200.0, 300.0, true, true, false, true, 1, true)
+			
+			Citizen.Wait(1000)
+			DeleteEntity(bagProp4)
+			SetPedComponentVariation(PlayerPedId(), 5, 40, 0, 0)
+			DeleteEntity(thermalentity)
+			ClearPedTasks(ped)
+			TriggerEvent('Notify','importante','Você plantou a bomba, cuidado...')
+			
+			local counter = 0
+			
+			while counter <= tRobbery and inRobbery do
+				if tRobbery == 13 then
+					TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+					Citizen.Wait(25000)
+					counter = tRobbery + 1
+				elseif tRobbery == 27 then
+					if counter <= 14 then
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Citizen.Wait(1000)
+					else
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Citizen.Wait(25000)
+						counter = tRobbery + 1
+					end
+				elseif tRobbery == 50 then
+					if counter <= 25 then
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Citizen.Wait(1000)
+					else
+						TriggerEvent('vrp_sound:distance', source, 0.8, 'bomb_25', 0.5)
+						Citizen.Wait(25000)
+						counter = tRobbery + 1
+					end
+				end
+				counter = counter + 1
+			end
+			
+			AddExplosion(vault.position.x, vault.position.y, vault.position.z, 2, 100.0, true, false, true)
+			local moneyProp = 'hei_prop_heist_cash_pile'
+			RequestModel(moneyProp)
+			
+			while not HasModelLoaded(moneyProp) do
+				Citizen.Wait(10)
+			end
+			
+			if not HasModelLoaded(moneyProp) then
+				SetModelAsNoLongerNeeded(moneyProp)
+			else
+				SetModelAsNoLongerNeeded(moneyProp)
+				local counterwell = 4
+				local amount = 5
+				local boneIndex = GetPedBoneIndex(PlayerPedId(), 57005)
+				while counterwell >= 0 and inRobbery do
+					Citizen.Wait(5)
+					x,y,z = table.unpack(GetEntityCoords(ped))
+					
+					local distancewell = GetDistanceBetweenCoords( vault.position.x, vault.position.y, vault.position.z, x, y, z,true)
+					local coord = GetOffsetFromEntityInWorldCoords(PlayerPedId(),0.0,1.0,-0.94)
+					if amount >= 0 then
+						oMoney = CreateObjectNoOffset(moneyProp, vault.position.x2, vault.position.y2, vault.position.z2-0.94, 1, 0, 1)
+						PlaceObjectOnGroundProperly(oMoney)
+						SetModelAsNoLongerNeeded(oMoney)
+						Citizen.InvokeNative(0xAD738C3085FE7E11,oMoney,true,true)
+						FreezeEntityPosition(oMoney,true)
+						SetEntityAsNoLongerNeeded(oMoney)
+						x2,y2,z2 = table.unpack(GetEntityCoords(oMoney))
+						amount = amount - 1
+					end
+					if distancewell <= 1 then
+						drawText3D(x2,y2,z2,'~b~[E] ~w~PEGAR')
+						if IsControlJustPressed(0,38) and not IsPedInAnyVehicle(ped) and not IsEntityDead(ped) then
+							vRP._playAnim(false,{{'pickup_object','pickup_low'}},false)
+							Citizen.Wait(1000)
+							SetEntityVisible(oMoney, true)
+							AttachEntityToEntity(oMoney, PlayerPedId(), boneIndex, 0.125, 0.0, -0.05, 360.0, 150.0, 360.0, true, true, false, true, 1, true)
+							Citizen.Wait(800)
+							SetEntityVisible(oMoney, false)
+							vSERVER.paymentRobbery(shopNameR)
+							if counterwell <= 1 then
+								local dAmount = 0
+								deletProps = true
+								if deletProps then
+									repeat
+										Citizen.Wait(100)
+										if DoesObjectOfTypeExistAtCoords(vault.position.x2, vault.position.y2, vault.position.z2-0.94,0.9,GetHashKey(moneyProp),true) then
+											oMoney = GetClosestObjectOfType(vault.position.x2, vault.position.y2, vault.position.z2-0.94,0.9,GetHashKey(moneyProp),false,false,false)
+											Citizen.InvokeNative(0xAD738C3085FE7E11,oMoney,true,true)
+											SetObjectAsNoLongerNeeded(Citizen.PointerValueIntInitialized(oMoney))
+											DeleteObject(oMoney)
+											dAmount = dAmount + 1
+										end
+									until dAmount > 4 
+										deletProps = false
+										inRobbery = false
+								end
+							end
+							counterwell = counterwell - 1
+						end
+					end
+					if distancewell > 15 then
+						TriggerEvent('Notify','importante','Você fugiu do roubo e deixou tudo para trás')
+						counterwell = -1
+						inRobbery = false
+					end
+				end
+				DeleteEntity(oMoney)
+			end
+		end
+		Citizen.Wait(idle)
+	end
 end)

@@ -48,6 +48,7 @@ items.list = {
 	['plastico'] = { ['index'] = 'plastico', ['name'] = 'Plastico', ['type'] = 'use', ['weight'] = 0.1 },
 	['borrifador'] = { ['index'] = 'borrifador', ['name'] = 'Borrifador', ['type'] = 'use', ['weight'] = 0.1 },
 	['alvejante'] = { ['index'] = 'alvejante', ['name'] = 'Alvejante', ['type'] = 'use', ['weight'] = 1.0 },
+	['c4'] = { ['index'] = 'c4', ['name'] = 'C4', ['type'] = 'use', ['weight'] = 1.0 },
 	
 	--[ Tools ] -------------------------------------------------------------------------------------------------------
 	
