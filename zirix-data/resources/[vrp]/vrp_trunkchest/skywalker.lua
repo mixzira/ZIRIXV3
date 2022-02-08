@@ -91,7 +91,9 @@ function vRPN.storeItem(itemName,amount)
 				return
 			end
 
-			if vRP.storeChestItem(user_id,uchests[parseInt(user_id)], itemName, amount,parseInt(vRP.vehicleChest(vchests[user_id]))) then
+			print(parseInt(vRP.vehicleChest(vchests[user_id])))
+
+			if vRP.storeChestItem(user_id, uchests[parseInt(user_id)], itemName, amount, parseInt(vRP.vehicleChest(vchests[user_id])), parseInt(vRP.vehicleSlot(vchests[user_id]))) then
 				TriggerClientEvent('Trunk:UpdateTrunk',source,'updateInventory')
 				TriggerClientEvent('itensNotify',source,'sucesso','Guardou',''..vRP.itemIndexList(itemName)..'',''..vRP.format(parseInt(amount))..'',''..vRP.format(vRP.getItemWeight(itemName)*parseInt(amount))..'')
 			end
