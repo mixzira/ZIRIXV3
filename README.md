@@ -16,4 +16,5 @@ Você pode buscar suporte em nosso [Discord](https://discord.gg/kYFy8JwVfd).
 - **Website: https://ziraflix.com.br**
 
 **Esta versão conta com as minha adaptações para um melhor funcionamento de RP**
+#
 **Ice41**
