@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `vrp_user_identities` (
   `driverlicense` int(1) NOT NULL DEFAULT 0,
   `fugitive` int(1) NOT NULL DEFAULT 0,
   `crimerecord` int(1) NOT NULL DEFAULT 0,
-  `gunlicense` int(1) NOT NULL DEFAULT 0,
+  `gunlicense` int(10) NOT NULL DEFAULT 0 COMMENT 'Porte de Arma',
   `foto` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `registration` (`registration`),
