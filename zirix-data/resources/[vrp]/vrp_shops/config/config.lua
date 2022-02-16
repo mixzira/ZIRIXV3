@@ -38,7 +38,8 @@ config.shops = {
         ['itens'] = {
             { itemName = 'mascara', itemPrice = 130, itemAmount = 1, saleValue = 52 },
             { itemName = 'mochilap', itemPrice = 1000, itemAmount = 1, saleValue = 400 },
-            { itemName = 'oculos', itemPrice = 90, itemAmount = 1, saleValue = 36 }
+            { itemName = 'oculos', itemPrice = 90, itemAmount = 1, saleValue = 36 },
+	    { itemName = "roupas", itemPrice = 1000, itemAmount = 1,  saleValue = 0 }
         } 
     },
     ['ammunation'] = {
@@ -60,7 +61,23 @@ config.shops = {
             { itemName = 'wbodyWEAPON_SWITCHBLADE', itemPrice = 950, itemAmount = 1, gunlicense = false, saleValue = 380 },
             { itemName = 'wbodyWEAPON_KNIFE', itemPrice = 950, itemAmount = 1, gunlicense = false, saleValue = 380 },
             { itemName = 'wbodyWEAPON_PISTOL', itemPrice = 50000, itemAmount = 1, gunlicense = true },
-            { itemName = 'wammoWEAPON_PISTOL', itemPrice = 1200, itemAmount = 30, gunlicense = true }
+            { itemName = 'wammoWEAPON_PISTOL', itemPrice = 1200, itemAmount = 30, gunlicense = true },
+	    { itemName = "wbody|WEAPON_BATTLEAXE", itemAmount = 1, itemPrice = 100, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|GADGET_PARACHUTE", itemAmount = 1, itemPrice = 300, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_FLASHLIGHT", itemAmount = 1, itemPrice = 10, gunlicense = false, saleValue = 50 }, 
+	    { itemName = "wbody|WEAPON_DAGGER", itemAmount = 1, itemPrice = 140, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_KNUCKLE", itemAmount = 1, itemPrice = 300, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_MACHETE", itemAmount = 1, itemPrice = 100, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_WRENCH", itemAmount = 1, itemPrice = 150, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_HAMMER", itemAmount = 1, itemPrice = 30, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_GOLFCLUB", itemAmount = 1, itemPrice = 80, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_CROWBAR", itemAmount = 1, itemPrice = 200, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_HATCHET", itemAmount = 1, itemPrice = 90, gunlicense = false, saleValue = 50 },
+	    { itemName = "wbody|WEAPON_BAT", itemAmount = 1, itemPrice = 60, gunlicense = false, saleValue = 10 },
+	    { itemName = "wbody|WEAPON_BOTTLE", itemAmount = 1, itemPrice = 40, gunlicense = false, saleValue = 10 },
+	    { itemName = "wbody|WEAPON_POOLCUE", itemAmount = 1, itemPrice = 70, gunlicense = false, saleValue = 20 },
+	    { itemName = "wbody|WEAPON_STONE_HATCHET", itemAmount = 1, itemPrice = 30, gunlicense = false, saleValue = 5 },
+	    { itemName = "wbody|WEAPON_FLARE", itemAmount = 1, itemPrice = 120, gunlicense = false, saleValue = 50 }
         }
     },
     ['pub'] = {
@@ -100,8 +117,26 @@ config.shops = {
             { itemName = 'frappuccino', itemPrice = 18, itemAmount = 1, saleValue = 7 },
             { itemName = 'cha', itemPrice = 9, itemAmount = 1, saleValue = 3 },
             { itemName = 'icecha', itemPrice = 9, itemAmount = 1, saleValue = 3 },
+            { itemName = "agua", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "cola", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "sprunk", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "energetico", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "leite", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "barracho", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "patriot", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "pibwassen", itemAmount = 1, itemPrice = 30, saleValue = 3 },
             { itemName = 'sanduiche', itemPrice = 12, itemAmount = 1, saleValue = 4 },
-            { itemName = 'rosquinha', itemPrice = 9, itemAmount = 1, saleValue = 3 }
+            { itemName = 'rosquinha', itemPrice = 9, itemAmount = 1, saleValue = 3 },
+            { itemName = "hotdog", itemAmount = 1, itemPrice = 15, saleValue = 3 },
+            { itemName = "xburguer", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "chips", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "batataf", itemAmount = 1, itemPrice = 15, saleValue = 3 },
+            { itemName = "pizza", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "taco", itemAmount = 1, itemPrice = 30, saleValue = 3 },
+            { itemName = "bchocolate", itemAmount = 1, itemPrice = 15, saleValue = 3 },
+            { itemName = "bcereal", itemAmount = 1, itemPrice = 15, saleValue = 3 },
+            { itemName = "frango", itemAmount = 1, itemPrice = 20, saleValue = 3 },
+            { itemName = "yakisoba", itemAmount = 1, itemPrice = 20, saleValue = 3 }
         }
     },
     ['convenienceshop'] = {
@@ -172,7 +207,19 @@ config.shops = {
             { itemName = 'voltarom', itemRequire = nil, itemPrice = 80, itemAmount = 1 },
             { itemName = 'trandrylux', itemRequire = nil, itemPrice = 95, itemAmount = 1 },
             { itemName = 'dorfrex', itemRequire = nil, itemPrice = 60, itemAmount = 1 },
-            { itemName = 'buscopom', itemRequire = nil, itemPrice = 73, itemAmount = 1 }
+            { itemName = 'buscopom', itemRequire = nil, itemPrice = 73, itemAmount = 1 },
+	    { itemName = "cicatricure", itemRequire = nil, itemAmount = 1, itemPrice = 65 },
+	    { itemName = "dorflex", itemRequire = nil, itemAmount = 1, itemPrice = 72 },
+	    { itemName = "dipiroca", itemRequire = nil, itemAmount = 1, itemPrice = 55 },
+	    { itemName = "nocucedin", itemRequire = nil, itemAmount = 1, itemPrice = 83 },
+	    { itemName = "paracetanal", itemRequire = nil, itemAmount = 1, itemPrice = 63 },
+	    { itemName = "decupramim", itemRequire = nil, itemAmount = 1, itemPrice = 76 },
+	    { itemName = "buscopau", itemRequire = nil, itemAmount = 1, itemPrice = 81 },
+	    { itemName = "navagina", itemRequire = nil, itemAmount = 1, itemPrice = 74 },
+	    { itemName = "analdor", itemRequire = nil, itemAmount = 1, itemPrice = 82 },
+	    { itemName = "sefodex", itemRequire = nil, itemAmount = 1, itemPrice = 95 },
+	    { itemName = "nokusin", itemRequire = nil, itemAmount = 1, itemPrice = 88 },
+	    { itemName = "glicoanal", itemRequire = nil, itemAmount = 1, itemPrice = 71 }
         }
     },
     ['toolshop'] = {
@@ -193,7 +240,13 @@ config.shops = {
             { itemName = 'wbodyWEAPON_HAMMER', itemPrice = 300, itemAmount = 1, saleValue = 120 },
             { itemName = 'wbodyWEAPON_CROWBAR', itemPrice = 300, itemAmount = 1, saleValue = 120 },
             { itemName = 'wbodyWEAPON_HATCHET', itemPrice = 300, itemAmount = 1, saleValue = 120 },
-            { itemName = 'wbodyWEAPON_WRENCH', itemPrice = 300, itemAmount = 1, saleValue = 120 }
+            { itemName = 'wbodyWEAPON_WRENCH', itemPrice = 300, itemAmount = 1, saleValue = 120 },
+	    { itemName = "ferramenta", itemAmount = 1, itemPrice = 10, saleValue = 3 },
+	    { itemName = "adubo", itemAmount = 1, itemPrice = 10, saleValue = 3 },
+	    { itemName = "Cordas", itemAmount = 1, itemPrice = 10, saleValue = 3 },
+	    { itemName = "Corrente", itemAmount = 1, itemPrice = 10, saleValue = 3 },
+	    { itemName = "Fertilizante", itemAmount = 1, itemPrice = 10, saleValue = 3 },
+	    { itemName = "Graos", itemAmount = 1, itemPrice = 10, saleValue = 3 },
         }
     }
 }
