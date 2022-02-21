@@ -1,0 +1,244 @@
+
+================================================================
+======== FXServer Starting - 21/02/2022 18:41:55                
+================================================================
+[    c-scripting-core] Creating script environments for _cfx_internal
+[ citizen-server-impl] Scanning resources.
+[ citizen-server-impl] [0mFound 85 resources.
+[          svadhesive] Authenticating server license key...
+[          svadhesive] Server license key authentication succeeded. Welcome!
+[    c-scripting-core] Creating script environments for sessionmanager
+[ citizen-server-impl] Started resource sessionmanager
+[    c-scripting-core] Creating script environments for monitor
+[      script:monitor] [txAdminClient] Version 4.11.0 starting...
+[ citizen-server-impl] Started resource monitor
+[    c-scripting-core] Creating script environments for chat
+[ citizen-server-impl] Started resource chat
+[ citizen-server-impl] Started resource fivem
+[ citizen-server-impl] Started resource zirix
+[    c-scripting-core] Creating script environments for mapmanager
+[ citizen-server-impl] Started resource mapmanager
+[ citizen-server-impl] Started resource spawnmanager
+[    c-scripting-core] Creating script environments for yarn
+[ citizen-server-impl] Started resource yarn
+[    c-scripting-core] Creating script environments for webpack
+[ citizen-server-impl] Started resource webpack
+[    c-scripting-core] Creating script environments for screenshot-basic
+[ citizen-server-impl] Started resource screenshot-basic
+[    c-scripting-core] Creating script environments for mysql-async
+[  script:mysql-async] Instantiated instance of script MySQLAsync.MySQLThread.
+[  script:mysql-async] Instantiated instance of script MySQLAsync.MySQLAsync.
+[ citizen-server-impl] Started resource mysql-async
+[    c-scripting-core] Creating script environments for GHMattiMySQL
+[ script:GHMattiMySQL] Instantiated instance of script GHMattiMySQL.Core.
+[ citizen-server-impl] Started resource GHMattiMySQL
+[    c-scripting-core] Creating script environments for vrp
+[ citizen-server-impl] Started resource vrp
+[    c-scripting-core] [0mCreating script environments for vrp_ghmattimysql
+[ citizen-server-impl] Started resource vrp_ghmattimysql
+[    c-scripting-core] Creating script environments for vrp_admin
+[ citizen-server-impl] Started resource vrp_admin
+[    c-scripting-core] Creating script environments for vrp_advanced_shops
+[ citizen-server-impl] Started resource vrp_advanced_shops
+[    c-scripting-core] Creating script environments for vrp_animacoes
+[ citizen-server-impl] Started resource vrp_animacoes
+[    c-scripting-core] Creating script environments for vrp_autoescola
+[ citizen-server-impl] Started resource vrp_autoescola
+[    c-scripting-core] Creating script environments for vrp_bank
+[ citizen-server-impl] Started resource vrp_bank
+[    c-scripting-core] Creating script environments for vrp_barbershop
+[ citizen-server-impl] Started resource vrp_barbershop
+[    c-scripting-core] Creating script environments for vrp_chest
+[ citizen-server-impl] Started resource vrp_chest
+[    c-scripting-core] Creating script environments for vrp_dealership
+[ citizen-server-impl] Started resource vrp_dealership
+[    c-scripting-core] [97mCreating script environments for vrp_doors
+[ citizen-server-impl] Started resource vrp_doors
+[    c-scripting-core] Creating script environments for vrp_emergencyblips
+[ citizen-server-impl] Started resource vrp_emergencyblips
+[    c-scripting-core] Creating script environments for vrp_garages
+[ citizen-server-impl] Started resource vrp_garages
+[    c-scripting-core] Creating script environments for vrp_homes
+[ citizen-server-impl] Started resource vrp_homes
+[ citizen-server-impl] Started resource vrp_hud
+[    c-scripting-core] Creating script environments for vrp_identity
+[ citizen-server-impl] Started resource vrp_identity
+[    c-scripting-core] Creating script environments for vrp_inspect
+[ citizen-server-impl] Started resource vrp_inspect
+[ citizen-server-impl] Started resource vrp_interiores
+[    c-scripting-core] Creating script environments for vrp_inventory
+[ citizen-server-impl] Started resource vrp_inventory
+[    c-scripting-core] Creating script environments for vrp_itemdrop
+[ citizen-server-impl] Started resource vrp_itemdrop
+[    c-scripting-core] Creating script environments for vrp_lavagem
+[ citizen-server-impl] Started resource vrp_lavagem
+[38;5;161m[    c-scripting-core] Creating script environments for vrp_legacyfuel
+[ citizen-server-impl] Started resource vrp_legacyfuel
+[ citizen-server-impl] Started resource vrp_login
+[    c-scripting-core] Creating script environments for vrp_lscustoms
+[ citizen-server-impl] Started resource vrp_lscustoms
+[    c-scripting-core] Creating script environments for vrp_machines
+[ citizen-server-impl] Started resource vrp_machines
+[    c-scripting-core] Creating script environments for vrp_misc
+[ citizen-server-impl] Started resource vrp_misc
+[    c-scripting-core] Creating script environments for vrp_notify
+[ citizen-server-impl] Started resource vrp_notify
+[    c-scripting-core] [97mCreating script environments for vrp_notifyitens
+[ citizen-server-impl] Started resource vrp_notifyitens
+[    c-scripting-core] Creating script environments for vrp_player
+[ citizen-server-impl] Started resource vrp_player
+[    c-scripting-core] Creating script environments for vrp_policia
+[ citizen-server-impl] Started resource vrp_policia
+[ citizen-server-impl] Started resource vrp_progressbar
+[    c-scripting-core] Creating script environments for vrp_shops
+[ citizen-server-impl] Started resource vrp_shops
+[    c-scripting-core] Creating script environments for vrp_skinshop
+[ citizen-server-impl] Started resource vrp_skinshop
+[ citizen-server-impl] Started resource vrp_sounds
+[    c-scripting-core] Creating script environments for vrp_tattoos
+[ citizen-server-impl] Started resource vrp_tattoos
+[    c-scripting-core] Creating script environments for vrp_timesync
+[ citizen-server-impl] Started resource vrp_timesync
+[    c-scripting-core] Creating script environments for vrp_trash
+[ citizen-server-impl] Started resource vrp_trash
+[    c-scripting-core] Creating script environments for vrp_trunkchest
+[ citizen-server-impl] Started resource vrp_trunkchest
+[ citizen-server-impl] Asset vrp_veiculos/audirs6_hi.yft uses 17.1 MiB of virtual memory.
+[ citizen-server-impl] [94mAsset vrp_veiculos/bmwm3f80.yft uses 31.8 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/bmwm3f80_hi.yft uses 31.8 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/bmwm4gts.yft uses 22.4 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/bmwm4gts_hi.yft uses 20.5 MiB of virtual memory.
+[ citizen-server-impl] [0mAsset vrp_veiculos/bmwm8.yft uses 23.5 MiB of virtual memory.
+[38;5;73m[ citizen-server-impl] Asset vrp_veiculos/bmwm8.ytd uses 16.8 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/bmwm8_hi.yft uses 23.5 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/dodgechargersrt.ytd uses 44.8 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/fordmustang.yft uses 17.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/lamborghinihuracan.ytd uses 24.5 MiB of physical memory.
+[ citizen-server-impl] [0mAsset vrp_veiculos/nissan370z.yft uses 22.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/nissan370z_hi.yft uses 22.0 MiB of virtual memory.
+[ citizen-server-impl] [0mAsset vrp_veiculos/panamera17turbo.yft uses 21.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/panamera17turbo.ytd uses 17.1 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/panamera17turbo_hi.yft uses 21.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/pm19.ytd uses 20.5 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiabearcat.yft uses 19.9 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiabearcat.ytd uses 18.5 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiabearcat_hi.yft uses 19.9 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiacharger2018.yft uses 30.8 MiB of virtual memory.
+[ citizen-server-impl] [0mAsset vrp_veiculos/policiacharger2018_hi.yft uses 30.8 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiasilverado.yft uses 31.2 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiatahoe.yft uses 32.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiatahoe.ytd uses 32.0 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiataurus.yft uses 17.9 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/policiataurus.ytd uses 19.0 MiB of physical memory.
+[ citizen-server-impl] Asset vrp_veiculos/teslaprior.yft uses 23.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/teslaprior_hi.yft uses 23.0 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/toyotasupra.yft uses 21.2 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/toyotasupra_hi.yft uses 19.3 MiB of virtual memory.
+[ citizen-server-impl] [94mAsset vrp_veiculos/urus.yft uses 21.3 MiB of virtual memory.
+[ citizen-server-impl] Asset vrp_veiculos/urus_hi.yft uses 18.8 MiB of virtual memory.
+[ citizen-server-impl] Started resource vrp_veiculos
+[    c-scripting-core] Creating script environments for vrp_watercooler
+[ citizen-server-impl] Started resource vrp_watercooler
+[    c-scripting-core] Creating script environments for character-creator
+[ citizen-server-impl] Started resource character-creator
+[    c-scripting-core] Creating script environments for gcphone
+[ citizen-server-impl] Started resource gcphone
+[    c-scripting-core] [0mCreating script environments for loadingscreen
+[ citizen-server-impl] Started resource loadingscreen
+[    c-scripting-core] Creating script environments for lux-vehcontrol
+[ citizen-server-impl] Started resource lux-vehcontrol
+[ citizen-server-impl] Started resource minimap
+[    c-scripting-core] Creating script environments for jobszirix
+[ citizen-server-impl] Started resource jobszirix
+[    c-scripting-core] Creating script environments for emp_trucker
+[ citizen-server-impl] Started resource emp_trucker
+[    c-scripting-core] Creating script environments for emp_pilot
+[ citizen-server-impl] Started resource emp_pilot
+[    c-scripting-core] Creating script environments for emp_miner-foundry
+[ citizen-server-impl] Started resource emp_miner-foundry
+[    c-scripting-core] Creating script environments for emp_miner-store
+[ citizen-server-impl] Started resource emp_miner-store
+[    c-scripting-core] Creating script environments for police_arsenal
+[ citizen-server-impl] Started resource police_arsenal
+[    c-scripting-core] Creating script environments for police_cloakroom
+[ citizen-server-impl] [0mStarted resource police_cloakroom
+[    c-scripting-core] Creating script environments for medical_system
+[ citizen-server-impl] Started resource medical_system
+[    c-scripting-core] Creating script environments for medical_items
+[ citizen-server-impl] Started resource medical_items
+[    c-scripting-core] Creating script environments for medical_change
+[ citizen-server-impl] Started resource medical_change
+[ citizen-server-impl] Asset zirix_maps/ba_int01_details.ytd uses 17.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/ba_int01_shell_txd.ytd uses 22.8 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/casino_garag_shell.ydr uses 18.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/casino_shell.ydr uses 20.2 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/casino_txd.ytd uses 52.0 MiB of physical memory. Oversized assets can and WILL lead to streaming issues (models not loading/rendering, commonly known as 'texture loss', 'city bug' or 'streaming isn't great').
+[ citizen-server-impl] Asset zirix_maps/ch_chint03_dlc_plan.ytd uses 20.9 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/ch_chint06_dlc_casino_back.ytd uses 21.5 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/designer_house_txd.ytd uses 24.2 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/grafica_model_txt.ytd uses 18.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/hei_ch3_12_casinonew_emmisive.ydr uses 24.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/hei_ch3_12_vw_dlc_casino.ytd uses 16.2 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/house_2_lks_bedroom_prop.ydr uses 20.4 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/int_stock_txd.ytd uses 20.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/interior_txd.ytd uses 22.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/italy_texture.ytd uses 16.7 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/mansion_1_txd.ytd uses 28.9 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/mansion_2_txd.ytd uses 24.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/modernhouse1.ytd uses 23.5 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/moutnz_zonah.ytd uses 40.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/mz_carpak_shell.ydr uses 25.5 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/ranchoroom9.ydr uses 19.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/texturetaxi.ytd uses 19.1 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/v_56_ranch_shell.ydr uses 23.0 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/vesp_01floor_txd.ytd uses 16.2 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/vesp_03floor_txd.ytd uses 17.2 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/vesp_1floor_txd.ytd uses 21.8 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/vesp_2floor_txd.ytd uses 22.9 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/vesp_txd.ytd uses 24.4 MiB of physical memory.
+[ citizen-server-impl] Asset zirix_maps/vw_vwint01_vwdlc_vw_casino.ytd uses 25.8 MiB of physical memory.
+[ citizen-server-impl] Started resource zirix_maps
+[    c-scripting-core] Creating script environments for lscustoms_items
+[ citizen-server-impl] Started resource lscustoms_items
+[    c-scripting-core] Creating script environments for lscustoms_change
+[ citizen-server-impl] Started resource lscustoms_change
+[    c-scripting-core] Creating script environments for oc_production-coca
+[ citizen-server-impl] Started resource oc_production-coca
+[    c-scripting-core] Creating script environments for oc_production-meta
+[ citizen-server-impl] Started resource oc_production-meta
+[    c-scripting-core] Creating script environments for oc_production-lsd
+[ citizen-server-impl] Started resource oc_production-lsd
+[    c-scripting-core] Creating script environments for oc_production-weapons
+[ citizen-server-impl] Started resource oc_production-weapons
+[    c-scripting-core] Creating script environments for oc_production-ammo
+[ citizen-server-impl] Started resource oc_production-ammo
+[    c-scripting-core] Creating script environments for farms
+[ citizen-server-impl] Started resource farms
+[    c-scripting-core] Creating script environments for delivery
+[ citizen-server-impl] Started resource delivery
+[ citizen-server-impl] Started resource mhacking
+[    c-scripting-core] Creating script environments for vrp_humane
+[ citizen-server-impl] Started resource vrp_humane
+[      script:monitor] [txAdminClient] Threads and commands set up. All Ready.
+[ citizen-server-impl] server thread hitch warning: timer interval of 672 milliseconds
+[ citizen-server-impl]         fff                          
+[ citizen-server-impl]   cccc ff   xx  xx     rr rr    eee  
+[ citizen-server-impl] [0mcc     ffff   xx       rrr  r ee   e 
+[ citizen-server-impl] cc     ff     xx   ... rr     eeeee  
+[ citizen-server-impl]  ccccc ff   xx  xx ... rr      eeeee 
+[ citizen-server-impl]                                      
+[ citizen-server-impl] Authenticated with cfx.re Nucleus: https://ziraflix-j857dp.users.cfx.re/
+[ citizen-server-impl] -- [server notice: tebex_not_set]
+[ citizen-server-impl] ================
+[ citizen-server-impl] Monetize your server using Tebex! Visit https://tebex.io/fivem for more info.
+[ citizen-server-impl] [0m================
+[ citizen-server-impl] 
+[ citizen-server-impl] Server list query returned an error: System.Net.Sockets.SocketException: Connection refused <- System.Net.Http.HttpRequestException: Connection refused (187.18.34.124:30190)
+[ citizen-server-impl] Server list query returned an error: System.Net.Sockets.SocketException: Connection refused <- System.Net.Http.HttpRequestException: Connection refused (187.18.34.124:30190)
+[ citizen-server-impl] Server list query returned an error: System.Net.Sockets.SocketException: Connection refused <- System.Net.Http.HttpRequestException: Connection refused (187.18.34.124:30190)
+[ citizen-server-impl] Server list query returned an error: System.Threading.Tasks.TaskCanceledException: The operation was canceled. <- System.TimeoutException: The operation was canceled. <- System.Threading.Tasks.TaskCanceledException: The request was canceled due to the configured HttpClient.Timeout of 30 seconds elapsing.
+[ citizen-server-impl] Server list query returned an error: System.Threading.Tasks.TaskCanceledException: The operation was canceled. <- System.TimeoutException: The operation was canceled. <- System.Threading.Tasks.TaskCanceledException: The request was canceled due to the configured HttpClient.Timeout of 30 seconds elapsing.
+[ citizen-server-impl] Server list query returned an error: System.Net.Sockets.SocketException: Connection refused <- System.Net.Http.HttpRequestException: Connection refused (187.18.34.124:30190)
+[ citizen-server-impl] Server list query returned an error: System.Threading.Tasks.TaskCanceledException: The operation was canceled. <- System.TimeoutException: The operation was canceled. <- System.Threading.Tasks.TaskCanceledException: The request was canceled due to the configured HttpClient.Timeout of 30 seconds elapsing.
+[ citizen-server-impl] Server list query returned an error: System.Net.Sockets.SocketException: Connection refused <- System.Net.Http.HttpRequestException: Connection refused (187.18.34.124:30190)
+[ citizen-server-main] -> Quitting: SIGHUP received

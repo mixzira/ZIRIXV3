@@ -240,7 +240,7 @@ const updateShop = () => {
 				<div class="fake-slot">
 					<div class="slot">
 						<div class="item" data-item-key="${item.key}">
-							<div id="item-icon"><img src='http://${data.imageService}/vrp_itens/${item.index}.png'></div>
+							<div id="item-icon"><img src='${data.imageService}/${item.index}.png'></div>
 							<div id="item-weight">${(item.weight*item.amount).toFixed(2)}Kg</div>
 							<div id="item-amount">${formatarNumero(item.amount)}x</div>
 							<div id="item-name">${item.name}</div>
@@ -266,7 +266,7 @@ const updateShop = () => {
 				<div class="fake-slot">
 					<div id="${data.sname}">
 						<div class="shop-item" data-item-key="${item.body}">
-							<div id="item-icon"><img src='http://${data.imageService}/vrp_itens/${item.index}.png'></div>
+							<div id="item-icon"><img src='${data.imageService}/${item.index}.png'></div>
 							<div id="item-weight">$${item.price}</div>
 							<div id="item-amount">${formatarNumero(item.stock)}x</div>
 							<div id="item-name">${item.name}</div>
@@ -293,7 +293,7 @@ const updateShop = () => {
 		$('#options').html(`
 			${optionItems.map((item) => (`
 				<div class="option-item">
-					<div id="oitem-icon"><img src='http://${data.ip}/image-streaming/Interno/vrp_itens/${item.body}.png'></div>
+					<div id="oitem-icon"><img src='${data.ip}/${item.body}.png'></div>
 					<div id="oitem-name">${item.name}</div>
 					<div id="oitem-price">$${item.price.toLocaleString('pt-BR')}</div>
 					<div id="oitem-description">${item.description}</div>

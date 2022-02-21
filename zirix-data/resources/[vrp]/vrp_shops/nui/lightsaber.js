@@ -185,7 +185,7 @@ const updateShop = () => {
 				<div class="fake-slot">
 					<div class="slot">
 						<div class="item" data-item-key="${item.key}">
-							<div id="item-icon"><img src='http://${data.imageService}/vrp_itens/${item.index}.png'></div>
+							<div id="item-icon"><img src='${data.imageService}/${item.index}.png'></div>
 							<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 							<div id="item-amount">${formatarNumero(item.amount)}x</div>
 							<div id="item-name">${item.name}</div>
@@ -211,7 +211,7 @@ const updateShop = () => {
 				<div class="fake-slot">
 					<div id="${data.shopName}">
 						<div class="shop-item" data-item-key="${item.itemBody}">
-							<div id="item-icon"><img src='http://${data.imageService}/vrp_itens/${item.itemIndex}.png'></div>
+							<div id="item-icon"><img src='${data.imageService}/${item.itemIndex}.png'></div>
 							<div id="item-weight">$${item.itemPrice}</div>
 							<div id="item-amount">${formatarNumero(item.itemAmount)}x</div>
 							<div id="item-name">${item.itemName}</div>

@@ -157,7 +157,7 @@ const updateInventory = () => {
 				<div class="fake-slot">
 					<div class="slot">
 						<div class="item" data-item-key="${item.key}" data-item-type="${item.type}" data-name-key="${item.name}">
-							<div id="item-icon"><img src='http://${data.imageService}/vrp_itens/${item.index}.png'></div>	
+							<div id="item-icon"><img src='${data.imageService}/${item.index}.png'></div>	
 							<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 							<div id="item-amount">${formatarNumero(item.amount)}x</div>
 							<div id="item-name">${item.name}</div>

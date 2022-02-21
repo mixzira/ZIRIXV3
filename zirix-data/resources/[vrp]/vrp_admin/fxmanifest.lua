@@ -12,11 +12,11 @@ client_scripts {
 
 server_scripts {
 	'@vrp/lib/utils.lua',
-	'@mysql-async/lib/MySQL.lua',
+	'@oxmysql/lib/MySQL.lua',
 	'config/config.lua',
 	'skywalker.lua'
 }
 
 dependencies {
-    'mysql-async'
+    'oxmysql'
 }

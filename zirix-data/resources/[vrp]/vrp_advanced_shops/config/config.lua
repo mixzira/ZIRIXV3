@@ -7,7 +7,7 @@ config = {}
 ]]
 
 
-config.imageService = ''
+config.imageService = 'http://158.69.239.234:3358/itens' -- IP + diretório.
 
 config.webhook = ''
 
@@ -56,7 +56,7 @@ config.shops = {
         ['price'] = 1958000,
         ['robbery'] = { 50000, 10000 },
         ['forsale'] = true
-    },
+    }
 }
 
 config.options = {

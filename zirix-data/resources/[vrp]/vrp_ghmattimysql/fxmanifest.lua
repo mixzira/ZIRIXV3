@@ -6,7 +6,7 @@ contact 'E-mail: contato@ziraflix.com - Discord: discord.gg/ziraflix'
 
 dependencies {
 	'vrp',
-	'GHMattiMySQL'
+	'oxmysql'
 }
 
 server_scripts {

@@ -8,9 +8,9 @@ cfg.gaptitudes = {
 }
 
 cfg.db = {
-	driver = "ghmattimysql",
+	driver = "oxmysql",
 	host = "127.0.0.1",
-	database = "zirix",
+	database = "clubz",
 	user = "root",
 	password = ""
 }

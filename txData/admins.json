@@ -1,0 +1,21 @@
+[
+  {
+    "name": "MixZira",
+    "master": true,
+    "password_hash": "$2a$11$OOf2QCDwuakFY3gknZgpOeo6f1vnZ9kowuNaKKZc2Ni7r0HWcJtzW",
+    "providers": {
+      "citizenfx": {
+        "id": "MixZira",
+        "identifier": "fivem:58309",
+        "data": {
+          "sub": "7b6c37680fddaa6fc07723ca7248d7aa",
+          "nameid": "https://forum.cfx.re/internal/user/58309",
+          "name": "MixZira",
+          "picture": "https://forum.cfx.re/user_avatar/forum.cfx.re/mixzira/256/939121_2.png",
+          "profile": "https://forum.cfx.re/u/MixZira"
+        }
+      }
+    },
+    "permissions": []
+  }
+]

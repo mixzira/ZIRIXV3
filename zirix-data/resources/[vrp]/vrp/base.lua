@@ -23,29 +23,23 @@ local cached_queries = {}
 local prepared_queries = {}
 local db_initialized = false
 
-function vRP.registerDBDriver(name,on_init,on_prepare,on_query)
-	if not db_drivers[name] then
-		db_drivers[name] = { on_init,on_prepare,on_query }
+function vRP.registerDBDriver(name, on_init, on_prepare, on_query)
+    if not db_drivers[name] then
+        db_drivers[name] = { on_init, on_prepare, on_query }
+        db_driver = db_drivers[name]
+        db_initialized = true
 
-		if name == config.db.driver then
-			db_driver = db_drivers[name]
+        for _, prepare in pairs(cached_prepares) do
+            on_prepare(table.unpack(prepare, 1, table.maxn(prepare)))
+        end
 
-			local ok = on_init(config.db)
-			if ok then
-				db_initialized = true
-				for _,prepare in pairs(cached_prepares) do
-					on_prepare(table.unpack(prepare,1,table.maxn(prepare)))
-				end
+        for _, query in pairs(cached_queries) do
+            query[2](on_query(table.unpack(query[1], 1, table.maxn(query[1]))))
+        end
 
-				for _,query in pairs(cached_queries) do
-					query[2](on_query(table.unpack(query[1],1,table.maxn(query[1]))))
-				end
-
-				cached_prepares = nil
-				cached_queries = nil
-			end
-		end
-	end
+        cached_prepares = nil
+        cached_queries = nil
+    end
 end
 
 function vRP.format(n)

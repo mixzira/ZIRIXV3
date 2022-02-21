@@ -176,7 +176,7 @@ const updateVault = () => {
 			${nameList2.map((item) => (`
 				<div class="slot">
 					<div class="item" data-item-key="${item.key}">
-						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
+						<div id="item-icon"><img src='${data.ip}/${item.index}.png'></div>
 						<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 						<div id="item-amount">${formatarNumero(item.amount)}x</div>
 						<div id="item-name">${item.name}</div>
@@ -194,7 +194,7 @@ const updateVault = () => {
 			${nameList.map((item) => (`
 				<div class="slot">
 					<div class="chest-item" data-item-key="${item.key}">
-						<div id="item-icon"><img src='http://${data.ip}/images/vrp_itens/${item.index}.png'></div>
+						<div id="item-icon"><img src='${data.ip}/${item.index}.png'></div>
 						<div id="item-weight">${(item.peso*item.amount).toFixed(2)}Kg</div>
 						<div id="item-amount">${formatarNumero(item.amount)}x</div>
 						<div id="item-name">${item.name}</div>

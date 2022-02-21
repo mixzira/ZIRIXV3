@@ -11,22 +11,24 @@ local timers = {}
 local idgens = Tools.newIDGenerator()
 local blips = {}
 
-vRP._prepare('vRP/insert_shops','INSERT INTO vrp_shops(owner, name, security, price, forsale, stock, maxstock, vault, maxvault,fantasy) VALUES(@owner, @name, @security, @price, @forsale, @stock, @maxstock, @vault, @maxvault, @fantasy)')
-vRP._prepare('vRP/get_stock_shop','SELECT stock FROM vrp_shops WHERE name = @name')
-vRP._prepare('vRP/set_stock_shop','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
-vRP._prepare('vRP/get_maxstock_shop','SELECT * FROM vrp_shops WHERE name = @name')
-vRP._prepare('vRP/set_maxstock_shop','UPDATE vrp_shops SET maxstock = @maxstock WHERE name = @name')
-vRP._prepare('vRP/get_vault_shop','SELECT * FROM vrp_shops WHERE name = @name')
-vRP._prepare('vRP/set_vault_shop','UPDATE vrp_shops SET vault = @vault WHERE name = @name')
-vRP._prepare('vRP/purchase_shop','UPDATE vrp_shops SET owner = @owner, forsale = @forsale WHERE name = @name')
-vRP._prepare('vRP/select_shop','SELECT * FROM vrp_shops')
-vRP._prepare('vRP/select_shop_name','SELECT * FROM vrp_shops WHERE name = @name')
-vRP._prepare('vRP/get_security_shop','SELECT * FROM vrp_shops WHERE name = @name')
-vRP._prepare('vRP/set_security_shop','UPDATE vrp_shops SET security = @security WHERE name = @name')
-vRP._prepare('vRP/get_owner_shop','SELECT * FROM vrp_shops WHERE name = @name')
-vRP._prepare('vRP/update_product','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
-vRP._prepare('vRP/set_fantasy_shop','UPDATE vrp_shops SET fantasy = @fantasy WHERE name = @name')
-vRP._prepare('vRP/get_owner','SELECT * FROM vrp_shops WHERE owner = @owner')
+vRP.prepare('vRP/insert_shops','INSERT INTO vrp_shops(owner, name, security, price, forsale, stock, maxstock, vault, maxvault,fantasy) VALUES(@owner, @name, @security, @price, @forsale, @stock, @maxstock, @vault, @maxvault, @fantasy)')
+vRP.prepare('vRP/get_stock_shop','SELECT stock FROM vrp_shops WHERE name = @name')
+vRP.prepare('vRP/set_stock_shop','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
+vRP.prepare('vRP/get_maxstock_shop','SELECT * FROM vrp_shops WHERE name = @name')
+vRP.prepare('vRP/set_maxstock_shop','UPDATE vrp_shops SET maxstock = @maxstock WHERE name = @name')
+vRP.prepare('vRP/get_vault_shop','SELECT * FROM vrp_shops WHERE name = @name')
+vRP.prepare('vRP/set_vault_shop','UPDATE vrp_shops SET vault = @vault WHERE name = @name')
+vRP.prepare('vRP/purchase_shop','UPDATE vrp_shops SET owner = @owner, forsale = @forsale WHERE name = @name')
+
+vRP.prepare('vRP/select_shop_name','SELECT * FROM vrp_shops WHERE name = @name')
+vRP.prepare('vRP/get_security_shop','SELECT * FROM vrp_shops WHERE name = @name')
+vRP.prepare('vRP/set_security_shop','UPDATE vrp_shops SET security = @security WHERE name = @name')
+vRP.prepare('vRP/get_owner_shop','SELECT * FROM vrp_shops WHERE name = @name')
+vRP.prepare('vRP/update_product','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
+vRP.prepare('vRP/set_fantasy_shop','UPDATE vrp_shops SET fantasy = @fantasy WHERE name = @name')
+vRP.prepare('vRP/get_owner','SELECT * FROM vrp_shops WHERE owner = @owner')
+
+vRP.prepare('vRP/select_shop','SELECT * FROM vrp_shops')
 
 function dist ( x1, y1, z1, x2, y2, z2 )
 	local dx = x1 - x2
@@ -36,7 +38,8 @@ function dist ( x1, y1, z1, x2, y2, z2 )
 end
 
 function createShop()
-    local rows = vRP.query('vRP/select_shop')
+    local rows = vRP.query('vRP/select_shop',{})
+    
     for k,v in pairs(config.shops) do
         local create = false
         for x,y in pairs(rows) do
