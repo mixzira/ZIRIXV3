@@ -1,5 +1,5 @@
-build/*
-build/**/*
+artifacts/*
+artifacts/**/*
 zirix-data/cache/**/*
 zirix-data/cache/*
 zirix-data/config/int.cfg
