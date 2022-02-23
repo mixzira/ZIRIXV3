@@ -8,7 +8,7 @@ Tunnel.bindInterface("vrp_misc",misc)
 
 SetConvarServerInfo("tags", "zirix, ziraflix")
 SetConvarServerInfo("DevelopedBy", "ZIRAFLIX")
-SetConvarServerInfo("Discord", "discord.gg/ziraflix")
+SetConvarServerInfo("Discord", "discord.gg/kYFy8JwVfd")
 SetConvarServerInfo("Website", "www.ziraflix.com")
 
 local cooldown = {}

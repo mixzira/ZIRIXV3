@@ -3,7 +3,7 @@
 echo ===-------------------------------===
 echo     ZIRIX V3 (3.2.0)
 echo     Developed by: ZIRAFLIX
-echo     Discord: discord.gg/ziraflix
+echo     Discord: discord.gg/kYFy8JwVfd
 echo     Contact: contato@ziraflix.com
 echo ===-------------------------------===
 

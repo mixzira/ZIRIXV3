@@ -2,7 +2,7 @@ fx_version 'adamant'
 game 'gta5'
 
 author 'ZIRAFLIX'
-contact 'E-mail: contato@ziraflix.com - Discord: discord.gg/ziraflix'
+contact 'E-mail: contato@ziraflix.com - Discord: discord.gg/kYFy8JwVfd'
 
 ui_page "nui/ui.html"
 
