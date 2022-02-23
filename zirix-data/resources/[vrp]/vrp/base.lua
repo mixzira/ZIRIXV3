@@ -99,28 +99,28 @@ function vRP.getUserIdByIdentifier(ids)
 end
 
 function vRP.getUserIdByIdentifiers(ids)
-	if ids and #ids then
-		for i=1,#ids do
-			if (string.find(ids[i],"ip:") == nil) then
-				local rows = vRP.query("vRP/userid_byidentifier",{ identifier = ids[i] })
-				if #rows > 0 then
-					return rows[1].user_id
-				end
-			end
-		end
+    if ids and #ids then
+        for i=1,#ids do
+            if (string.find(ids[i],"ip:") == nil) then
+                local rows = vRP.query("vRP/userid_byidentifier",{ identifier = ids[i] })
+                if #rows > 0 then
+                    return rows[1].user_id
+                end
+            end
+        end
 
-		local rows,affected = vRP.query("vRP/create_user",{})
+        local affected, rows = vRP.query("vRP/create_user",{})
 
-		if #rows > 0 then
-			local user_id = rows[1].id
-			for l,w in pairs(ids) do
-				if (string.find(w,"ip:") == nil) then
-					vRP.execute("vRP/add_identifier",{ user_id = user_id, identifier = w })
-				end
-			end
-			return user_id
-		end
-	end
+        if #rows > 0 then
+            local user_id = rows[1].id
+            for l,w in pairs(ids) do
+                if (string.find(w,"ip:") == nil) then
+                    vRP.execute("vRP/add_identifier",{ user_id = user_id, identifier = w })
+                end
+            end
+            return user_id
+        end
+    end
 end
 
 function vRP.getPlayerEndpoint(player)
