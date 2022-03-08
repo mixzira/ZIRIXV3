@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `zirix`;
-USE `zirix`;
+CREATE DATABASE IF NOT EXISTS `clubz`;
+USE `clubz`;
 
 CREATE TABLE IF NOT EXISTS `phone_app_chat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
