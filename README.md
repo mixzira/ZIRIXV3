@@ -6,7 +6,7 @@
 ZIRIX V3 é uma base vRPex para FiveM, com um conjunto de scripts da comunidade e do grupo de desenvolvimento da ZIRAFLIX.
 
 <h2>Está tendo problemas para baixar?</h2>
-Caso o download da base esteja corrompendo, baixe utilizando o [GitHub Desktop](https://desktop.github.com).
+Caso o download da base esteja corrompendo, baixe utilizando o [GitHub Desktop](https://desktop.github.com) .
 
 <h2>Necessários</h2>
 1. [XAMPP](https://www.apachefriends.org/pt_br/index.html);</br>
