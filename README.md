@@ -9,11 +9,11 @@ ZIRIX V3 é uma base vRPex para FiveM, com um conjunto de scripts da comunidade 
 Caso o download da base esteja corrompendo, baixe utilizando o [GitHub Desktop](https://desktop.github.com).
 
 <h2>Necessários</h2>
-1. [XAMPP](https://www.apachefriends.org/pt_br/index.html);
-2. [HeidiSQL](https://www.heidisql.com/download.php) ou qualquer método de viasualização e manipulação do mysql;
-3. [Artifacts](https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/);
-4. [FiveM key](https://keymaster.fivem.net/login);
-5. [Steam key](https://steamcommunity.com/dev/apikey);
+1. [XAMPP](https://www.apachefriends.org/pt_br/index.html);</br>
+2. [HeidiSQL](https://www.heidisql.com/download.php) ou qualquer método de viasualização e manipulação do mysql;</br>
+3. [Artifacts](https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/);</br>
+4. [FiveM key](https://keymaster.fivem.net/login);</br>
+5. [Steam key](https://steamcommunity.com/dev/apikey);</br>
 
 <h2>Instalação</h2>
 1. Obtenha todos os programas e dados tidos como necessário acima;
