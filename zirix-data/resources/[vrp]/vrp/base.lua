@@ -109,10 +109,10 @@ function vRP.getUserIdByIdentifiers(ids)
             end
         end
 
-        local affected, rows = vRP.query("vRP/create_user",{})
+        local affected, rows = vRP.query("vRP/create_user", {})
 
-        if #rows > 0 then
-            local user_id = rows[1].id
+        if #affected then
+            local user_id = affected[1].id
             for l,w in pairs(ids) do
                 if (string.find(w,"ip:") == nil) then
                     vRP.execute("vRP/add_identifier",{ user_id = user_id, identifier = w })

@@ -11,6 +11,25 @@ local timers = {}
 local idgens = Tools.newIDGenerator()
 local blips = {}
 
+vRP.prepare('vRP/create_vrp_shops',
+    [[
+        CREATE TABLE IF NOT EXISTS `vrp_shops` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `owner` int(11) DEFAULT NULL,
+            `name` varchar(255) DEFAULT NULL,
+            `security` varchar(255) NOT NULL DEFAULT 1,
+            `price` int(11) DEFAULT NULL,
+            `forsale` tinyint(1) DEFAULT NULL,
+            `stock` text DEFAULT NULL,
+            `maxstock` int(11) DEFAULT NULL,
+            `vault` int(11) DEFAULT NULL,
+            `maxvault` int(11) DEFAULT NULL,
+            `fantasy` VARCHAR(255) NULL DEFAULT NULL,
+            PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ]]
+)
+
 vRP.prepare('vRP/insert_shops','INSERT INTO vrp_shops(owner, name, security, price, forsale, stock, maxstock, vault, maxvault,fantasy) VALUES(@owner, @name, @security, @price, @forsale, @stock, @maxstock, @vault, @maxvault, @fantasy)')
 vRP.prepare('vRP/get_stock_shop','SELECT stock FROM vrp_shops WHERE name = @name')
 vRP.prepare('vRP/set_stock_shop','UPDATE vrp_shops SET stock = @stock WHERE name = @name')
@@ -807,6 +826,7 @@ RegisterCommand('loja',function(source,args,rawCommand)
 end)
 
 Citizen.CreateThread(function()
+    vRP.execute('vRP/create_vrp_shops')
     createShop()
 end)
 

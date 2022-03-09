@@ -1,3 +1,15 @@
+vRP.items = {}
+
+CreateThread(function()
+	for k, v in pairs(items.list) do
+		if v.weight == nil then
+			v.weight = 0
+		end
+		local item = { name = v.name, weight = v.weight }
+		vRP.items[k] = item
+	end
+end)
+
 function vRP.save_idle_custom(player, custom)
 	local r_idle = {}
 	local user_id = vRP.getUserId(player)
@@ -51,16 +63,6 @@ function vRP.itemBodyList(item)
 	if items.list[item] ~= nil then
 		return items.list[item]
 	end
-end
-
-vRP.items = {}
-
-function vRP.defInventoryItem(idname, name, weight)
-	if weight == nil then
-		weight = 0
-	end
-	local item = { name = name, weight = weight }
-	vRP.items[idname] = item
 end
 
 function vRP.computeItemName(item, args)
