@@ -1,0 +1,37 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= ZIRIX V3
+ZIRIX V3 é uma base vRPex para FiveM, com um conjunto de scripts da comunidade e do grupo de desenvolvimento da ZIRAFLIX.
+
+NOTE: Caso o download da base esteja corrompendo, baixe utilizando o https://desktop.github.com/[GitHub Desktop].
+
+= Necessários
+[horizontal]
+➡ XAMPP :: https://www.apachefriends.org/pt_br/index.html/
+➡ HeidiSQL :: https://www.heidisql.com/download.php/
+➡ Artifacts :: https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/
+➡ FiveM key :: https://keymaster.fivem.net/login/
+➡ Steam key :: https://steamcommunity.com/dev/apikey/
+
+= Instalação
+[horizontal]
+
+1⃣ :: Obtenha todos os programas e dados tidos como necessário acima.
+2⃣ :: Baixe a base e extraia em seu computador ou VPS (Observação: Para problemas, o diretórios não devem conter acentos ou espaços em seus nomes).
+3⃣ :: Após instalar o XAMPP & o programa escolhido para visualizar e manipular os dados do mysql, crie uma banco de dados chamado zirix.
+4⃣ :: Dentro de ZIRIX V3 crie uma pasta chamada artifacts e extraia o conteúdo do download https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/[Artifacts] dentro desta pasta.
+5⃣ :: No arquivo config.cfg você pode adicionar e editar os dados para as informações do seu servidor e adicionar novas configurações como instruido na https://docs.fivem.net/docs/server-manual/setting-up-a-server/[documentação do FiveM].
+
+= Suporte
+Você pode buscar suporte em nosso https://www.ziraflix.com.br/discord/[Discord].
+
+= Contato
+- Comercial: contato@ziraflix.com
+- Discord: https://www.ziraflix.com.br/discord
+- Website: https://ziraflix.com.br
