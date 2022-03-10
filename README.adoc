@@ -6,6 +6,8 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+image::https://cdn.discordapp.com/attachments/917183221375049728/951262131007918120/background.png[ZIRIXV3,822,float="center"]
+
 = ZIRIX V3
 ZIRIX V3 é uma base vRPex para FiveM, com um conjunto de scripts da comunidade e do grupo de desenvolvimento da ZIRAFLIX.
 
