@@ -2,7 +2,11 @@ local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 
-src = Tunnel.getInterface("vrp_player",src)
+
+clPLAYER = {}
+Tunnel.bindInterface("vrp_player",clPLAYER)
+svPLAYER = Tunnel.getInterface("vrp_player")
+
 
 RegisterCommand("vtuning",function(source,args)
 	local vehicle = GetVehiclePedIsUsing(PlayerPedId())
@@ -306,7 +310,7 @@ RegisterCommand("attachs",function(source,args)
 	local ped = PlayerPedId()
 
 	if args[1] == "s" then
-		if src.checkPassGold() then
+		if svPLAYER.checkPassGold() then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL") then
 				GiveWeaponComponentToPed(ped,GetHashKey("WEAPON_PISTOL"),GetHashKey("COMPONENT_PISTOL_CLIP_02"))
 				GiveWeaponComponentToPed(ped,GetHashKey("WEAPON_PISTOL"),GetHashKey("COMPONENT_AT_PI_FLSH"))
@@ -436,7 +440,7 @@ RegisterCommand("attachs",function(source,args)
 			end
 		end
 	elseif args[1] == "p" then
-		if src.checkPassPlatinum() then
+		if svPLAYER.checkPassPlatinum() then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL") then
 				GiveWeaponComponentToPed(ped,GetHashKey("WEAPON_PISTOL"),GetHashKey("COMPONENT_PISTOL_CLIP_02"))
 				GiveWeaponComponentToPed(ped,GetHashKey("WEAPON_PISTOL"),GetHashKey("COMPONENT_AT_PI_FLSH"))
@@ -892,7 +896,7 @@ AddEventHandler('setchapeu',function(modelo,cor)
 		end
 	end
 
-	if GetEntityHealth(ped) > 101 and src.checkChapeu() then
+	if GetEntityHealth(ped) > 101 and svPLAYER.checkChapeu() then
 		if GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") then
 			vRP._playAnim(true,{{"misscommon@van_put_on_masks","put_on_mask_ps"}},false)
 			Wait(800)
@@ -921,7 +925,7 @@ AddEventHandler('setmascara',function(modelo,cor)
 		end
 	end
 
-	if GetEntityHealth(ped) > 101 and src.checkMascara() then
+	if GetEntityHealth(ped) > 101 and svPLAYER.checkMascara() then
 		if GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") or GetEntityModel(ped) == GetHashKey("mp_f_freemode_01") then
 			vRP._playAnim(true,{{"misscommon@van_put_on_masks","put_on_mask_ps"}},false)
 			Wait(1500)
@@ -945,7 +949,7 @@ AddEventHandler('setoculos',function(modelo,cor)
 		end
 	end
 
-	if GetEntityHealth(ped) > 101 and src.checkOculos() then
+	if GetEntityHealth(ped) > 101 and svPLAYER.checkOculos() then
 		if GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") then
 			vRP._playAnim(true,{{"misscommon@van_put_on_masks","put_on_mask_ps"}},false)
 			Wait(800)
