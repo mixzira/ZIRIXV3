@@ -270,7 +270,7 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(30*60000)
+		Citizen.Wait(config.TimeSalary*60000)
 		TriggerServerEvent('salario:pagamento')
 	end
 end)
