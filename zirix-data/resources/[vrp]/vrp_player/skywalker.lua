@@ -148,8 +148,7 @@ Citizen.CreateThread(function()
 end)
 
 
-RegisterServerEvent('salario:pagamento')
-AddEventHandler('salario:pagamento',function()
+function svPLAYER.PagamentoSalario()
 	local source = source
 	local user_id = vRP.getUserId(source)
 
@@ -191,7 +190,7 @@ AddEventHandler('salario:pagamento',function()
 		vRP.setBanned(user_id,true)
 		vRP.kick(source,"Você foi banido, PAU NO CU!")
 	end
-end)
+end
 
 local veiculos = {}
 RegisterServerEvent("TryDoorsEveryone")

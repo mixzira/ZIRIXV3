@@ -275,7 +275,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(config.TimeSalary*60000)
-		TriggerServerEvent('salario:pagamento')
+		svPLAYER.PagamentoSalario()
 	end
 end)
 
