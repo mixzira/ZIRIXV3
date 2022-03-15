@@ -1,5 +1,6 @@
 config = {}
 
+config.TimeSalary = 30 -- Intervalo em minutos para pagamento do salário
 config.payments = {
 	{ ['permissao'] = "juiz.permissao", ['nome'] = "Juiz(a)", ['payment'] = 7000 },
 	{ ['permissao'] = "procurador.permissao", ['nome'] = "Procurador(a)", ['payment'] = 4900 },

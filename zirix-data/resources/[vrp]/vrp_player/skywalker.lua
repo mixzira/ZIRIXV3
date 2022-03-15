@@ -4,11 +4,12 @@ local Tools = module("vrp","lib/Tools")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP")
 
-src = {}
-Tunnel.bindInterface("vrp_player",src)
+svPLAYER = {}
+Tunnel.bindInterface("vrp_player",svPLAYER)
+clPLAYER = Tunnel.getInterface("vrp_player")
 local idgens = Tools.newIDGenerator()
 
-function src.checkChapeu()
+function svPLAYER.checkChapeu()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -23,7 +24,7 @@ function src.checkChapeu()
 	end
 end
 
-function src.checkMascara()
+function svPLAYER.checkMascara()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -38,7 +39,7 @@ function src.checkMascara()
 	end
 end
 
-function src.checkOculos()
+function svPLAYER.checkOculos()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -147,8 +148,7 @@ Citizen.CreateThread(function()
 end)
 
 
-RegisterServerEvent('salario:pagamento')
-AddEventHandler('salario:pagamento',function()
+function svPLAYER.PagamentoSalario()
 	local source = source
 	local user_id = vRP.getUserId(source)
 
@@ -190,7 +190,7 @@ AddEventHandler('salario:pagamento',function()
 		vRP.setBanned(user_id,true)
 		vRP.kick(source,"Você foi banido, PAU NO CU!")
 	end
-end)
+end
 
 local veiculos = {}
 RegisterServerEvent("TryDoorsEveryone")
@@ -470,7 +470,7 @@ RegisterCommand('oculos',function(source,args,rawCommand)
 	end
 end)
 
-function src.checkPassGold()
+function svPLAYER.checkPassGold()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"gold.permissao") or vRP.hasPermission(user_id,"platinum.permissao") or vRP.hasPermission(user_id,"ultimate.permissao") then
@@ -478,7 +478,7 @@ function src.checkPassGold()
 	end
 end
 
-function src.checkPassPlatinum()
+function svPLAYER.checkPassPlatinum()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"ultimate.permissao") then
