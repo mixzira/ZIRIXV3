@@ -24,7 +24,7 @@ vRP.prepare('vRP/create_phone_calls',
     ]]
 )
 
-vRP.prepare('vRP/create_phone_calls',
+vRP.prepare('vRP/create_phone_messages',
     [[
         CREATE TABLE IF NOT EXISTS `phone_messages` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -298,7 +298,7 @@ vRP.prepare('vRP/create_vrp_estoque',
 CreateThread(function()
     vRP.execute('vRP/create_phone_app_chat')
     vRP.execute('vRP/create_phone_calls')
-    vRP.execute('vRP/create_phone_calls')
+    vRP.execute('vRP/create_phone_messages')
     vRP.execute('vRP/create_phone_users_contacts')
     vRP.execute('vRP/create_bank_transfer')
     vRP.execute('vRP/create_twitter_accounts')
