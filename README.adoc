@@ -32,7 +32,7 @@ NOTE: Caso o download da base esteja corrompendo, baixe utilizando o https://des
 
 ⠀
 
-NOTE: As tabelas serão geradas automaticamente ao iniciar a base. Basta criar um banco de dados chamado zirix.
+NOTE: GERADOR DE BANCO DE DADOS AUTOMATICO! As tabelas serão geradas automaticamente ao iniciar a base. Basta criar um banco de dados chamado: zirix
 
 
 = Suporte
