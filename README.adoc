@@ -15,11 +15,11 @@ NOTE: Caso o download da base esteja corrompendo, baixe utilizando o https://des
 
 = Necessários
 [horizontal]
-➡ XAMPP :: https://www.apachefriends.org/pt_br/index.html/
-➡ HeidiSQL :: https://www.heidisql.com/download.php/
-➡ Artifacts :: https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/
-➡ FiveM key :: https://keymaster.fivem.net/login/
-➡ Steam key :: https://steamcommunity.com/dev/apikey/
+➡ XAMPP :: https://www.apachefriends.org/pt_br/index.html
+➡ HeidiSQL :: https://www.heidisql.com/download.php
+➡ Artifacts :: https://runtime.fivem.net/artifacts/fivem/build_server_windows/master
+➡ FiveM key :: https://keymaster.fivem.net/login
+➡ Steam key :: https://steamcommunity.com/dev/apikey
 
 = Instalação
 [horizontal]
