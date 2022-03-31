@@ -30,7 +30,7 @@ NOTE: Caso o download da base esteja corrompendo, baixe utilizando o https://des
 4⃣ :: Dentro de ZIRIX V3 crie uma pasta chamada artifacts e extraia o conteúdo do download https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/[Artifacts] dentro desta pasta.
 5⃣ :: No arquivo config.cfg você pode adicionar e editar os dados para as informações do seu servidor e adicionar novas configurações como instruido na https://docs.fivem.net/docs/server-manual/setting-up-a-server/[documentação do FiveM].
 
-NOTE: Essa base possui gerador de tabelas de banco de dados automatico, basta criar um banco de dados nomeado como zirix e iniciar a base.
+NOTE: As tabelas serão geradas automaticamente ao iniciar a base. Basta criar um banco de dados chamado zirix.
 
 = Suporte
 Você pode buscar suporte em nosso https://www.ziraflix.com.br/discord/[Discord].
