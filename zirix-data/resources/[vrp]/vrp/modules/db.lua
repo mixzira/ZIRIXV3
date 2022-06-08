@@ -10,6 +10,33 @@ vRP.prepare('vRP/create_phone_app_chat',
     ]]
 )
 
+vRP.prepare('vRP/phone_calls',
+    [[
+    CREATE TABLE IF NOT EXISTS `phone_calls` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `owner` varchar(10) NOT NULL COMMENT 'Num tel proprio',
+        `num` varchar(10) NOT NULL COMMENT 'Num do contato',
+        `incoming` int(11) NOT NULL COMMENT 'Define quem te liga',
+        `time` timestamp NOT NULL DEFAULT current_timestamp(),
+        `accepts` int(11) NOT NULL COMMENT 'Aceitou ou nao a chamada',
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ]]
+)
+
+
+vRP.prepare('vRP/create_vrp_homes_permissions',
+    [[
+        CREATE TABLE IF NOT EXISTS `vrp_homes_permissions` (
+            `owner` int(11) NOT NULL,
+            `user_id` int(11) NOT NULL,
+            `garage` int(11) NOT NULL,
+            `home` varchar(100) NOT NULL DEFAULT '',
+            `tax` varchar(24) NOT NULL DEFAULT ''
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    ]]
+)
+
 vRP.prepare('vRP/create_phone_calls',
     [[
         CREATE TABLE IF NOT EXISTS `phone_calls` (
@@ -158,18 +185,6 @@ vRP.prepare('vRP/create_insto_likes',
     ]]
 )
 
-vRP.prepare('vRP/create_vrp_homes_permissions',
-    [[
-        CREATE TABLE IF NOT EXISTS `vrp_homes_permissions` (
-            `owner` int(11) NOT NULL,
-            `user_id` int(11) NOT NULL,
-            `garage` int(11) NOT NULL,
-            `home` varchar(100) NOT NULL DEFAULT '',
-            `tax` varchar(24) NOT NULL DEFAULT ''
-        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-    ]]
-)
-
 vRP.prepare('vRP/create_vrp_srv_data',
     [[
         CREATE TABLE IF NOT EXISTS `vrp_srv_data` (
@@ -292,12 +307,15 @@ vRP.prepare('vRP/create_vrp_estoque',
             `vehicle` varchar(100) NOT NULL,
             `quantidade` int(11) NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        INSERT INTO `vrp_estoque` (`vehicle`, `quantidade`) VALUES
+	('deveste', 10);
     ]]
 )
 
+
 CreateThread(function()
+
     vRP.execute('vRP/create_phone_app_chat')
-    vRP.execute('vRP/create_phone_calls')
     vRP.execute('vRP/create_phone_calls')
     vRP.execute('vRP/create_phone_users_contacts')
     vRP.execute('vRP/create_bank_transfer')
@@ -307,7 +325,6 @@ CreateThread(function()
     vRP.execute('vRP/create_insto_accounts')
     vRP.execute('vRP/create_insto_instas')
     vRP.execute('vRP/create_insto_likes')
-    vRP.execute('vRP/create_vrp_homes_permissions')
     vRP.execute('vRP/create_vrp_srv_data')
     vRP.execute('vRP/create_vrp_users')
     vRP.execute('vRP/create_vrp_user_data')
@@ -318,4 +335,5 @@ CreateThread(function()
     vRP.execute('vRP/create_vrp_priority')
     vRP.execute('vRP/create_vrp_stock_exchange')
     vRP.execute('vRP/create_vrp_estoque')
+    vRP.execute('vRP/create_vrp_homes_permissions')
 end)
