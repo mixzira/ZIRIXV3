@@ -9,7 +9,7 @@ endif::[]
 image::https://media.discordapp.net/attachments/917183221375049728/992580407654633513/zirix-v3.png[ZIRIXV3,float="center"]
 
 = ZIRIX V3
-ZIRIX V3 é uma base vRPex para FiveM, com um conjunto de scripts da comunidade e do grupo de desenvolvimento da ZIRAFLIX.
+Uma base vRPex para FiveM, desenvolvida pela equipe ZIRAFLIX em conjunto a scripts da comunidade.
 
 NOTE: Caso o download da base esteja corrompendo, baixe utilizando o https://desktop.github.com/[GitHub Desktop].
 
