@@ -1,6 +1,6 @@
 config = {}
 
-config.imageServer = ''
+config.imageServer = 'http://images.ziraflix.com/itens'
 
 config.webhookBottomText = 'CLEAN TWO - '
 config.webhookIcon = 'https://i.imgur.com/CtQB816.png'

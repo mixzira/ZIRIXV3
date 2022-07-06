@@ -21,7 +21,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -32,21 +31,19 @@ var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __reExport = (target, module2, copyDefault, desc) => {
-  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
-    for (let key of __getOwnPropNames(module2))
-      if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
-        __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
   }
-  return target;
+  return to;
 };
-var __toESM = (module2, isNodeMode) => {
-  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", !isNodeMode && module2 && module2.__esModule ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
-};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 
-// node_modules/sqlstring/lib/SqlString.js
+// node_modules/.pnpm/sqlstring@2.3.3/node_modules/sqlstring/lib/SqlString.js
 var require_SqlString = __commonJS({
-  "node_modules/sqlstring/lib/SqlString.js"(exports) {
+  "node_modules/.pnpm/sqlstring@2.3.3/node_modules/sqlstring/lib/SqlString.js"(exports) {
     var SqlString = exports;
     var ID_GLOBAL_REGEXP = /`/g;
     var QUAL_GLOBAL_REGEXP = /\./g;
@@ -85,7 +82,7 @@ var require_SqlString = __commonJS({
         case "number":
           return val + "";
         case "object":
-          if (val instanceof Date) {
+          if (Object.prototype.toString.call(val) === "[object Date]") {
             return SqlString.dateToString(val, timeZone || "local");
           } else if (Array.isArray(val)) {
             return SqlString.arrayToList(val, timeZone);
@@ -240,16 +237,16 @@ var require_SqlString = __commonJS({
   }
 });
 
-// node_modules/sqlstring/index.js
+// node_modules/.pnpm/sqlstring@2.3.3/node_modules/sqlstring/index.js
 var require_sqlstring = __commonJS({
-  "node_modules/sqlstring/index.js"(exports, module2) {
+  "node_modules/.pnpm/sqlstring@2.3.3/node_modules/sqlstring/index.js"(exports, module2) {
     module2.exports = require_SqlString();
   }
 });
 
-// node_modules/denque/index.js
+// node_modules/.pnpm/denque@2.0.1/node_modules/denque/index.js
 var require_denque = __commonJS({
-  "node_modules/denque/index.js"(exports, module2) {
+  "node_modules/.pnpm/denque@2.0.1/node_modules/denque/index.js"(exports, module2) {
     "use strict";
     function Denque(array, options) {
       var options = options || {};
@@ -574,9 +571,9 @@ var require_denque = __commonJS({
   }
 });
 
-// node_modules/yallist/iterator.js
+// node_modules/.pnpm/yallist@4.0.0/node_modules/yallist/iterator.js
 var require_iterator = __commonJS({
-  "node_modules/yallist/iterator.js"(exports, module2) {
+  "node_modules/.pnpm/yallist@4.0.0/node_modules/yallist/iterator.js"(exports, module2) {
     "use strict";
     module2.exports = function(Yallist) {
       Yallist.prototype[Symbol.iterator] = function* () {
@@ -588,9 +585,9 @@ var require_iterator = __commonJS({
   }
 });
 
-// node_modules/yallist/yallist.js
+// node_modules/.pnpm/yallist@4.0.0/node_modules/yallist/yallist.js
 var require_yallist = __commonJS({
-  "node_modules/yallist/yallist.js"(exports, module2) {
+  "node_modules/.pnpm/yallist@4.0.0/node_modules/yallist/yallist.js"(exports, module2) {
     "use strict";
     module2.exports = Yallist;
     Yallist.Node = Node;
@@ -957,9 +954,9 @@ var require_yallist = __commonJS({
   }
 });
 
-// node_modules/lru-cache/index.js
+// node_modules/.pnpm/lru-cache@6.0.0/node_modules/lru-cache/index.js
 var require_lru_cache = __commonJS({
-  "node_modules/lru-cache/index.js"(exports, module2) {
+  "node_modules/.pnpm/lru-cache@6.0.0/node_modules/lru-cache/index.js"(exports, module2) {
     "use strict";
     var Yallist = require_yallist();
     var MAX = Symbol("max");
@@ -1225,9 +1222,9 @@ var require_lru_cache = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/errors.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/errors.js
 var require_errors = __commonJS({
-  "node_modules/mysql2/lib/constants/errors.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/errors.js"(exports) {
     "use strict";
     exports.EE_CANTCREATEFILE = 1;
     exports.EE_READ = 2;
@@ -3308,9 +3305,9 @@ var require_errors = __commonJS({
   }
 });
 
-// node_modules/long/src/long.js
+// node_modules/.pnpm/long@4.0.0/node_modules/long/src/long.js
 var require_long = __commonJS({
-  "node_modules/long/src/long.js"(exports, module2) {
+  "node_modules/.pnpm/long@4.0.0/node_modules/long/src/long.js"(exports, module2) {
     module2.exports = Long;
     var wasm = null;
     try {
@@ -4133,9 +4130,9 @@ var require_long = __commonJS({
   }
 });
 
-// node_modules/safer-buffer/safer.js
+// node_modules/.pnpm/safer-buffer@2.1.2/node_modules/safer-buffer/safer.js
 var require_safer = __commonJS({
-  "node_modules/safer-buffer/safer.js"(exports, module2) {
+  "node_modules/.pnpm/safer-buffer@2.1.2/node_modules/safer-buffer/safer.js"(exports, module2) {
     "use strict";
     var buffer = require("buffer");
     var Buffer4 = buffer.Buffer;
@@ -4205,9 +4202,9 @@ var require_safer = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/lib/bom-handling.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/lib/bom-handling.js
 var require_bom_handling = __commonJS({
-  "node_modules/iconv-lite/lib/bom-handling.js"(exports) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/lib/bom-handling.js"(exports) {
     "use strict";
     var BOMChar = "\uFEFF";
     exports.PrependBOM = PrependBOMWrapper;
@@ -4249,9 +4246,9 @@ var require_bom_handling = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/internal.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/internal.js
 var require_internal = __commonJS({
-  "node_modules/iconv-lite/encodings/internal.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/internal.js"(exports, module2) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     module2.exports = {
@@ -4399,9 +4396,9 @@ var require_internal = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/utf32.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/utf32.js
 var require_utf32 = __commonJS({
-  "node_modules/iconv-lite/encodings/utf32.js"(exports) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/utf32.js"(exports) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     exports._utf32 = Utf32Codec;
@@ -4624,9 +4621,9 @@ var require_utf32 = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/utf16.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/utf16.js
 var require_utf16 = __commonJS({
-  "node_modules/iconv-lite/encodings/utf16.js"(exports) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/utf16.js"(exports) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     exports.utf16be = Utf16BECodec;
@@ -4764,9 +4761,9 @@ var require_utf16 = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/utf7.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/utf7.js
 var require_utf7 = __commonJS({
-  "node_modules/iconv-lite/encodings/utf7.js"(exports) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/utf7.js"(exports) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     exports.utf7 = Utf7Codec;
@@ -4965,9 +4962,9 @@ var require_utf7 = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/sbcs-codec.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/sbcs-codec.js
 var require_sbcs_codec = __commonJS({
-  "node_modules/iconv-lite/encodings/sbcs-codec.js"(exports) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/sbcs-codec.js"(exports) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     exports._sbcs = SBCSCodec;
@@ -5021,9 +5018,9 @@ var require_sbcs_codec = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/sbcs-data.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/sbcs-data.js
 var require_sbcs_data = __commonJS({
-  "node_modules/iconv-lite/encodings/sbcs-data.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/sbcs-data.js"(exports, module2) {
     "use strict";
     module2.exports = {
       "10029": "maccenteuro",
@@ -5172,9 +5169,9 @@ var require_sbcs_data = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/sbcs-data-generated.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/sbcs-data-generated.js
 var require_sbcs_data_generated = __commonJS({
-  "node_modules/iconv-lite/encodings/sbcs-data-generated.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/sbcs-data-generated.js"(exports, module2) {
     "use strict";
     module2.exports = {
       "437": "cp437",
@@ -5627,9 +5624,9 @@ var require_sbcs_data_generated = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/dbcs-codec.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/dbcs-codec.js
 var require_dbcs_codec = __commonJS({
-  "node_modules/iconv-lite/encodings/dbcs-codec.js"(exports) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/dbcs-codec.js"(exports) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     exports._dbcs = DBCSCodec;
@@ -6048,9 +6045,9 @@ var require_dbcs_codec = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/shiftjis.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/shiftjis.json
 var require_shiftjis = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/shiftjis.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/shiftjis.json"(exports, module2) {
     module2.exports = [
       ["0", "\0", 128],
       ["a1", "\uFF61", 62],
@@ -6179,9 +6176,9 @@ var require_shiftjis = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/eucjp.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/eucjp.json
 var require_eucjp = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/eucjp.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/eucjp.json"(exports, module2) {
     module2.exports = [
       ["0", "\0", 127],
       ["8ea1", "\uFF61", 62],
@@ -6367,9 +6364,9 @@ var require_eucjp = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/cp936.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/cp936.json
 var require_cp936 = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/cp936.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/cp936.json"(exports, module2) {
     module2.exports = [
       ["0", "\0", 127, "\u20AC"],
       ["8140", "\u4E02\u4E04\u4E05\u4E06\u4E0F\u4E12\u4E17\u4E1F\u4E20\u4E21\u4E23\u4E26\u4E29\u4E2E\u4E2F\u4E31\u4E33\u4E35\u4E37\u4E3C\u4E40\u4E41\u4E42\u4E44\u4E46\u4E4A\u4E51\u4E55\u4E57\u4E5A\u4E5B\u4E62\u4E63\u4E64\u4E65\u4E67\u4E68\u4E6A", 5, "\u4E72\u4E74", 9, "\u4E7F", 6, "\u4E87\u4E8A"],
@@ -6637,9 +6634,9 @@ var require_cp936 = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/gbk-added.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/gbk-added.json
 var require_gbk_added = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/gbk-added.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/gbk-added.json"(exports, module2) {
     module2.exports = [
       ["a140", "\uE4C6", 62],
       ["a180", "\uE505", 32],
@@ -6699,16 +6696,16 @@ var require_gbk_added = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/gb18030-ranges.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json
 var require_gb18030_ranges = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/gb18030-ranges.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json"(exports, module2) {
     module2.exports = { uChars: [128, 165, 169, 178, 184, 216, 226, 235, 238, 244, 248, 251, 253, 258, 276, 284, 300, 325, 329, 334, 364, 463, 465, 467, 469, 471, 473, 475, 477, 506, 594, 610, 712, 716, 730, 930, 938, 962, 970, 1026, 1104, 1106, 8209, 8215, 8218, 8222, 8231, 8241, 8244, 8246, 8252, 8365, 8452, 8454, 8458, 8471, 8482, 8556, 8570, 8596, 8602, 8713, 8720, 8722, 8726, 8731, 8737, 8740, 8742, 8748, 8751, 8760, 8766, 8777, 8781, 8787, 8802, 8808, 8816, 8854, 8858, 8870, 8896, 8979, 9322, 9372, 9548, 9588, 9616, 9622, 9634, 9652, 9662, 9672, 9676, 9680, 9702, 9735, 9738, 9793, 9795, 11906, 11909, 11913, 11917, 11928, 11944, 11947, 11951, 11956, 11960, 11964, 11979, 12284, 12292, 12312, 12319, 12330, 12351, 12436, 12447, 12535, 12543, 12586, 12842, 12850, 12964, 13200, 13215, 13218, 13253, 13263, 13267, 13270, 13384, 13428, 13727, 13839, 13851, 14617, 14703, 14801, 14816, 14964, 15183, 15471, 15585, 16471, 16736, 17208, 17325, 17330, 17374, 17623, 17997, 18018, 18212, 18218, 18301, 18318, 18760, 18811, 18814, 18820, 18823, 18844, 18848, 18872, 19576, 19620, 19738, 19887, 40870, 59244, 59336, 59367, 59413, 59417, 59423, 59431, 59437, 59443, 59452, 59460, 59478, 59493, 63789, 63866, 63894, 63976, 63986, 64016, 64018, 64021, 64025, 64034, 64037, 64042, 65074, 65093, 65107, 65112, 65127, 65132, 65375, 65510, 65536], gbChars: [0, 36, 38, 45, 50, 81, 89, 95, 96, 100, 103, 104, 105, 109, 126, 133, 148, 172, 175, 179, 208, 306, 307, 308, 309, 310, 311, 312, 313, 341, 428, 443, 544, 545, 558, 741, 742, 749, 750, 805, 819, 820, 7922, 7924, 7925, 7927, 7934, 7943, 7944, 7945, 7950, 8062, 8148, 8149, 8152, 8164, 8174, 8236, 8240, 8262, 8264, 8374, 8380, 8381, 8384, 8388, 8390, 8392, 8393, 8394, 8396, 8401, 8406, 8416, 8419, 8424, 8437, 8439, 8445, 8482, 8485, 8496, 8521, 8603, 8936, 8946, 9046, 9050, 9063, 9066, 9076, 9092, 9100, 9108, 9111, 9113, 9131, 9162, 9164, 9218, 9219, 11329, 11331, 11334, 11336, 11346, 11361, 11363, 11366, 11370, 11372, 11375, 11389, 11682, 11686, 11687, 11692, 11694, 11714, 11716, 11723, 11725, 11730, 11736, 11982, 11989, 12102, 12336, 12348, 12350, 12384, 12393, 12395, 12397, 12510, 12553, 12851, 12962, 12973, 13738, 13823, 13919, 13933, 14080, 14298, 14585, 14698, 15583, 15847, 16318, 16434, 16438, 16481, 16729, 17102, 17122, 17315, 17320, 17402, 17418, 17859, 17909, 17911, 17915, 17916, 17936, 17939, 17961, 18664, 18703, 18814, 18962, 19043, 33469, 33470, 33471, 33484, 33485, 33490, 33497, 33501, 33505, 33513, 33520, 33536, 33550, 37845, 37921, 37948, 38029, 38038, 38064, 38065, 38066, 38069, 38075, 38076, 38078, 39108, 39109, 39113, 39114, 39115, 39116, 39265, 39394, 189e3] };
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/cp949.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/cp949.json
 var require_cp949 = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/cp949.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/cp949.json"(exports, module2) {
     module2.exports = [
       ["0", "\0", 127],
       ["8141", "\uAC02\uAC03\uAC05\uAC06\uAC0B", 4, "\uAC18\uAC1E\uAC1F\uAC21\uAC22\uAC23\uAC25", 6, "\uAC2E\uAC32\uAC33\uAC34"],
@@ -6985,9 +6982,9 @@ var require_cp949 = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/cp950.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/cp950.json
 var require_cp950 = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/cp950.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/cp950.json"(exports, module2) {
     module2.exports = [
       ["0", "\0", 127],
       ["a140", "\u3000\uFF0C\u3001\u3002\uFF0E\u2027\uFF1B\uFF1A\uFF1F\uFF01\uFE30\u2026\u2025\uFE50\uFE51\uFE52\xB7\uFE54\uFE55\uFE56\uFE57\uFF5C\u2013\uFE31\u2014\uFE33\u2574\uFE34\uFE4F\uFF08\uFF09\uFE35\uFE36\uFF5B\uFF5D\uFE37\uFE38\u3014\u3015\uFE39\uFE3A\u3010\u3011\uFE3B\uFE3C\u300A\u300B\uFE3D\uFE3E\u3008\u3009\uFE3F\uFE40\u300C\u300D\uFE41\uFE42\u300E\u300F\uFE43\uFE44\uFE59\uFE5A"],
@@ -7168,9 +7165,9 @@ var require_cp950 = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/tables/big5-added.json
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/big5-added.json
 var require_big5_added = __commonJS({
-  "node_modules/iconv-lite/encodings/tables/big5-added.json"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/tables/big5-added.json"(exports, module2) {
     module2.exports = [
       ["8740", "\u43F0\u4C32\u4603\u45A6\u4578\u{27267}\u4D77\u45B3\u{27CB1}\u4CE2\u{27CC5}\u3B95\u4736\u4744\u4C47\u4C40\u{242BF}\u{23617}\u{27352}\u{26E8B}\u{270D2}\u4C57\u{2A351}\u474F\u45DA\u4C85\u{27C6C}\u4D07\u4AA4\u46A1\u{26B23}\u7225\u{25A54}\u{21A63}\u{23E06}\u{23F61}\u664D\u56FB"],
       ["8767", "\u7D95\u591D\u{28BB9}\u3DF4\u9734\u{27BEF}\u5BDB\u{21D5E}\u5AA4\u3625\u{29EB0}\u5AD1\u5BB7\u5CFC\u676E\u8593\u{29945}\u7461\u749D\u3875\u{21D53}\u{2369E}\u{26021}\u3EEC"],
@@ -7296,9 +7293,9 @@ var require_big5_added = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/dbcs-data.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/dbcs-data.js
 var require_dbcs_data = __commonJS({
-  "node_modules/iconv-lite/encodings/dbcs-data.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/dbcs-data.js"(exports, module2) {
     "use strict";
     module2.exports = {
       "shiftjis": {
@@ -7470,9 +7467,9 @@ var require_dbcs_data = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/encodings/index.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/index.js
 var require_encodings = __commonJS({
-  "node_modules/iconv-lite/encodings/index.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/encodings/index.js"(exports, module2) {
     "use strict";
     var modules = [
       require_internal(),
@@ -7497,9 +7494,9 @@ var require_encodings = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/lib/streams.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/lib/streams.js
 var require_streams = __commonJS({
-  "node_modules/iconv-lite/lib/streams.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/lib/streams.js"(exports, module2) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     module2.exports = function(stream_module) {
@@ -7596,9 +7593,9 @@ var require_streams = __commonJS({
   }
 });
 
-// node_modules/iconv-lite/lib/index.js
+// node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/lib/index.js
 var require_lib = __commonJS({
-  "node_modules/iconv-lite/lib/index.js"(exports, module2) {
+  "node_modules/.pnpm/iconv-lite@0.6.3/node_modules/iconv-lite/lib/index.js"(exports, module2) {
     "use strict";
     var Buffer4 = require_safer().Buffer;
     var bomHandling = require_bom_handling();
@@ -7716,9 +7713,9 @@ var require_lib = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/parsers/string.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/string.js
 var require_string = __commonJS({
-  "node_modules/mysql2/lib/parsers/string.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/string.js"(exports) {
     "use strict";
     var Iconv = require_lib();
     exports.decode = function(buffer, encoding, start, end, options) {
@@ -7742,9 +7739,9 @@ var require_string = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/packet.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/packet.js
 var require_packet = __commonJS({
-  "node_modules/mysql2/lib/packets/packet.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/packet.js"(exports, module2) {
     "use strict";
     var ErrorCodeToName = require_errors();
     var NativeBuffer = require("buffer").Buffer;
@@ -8485,9 +8482,9 @@ var require_packet = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packet_parser.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packet_parser.js
 var require_packet_parser = __commonJS({
-  "node_modules/mysql2/lib/packet_parser.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packet_parser.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var MAX_PACKET_LENGTH = 16777215;
@@ -8628,9 +8625,9 @@ var require_packet_parser = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/auth_switch_request.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/auth_switch_request.js
 var require_auth_switch_request = __commonJS({
-  "node_modules/mysql2/lib/packets/auth_switch_request.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/auth_switch_request.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var AuthSwitchRequest = class {
@@ -8662,9 +8659,9 @@ var require_auth_switch_request = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/auth_switch_request_more_data.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/auth_switch_request_more_data.js
 var require_auth_switch_request_more_data = __commonJS({
-  "node_modules/mysql2/lib/packets/auth_switch_request_more_data.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/auth_switch_request_more_data.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var AuthSwitchRequestMoreData = class {
@@ -8693,9 +8690,9 @@ var require_auth_switch_request_more_data = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/auth_switch_response.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/auth_switch_response.js
 var require_auth_switch_response = __commonJS({
-  "node_modules/mysql2/lib/packets/auth_switch_response.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/auth_switch_response.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var AuthSwitchResponse = class {
@@ -8722,9 +8719,9 @@ var require_auth_switch_response = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/types.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/types.js
 var require_types = __commonJS({
-  "node_modules/mysql2/lib/constants/types.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/types.js"(exports) {
     "use strict";
     exports.DECIMAL = 0;
     exports.TINY = 1;
@@ -8757,9 +8754,9 @@ var require_types = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/binary_row.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/binary_row.js
 var require_binary_row = __commonJS({
-  "node_modules/mysql2/lib/packets/binary_row.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/binary_row.js"(exports, module2) {
     "use strict";
     var Types = require_types();
     var Packet = require_packet();
@@ -8801,9 +8798,9 @@ var require_binary_row = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/commands.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/commands.js
 var require_commands = __commonJS({
-  "node_modules/mysql2/lib/constants/commands.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/commands.js"(exports, module2) {
     "use strict";
     module2.exports = {
       SLEEP: 0,
@@ -8842,9 +8839,9 @@ var require_commands = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/binlog_dump.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/binlog_dump.js
 var require_binlog_dump = __commonJS({
-  "node_modules/mysql2/lib/packets/binlog_dump.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/binlog_dump.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var CommandCodes = require_commands();
@@ -8872,9 +8869,9 @@ var require_binlog_dump = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/client.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/client.js
 var require_client = __commonJS({
-  "node_modules/mysql2/lib/constants/client.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/client.js"(exports) {
     "use strict";
     exports.LONG_PASSWORD = 1;
     exports.FOUND_ROWS = 2;
@@ -8906,9 +8903,9 @@ var require_client = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/auth_41.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_41.js
 var require_auth_41 = __commonJS({
-  "node_modules/mysql2/lib/auth_41.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_41.js"(exports) {
     "use strict";
     var crypto = require("crypto");
     function sha1(msg, msg1, msg2) {
@@ -8977,9 +8974,9 @@ var require_auth_41 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/charset_encodings.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/charset_encodings.js
 var require_charset_encodings = __commonJS({
-  "node_modules/mysql2/lib/constants/charset_encodings.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/charset_encodings.js"(exports, module2) {
     "use strict";
     module2.exports = [
       "utf8",
@@ -9292,9 +9289,9 @@ var require_charset_encodings = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/change_user.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/change_user.js
 var require_change_user = __commonJS({
-  "node_modules/mysql2/lib/packets/change_user.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/change_user.js"(exports, module2) {
     "use strict";
     var CommandCode = require_commands();
     var ClientConstants = require_client();
@@ -9370,9 +9367,9 @@ var require_change_user = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/close_statement.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/close_statement.js
 var require_close_statement = __commonJS({
-  "node_modules/mysql2/lib/packets/close_statement.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/close_statement.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var CommandCodes = require_commands();
@@ -9392,9 +9389,9 @@ var require_close_statement = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/column_definition.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/column_definition.js
 var require_column_definition = __commonJS({
-  "node_modules/mysql2/lib/packets/column_definition.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/column_definition.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var StringParser = require_string();
@@ -9496,9 +9493,9 @@ var require_column_definition = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/cursor.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/cursor.js
 var require_cursor = __commonJS({
-  "node_modules/mysql2/lib/constants/cursor.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/cursor.js"(exports, module2) {
     "use strict";
     module2.exports = {
       NO_CURSOR: 0,
@@ -9509,9 +9506,9 @@ var require_cursor = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/execute.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/execute.js
 var require_execute = __commonJS({
-  "node_modules/mysql2/lib/packets/execute.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/execute.js"(exports, module2) {
     "use strict";
     var CursorType = require_cursor();
     var CommandCodes = require_commands();
@@ -9630,9 +9627,9 @@ var require_execute = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/handshake.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/handshake.js
 var require_handshake = __commonJS({
-  "node_modules/mysql2/lib/packets/handshake.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/handshake.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var ClientConstants = require_client();
@@ -9732,9 +9729,9 @@ var require_handshake = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/handshake_response.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/handshake_response.js
 var require_handshake_response = __commonJS({
-  "node_modules/mysql2/lib/packets/handshake_response.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/handshake_response.js"(exports, module2) {
     "use strict";
     var ClientConstants = require_client();
     var CharsetToEncoding = require_charset_encodings();
@@ -9858,9 +9855,9 @@ var require_handshake_response = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/prepare_statement.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/prepare_statement.js
 var require_prepare_statement = __commonJS({
-  "node_modules/mysql2/lib/packets/prepare_statement.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/prepare_statement.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var CommandCodes = require_commands();
@@ -9887,9 +9884,9 @@ var require_prepare_statement = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/prepared_statement_header.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/prepared_statement_header.js
 var require_prepared_statement_header = __commonJS({
-  "node_modules/mysql2/lib/packets/prepared_statement_header.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/prepared_statement_header.js"(exports, module2) {
     "use strict";
     var PreparedStatementHeader = class {
       constructor(packet) {
@@ -9905,9 +9902,9 @@ var require_prepared_statement_header = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/query.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/query.js
 var require_query = __commonJS({
-  "node_modules/mysql2/lib/packets/query.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/query.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var CommandCode = require_commands();
@@ -9934,9 +9931,9 @@ var require_query = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/register_slave.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/register_slave.js
 var require_register_slave = __commonJS({
-  "node_modules/mysql2/lib/packets/register_slave.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/register_slave.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var CommandCodes = require_commands();
@@ -9973,9 +9970,9 @@ var require_register_slave = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/server_status.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/server_status.js
 var require_server_status = __commonJS({
-  "node_modules/mysql2/lib/constants/server_status.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/server_status.js"(exports) {
     "use strict";
     exports.SERVER_STATUS_IN_TRANS = 1;
     exports.SERVER_STATUS_AUTOCOMMIT = 2;
@@ -9994,9 +9991,9 @@ var require_server_status = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/encoding_charset.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/encoding_charset.js
 var require_encoding_charset = __commonJS({
-  "node_modules/mysql2/lib/constants/encoding_charset.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/encoding_charset.js"(exports, module2) {
     "use strict";
     module2.exports = {
       big5: 1,
@@ -10045,9 +10042,9 @@ var require_encoding_charset = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/session_track.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/session_track.js
 var require_session_track = __commonJS({
-  "node_modules/mysql2/lib/constants/session_track.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/session_track.js"(exports) {
     "use strict";
     exports.SYSTEM_VARIABLES = 0;
     exports.SCHEMA = 1;
@@ -10060,9 +10057,9 @@ var require_session_track = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/resultset_header.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/resultset_header.js
 var require_resultset_header = __commonJS({
-  "node_modules/mysql2/lib/packets/resultset_header.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/resultset_header.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var ClientConstants = require_client();
@@ -10160,9 +10157,9 @@ var require_resultset_header = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/ssl_request.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/ssl_request.js
 var require_ssl_request = __commonJS({
-  "node_modules/mysql2/lib/packets/ssl_request.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/ssl_request.js"(exports, module2) {
     "use strict";
     var ClientConstants = require_client();
     var Packet = require_packet();
@@ -10187,9 +10184,9 @@ var require_ssl_request = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/text_row.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/text_row.js
 var require_text_row = __commonJS({
-  "node_modules/mysql2/lib/packets/text_row.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/text_row.js"(exports, module2) {
     "use strict";
     var Packet = require_packet();
     var TextRow = class {
@@ -10234,9 +10231,9 @@ var require_text_row = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/index.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/index.js
 var require_packets = __commonJS({
-  "node_modules/mysql2/lib/packets/index.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/index.js"(exports, module2) {
     "use strict";
     var process2 = require("process");
     var AuthSwitchRequest = require_auth_switch_request();
@@ -10362,9 +10359,9 @@ var require_packets = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/command.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/command.js
 var require_command = __commonJS({
-  "node_modules/mysql2/lib/commands/command.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/command.js"(exports, module2) {
     "use strict";
     var EventEmitter = require("events").EventEmitter;
     var Timers = require("timers");
@@ -10415,9 +10412,9 @@ var require_command = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/auth_plugins/sha256_password.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_plugins/sha256_password.js
 var require_sha256_password = __commonJS({
-  "node_modules/mysql2/lib/auth_plugins/sha256_password.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_plugins/sha256_password.js"(exports, module2) {
     "use strict";
     var PLUGIN_NAME = "sha256_password";
     var crypto = require("crypto");
@@ -10462,9 +10459,9 @@ var require_sha256_password = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/auth_plugins/caching_sha2_password.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_plugins/caching_sha2_password.js
 var require_caching_sha2_password = __commonJS({
-  "node_modules/mysql2/lib/auth_plugins/caching_sha2_password.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_plugins/caching_sha2_password.js"(exports, module2) {
     "use strict";
     var PLUGIN_NAME = "caching_sha2_password";
     var crypto = require("crypto");
@@ -10541,9 +10538,9 @@ var require_caching_sha2_password = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/auth_plugins/mysql_native_password.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_plugins/mysql_native_password.js
 var require_mysql_native_password = __commonJS({
-  "node_modules/mysql2/lib/auth_plugins/mysql_native_password.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/auth_plugins/mysql_native_password.js"(exports, module2) {
     "use strict";
     var auth41 = require_auth_41();
     module2.exports = (pluginOptions) => ({ connection, command }) => {
@@ -10564,9 +10561,9 @@ var require_mysql_native_password = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/auth_switch.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/auth_switch.js
 var require_auth_switch = __commonJS({
-  "node_modules/mysql2/lib/commands/auth_switch.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/auth_switch.js"(exports, module2) {
     "use strict";
     var Packets = require_packets();
     var sha256_password = require_sha256_password();
@@ -10645,9 +10642,9 @@ var require_auth_switch = __commonJS({
   }
 });
 
-// node_modules/seq-queue/lib/seq-queue.js
+// node_modules/.pnpm/seq-queue@0.0.5/node_modules/seq-queue/lib/seq-queue.js
 var require_seq_queue = __commonJS({
-  "node_modules/seq-queue/lib/seq-queue.js"(exports, module2) {
+  "node_modules/.pnpm/seq-queue@0.0.5/node_modules/seq-queue/lib/seq-queue.js"(exports, module2) {
     var EventEmitter = require("events").EventEmitter;
     var util = require("util");
     var DEFAULT_TIMEOUT = 3e3;
@@ -10759,16 +10756,16 @@ var require_seq_queue = __commonJS({
   }
 });
 
-// node_modules/seq-queue/index.js
+// node_modules/.pnpm/seq-queue@0.0.5/node_modules/seq-queue/index.js
 var require_seq_queue2 = __commonJS({
-  "node_modules/seq-queue/index.js"(exports, module2) {
+  "node_modules/.pnpm/seq-queue@0.0.5/node_modules/seq-queue/index.js"(exports, module2) {
     module2.exports = require_seq_queue();
   }
 });
 
-// node_modules/mysql2/lib/compressed_protocol.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/compressed_protocol.js
 var require_compressed_protocol = __commonJS({
-  "node_modules/mysql2/lib/compressed_protocol.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/compressed_protocol.js"(exports, module2) {
     "use strict";
     var zlib2 = require("zlib");
     var PacketParser = require_packet_parser();
@@ -10864,9 +10861,9 @@ var require_compressed_protocol = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/client_handshake.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/client_handshake.js
 var require_client_handshake = __commonJS({
-  "node_modules/mysql2/lib/commands/client_handshake.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/client_handshake.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var Packets = require_packets();
@@ -11018,9 +11015,9 @@ var require_client_handshake = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/server_handshake.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/server_handshake.js
 var require_server_handshake = __commonJS({
-  "node_modules/mysql2/lib/commands/server_handshake.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/server_handshake.js"(exports, module2) {
     "use strict";
     var CommandCode = require_commands();
     var Errors = require_errors();
@@ -11135,9 +11132,9 @@ var require_server_handshake = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/charsets.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/charsets.js
 var require_charsets = __commonJS({
-  "node_modules/mysql2/lib/constants/charsets.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/charsets.js"(exports) {
     "use strict";
     exports.BIG5_CHINESE_CI = 1;
     exports.LATIN2_CZECH_CS = 2;
@@ -11427,9 +11424,9 @@ var require_charsets = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/helpers.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/helpers.js
 var require_helpers = __commonJS({
-  "node_modules/mysql2/lib/helpers.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/helpers.js"(exports) {
     "use strict";
     function srcEscape(str) {
       return JSON.stringify({
@@ -11469,9 +11466,9 @@ ${msg}:
   }
 });
 
-// node_modules/is-property/is-property.js
+// node_modules/.pnpm/is-property@1.0.2/node_modules/is-property/is-property.js
 var require_is_property = __commonJS({
-  "node_modules/is-property/is-property.js"(exports, module2) {
+  "node_modules/.pnpm/is-property@1.0.2/node_modules/is-property/is-property.js"(exports, module2) {
     "use strict";
     function isProperty(str) {
       return /^[$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc][$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc0-9\u0300-\u036f\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u064b-\u0669\u0670\u06d6-\u06dc\u06df-\u06e4\u06e7\u06e8\u06ea-\u06ed\u06f0-\u06f9\u0711\u0730-\u074a\u07a6-\u07b0\u07c0-\u07c9\u07eb-\u07f3\u0816-\u0819\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0859-\u085b\u08e4-\u08fe\u0900-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09cb-\u09cd\u09d7\u09e2\u09e3\u09e6-\u09ef\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2\u0ae3\u0ae6-\u0aef\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b56\u0b57\u0b62\u0b63\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c01-\u0c03\u0c3e-\u0c44\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62\u0c63\u0c66-\u0c6f\u0c82\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2\u0ce3\u0ce6-\u0cef\u0d02\u0d03\u0d3e-\u0d44\u0d46-\u0d48\u0d4a-\u0d4d\u0d57\u0d62\u0d63\u0d66-\u0d6f\u0d82\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0df2\u0df3\u0e31\u0e34-\u0e3a\u0e47-\u0e4e\u0e50-\u0e59\u0eb1\u0eb4-\u0eb9\u0ebb\u0ebc\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f3e\u0f3f\u0f71-\u0f84\u0f86\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u102b-\u103e\u1040-\u1049\u1056-\u1059\u105e-\u1060\u1062-\u1064\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17b4-\u17d3\u17dd\u17e0-\u17e9\u180b-\u180d\u1810-\u1819\u18a9\u1920-\u192b\u1930-\u193b\u1946-\u194f\u19b0-\u19c0\u19c8\u19c9\u19d0-\u19d9\u1a17-\u1a1b\u1a55-\u1a5e\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1b00-\u1b04\u1b34-\u1b44\u1b50-\u1b59\u1b6b-\u1b73\u1b80-\u1b82\u1ba1-\u1bad\u1bb0-\u1bb9\u1be6-\u1bf3\u1c24-\u1c37\u1c40-\u1c49\u1c50-\u1c59\u1cd0-\u1cd2\u1cd4-\u1ce8\u1ced\u1cf2-\u1cf4\u1dc0-\u1de6\u1dfc-\u1dff\u200c\u200d\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2cef-\u2cf1\u2d7f\u2de0-\u2dff\u302a-\u302f\u3099\u309a\ua620-\ua629\ua66f\ua674-\ua67d\ua69f\ua6f0\ua6f1\ua802\ua806\ua80b\ua823-\ua827\ua880\ua881\ua8b4-\ua8c4\ua8d0-\ua8d9\ua8e0-\ua8f1\ua900-\ua909\ua926-\ua92d\ua947-\ua953\ua980-\ua983\ua9b3-\ua9c0\ua9d0-\ua9d9\uaa29-\uaa36\uaa43\uaa4c\uaa4d\uaa50-\uaa59\uaa7b\uaab0\uaab2-\uaab4\uaab7\uaab8\uaabe\uaabf\uaac1\uaaeb-\uaaef\uaaf5\uaaf6\uabe3-\uabea\uabec\uabed\uabf0-\uabf9\ufb1e\ufe00-\ufe0f\ufe20-\ufe26\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f]*$/.test(str);
@@ -11480,9 +11477,9 @@ var require_is_property = __commonJS({
   }
 });
 
-// node_modules/generate-function/index.js
+// node_modules/.pnpm/generate-function@2.3.1/node_modules/generate-function/index.js
 var require_generate_function = __commonJS({
-  "node_modules/generate-function/index.js"(exports, module2) {
+  "node_modules/.pnpm/generate-function@2.3.1/node_modules/generate-function/index.js"(exports, module2) {
     var util = require("util");
     var isProperty = require_is_property();
     var INDENT_START = /[\{\[]/;
@@ -11647,9 +11644,9 @@ var require_generate_function = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/parsers/parser_cache.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/parser_cache.js
 var require_parser_cache = __commonJS({
-  "node_modules/mysql2/lib/parsers/parser_cache.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/parser_cache.js"(exports, module2) {
     "use strict";
     var LRU = require_lru_cache();
     var parserCache = new LRU({
@@ -11687,9 +11684,9 @@ var require_parser_cache = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/parsers/text_parser.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/text_parser.js
 var require_text_parser = __commonJS({
-  "node_modules/mysql2/lib/parsers/text_parser.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/text_parser.js"(exports, module2) {
     "use strict";
     var Types = require_types();
     var Charsets = require_charsets();
@@ -11847,9 +11844,9 @@ var require_text_parser = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/query.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/query.js
 var require_query2 = __commonJS({
-  "node_modules/mysql2/lib/commands/query.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/query.js"(exports, module2) {
     "use strict";
     var Timers = require("timers");
     var Readable = require("stream").Readable;
@@ -12116,9 +12113,9 @@ var require_query2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/close_statement.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/close_statement.js
 var require_close_statement2 = __commonJS({
-  "node_modules/mysql2/lib/commands/close_statement.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/close_statement.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var Packets = require_packets();
@@ -12136,9 +12133,9 @@ var require_close_statement2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/field_flags.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/field_flags.js
 var require_field_flags = __commonJS({
-  "node_modules/mysql2/lib/constants/field_flags.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/field_flags.js"(exports) {
     "use strict";
     exports.NOT_NULL = 1;
     exports.PRI_KEY = 2;
@@ -12158,9 +12155,9 @@ var require_field_flags = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/parsers/binary_parser.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/binary_parser.js
 var require_binary_parser = __commonJS({
-  "node_modules/mysql2/lib/parsers/binary_parser.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/parsers/binary_parser.js"(exports, module2) {
     "use strict";
     var FieldFlags = require_field_flags();
     var Charsets = require_charsets();
@@ -12302,9 +12299,9 @@ var require_binary_parser = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/execute.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/execute.js
 var require_execute2 = __commonJS({
-  "node_modules/mysql2/lib/commands/execute.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/execute.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var Query = require_query2();
@@ -12382,9 +12379,9 @@ var require_execute2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/prepare.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/prepare.js
 var require_prepare = __commonJS({
-  "node_modules/mysql2/lib/commands/prepare.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/prepare.js"(exports, module2) {
     "use strict";
     var Packets = require_packets();
     var Command = require_command();
@@ -12493,9 +12490,9 @@ var require_prepare = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/ping.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/ping.js
 var require_ping = __commonJS({
-  "node_modules/mysql2/lib/commands/ping.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/ping.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var CommandCode = require_commands();
@@ -12521,9 +12518,9 @@ var require_ping = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/register_slave.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/register_slave.js
 var require_register_slave2 = __commonJS({
-  "node_modules/mysql2/lib/commands/register_slave.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/register_slave.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var Packets = require_packets();
@@ -12549,9 +12546,9 @@ var require_register_slave2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/packets/binlog_query_statusvars.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/binlog_query_statusvars.js
 var require_binlog_query_statusvars = __commonJS({
-  "node_modules/mysql2/lib/packets/binlog_query_statusvars.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/packets/binlog_query_statusvars.js"(exports, module2) {
     "use strict";
     var keys = {
       FLAGS2: 0,
@@ -12650,9 +12647,9 @@ var require_binlog_query_statusvars = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/binlog_dump.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/binlog_dump.js
 var require_binlog_dump2 = __commonJS({
-  "node_modules/mysql2/lib/commands/binlog_dump.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/binlog_dump.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var Packets = require_packets();
@@ -12747,9 +12744,9 @@ var require_binlog_dump2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/change_user.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/change_user.js
 var require_change_user2 = __commonJS({
-  "node_modules/mysql2/lib/commands/change_user.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/change_user.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var Packets = require_packets();
@@ -12793,9 +12790,9 @@ var require_change_user2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/quit.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/quit.js
 var require_quit = __commonJS({
-  "node_modules/mysql2/lib/commands/quit.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/quit.js"(exports, module2) {
     "use strict";
     var Command = require_command();
     var CommandCode = require_commands();
@@ -12819,9 +12816,9 @@ var require_quit = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/commands/index.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/index.js
 var require_commands2 = __commonJS({
-  "node_modules/mysql2/lib/commands/index.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/commands/index.js"(exports, module2) {
     "use strict";
     var ClientHandshake = require_client_handshake();
     var ServerHandshake = require_server_handshake();
@@ -12850,9 +12847,9 @@ var require_commands2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/constants/ssl_profiles.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/ssl_profiles.js
 var require_ssl_profiles = __commonJS({
-  "node_modules/mysql2/lib/constants/ssl_profiles.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/constants/ssl_profiles.js"(exports) {
     "use strict";
     exports["Amazon RDS"] = {
       ca: [
@@ -12907,9 +12904,9 @@ var require_ssl_profiles = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/connection_config.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/connection_config.js
 var require_connection_config = __commonJS({
-  "node_modules/mysql2/lib/connection_config.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/connection_config.js"(exports, module2) {
     "use strict";
     var { URL: URL2 } = require("url");
     var ClientConstants = require_client();
@@ -13125,9 +13122,458 @@ var require_connection_config = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/connection.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/promise.js
+var require_promise = __commonJS({
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/promise.js"(exports) {
+    "use strict";
+    var core = require_mysql2();
+    var EventEmitter = require("events").EventEmitter;
+    function makeDoneCb(resolve, reject, localErr) {
+      return function(err, rows, fields, time) {
+        if (err) {
+          localErr.message = err.message;
+          localErr.code = err.code;
+          localErr.errno = err.errno;
+          localErr.sql = err.sql;
+          localErr.sqlState = err.sqlState;
+          localErr.sqlMessage = err.sqlMessage;
+          reject(localErr);
+        } else {
+          resolve([rows, fields, time]);
+        }
+      };
+    }
+    function inheritEvents(source2, target, events) {
+      const listeners = {};
+      target.on("newListener", (eventName) => {
+        if (events.indexOf(eventName) >= 0 && !target.listenerCount(eventName)) {
+          source2.on(eventName, listeners[eventName] = function() {
+            const args = [].slice.call(arguments);
+            args.unshift(eventName);
+            target.emit.apply(target, args);
+          });
+        }
+      }).on("removeListener", (eventName) => {
+        if (events.indexOf(eventName) >= 0 && !target.listenerCount(eventName)) {
+          source2.removeListener(eventName, listeners[eventName]);
+          delete listeners[eventName];
+        }
+      });
+    }
+    var PromisePreparedStatementInfo = class {
+      constructor(statement, promiseImpl) {
+        this.statement = statement;
+        this.Promise = promiseImpl;
+      }
+      execute(parameters) {
+        const s2 = this.statement;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          if (parameters) {
+            s2.execute(parameters, done);
+          } else {
+            s2.execute(done);
+          }
+        });
+      }
+      close() {
+        return new this.Promise((resolve) => {
+          this.statement.close();
+          resolve();
+        });
+      }
+    };
+    var PromiseConnection = class extends EventEmitter {
+      constructor(connection, promiseImpl) {
+        super();
+        this.connection = connection;
+        this.Promise = promiseImpl || Promise;
+        inheritEvents(connection, this, [
+          "error",
+          "drain",
+          "connect",
+          "end",
+          "enqueue"
+        ]);
+      }
+      release() {
+        this.connection.release();
+      }
+      query(query, params) {
+        const c = this.connection;
+        const localErr = new Error();
+        if (typeof params === "function") {
+          throw new Error("Callback function is not available with promise clients.");
+        }
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          if (params !== void 0) {
+            c.query(query, params, done);
+          } else {
+            c.query(query, done);
+          }
+        });
+      }
+      execute(query, params) {
+        const c = this.connection;
+        const localErr = new Error();
+        if (typeof params === "function") {
+          throw new Error("Callback function is not available with promise clients.");
+        }
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          if (params !== void 0) {
+            c.execute(query, params, done);
+          } else {
+            c.execute(query, done);
+          }
+        });
+      }
+      end() {
+        return new this.Promise((resolve) => {
+          this.connection.end(resolve);
+        });
+      }
+      beginTransaction() {
+        const c = this.connection;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          c.beginTransaction(done);
+        });
+      }
+      commit() {
+        const c = this.connection;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          c.commit(done);
+        });
+      }
+      rollback() {
+        const c = this.connection;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          c.rollback(done);
+        });
+      }
+      ping() {
+        const c = this.connection;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          c.ping(done);
+        });
+      }
+      connect() {
+        const c = this.connection;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          c.connect((err, param) => {
+            if (err) {
+              localErr.message = err.message;
+              localErr.code = err.code;
+              localErr.errno = err.errno;
+              localErr.sqlState = err.sqlState;
+              localErr.sqlMessage = err.sqlMessage;
+              reject(localErr);
+            } else {
+              resolve(param);
+            }
+          });
+        });
+      }
+      prepare(options) {
+        const c = this.connection;
+        const promiseImpl = this.Promise;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          c.prepare(options, (err, statement) => {
+            if (err) {
+              localErr.message = err.message;
+              localErr.code = err.code;
+              localErr.errno = err.errno;
+              localErr.sqlState = err.sqlState;
+              localErr.sqlMessage = err.sqlMessage;
+              reject(localErr);
+            } else {
+              const wrappedStatement = new PromisePreparedStatementInfo(statement, promiseImpl);
+              resolve(wrappedStatement);
+            }
+          });
+        });
+      }
+      changeUser(options) {
+        const c = this.connection;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          c.changeUser(options, (err) => {
+            if (err) {
+              localErr.message = err.message;
+              localErr.code = err.code;
+              localErr.errno = err.errno;
+              localErr.sqlState = err.sqlState;
+              localErr.sqlMessage = err.sqlMessage;
+              reject(localErr);
+            } else {
+              resolve();
+            }
+          });
+        });
+      }
+      get config() {
+        return this.connection.config;
+      }
+      get threadId() {
+        return this.connection.threadId;
+      }
+    };
+    function createConnection(opts) {
+      const coreConnection = core.createConnection(opts);
+      const createConnectionErr = new Error();
+      const thePromise = opts.Promise || Promise;
+      if (!thePromise) {
+        throw new Error("no Promise implementation available.Use promise-enabled node version or pass userland Promise implementation as parameter, for example: { Promise: require('bluebird') }");
+      }
+      return new thePromise((resolve, reject) => {
+        coreConnection.once("connect", () => {
+          resolve(new PromiseConnection(coreConnection, thePromise));
+        });
+        coreConnection.once("error", (err) => {
+          createConnectionErr.message = err.message;
+          createConnectionErr.code = err.code;
+          createConnectionErr.errno = err.errno;
+          createConnectionErr.sqlState = err.sqlState;
+          reject(createConnectionErr);
+        });
+      });
+    }
+    (function(functionsToWrap) {
+      for (let i2 = 0; functionsToWrap && i2 < functionsToWrap.length; i2++) {
+        const func = functionsToWrap[i2];
+        if (typeof core.Connection.prototype[func] === "function" && PromiseConnection.prototype[func] === void 0) {
+          PromiseConnection.prototype[func] = function factory(funcName) {
+            return function() {
+              return core.Connection.prototype[funcName].apply(this.connection, arguments);
+            };
+          }(func);
+        }
+      }
+    })([
+      "close",
+      "createBinlogStream",
+      "destroy",
+      "escape",
+      "escapeId",
+      "format",
+      "pause",
+      "pipe",
+      "resume",
+      "unprepare"
+    ]);
+    var PromisePoolConnection = class extends PromiseConnection {
+      constructor(connection, promiseImpl) {
+        super(connection, promiseImpl);
+      }
+      destroy() {
+        return core.PoolConnection.prototype.destroy.apply(this.connection, arguments);
+      }
+    };
+    var PromisePool = class extends EventEmitter {
+      constructor(pool2, thePromise) {
+        super();
+        this.pool = pool2;
+        this.Promise = thePromise || Promise;
+        inheritEvents(pool2, this, ["acquire", "connection", "enqueue", "release"]);
+      }
+      getConnection() {
+        const corePool = this.pool;
+        return new this.Promise((resolve, reject) => {
+          corePool.getConnection((err, coreConnection) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(new PromisePoolConnection(coreConnection, this.Promise));
+            }
+          });
+        });
+      }
+      query(sql, args) {
+        const corePool = this.pool;
+        const localErr = new Error();
+        if (typeof args === "function") {
+          throw new Error("Callback function is not available with promise clients.");
+        }
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          if (args !== void 0) {
+            corePool.query(sql, args, done);
+          } else {
+            corePool.query(sql, done);
+          }
+        });
+      }
+      execute(sql, args) {
+        const corePool = this.pool;
+        const localErr = new Error();
+        if (typeof args === "function") {
+          throw new Error("Callback function is not available with promise clients.");
+        }
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          if (args) {
+            corePool.execute(sql, args, done);
+          } else {
+            corePool.execute(sql, done);
+          }
+        });
+      }
+      end() {
+        const corePool = this.pool;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          corePool.end((err) => {
+            if (err) {
+              localErr.message = err.message;
+              localErr.code = err.code;
+              localErr.errno = err.errno;
+              localErr.sqlState = err.sqlState;
+              localErr.sqlMessage = err.sqlMessage;
+              reject(localErr);
+            } else {
+              resolve();
+            }
+          });
+        });
+      }
+    };
+    function createPool2(opts) {
+      const corePool = core.createPool(opts);
+      const thePromise = opts.Promise || Promise;
+      if (!thePromise) {
+        throw new Error("no Promise implementation available.Use promise-enabled node version or pass userland Promise implementation as parameter, for example: { Promise: require('bluebird') }");
+      }
+      return new PromisePool(corePool, thePromise);
+    }
+    (function(functionsToWrap) {
+      for (let i2 = 0; functionsToWrap && i2 < functionsToWrap.length; i2++) {
+        const func = functionsToWrap[i2];
+        if (typeof core.Pool.prototype[func] === "function" && PromisePool.prototype[func] === void 0) {
+          PromisePool.prototype[func] = function factory(funcName) {
+            return function() {
+              return core.Pool.prototype[funcName].apply(this.pool, arguments);
+            };
+          }(func);
+        }
+      }
+    })([
+      "escape",
+      "escapeId",
+      "format"
+    ]);
+    var PromisePoolCluster = class extends EventEmitter {
+      constructor(poolCluster, thePromise) {
+        super();
+        this.poolCluster = poolCluster;
+        this.Promise = thePromise || Promise;
+        inheritEvents(poolCluster, this, ["acquire", "connection", "enqueue", "release"]);
+      }
+      getConnection() {
+        const corePoolCluster = this.poolCluster;
+        return new this.Promise((resolve, reject) => {
+          corePoolCluster.getConnection((err, coreConnection) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(new PromisePoolConnection(coreConnection, this.Promise));
+            }
+          });
+        });
+      }
+      query(sql, args) {
+        const corePoolCluster = this.poolCluster;
+        const localErr = new Error();
+        if (typeof args === "function") {
+          throw new Error("Callback function is not available with promise clients.");
+        }
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          corePoolCluster.query(sql, args, done);
+        });
+      }
+      execute(sql, args) {
+        const corePoolCluster = this.poolCluster;
+        const localErr = new Error();
+        if (typeof args === "function") {
+          throw new Error("Callback function is not available with promise clients.");
+        }
+        return new this.Promise((resolve, reject) => {
+          const done = makeDoneCb(resolve, reject, localErr);
+          corePoolCluster.execute(sql, args, done);
+        });
+      }
+      of(pattern, selector) {
+        return new PromisePoolCluster(this.poolCluster.of(pattern, selector), this.Promise);
+      }
+      end() {
+        const corePoolCluster = this.poolCluster;
+        const localErr = new Error();
+        return new this.Promise((resolve, reject) => {
+          corePoolCluster.end((err) => {
+            if (err) {
+              localErr.message = err.message;
+              localErr.code = err.code;
+              localErr.errno = err.errno;
+              localErr.sqlState = err.sqlState;
+              localErr.sqlMessage = err.sqlMessage;
+              reject(localErr);
+            } else {
+              resolve();
+            }
+          });
+        });
+      }
+    };
+    (function(functionsToWrap) {
+      for (let i2 = 0; functionsToWrap && i2 < functionsToWrap.length; i2++) {
+        const func = functionsToWrap[i2];
+        if (typeof core.PoolCluster.prototype[func] === "function" && PromisePoolCluster.prototype[func] === void 0) {
+          PromisePoolCluster.prototype[func] = function factory(funcName) {
+            return function() {
+              return core.PoolCluster.prototype[funcName].apply(this.poolCluster, arguments);
+            };
+          }(func);
+        }
+      }
+    })([
+      "add"
+    ]);
+    function createPoolCluster(opts) {
+      const corePoolCluster = core.createPoolCluster(opts);
+      const thePromise = opts && opts.Promise || Promise;
+      if (!thePromise) {
+        throw new Error("no Promise implementation available.Use promise-enabled node version or pass userland Promise implementation as parameter, for example: { Promise: require('bluebird') }");
+      }
+      return new PromisePoolCluster(corePoolCluster, thePromise);
+    }
+    exports.createConnection = createConnection;
+    exports.createPool = createPool2;
+    exports.createPoolCluster = createPoolCluster;
+    exports.escape = core.escape;
+    exports.escapeId = core.escapeId;
+    exports.format = core.format;
+    exports.raw = core.raw;
+    exports.PromisePool = PromisePool;
+    exports.PromiseConnection = PromiseConnection;
+    exports.PromisePoolConnection = PromisePoolConnection;
+  }
+});
+
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/connection.js
 var require_connection = __commonJS({
-  "node_modules/mysql2/lib/connection.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/connection.js"(exports, module2) {
     "use strict";
     var Net = require("net");
     var Tls = require("tls");
@@ -13806,9 +14252,9 @@ var require_connection = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/pool_connection.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool_connection.js
 var require_pool_connection = __commonJS({
-  "node_modules/mysql2/lib/pool_connection.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool_connection.js"(exports, module2) {
     "use strict";
     var Connection = require_mysql2().Connection;
     var PoolConnection = class extends Connection {
@@ -13857,9 +14303,9 @@ var require_pool_connection = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/pool.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool.js
 var require_pool = __commonJS({
-  "node_modules/mysql2/lib/pool.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool.js"(exports, module2) {
     "use strict";
     var process2 = require("process");
     var mysql = require_mysql2();
@@ -14035,9 +14481,9 @@ var require_pool = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/pool_config.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool_config.js
 var require_pool_config = __commonJS({
-  "node_modules/mysql2/lib/pool_config.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool_config.js"(exports, module2) {
     "use strict";
     var ConnectionConfig = require_connection_config();
     var PoolConfig = class {
@@ -14055,9 +14501,9 @@ var require_pool_config = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/pool_cluster.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool_cluster.js
 var require_pool_cluster = __commonJS({
-  "node_modules/mysql2/lib/pool_cluster.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/pool_cluster.js"(exports, module2) {
     "use strict";
     var process2 = require("process");
     var Pool2 = require_pool();
@@ -14290,9 +14736,9 @@ var require_pool_cluster = __commonJS({
   }
 });
 
-// node_modules/mysql2/lib/server.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/server.js
 var require_server = __commonJS({
-  "node_modules/mysql2/lib/server.js"(exports, module2) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/lib/server.js"(exports, module2) {
     "use strict";
     var net = require("net");
     var EventEmitter = require("events").EventEmitter;
@@ -14325,9 +14771,9 @@ var require_server = __commonJS({
   }
 });
 
-// node_modules/mysql2/index.js
+// node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/index.js
 var require_mysql2 = __commonJS({
-  "node_modules/mysql2/index.js"(exports) {
+  "node_modules/.pnpm/mysql2@2.3.3/node_modules/mysql2/index.js"(exports) {
     "use strict";
     var SqlString = require_sqlstring();
     var Connection = require_connection();
@@ -14379,457 +14825,8 @@ var require_mysql2 = __commonJS({
   }
 });
 
-// node_modules/mysql2/promise.js
-var require_promise = __commonJS({
-  "node_modules/mysql2/promise.js"(exports) {
-    "use strict";
-    var core = require_mysql2();
-    var EventEmitter = require("events").EventEmitter;
-    function makeDoneCb(resolve, reject, localErr) {
-      return function(err, rows, fields, time) {
-        if (err) {
-          localErr.message = err.message;
-          localErr.code = err.code;
-          localErr.errno = err.errno;
-          localErr.sql = err.sql;
-          localErr.sqlState = err.sqlState;
-          localErr.sqlMessage = err.sqlMessage;
-          reject(localErr);
-        } else {
-          resolve([rows, fields, time]);
-        }
-      };
-    }
-    function inheritEvents(source2, target, events) {
-      const listeners = {};
-      target.on("newListener", (eventName) => {
-        if (events.indexOf(eventName) >= 0 && !target.listenerCount(eventName)) {
-          source2.on(eventName, listeners[eventName] = function() {
-            const args = [].slice.call(arguments);
-            args.unshift(eventName);
-            target.emit.apply(target, args);
-          });
-        }
-      }).on("removeListener", (eventName) => {
-        if (events.indexOf(eventName) >= 0 && !target.listenerCount(eventName)) {
-          source2.removeListener(eventName, listeners[eventName]);
-          delete listeners[eventName];
-        }
-      });
-    }
-    var PromisePreparedStatementInfo = class {
-      constructor(statement, promiseImpl) {
-        this.statement = statement;
-        this.Promise = promiseImpl;
-      }
-      execute(parameters) {
-        const s2 = this.statement;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          if (parameters) {
-            s2.execute(parameters, done);
-          } else {
-            s2.execute(done);
-          }
-        });
-      }
-      close() {
-        return new this.Promise((resolve) => {
-          this.statement.close();
-          resolve();
-        });
-      }
-    };
-    var PromiseConnection = class extends EventEmitter {
-      constructor(connection, promiseImpl) {
-        super();
-        this.connection = connection;
-        this.Promise = promiseImpl || Promise;
-        inheritEvents(connection, this, [
-          "error",
-          "drain",
-          "connect",
-          "end",
-          "enqueue"
-        ]);
-      }
-      release() {
-        this.connection.release();
-      }
-      query(query, params) {
-        const c = this.connection;
-        const localErr = new Error();
-        if (typeof params === "function") {
-          throw new Error("Callback function is not available with promise clients.");
-        }
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          if (params !== void 0) {
-            c.query(query, params, done);
-          } else {
-            c.query(query, done);
-          }
-        });
-      }
-      execute(query, params) {
-        const c = this.connection;
-        const localErr = new Error();
-        if (typeof params === "function") {
-          throw new Error("Callback function is not available with promise clients.");
-        }
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          if (params !== void 0) {
-            c.execute(query, params, done);
-          } else {
-            c.execute(query, done);
-          }
-        });
-      }
-      end() {
-        return new this.Promise((resolve) => {
-          this.connection.end(resolve);
-        });
-      }
-      beginTransaction() {
-        const c = this.connection;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          c.beginTransaction(done);
-        });
-      }
-      commit() {
-        const c = this.connection;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          c.commit(done);
-        });
-      }
-      rollback() {
-        const c = this.connection;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          c.rollback(done);
-        });
-      }
-      ping() {
-        const c = this.connection;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          c.ping(done);
-        });
-      }
-      connect() {
-        const c = this.connection;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          c.connect((err, param) => {
-            if (err) {
-              localErr.message = err.message;
-              localErr.code = err.code;
-              localErr.errno = err.errno;
-              localErr.sqlState = err.sqlState;
-              localErr.sqlMessage = err.sqlMessage;
-              reject(localErr);
-            } else {
-              resolve(param);
-            }
-          });
-        });
-      }
-      prepare(options) {
-        const c = this.connection;
-        const promiseImpl = this.Promise;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          c.prepare(options, (err, statement) => {
-            if (err) {
-              localErr.message = err.message;
-              localErr.code = err.code;
-              localErr.errno = err.errno;
-              localErr.sqlState = err.sqlState;
-              localErr.sqlMessage = err.sqlMessage;
-              reject(localErr);
-            } else {
-              const wrappedStatement = new PromisePreparedStatementInfo(statement, promiseImpl);
-              resolve(wrappedStatement);
-            }
-          });
-        });
-      }
-      changeUser(options) {
-        const c = this.connection;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          c.changeUser(options, (err) => {
-            if (err) {
-              localErr.message = err.message;
-              localErr.code = err.code;
-              localErr.errno = err.errno;
-              localErr.sqlState = err.sqlState;
-              localErr.sqlMessage = err.sqlMessage;
-              reject(localErr);
-            } else {
-              resolve();
-            }
-          });
-        });
-      }
-      get config() {
-        return this.connection.config;
-      }
-      get threadId() {
-        return this.connection.threadId;
-      }
-    };
-    function createConnection(opts) {
-      const coreConnection = core.createConnection(opts);
-      const createConnectionErr = new Error();
-      const thePromise = opts.Promise || Promise;
-      if (!thePromise) {
-        throw new Error("no Promise implementation available.Use promise-enabled node version or pass userland Promise implementation as parameter, for example: { Promise: require('bluebird') }");
-      }
-      return new thePromise((resolve, reject) => {
-        coreConnection.once("connect", () => {
-          resolve(new PromiseConnection(coreConnection, thePromise));
-        });
-        coreConnection.once("error", (err) => {
-          createConnectionErr.message = err.message;
-          createConnectionErr.code = err.code;
-          createConnectionErr.errno = err.errno;
-          createConnectionErr.sqlState = err.sqlState;
-          reject(createConnectionErr);
-        });
-      });
-    }
-    (function(functionsToWrap) {
-      for (let i2 = 0; functionsToWrap && i2 < functionsToWrap.length; i2++) {
-        const func = functionsToWrap[i2];
-        if (typeof core.Connection.prototype[func] === "function" && PromiseConnection.prototype[func] === void 0) {
-          PromiseConnection.prototype[func] = function factory(funcName) {
-            return function() {
-              return core.Connection.prototype[funcName].apply(this.connection, arguments);
-            };
-          }(func);
-        }
-      }
-    })([
-      "close",
-      "createBinlogStream",
-      "destroy",
-      "escape",
-      "escapeId",
-      "format",
-      "pause",
-      "pipe",
-      "resume",
-      "unprepare"
-    ]);
-    var PromisePoolConnection = class extends PromiseConnection {
-      constructor(connection, promiseImpl) {
-        super(connection, promiseImpl);
-      }
-      destroy() {
-        return core.PoolConnection.prototype.destroy.apply(this.connection, arguments);
-      }
-    };
-    var PromisePool = class extends EventEmitter {
-      constructor(pool2, thePromise) {
-        super();
-        this.pool = pool2;
-        this.Promise = thePromise || Promise;
-        inheritEvents(pool2, this, ["acquire", "connection", "enqueue", "release"]);
-      }
-      getConnection() {
-        const corePool = this.pool;
-        return new this.Promise((resolve, reject) => {
-          corePool.getConnection((err, coreConnection) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(new PromisePoolConnection(coreConnection, this.Promise));
-            }
-          });
-        });
-      }
-      query(sql, args) {
-        const corePool = this.pool;
-        const localErr = new Error();
-        if (typeof args === "function") {
-          throw new Error("Callback function is not available with promise clients.");
-        }
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          if (args !== void 0) {
-            corePool.query(sql, args, done);
-          } else {
-            corePool.query(sql, done);
-          }
-        });
-      }
-      execute(sql, args) {
-        const corePool = this.pool;
-        const localErr = new Error();
-        if (typeof args === "function") {
-          throw new Error("Callback function is not available with promise clients.");
-        }
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          if (args) {
-            corePool.execute(sql, args, done);
-          } else {
-            corePool.execute(sql, done);
-          }
-        });
-      }
-      end() {
-        const corePool = this.pool;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          corePool.end((err) => {
-            if (err) {
-              localErr.message = err.message;
-              localErr.code = err.code;
-              localErr.errno = err.errno;
-              localErr.sqlState = err.sqlState;
-              localErr.sqlMessage = err.sqlMessage;
-              reject(localErr);
-            } else {
-              resolve();
-            }
-          });
-        });
-      }
-    };
-    function createPool2(opts) {
-      const corePool = core.createPool(opts);
-      const thePromise = opts.Promise || Promise;
-      if (!thePromise) {
-        throw new Error("no Promise implementation available.Use promise-enabled node version or pass userland Promise implementation as parameter, for example: { Promise: require('bluebird') }");
-      }
-      return new PromisePool(corePool, thePromise);
-    }
-    (function(functionsToWrap) {
-      for (let i2 = 0; functionsToWrap && i2 < functionsToWrap.length; i2++) {
-        const func = functionsToWrap[i2];
-        if (typeof core.Pool.prototype[func] === "function" && PromisePool.prototype[func] === void 0) {
-          PromisePool.prototype[func] = function factory(funcName) {
-            return function() {
-              return core.Pool.prototype[funcName].apply(this.pool, arguments);
-            };
-          }(func);
-        }
-      }
-    })([
-      "escape",
-      "escapeId",
-      "format"
-    ]);
-    var PromisePoolCluster = class extends EventEmitter {
-      constructor(poolCluster, thePromise) {
-        super();
-        this.poolCluster = poolCluster;
-        this.Promise = thePromise || Promise;
-        inheritEvents(poolCluster, this, ["acquire", "connection", "enqueue", "release"]);
-      }
-      getConnection() {
-        const corePoolCluster = this.poolCluster;
-        return new this.Promise((resolve, reject) => {
-          corePoolCluster.getConnection((err, coreConnection) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(new PromisePoolConnection(coreConnection, this.Promise));
-            }
-          });
-        });
-      }
-      query(sql, args) {
-        const corePoolCluster = this.poolCluster;
-        const localErr = new Error();
-        if (typeof args === "function") {
-          throw new Error("Callback function is not available with promise clients.");
-        }
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          corePoolCluster.query(sql, args, done);
-        });
-      }
-      execute(sql, args) {
-        const corePoolCluster = this.poolCluster;
-        const localErr = new Error();
-        if (typeof args === "function") {
-          throw new Error("Callback function is not available with promise clients.");
-        }
-        return new this.Promise((resolve, reject) => {
-          const done = makeDoneCb(resolve, reject, localErr);
-          corePoolCluster.execute(sql, args, done);
-        });
-      }
-      of(pattern, selector) {
-        return new PromisePoolCluster(this.poolCluster.of(pattern, selector), this.Promise);
-      }
-      end() {
-        const corePoolCluster = this.poolCluster;
-        const localErr = new Error();
-        return new this.Promise((resolve, reject) => {
-          corePoolCluster.end((err) => {
-            if (err) {
-              localErr.message = err.message;
-              localErr.code = err.code;
-              localErr.errno = err.errno;
-              localErr.sqlState = err.sqlState;
-              localErr.sqlMessage = err.sqlMessage;
-              reject(localErr);
-            } else {
-              resolve();
-            }
-          });
-        });
-      }
-    };
-    (function(functionsToWrap) {
-      for (let i2 = 0; functionsToWrap && i2 < functionsToWrap.length; i2++) {
-        const func = functionsToWrap[i2];
-        if (typeof core.PoolCluster.prototype[func] === "function" && PromisePoolCluster.prototype[func] === void 0) {
-          PromisePoolCluster.prototype[func] = function factory(funcName) {
-            return function() {
-              return core.PoolCluster.prototype[funcName].apply(this.poolCluster, arguments);
-            };
-          }(func);
-        }
-      }
-    })([
-      "add"
-    ]);
-    function createPoolCluster(opts) {
-      const corePoolCluster = core.createPoolCluster(opts);
-      const thePromise = opts && opts.Promise || Promise;
-      if (!thePromise) {
-        throw new Error("no Promise implementation available.Use promise-enabled node version or pass userland Promise implementation as parameter, for example: { Promise: require('bluebird') }");
-      }
-      return new PromisePoolCluster(corePoolCluster, thePromise);
-    }
-    exports.createConnection = createConnection;
-    exports.createPool = createPool2;
-    exports.createPoolCluster = createPoolCluster;
-    exports.escape = core.escape;
-    exports.escapeId = core.escapeId;
-    exports.format = core.format;
-    exports.raw = core.raw;
-    exports.PromisePool = PromisePool;
-    exports.PromiseConnection = PromiseConnection;
-    exports.PromisePoolConnection = PromisePoolConnection;
-  }
-});
-
 // src/config/index.ts
-var resourceName, mysql_debug, mysql_ui, mysql_slow_query_warning, mysql_connection_string, mysql_transaction_isolation_level, connectionOptions;
+var resourceName, mysql_debug, mysql_ui, mysql_slow_query_warning, mysql_connection_string, mysql_transaction_isolation_level;
 var init_config = __esm({
   "src/config/index.ts"() {
     resourceName = GetCurrentResourceName();
@@ -14852,22 +14849,12 @@ var init_config = __esm({
           return `${query} READ COMMITTED`;
       }
     })();
-    connectionOptions = (() => {
-      if (mysql_connection_string.includes("mysql://"))
-        return { uri: mysql_connection_string };
-      const options = mysql_connection_string.replace(/(?:host(?:name)|ip|server|data\s?source|addr(?:ess)?)=/gi, "host=").replace(/(?:user\s?(?:id|name)?|uid)=/gi, "user=").replace(/(?:pwd|pass)=/gi, "password=").replace(/(?:db)=/gi, "database=").split(";").reduce((connectionInfo, parameter) => {
-        const [key, value] = parameter.split("=");
-        connectionInfo[key] = value;
-        return connectionInfo;
-      }, {});
-      return options;
-    })();
   }
 });
 
-// node_modules/pseudomap/pseudomap.js
+// node_modules/.pnpm/pseudomap@1.0.2/node_modules/pseudomap/pseudomap.js
 var require_pseudomap = __commonJS({
-  "node_modules/pseudomap/pseudomap.js"(exports, module2) {
+  "node_modules/.pnpm/pseudomap@1.0.2/node_modules/pseudomap/pseudomap.js"(exports, module2) {
     var hasOwnProperty = Object.prototype.hasOwnProperty;
     module2.exports = PseudoMap;
     function PseudoMap(set2) {
@@ -14960,9 +14947,9 @@ var require_pseudomap = __commonJS({
   }
 });
 
-// node_modules/pseudomap/map.js
+// node_modules/.pnpm/pseudomap@1.0.2/node_modules/pseudomap/map.js
 var require_map = __commonJS({
-  "node_modules/pseudomap/map.js"(exports, module2) {
+  "node_modules/.pnpm/pseudomap@1.0.2/node_modules/pseudomap/map.js"(exports, module2) {
     if (process.env.npm_package_name === "pseudomap" && process.env.npm_lifecycle_script === "test")
       process.env.TEST_PSEUDOMAP = "true";
     if (typeof Map === "function" && !process.env.TEST_PSEUDOMAP) {
@@ -14973,9 +14960,9 @@ var require_map = __commonJS({
   }
 });
 
-// node_modules/named-placeholders/node_modules/yallist/yallist.js
+// node_modules/.pnpm/yallist@2.1.2/node_modules/yallist/yallist.js
 var require_yallist2 = __commonJS({
-  "node_modules/named-placeholders/node_modules/yallist/yallist.js"(exports, module2) {
+  "node_modules/.pnpm/yallist@2.1.2/node_modules/yallist/yallist.js"(exports, module2) {
     module2.exports = Yallist;
     Yallist.Node = Node;
     Yallist.create = Yallist;
@@ -15299,9 +15286,9 @@ var require_yallist2 = __commonJS({
   }
 });
 
-// node_modules/named-placeholders/node_modules/lru-cache/index.js
+// node_modules/.pnpm/lru-cache@4.1.5/node_modules/lru-cache/index.js
 var require_lru_cache2 = __commonJS({
-  "node_modules/named-placeholders/node_modules/lru-cache/index.js"(exports, module2) {
+  "node_modules/.pnpm/lru-cache@4.1.5/node_modules/lru-cache/index.js"(exports, module2) {
     "use strict";
     module2.exports = LRUCache;
     var Map2 = require_map();
@@ -15695,9 +15682,9 @@ var require_lru_cache2 = __commonJS({
   }
 });
 
-// node_modules/named-placeholders/index.js
+// node_modules/.pnpm/named-placeholders@1.1.2/node_modules/named-placeholders/index.js
 var require_named_placeholders = __commonJS({
-  "node_modules/named-placeholders/index.js"(exports, module2) {
+  "node_modules/.pnpm/named-placeholders@1.1.2/node_modules/named-placeholders/index.js"(exports, module2) {
     "use strict";
     var RE_PARAM = /(?:\?)|(?:(?<!["'])[:@](\d+|(?:[a-zA-Z][a-zA-Z0-9_]*)))/g;
     var DQUOTE = 34;
@@ -15870,7 +15857,7 @@ var require_named_placeholders = __commonJS({
   }
 });
 
-// node_modules/data-uri-to-buffer/dist/index.js
+// node_modules/.pnpm/data-uri-to-buffer@4.0.0/node_modules/data-uri-to-buffer/dist/index.js
 function dataUriToBuffer(uri) {
   if (!/^data:/i.test(uri)) {
     throw new TypeError('`uri` does not appear to be a Data URI (must begin with "data:")');
@@ -15909,14 +15896,14 @@ function dataUriToBuffer(uri) {
 }
 var dist_default;
 var init_dist = __esm({
-  "node_modules/data-uri-to-buffer/dist/index.js"() {
+  "node_modules/.pnpm/data-uri-to-buffer@4.0.0/node_modules/data-uri-to-buffer/dist/index.js"() {
     dist_default = dataUriToBuffer;
   }
 });
 
-// node_modules/web-streams-polyfill/dist/ponyfill.es2018.js
+// node_modules/.pnpm/web-streams-polyfill@3.2.1/node_modules/web-streams-polyfill/dist/ponyfill.es2018.js
 var require_ponyfill_es2018 = __commonJS({
-  "node_modules/web-streams-polyfill/dist/ponyfill.es2018.js"(exports, module2) {
+  "node_modules/.pnpm/web-streams-polyfill@3.2.1/node_modules/web-streams-polyfill/dist/ponyfill.es2018.js"(exports, module2) {
     (function(global2, factory) {
       typeof exports === "object" && typeof module2 !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.WebStreamsPolyfill = {}));
     })(exports, function(exports2) {
@@ -19093,10 +19080,13 @@ var require_ponyfill_es2018 = __commonJS({
       const byteLengthSizeFunction = (chunk) => {
         return chunk.byteLength;
       };
-      Object.defineProperty(byteLengthSizeFunction, "name", {
-        value: "size",
-        configurable: true
-      });
+      try {
+        Object.defineProperty(byteLengthSizeFunction, "name", {
+          value: "size",
+          configurable: true
+        });
+      } catch (_a) {
+      }
       class ByteLengthQueuingStrategy {
         constructor(options) {
           assertRequiredArgument(options, 1, "ByteLengthQueuingStrategy");
@@ -19141,10 +19131,13 @@ var require_ponyfill_es2018 = __commonJS({
       const countSizeFunction = () => {
         return 1;
       };
-      Object.defineProperty(countSizeFunction, "name", {
-        value: "size",
-        configurable: true
-      });
+      try {
+        Object.defineProperty(countSizeFunction, "name", {
+          value: "size",
+          configurable: true
+        });
+      } catch (_a) {
+      }
       class CountQueuingStrategy {
         constructor(options) {
           assertRequiredArgument(options, 1, "CountQueuingStrategy");
@@ -19499,9 +19492,9 @@ var require_ponyfill_es2018 = __commonJS({
   }
 });
 
-// node_modules/fetch-blob/streams.cjs
+// node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/streams.cjs
 var require_streams2 = __commonJS({
-  "node_modules/fetch-blob/streams.cjs"() {
+  "node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/streams.cjs"() {
     var POOL_SIZE2 = 65536;
     if (!globalThis.ReadableStream) {
       try {
@@ -19545,7 +19538,7 @@ var require_streams2 = __commonJS({
   }
 });
 
-// node_modules/fetch-blob/index.js
+// node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/index.js
 async function* toIterator(parts, clone2 = true) {
   for (const part of parts) {
     if ("stream" in part) {
@@ -19576,7 +19569,7 @@ async function* toIterator(parts, clone2 = true) {
 }
 var import_streams, POOL_SIZE, _Blob, Blob2, fetch_blob_default;
 var init_fetch_blob = __esm({
-  "node_modules/fetch-blob/index.js"() {
+  "node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/index.js"() {
     import_streams = __toESM(require_streams2(), 1);
     POOL_SIZE = 65536;
     _Blob = class Blob {
@@ -19608,8 +19601,11 @@ var init_fetch_blob = __esm({
           } else {
             part = encoder.encode(`${element}`);
           }
-          this.#size += ArrayBuffer.isView(part) ? part.byteLength : part.size;
-          this.#parts.push(part);
+          const size = ArrayBuffer.isView(part) ? part.byteLength : part.size;
+          if (size) {
+            this.#size += size;
+            this.#parts.push(part);
+          }
         }
         this.#endings = `${options.endings === void 0 ? "transparent" : options.endings}`;
         const type = options.type === void 0 ? "" : String(options.type);
@@ -19704,10 +19700,10 @@ var init_fetch_blob = __esm({
   }
 });
 
-// node_modules/fetch-blob/file.js
+// node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/file.js
 var _File, File2, file_default;
 var init_file = __esm({
-  "node_modules/fetch-blob/file.js"() {
+  "node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/file.js"() {
     init_fetch_blob();
     _File = class File extends fetch_blob_default {
       #lastModified = 0;
@@ -19743,7 +19739,7 @@ var init_file = __esm({
   }
 });
 
-// node_modules/formdata-polyfill/esm.min.js
+// node_modules/.pnpm/formdata-polyfill@4.0.10/node_modules/formdata-polyfill/esm.min.js
 function formDataToBlob(F2, B = fetch_blob_default) {
   var b = `${r()}${r()}`.replace(/\./g, "").slice(-28).padStart(32, "-"), c = [], p = `--${b}\r
 Content-Disposition: form-data; name="`;
@@ -19759,7 +19755,7 @@ Content-Type: ${v.type || "application/octet-stream"}\r
 }
 var t, i, h, r, m, f, e, x, FormData;
 var init_esm_min = __esm({
-  "node_modules/formdata-polyfill/esm.min.js"() {
+  "node_modules/.pnpm/formdata-polyfill@4.0.10/node_modules/formdata-polyfill/esm.min.js"() {
     init_fetch_blob();
     init_file();
     ({ toStringTag: t, iterator: i, hasInstance: h } = Symbol);
@@ -19846,10 +19842,10 @@ var init_esm_min = __esm({
   }
 });
 
-// node_modules/node-fetch/src/errors/base.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/errors/base.js
 var FetchBaseError;
 var init_base = __esm({
-  "node_modules/node-fetch/src/errors/base.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/errors/base.js"() {
     FetchBaseError = class extends Error {
       constructor(message, type) {
         super(message);
@@ -19866,10 +19862,10 @@ var init_base = __esm({
   }
 });
 
-// node_modules/node-fetch/src/errors/fetch-error.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/errors/fetch-error.js
 var FetchError;
 var init_fetch_error = __esm({
-  "node_modules/node-fetch/src/errors/fetch-error.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/errors/fetch-error.js"() {
     init_base();
     FetchError = class extends FetchBaseError {
       constructor(message, type, systemError) {
@@ -19883,10 +19879,10 @@ var init_fetch_error = __esm({
   }
 });
 
-// node_modules/node-fetch/src/utils/is.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/is.js
 var NAME, isURLSearchParameters, isBlob, isAbortSignal, isDomainOrSubdomain;
 var init_is = __esm({
-  "node_modules/node-fetch/src/utils/is.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/is.js"() {
     NAME = Symbol.toStringTag;
     isURLSearchParameters = (object) => {
       return typeof object === "object" && typeof object.append === "function" && typeof object.delete === "function" && typeof object.get === "function" && typeof object.getAll === "function" && typeof object.has === "function" && typeof object.set === "function" && typeof object.sort === "function" && object[NAME] === "URLSearchParams";
@@ -19905,9 +19901,9 @@ var init_is = __esm({
   }
 });
 
-// node_modules/node-domexception/index.js
+// node_modules/.pnpm/node-domexception@1.0.0/node_modules/node-domexception/index.js
 var require_node_domexception = __commonJS({
-  "node_modules/node-domexception/index.js"(exports, module2) {
+  "node_modules/.pnpm/node-domexception@1.0.0/node_modules/node-domexception/index.js"(exports, module2) {
     if (!globalThis.DOMException) {
       try {
         const { MessageChannel } = require("worker_threads"), port = new MessageChannel().port1, ab = new ArrayBuffer();
@@ -19920,10 +19916,10 @@ var require_node_domexception = __commonJS({
   }
 });
 
-// node_modules/fetch-blob/from.js
+// node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/from.js
 var import_node_fs, import_node_domexception, stat, BlobDataItem;
 var init_from = __esm({
-  "node_modules/fetch-blob/from.js"() {
+  "node_modules/.pnpm/fetch-blob@3.1.5/node_modules/fetch-blob/from.js"() {
     import_node_fs = require("node:fs");
     import_node_domexception = __toESM(require_node_domexception(), 1);
     init_file();
@@ -19937,18 +19933,20 @@ var init_from = __esm({
         this.#start = options.start;
         this.size = options.size;
         this.lastModified = options.lastModified;
+        this.originalSize = options.originalSize === void 0 ? options.size : options.originalSize;
       }
       slice(start, end) {
         return new BlobDataItem({
           path: this.#path,
           lastModified: this.lastModified,
+          originalSize: this.originalSize,
           size: end - start,
           start: this.#start + start
         });
       }
       async *stream() {
-        const { mtimeMs } = await stat(this.#path);
-        if (mtimeMs > this.lastModified) {
+        const { mtimeMs, size } = await stat(this.#path);
+        if (mtimeMs > this.lastModified || this.originalSize !== size) {
           throw new import_node_domexception.default("The requested file could not be read, typically due to permission problems that have occurred after a reference to a file was acquired.", "NotReadableError");
         }
         yield* (0, import_node_fs.createReadStream)(this.#path, {
@@ -19963,7 +19961,7 @@ var init_from = __esm({
   }
 });
 
-// node_modules/node-fetch/src/utils/multipart-parser.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/multipart-parser.js
 var multipart_parser_exports = {};
 __export(multipart_parser_exports, {
   toFormData: () => toFormData
@@ -20057,7 +20055,7 @@ async function toFormData(Body2, ct) {
 }
 var s, S, f2, F, LF, CR, SPACE, HYPHEN, COLON, A, Z, lower, noop, MultipartParser;
 var init_multipart_parser = __esm({
-  "node_modules/node-fetch/src/utils/multipart-parser.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/multipart-parser.js"() {
     init_from();
     init_esm_min();
     s = 0;
@@ -20316,7 +20314,7 @@ var init_multipart_parser = __esm({
   }
 });
 
-// node_modules/node-fetch/src/body.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/body.js
 async function consumeBody(data) {
   if (data[INTERNALS].disturbed) {
     throw new TypeError(`body used already for: ${data.url}`);
@@ -20363,7 +20361,7 @@ async function consumeBody(data) {
 }
 var import_node_stream, import_node_util, import_node_buffer, pipeline, INTERNALS, Body, clone, getNonSpecFormDataBoundary, extractContentType, getTotalBytes, writeToStream;
 var init_body = __esm({
-  "node_modules/node-fetch/src/body.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/body.js"() {
     import_node_stream = __toESM(require("node:stream"), 1);
     import_node_util = require("node:util");
     import_node_buffer = require("node:buffer");
@@ -20448,12 +20446,12 @@ var init_body = __esm({
         });
       }
       async json() {
-        const buffer = await consumeBody(this);
-        return JSON.parse(buffer.toString());
+        const text = await this.text();
+        return JSON.parse(text);
       }
       async text() {
         const buffer = await consumeBody(this);
-        return buffer.toString();
+        return new TextDecoder().decode(buffer);
       }
       buffer() {
         return consumeBody(this);
@@ -20541,7 +20539,7 @@ var init_body = __esm({
   }
 });
 
-// node_modules/node-fetch/src/headers.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/headers.js
 function fromRawHeaders(headers = []) {
   return new Headers(headers.reduce((result, value, index, array) => {
     if (index % 2 === 0) {
@@ -20560,7 +20558,7 @@ function fromRawHeaders(headers = []) {
 }
 var import_node_util2, import_node_http, validateHeaderName, validateHeaderValue, Headers;
 var init_headers = __esm({
-  "node_modules/node-fetch/src/headers.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/headers.js"() {
     import_node_util2 = require("node:util");
     import_node_http = __toESM(require("node:http"), 1);
     validateHeaderName = typeof import_node_http.default.validateHeaderName === "function" ? import_node_http.default.validateHeaderName : (name) => {
@@ -20703,10 +20701,10 @@ var init_headers = __esm({
   }
 });
 
-// node_modules/node-fetch/src/utils/is-redirect.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/is-redirect.js
 var redirectStatus, isRedirect;
 var init_is_redirect = __esm({
-  "node_modules/node-fetch/src/utils/is-redirect.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/is-redirect.js"() {
     redirectStatus = /* @__PURE__ */ new Set([301, 302, 303, 307, 308]);
     isRedirect = (code) => {
       return redirectStatus.has(code);
@@ -20714,10 +20712,10 @@ var init_is_redirect = __esm({
   }
 });
 
-// node_modules/node-fetch/src/response.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/response.js
 var INTERNALS2, Response;
 var init_response = __esm({
-  "node_modules/node-fetch/src/response.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/response.js"() {
     init_headers();
     init_body();
     init_is_redirect();
@@ -20813,10 +20811,10 @@ var init_response = __esm({
   }
 });
 
-// node_modules/node-fetch/src/utils/get-search.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/get-search.js
 var getSearch;
 var init_get_search = __esm({
-  "node_modules/node-fetch/src/utils/get-search.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/get-search.js"() {
     getSearch = (parsedURL) => {
       if (parsedURL.search) {
         return parsedURL.search;
@@ -20828,7 +20826,7 @@ var init_get_search = __esm({
   }
 });
 
-// node_modules/node-fetch/src/utils/referrer.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/referrer.js
 function stripURLForUseAsAReferrer(url, originOnly = false) {
   if (url == null) {
     return "no-referrer";
@@ -20956,7 +20954,7 @@ function parseReferrerPolicyFromHeader(headers) {
 }
 var import_node_net, ReferrerPolicy, DEFAULT_REFERRER_POLICY;
 var init_referrer = __esm({
-  "node_modules/node-fetch/src/utils/referrer.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/utils/referrer.js"() {
     import_node_net = require("node:net");
     ReferrerPolicy = /* @__PURE__ */ new Set([
       "",
@@ -20973,10 +20971,10 @@ var init_referrer = __esm({
   }
 });
 
-// node_modules/node-fetch/src/request.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/request.js
 var import_node_url, import_node_util3, INTERNALS3, isRequest, doBadDataWarn, Request, getNodeRequestOptions;
 var init_request = __esm({
-  "node_modules/node-fetch/src/request.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/request.js"() {
     import_node_url = require("node:url");
     import_node_util3 = require("node:util");
     init_headers();
@@ -21003,7 +21001,9 @@ var init_request = __esm({
           throw new TypeError(`${parsedURL} is an url with embedded credentials.`);
         }
         let method = init.method || input.method || "GET";
-        method = method.toUpperCase();
+        if (/^(delete|get|head|options|post|put)$/i.test(method)) {
+          method = method.toUpperCase();
+        }
         if ("data" in init) {
           doBadDataWarn();
         }
@@ -21162,10 +21162,10 @@ var init_request = __esm({
   }
 });
 
-// node_modules/node-fetch/src/errors/abort-error.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/errors/abort-error.js
 var AbortError;
 var init_abort_error = __esm({
-  "node_modules/node-fetch/src/errors/abort-error.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/errors/abort-error.js"() {
     init_base();
     AbortError = class extends FetchBaseError {
       constructor(message, type = "aborted") {
@@ -21175,7 +21175,7 @@ var init_abort_error = __esm({
   }
 });
 
-// node_modules/node-fetch/src/index.js
+// node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/index.js
 async function fetch(url, options_) {
   return new Promise((resolve, reject) => {
     const request = new Request(url, options_);
@@ -21435,7 +21435,7 @@ function fixResponseChunkedTransferBadEnding(request, errorCallback) {
 }
 var import_node_http2, import_node_https, import_node_zlib, import_node_stream2, import_node_buffer2, supportedSchemas;
 var init_src = __esm({
-  "node_modules/node-fetch/src/index.js"() {
+  "node_modules/.pnpm/node-fetch@3.2.4/node_modules/node-fetch/src/index.js"() {
     import_node_http2 = __toESM(require("node:http"), 1);
     import_node_https = __toESM(require("node:https"), 1);
     import_node_zlib = __toESM(require("node:zlib"), 1);
@@ -21463,34 +21463,35 @@ var init_update = __esm({
   "src/update/index.ts"() {
     init_src();
     init_config();
-    setTimeout(async () => {
-      try {
-        const response = await fetch(`https://api.github.com/repos/overextended/oxmysql/releases/latest`);
-        if (response.status !== 200)
-          return;
-        const release = await response.json();
-        if (release.prerelease)
-          return;
-        const currentVersion = GetResourceMetadata(resourceName, "version", 0).match(/(\d)\.(\d+)\.(\d+)/);
-        if (!currentVersion)
-          return;
-        const latestVersion = release.tag_name.match(/(\d)\.(\d+)\.(\d+)/);
-        if (!latestVersion)
-          return;
-        if (currentVersion[0] === latestVersion[0])
-          return;
-        const updateMessage = currentVersion[3] < latestVersion[3] ? "patch" : currentVersion[2] < latestVersion[2] ? "an update" : "a major update";
-        console.log(`^3There is ${updateMessage} available for oxmysql - please update to the latest release (current version: ${currentVersion[0]})\r
+    if (GetConvar("mysql_versioncheck", "true") === "true") {
+      setTimeout(async () => {
+        try {
+          const response = await fetch(`https://api.github.com/repos/overextended/oxmysql/releases/latest`);
+          if (response.status !== 200)
+            return;
+          const release = await response.json();
+          if (release.prerelease)
+            return;
+          const currentVersion = GetResourceMetadata(resourceName, "version", 0).match(/(\d)\.(\d+)\.(\d+)/);
+          if (!currentVersion)
+            return;
+          const latestVersion = release.tag_name.match(/(\d)\.(\d+)\.(\d+)/);
+          if (!latestVersion)
+            return;
+          if (currentVersion[0] === latestVersion[0] || currentVersion[0] > latestVersion[0])
+            return;
+          const updateMessage = currentVersion[3] < latestVersion[3] ? "patch" : currentVersion[2] < latestVersion[2] ? "an update" : "a major update";
+          console.log(`^3There is ${updateMessage} available for oxmysql - please update to the latest release (current version: ${currentVersion[0]})\r
 ${release.html_url}^0`);
-      } catch (e2) {
-        console.error(e2);
-      }
-    }, 1e3);
+        } catch (e2) {
+        }
+      }, 1e3);
+    }
   }
 });
 
 // src/database/index.ts
-var import_promise = __toESM(require_promise());
+var import_mysql2 = __toESM(require_mysql2());
 init_config();
 
 // src/utils/typeCast.ts
@@ -21502,8 +21503,9 @@ var typeCast = (field, next) => {
     case "TIMESTAMP":
     case "TIMESTAMP2":
     case "NEWDATE":
+      return new Date(field.string()).getTime();
     case "DATE":
-      return field.type === "DATE" ? new Date(field.string() + " 00:00:00").getTime() : new Date(field.string()).getTime();
+      return new Date(field.string() + " 00:00:00").getTime();
     case "TINY":
       return field.length === 1 ? field.string() === "1" : next();
     case "BIT":
@@ -21513,7 +21515,10 @@ var typeCast = (field, next) => {
     case "LONG_BLOB":
     case "BLOB":
       if (field.charset === BINARY_CHARSET) {
-        return [...field.buffer()];
+        const value = field.buffer();
+        if (value === null)
+          return [value];
+        return [...value];
       }
       return field.string();
     default:
@@ -21522,19 +21527,49 @@ var typeCast = (field, next) => {
 };
 
 // src/database/index.ts
+var parseUri = (connectionString) => {
+  const splitMatchGroups = connectionString.match(new RegExp("^(?:([^:/?#.]+):)?(?://(?:([^/?#]*)@)?([\\w\\d\\-\\u0100-\\uffff.%]*)(?::([0-9]+))?)?([^?#]+)?(?:\\?([^#]*))?$"));
+  if (!splitMatchGroups)
+    throw new Error(`mysql_connection_string structure was invalid (${connectionString})`);
+  const authTarget = splitMatchGroups[2] ? splitMatchGroups[2].split(":") : [];
+  const options = __spreadValues({
+    user: authTarget[0] || void 0,
+    password: authTarget[1] || void 0,
+    host: splitMatchGroups[3],
+    port: parseInt(splitMatchGroups[4]),
+    database: splitMatchGroups[5].replace(/^\/+/, "")
+  }, splitMatchGroups[6] && splitMatchGroups[6].split("&").reduce((connectionInfo, parameter) => {
+    const [key, value] = parameter.split("=");
+    connectionInfo[key] = value;
+    return connectionInfo;
+  }, {}));
+  return options;
+};
+var connectionOptions = (() => {
+  const options = mysql_connection_string.includes("mysql://") ? parseUri(mysql_connection_string) : mysql_connection_string.replace(/(?:host(?:name)|ip|server|data\s?source|addr(?:ess)?)=/gi, "host=").replace(/(?:user\s?(?:id|name)?|uid)=/gi, "user=").replace(/(?:pwd|pass)=/gi, "password=").replace(/(?:db)=/gi, "database=").split(";").reduce((connectionInfo, parameter) => {
+    const [key, value] = parameter.split("=");
+    connectionInfo[key] = value;
+    return connectionInfo;
+  }, {});
+  return options;
+})();
 var pool;
 var serverReady = false;
 setTimeout(() => {
-  pool = (0, import_promise.createPool)(__spreadProps(__spreadValues({
-    connectTimeout: 6e4
+  pool = (0, import_mysql2.createPool)(__spreadProps(__spreadValues({
+    connectTimeout: 6e4,
+    trace: false,
+    supportBigNumbers: true
   }, connectionOptions), {
     typeCast
   }));
-  pool.query(mysql_transaction_isolation_level).then(() => {
+  pool.query(mysql_transaction_isolation_level, (err) => {
+    if (err)
+      return console.error(`^3Unable to establish a connection to the database!
+^3[${err}]^0`);
     console.log(`^2Database server connection established!^0`);
     serverReady = true;
-  }).catch((e2) => console.error(`^3Unable to establish a connection to the database! [${e2.code}]
-${e2.message}^0`));
+  });
 });
 
 // src/utils/parseArguments.ts
@@ -21620,6 +21655,10 @@ var logQuery = (invokingResource, query, executionTime, parameters) => {
 RegisterCommand("mysql", (source2) => {
   if (!mysql_ui)
     return;
+  if (source2 < 1) {
+    console.log("^3This command cannot run server side^0");
+    return;
+  }
   let totalQueries = 0;
   let totalTime = 0;
   let slowQueries = 0;
@@ -21690,36 +21729,64 @@ var scheduleTick = async () => {
 };
 
 // src/database/rawQuery.ts
-var rawQuery = async (type, invokingResource, query, parameters, cb) => {
+var rawQuery = async (type, invokingResource, query, parameters, cb, throwError) => {
   await scheduleTick();
-  let response;
-  try {
-    [query, parameters, cb] = parseArguments(invokingResource, query, parameters, cb);
-    const [result, _, executionTime] = await pool.query(query, parameters);
-    logQuery(invokingResource, query, executionTime, parameters);
-    response = parseResponse(type, result);
-  } catch (e2) {
-    throw new Error(`${invokingResource} was unable to execute a query!
-${e2.message}
-${e2.sql || `${query} ${JSON.stringify(parameters)}`}`);
-  }
-  try {
-    return cb ? cb(response) : response;
-  } catch {
-  }
+  [query, parameters, cb] = parseArguments(invokingResource, query, parameters, cb);
+  return await new Promise((resolve, reject) => {
+    pool.query(query, parameters, (err, result, _, executionTime) => {
+      if (err)
+        return reject(err);
+      logQuery(invokingResource, query, executionTime, parameters);
+      resolve(cb ? parseResponse(type, result) : null);
+    });
+  }).then(async (result) => {
+    if (cb)
+      try {
+        await cb(result);
+      } catch (err) {
+        if (typeof err === "string") {
+          if (err.includes("SCRIPT ERROR:"))
+            return console.log(err);
+          console.log(`^1SCRIPT ERROR in invoking resource ${invokingResource}: ${err}^0`);
+        }
+      }
+  }).catch((err) => {
+    const error = `${invokingResource} was unable to execute a query!
+${err.message}
+${`${query} ${JSON.stringify(parameters)}`}`;
+    TriggerEvent("oxmysql:error", {
+      query,
+      parameters,
+      message: err.message,
+      err,
+      resource: invokingResource
+    });
+    if (cb && throwError)
+      return cb(null, error);
+    throw new Error(error);
+  });
 };
 
 // src/utils/parseTransaction.ts
 var isTransactionQuery = (query) => query.query !== void 0;
 var parseTransaction = (invokingResource, queries, parameters, cb) => {
   if (!Array.isArray(queries))
-    throw new Error(`Transaction queries must be array type`);
+    throw new Error(`Transaction queries must be array, received '${typeof queries}'.`);
   if (cb && typeof cb !== "function")
     cb = void 0;
   if (parameters && typeof parameters === "function")
     cb = parameters;
   if (parameters === null || parameters === void 0 || typeof parameters === "function")
     parameters = [];
+  if (Array.isArray(queries[0])) {
+    const transactions2 = queries.map((query) => {
+      if (typeof query[1] !== "object")
+        throw new Error(`Transaction parameters must be array or object, received '${typeof query[1]}'.`);
+      const [parsedQuery, parsedParameters] = parseArguments(invokingResource, query[0], query[1]);
+      return { query: parsedQuery, params: parsedParameters };
+    });
+    return { transactions: transactions2, cb };
+  }
   const transactions = queries.map((query) => {
     const [parsedQuery, parsedParameters] = parseArguments(invokingResource, isTransactionQuery(query) ? query.query : query, isTransactionQuery(query) ? query.parameters || query.values : parameters || []);
     return { query: parsedQuery, params: parsedParameters };
@@ -21733,35 +21800,49 @@ ${JSON.stringify(parameters)}`;
 var rawTransaction = async (invokingResource, queries, parameters, callback) => {
   await scheduleTick();
   const { transactions, cb } = parseTransaction(invokingResource, queries, parameters, callback);
-  const connection = await pool.getConnection();
+  const connection = await pool.promise().getConnection();
   let response = false;
   try {
-    const executionTime = process.hrtime();
     await connection.beginTransaction();
-    for (const transaction of transactions)
-      await connection.query(transaction.query, transaction.params);
+    for (const transaction of transactions) {
+      const [result, fields, executionTime] = await connection.query(transaction.query, transaction.params);
+      logQuery(invokingResource, transaction.query, executionTime, transaction.params);
+    }
     await connection.commit();
-    logQuery(invokingResource, "TRANSACTION", process.hrtime(executionTime)[1] / 1e6, parameters);
     response = true;
   } catch (e2) {
     await connection.rollback();
+    const transactionErrorMessage = e2.sql || transactionError(transactions, parameters);
     console.error(`${invokingResource} was unable to execute a transaction!
 ${e2.message}
-${e2.sql || `${transactionError(transactions, parameters)}`}^0`);
+${transactionErrorMessage}^0`);
+    TriggerEvent("oxmysql:transaction-error", {
+      query: transactionErrorMessage,
+      parameters,
+      message: e2.message,
+      err: e2,
+      resource: invokingResource
+    });
   } finally {
     connection.release();
   }
-  try {
-    return cb ? cb(response) : response;
-  } catch {
-  }
+  if (cb)
+    try {
+      cb(response);
+    } catch (err) {
+      if (typeof err === "string") {
+        if (err.includes("SCRIPT ERROR:"))
+          return console.log(err);
+        console.log(`^1SCRIPT ERROR in invoking resource ${invokingResource}: ${err}^0`);
+      }
+    }
 };
 
 // src/utils/parseExecute.ts
-var parseExecute = (query) => {
-  switch (query.replace(/\s.*/, "")) {
+var executeType = (query) => {
+  switch (query.substring(0, query.indexOf(" "))) {
     case "SELECT":
-      return "execute";
+      return null;
     case "INSERT":
       return "insert";
     case "UPDATE":
@@ -21769,104 +21850,155 @@ var parseExecute = (query) => {
     case "DELETE":
       return "update";
     default:
-      return false;
+      throw new Error(`Prepared statements only accept SELECT, INSERT, UPDATE, and DELETE methods.`);
   }
+};
+var parseExecute = (parameters) => {
+  if (!Array.isArray(parameters)) {
+    if (typeof parameters === "object") {
+      const arr = [];
+      Object.entries(parameters).forEach((entry) => arr[parseInt(entry[0]) - 1] = entry[1]);
+      parameters = arr;
+    } else
+      throw new Error(`Parameters expected an array but received ${typeof parameters} instead`);
+  }
+  return parameters;
+};
+var parseValues = (placeholders, parameters) => {
+  if (!Array.isArray(parameters)) {
+    if (typeof parameters === "object") {
+      const arr = [];
+      Object.entries(parameters).forEach((entry) => arr[parseInt(entry[0]) - 1] = entry[1]);
+      parameters = arr;
+    } else
+      throw new Error(`Parameters expected an array but received ${typeof parameters} instead`);
+  } else if (placeholders > parameters.length) {
+    for (let i2 = parameters.length; i2 < placeholders; i2++) {
+      parameters[i2] = null;
+    }
+  }
+  return parameters;
 };
 
 // src/database/rawExecute.ts
-var rawExecute = async (invokingResource, query, parameters, cb) => {
-  const type = parseExecute(query);
-  if (!type)
-    throw new Error(`Prepared statements only accept SELECT, INSERT, UPDATE, and DELETE methods!`);
-  if (!Array.isArray(parameters))
-    throw new Error(`Parameters expected an array but received ${typeof parameters} instead`);
+var rawExecute = async (invokingResource, query, parameters, cb, throwError) => {
+  const type = executeType(query);
+  parameters = parseExecute(parameters);
+  let response = [];
+  if (!parameters.every(Array.isArray))
+    parameters = [[...parameters]];
   await scheduleTick();
-  const connection = await pool.getConnection();
-  let response;
-  try {
-    if (!parameters.every(Array.isArray))
-      parameters = [[...parameters]];
-    const results = [];
-    const executionTime = process.hrtime();
-    for (const params of parameters) {
-      const [rows] = await connection.execute(query, params);
-      if (rows.length > 1) {
-        for (const row of rows) {
-          results.push(parseResponse(type, row));
+  return await new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      if (err)
+        return reject(err.message);
+      if (parameters.length === 0)
+        return reject(`Query received no parameters.`);
+      const placeholders = query.split("?").length - 1;
+      parameters.forEach((values, index) => {
+        const executionTime = process.hrtime();
+        values = parseValues(placeholders, values);
+        connection.execute(query, values, (err2, results) => {
+          if (err2) {
+            connection.release();
+            return reject(err2.message);
+          }
+          if (cb) {
+            if (results.length > 1) {
+              for (const value of results) {
+                response.push(parseResponse(type, value));
+              }
+            } else
+              response.push(parseResponse(type, results));
+          }
+          logQuery(invokingResource, query, process.hrtime(executionTime)[1] / 1e6, values);
+          if (index === parameters.length - 1) {
+            connection.release();
+            if (cb) {
+              if (response.length === 1) {
+                if (type === null) {
+                  if (response[0][0] && Object.keys(response[0][0]).length === 1)
+                    resolve(Object.values(response[0][0])[0]);
+                  else
+                    resolve(response[0][0]);
+                } else {
+                  resolve(response[0]);
+                }
+              } else {
+                resolve(response);
+              }
+            }
+          }
+        });
+      });
+    });
+  }).then(async (response2) => {
+    if (cb)
+      try {
+        await cb(response2);
+      } catch (err) {
+        if (typeof err === "string") {
+          if (err.includes("SCRIPT ERROR:"))
+            return console.log(err);
+          console.log(`^1SCRIPT ERROR in invoking resource ${invokingResource}: ${err}^0`);
         }
-      } else
-        results.push(parseResponse(type, rows));
-      logQuery(invokingResource, query, process.hrtime(executionTime)[1] / 1e6, params);
-    }
-    response = results;
-    if (results.length === 1) {
-      if (type === "execute") {
-        if (results[0][0] && Object.keys(results[0][0]).length === 1)
-          response = Object.values(results[0][0])[0];
-        else
-          response = results[0][0];
-      } else {
-        response = results[0];
       }
-    } else {
-      response = results;
-    }
-  } catch (e2) {
-    throw new Error(`${invokingResource} was unable to execute a query!
-    ${e2.message}
-    ${e2.sql || `${query} ${JSON.stringify(parameters)}`}`);
-  } finally {
-    connection.release();
-  }
-  try {
-    return cb ? cb(response) : response;
-  } catch {
-  }
+  }).catch((err) => {
+    const error = `${invokingResource} was unable to execute a query!
+${err}
+${`${query}`}`;
+    TriggerEvent("oxmysql:error", {
+      query,
+      parameters,
+      message: err.message,
+      err,
+      resource: invokingResource
+    });
+    if (cb && throwError)
+      return cb(null, error);
+    throw new Error(error);
+  });
 };
 
 // src/index.ts
 Promise.resolve().then(() => init_update());
 var MySQL = {};
-MySQL.query = (query, parameters, cb, invokingResource = GetInvokingResource()) => {
-  rawQuery(null, invokingResource, query, parameters, cb);
+MySQL.query = (query, parameters, cb, invokingResource = GetInvokingResource(), throwError) => {
+  rawQuery(null, invokingResource, query, parameters, cb, throwError);
 };
-MySQL.query_async = (query, parameters, invokingResource = GetInvokingResource()) => rawQuery(null, invokingResource, query, parameters);
-MySQL.single = (query, parameters, cb, invokingResource = GetInvokingResource()) => {
-  rawQuery("single", invokingResource, query, parameters, cb);
+MySQL.single = (query, parameters, cb, invokingResource = GetInvokingResource(), throwError) => {
+  rawQuery("single", invokingResource, query, parameters, cb, throwError);
 };
-MySQL.single_async = (query, parameters, invokingResource = GetInvokingResource()) => rawQuery("single", invokingResource, query, parameters);
-MySQL.scalar = (query, parameters, cb, invokingResource = GetInvokingResource()) => {
-  rawQuery("scalar", invokingResource, query, parameters, cb);
+MySQL.scalar = (query, parameters, cb, invokingResource = GetInvokingResource(), throwError) => {
+  rawQuery("scalar", invokingResource, query, parameters, cb, throwError);
 };
-MySQL.scalar_async = (query, parameters, invokingResource = GetInvokingResource()) => rawQuery("scalar", invokingResource, query, parameters);
-MySQL.update = (query, parameters, cb, invokingResource = GetInvokingResource()) => {
-  rawQuery("update", invokingResource, query, parameters, cb);
+MySQL.update = (query, parameters, cb, invokingResource = GetInvokingResource(), throwError) => {
+  rawQuery("update", invokingResource, query, parameters, cb, throwError);
 };
-MySQL.update_async = (query, parameters, invokingResource = GetInvokingResource()) => rawQuery("update", invokingResource, query, parameters);
-MySQL.insert = (query, parameters, cb, invokingResource = GetInvokingResource()) => {
-  rawQuery("insert", invokingResource, query, parameters, cb);
+MySQL.insert = (query, parameters, cb, invokingResource = GetInvokingResource(), throwError) => {
+  rawQuery("insert", invokingResource, query, parameters, cb, throwError);
 };
-MySQL.insert_async = (query, parameters, invokingResource = GetInvokingResource()) => rawQuery("insert", invokingResource, query, parameters);
 MySQL.transaction = (queries, parameters, cb, invokingResource = GetInvokingResource()) => {
   rawTransaction(invokingResource, queries, parameters, cb);
 };
-MySQL.transaction_async = (queries, parameters, invokingResource = GetInvokingResource()) => rawTransaction(invokingResource, queries, parameters);
-MySQL.prepare = (query, parameters, cb, invokingResource = GetInvokingResource()) => {
-  rawExecute(invokingResource, query, parameters, cb);
+MySQL.prepare = (query, parameters, cb, invokingResource = GetInvokingResource(), throwError) => {
+  rawExecute(invokingResource, query, parameters, cb, throwError);
 };
-MySQL.prepare_async = (query, parameters, invokingResource = GetInvokingResource()) => rawExecute(invokingResource, query, parameters);
 MySQL.execute = MySQL.query;
-MySQL.executeSync = MySQL.query_async;
 MySQL.fetch = MySQL.query;
-MySQL.fetchSync = MySQL.query_async;
 for (const key in MySQL) {
   global.exports(key, MySQL[key]);
-  if (key.includes("_async")) {
-    const alias = `${key.slice(0, -6)}Sync`;
-    global.exports(alias, (query, parameters, invokingResource = GetInvokingResource()) => {
-      return MySQL[key](query, parameters, invokingResource);
+  const exp = (query, parameters, invokingResource = GetInvokingResource()) => {
+    return new Promise((resolve, reject) => {
+      MySQL[key](query, parameters, (result, err) => {
+        if (err)
+          return reject(new Error(err));
+        resolve(result);
+      }, invokingResource, true);
     });
-  }
+  };
+  global.exports(`${key}_async`, exp);
+  global.exports(`${key}Sync`, exp);
 }
 /*! fetch-blob. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
 /*! formdata-polyfill. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */

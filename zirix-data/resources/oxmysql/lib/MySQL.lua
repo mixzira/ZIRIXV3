@@ -35,22 +35,26 @@ local function safeArgs(query, parameters, cb, transaction)
 	if type(query) == 'number' then query = Store[query] end
 
 	if transaction then
-		assert(type(query) == 'table', ('Transaction query expects a table, received %s'):format(query))
+		if type(query) ~= 'table' then
+			error(("First argument expected table, received '%s'"):format(query))
+		end
 	else
-		assert(type(query) == 'string', ('Query expects a string, received %s'):format(query))
+		if type(query) ~= 'string' then
+			error(("First argument expected string, received '%s'"):format(query))
+		end
 	end
 
 	if parameters then
 		local type = type(parameters)
 		if type ~= 'table' and type ~= 'function' then
-			error(('Parameters expected table or function, received %s'):format(parameters))
+			error(("Second argument expected table or function, received '%s'"):format(parameters))
 		end
 	end
 
 	if cb then
 		local type = type(cb)
 		if type ~= 'function' and (type == 'table' and not cb.__cfx_functionReference) then
-			error(('Callback expects a function, received %s'):format(cb))
+			error(("Third argument expected function, received '%s'"):format(cb))
 		end
 	end
 
@@ -64,9 +68,13 @@ local GetCurrentResourceName = GetCurrentResourceName()
 
 local function await(fn, query, parameters)
 	local p = promise.new()
-	fn(nil, query, parameters, function(result)
+	fn(nil, query, parameters, function(result, error)
+		if error then
+			return p:reject(error)
+		end
+
 		p:resolve(result)
-	end, GetCurrentResourceName)
+	end, GetCurrentResourceName, true)
 	return Await(p)
 end
 
@@ -77,7 +85,8 @@ setmetatable(MySQL, {
 			self[method] = setmetatable({}, {
 
 				__call = function(_, query, parameters, cb)
-					return oxmysql[method](nil, safeArgs(query, parameters, cb, method == 'transaction'))
+					query, parameters, cb = safeArgs(query, parameters, cb, method == 'transaction')
+					return oxmysql[method](nil, query, parameters, cb, GetCurrentResourceName, false)
 				end,
 
 				__index = function(_, index)

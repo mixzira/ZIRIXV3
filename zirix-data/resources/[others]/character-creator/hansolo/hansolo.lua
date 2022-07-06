@@ -13,7 +13,7 @@ end
 
 function setCamHeight(height)
 	local pos = GetEntityCoords(PlayerPedId())
-	SetCamCoord(cam,vector3(pos.x,pos.y,f(height)))
+	SetCamCoord(cam, vector3(pos.x, pos.y, f(height)))
 end
 
 local function StartFade()
@@ -32,29 +32,29 @@ local function EndFade()
 end
 
 Citizen.CreateThread(function()
-	SetNuiFocus(false,false)
-	SetEntityInvincible(PlayerPedId(),true)
-	SetEntityVisible(PlayerPedId(),false)
-	FreezeEntityPosition(PlayerPedId(),true)
-	SetPedDiesInWater(PlayerPedId(),false)
+	SetNuiFocus(false, false)
+	SetEntityInvincible(PlayerPedId(), true)
+	SetEntityVisible(PlayerPedId(), false)
+	FreezeEntityPosition(PlayerPedId(), true)
+	SetPedDiesInWater(PlayerPedId(), false)
 	while freezedOnTop do
 		if doStatus == 1 then
-			SetEntityInvincible(PlayerPedId(),true)
-			SetEntityVisible(PlayerPedId(),true)
-			FreezeEntityPosition(PlayerPedId(),true)
-			SetPedDiesInWater(PlayerPedId(),false)
+			SetEntityInvincible(PlayerPedId(), true)
+			SetEntityVisible(PlayerPedId(), true)
+			FreezeEntityPosition(PlayerPedId(), true)
+			SetPedDiesInWater(PlayerPedId(), false)
 		elseif doStatus == 2 then
 			TriggerCamController(doStatus)
-			SetEntityInvincible(PlayerPedId(),false)
-			SetEntityVisible(PlayerPedId(),true)
-			FreezeEntityPosition(PlayerPedId(),false)
-			SetPedDiesInWater(PlayerPedId(),true)
+			SetEntityInvincible(PlayerPedId(), false)
+			SetEntityVisible(PlayerPedId(), true)
+			FreezeEntityPosition(PlayerPedId(), false)
+			SetPedDiesInWater(PlayerPedId(), true)
 			TriggerCamController(-2)
 			freezedOnTop = false
 		else
-			SetEntityInvincible(PlayerPedId(),true)
-			SetEntityVisible(PlayerPedId(),false)
-			FreezeEntityPosition(PlayerPedId(),true)
+			SetEntityInvincible(PlayerPedId(), true)
+			SetEntityVisible(PlayerPedId(), true)
+			FreezeEntityPosition(PlayerPedId(), true)
 		end
 		Citizen.Wait(1)
 	end
@@ -63,19 +63,19 @@ end)
 local altura
 function TriggerCamController(statusSent)
 	if not DoesCamExist(cam) then
-		cam = CreateCam("DEFAULT_SCRIPTED_CAMERA",false)
+		cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", false)
 	end
 
 	if statusSent == -1 then
 		local pos = GetEntityCoords(PlayerPedId())
-		SetCamCoord(cam,vector3(pos.x,pos.y,f(1000)))
-		SetCamRot(cam,-f(90),f(0),f(0),2)
-		SetCamActive(cam,true)
+		SetCamCoord(cam, vector3(pos.x, pos.y, f(1000)))
+		SetCamRot(cam, -f(90), f(0), f(0), 2)
+		SetCamActive(cam, true)
 		StopCamPointing(cam)
-		RenderScriptCams(true,true,0,0,0,0)
+		RenderScriptCams(true, true, 0, 0, 0, 0)
 	elseif statusSent == 2 then
 		local pos = GetEntityCoords(PlayerPedId())
-		SetCamCoord(cam,vector3(pos.x,pos.y,f(1000)))
+		SetCamCoord(cam, vector3(pos.x, pos.y, f(1000)))
 		altura = 1000
 		while altura > 50 do
 			if altura <= 300 then
@@ -89,31 +89,31 @@ function TriggerCamController(statusSent)
 			Citizen.Wait(10)
 		end
 	elseif statusSent == -2 then
-		SetCamActive(cam,false)
+		SetCamActive(cam, false)
 		StopCamPointing(cam)
-		RenderScriptCams(0,0,0,0,0,0)
+		RenderScriptCams(0, 0, 0, 0, 0, 0)
 		SetFocusEntity(PlayerPedId())
 	elseif statusSent == 1 then
-		SetCamCoord(cam,vector3(402.6,-997.2,-98.3))
-		SetCamRot(cam,f(0),f(0),f(358),15)
-		SetCamActive(cam,true)
-		RenderScriptCams(true,true,20000000000000000000000000,0,0,0)
+		SetCamCoord(cam, vector3(402.6, -997.2, -98.3))
+		SetCamRot(cam, f(0), f(0), f(358), 15)
+		SetCamActive(cam, true)
+		RenderScriptCams(true, true, 20000000000000000000000000, 0, 0, 0)
 	end
 end
 
 RegisterNetEvent('ToogleBackCharacter')
-AddEventHandler('ToogleBackCharacter',function()
+AddEventHandler('ToogleBackCharacter', function()
 	doStatus = 2
 end)
 
-AddEventHandler("character-creator:characterCreate",function()
+AddEventHandler("character-creator:characterCreate", function()
 	doStatus = 1
-	SetTimeout(1000,function()
+	SetTimeout(1000, function()
 		TriggerCreateCharacter()
 	end)
 end)
 
-AddEventHandler("character-creator:normalSpawn",function(firstspawn)
+AddEventHandler("character-creator:normalSpawn", function(firstspawn)
 	if firstspawn then
 		TriggerCamController(-1)
 		EndFade()
@@ -143,10 +143,10 @@ function TriggerCreateCharacter()
 	TaskUpdateFaceOptions()
 	TaskUpdateHeadOptions()
 	SetEntityCoordsNoOffset(PlayerPedId(), config.creatorCoord[1], config.creatorCoord[2], config.creatorCoord[3], true, true, true) 
-	SetEntityHeading(PlayerPedId(),f(180))
+	SetEntityHeading(PlayerPedId(), f(180))
 	TriggerCamController(doStatus)
 	Citizen.Wait(1000)
-	SetNuiFocus(isInCharacterMode,isInCharacterMode)
+	SetNuiFocus(isInCharacterMode, isInCharacterMode)
 	SendNUIMessage({ CharacterMode = isInCharacterMode, CharacterMode2 = not isInCharacterMode, CharacterMode3 = not isInCharacterMode })
 	EndFade()
 end
@@ -155,33 +155,33 @@ function refreshDefaultCharacter()
 	SetPedDefaultComponentVariation(PlayerPedId())
 	ClearAllPedProps(PlayerPedId())
 	if GetEntityModel(PlayerPedId()) == GetHashKey("mp_m_freemode_01") then
-		SetPedComponentVariation(PlayerPedId(),1,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),5,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),7,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),3,15,0,2)
-		SetPedComponentVariation(PlayerPedId(),4,61,0,2)
-		SetPedComponentVariation(PlayerPedId(),8,15,0,2)
-		SetPedComponentVariation(PlayerPedId(),6,16,0,2)
-		SetPedComponentVariation(PlayerPedId(),11,104,0,2)
-		SetPedComponentVariation(PlayerPedId(),9,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),10,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),2,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),6,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),7,-1,0,2)
+		SetPedComponentVariation(PlayerPedId(), 1, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 5, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 7, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 3, 15, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 4, 61, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 8, 15, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 6, 16, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 11, 104, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 9, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 10, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 2, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 6, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 7, -1, 0, 2)
 	else
-		SetPedComponentVariation(PlayerPedId(),1,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),5,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),7,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),3,15,0,2)
-		SetPedComponentVariation(PlayerPedId(),4,15,0,2)
-		SetPedComponentVariation(PlayerPedId(),8,7,0,2)
-		SetPedComponentVariation(PlayerPedId(),6,5,0,2)
-		SetPedComponentVariation(PlayerPedId(),11,5,0,2)
-		SetPedComponentVariation(PlayerPedId(),9,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),10,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),2,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),6,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),7,-1,0,2)
+		SetPedComponentVariation(PlayerPedId(), 1, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 5, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 7, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 3, 15, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 4, 15, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 8, 7, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 6, 5, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 11, 5, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 9, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 10, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 2, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 6, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 7, -1, 0, 2)
 	end
 end
 
@@ -193,9 +193,9 @@ function changeGender(model)
 	end
 
 	if HasModelLoaded(mhash) then
-		SetPlayerModel(PlayerId(),mhash)
-		SetPedMaxHealth(PlayerPedId(),400)
-		SetEntityHealth(PlayerPedId(),400)
+		SetPlayerModel(PlayerId(), mhash)
+		SetPedMaxHealth(PlayerPedId(), 400)
+		SetEntityHealth(PlayerPedId(), 400)
 		SetModelAsNoLongerNeeded(mhash)
 	end
 end
@@ -204,9 +204,9 @@ Citizen.CreateThread(function()
 	while true do 
 		Citizen.Wait(1)
 		if continuousFadeOutNetwork then 
-			for id = 0,256 do
+			for id = 0, 256 do
 				if id ~= PlayerId() and NetworkIsPlayerActive(id) then
-					NetworkFadeOutEntity(GetPlayerPed(id),false)
+					NetworkFadeOutEntity(GetPlayerPed(id), false)
 				end
 			end
 		else
@@ -215,68 +215,68 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNUICallback('cDoneSave',function(data,cb)
+RegisterNUICallback('cDoneSave', function(data, cb)
 	StartFade()
 	isInCharacterMode = false
-	SetNuiFocus(isInCharacterMode,isInCharacterMode)
+	SetNuiFocus(isInCharacterMode, isInCharacterMode)
 	SendNUIMessage({ CharacterMode = isInCharacterMode, CharacterMode2 = isInCharacterMode, CharacterMode3 = isInCharacterMode })
 	if GetEntityModel(PlayerPedId()) == GetHashKey("mp_m_freemode_01") then
-		SetPedComponentVariation(PlayerPedId(),1,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),5,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),7,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),3,0,0,1)
-		SetPedComponentVariation(PlayerPedId(),4,4,0,1)
-		SetPedComponentVariation(PlayerPedId(),8,15,0,2)
-		SetPedComponentVariation(PlayerPedId(),6,1,0,1)
-		SetPedComponentVariation(PlayerPedId(),11,16,2,1)
-		SetPedComponentVariation(PlayerPedId(),9,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),10,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),0,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),1,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),2,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),6,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),7,-1,0,2)
+		SetPedComponentVariation(PlayerPedId(), 1, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 5, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 7, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 3, 0, 0, 1)
+		SetPedComponentVariation(PlayerPedId(), 4, 4, 0, 1)
+		SetPedComponentVariation(PlayerPedId(), 8, 15, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 6, 1, 0, 1)
+		SetPedComponentVariation(PlayerPedId(), 11, 16, 2, 1)
+		SetPedComponentVariation(PlayerPedId(), 9, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 10, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 0, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 1, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 2, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 6, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 7, -1, 0, 2)
 	else
-		SetPedComponentVariation(PlayerPedId(),1,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),5,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),7,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),3,5,0,2)
-		SetPedComponentVariation(PlayerPedId(),4,43,0,1)
-		SetPedComponentVariation(PlayerPedId(),8,30,3,1)
-		SetPedComponentVariation(PlayerPedId(),6,4,0,1)
-		SetPedComponentVariation(PlayerPedId(),11,31,0,1)
-		SetPedComponentVariation(PlayerPedId(),9,-1,0,2)
-		SetPedComponentVariation(PlayerPedId(),10,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),0,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),1,5,0,2)
-		SetPedPropIndex(PlayerPedId(),2,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),6,-1,0,2)
-		SetPedPropIndex(PlayerPedId(),7,-1,0,2)
+		SetPedComponentVariation(PlayerPedId(), 1, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 5, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 7, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 3, 5, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 4, 43, 0, 1)
+		SetPedComponentVariation(PlayerPedId(), 8, 30, 3, 1)
+		SetPedComponentVariation(PlayerPedId(), 6, 4, 0, 1)
+		SetPedComponentVariation(PlayerPedId(), 11, 31, 0, 1)
+		SetPedComponentVariation(PlayerPedId(), 9, -1, 0, 2)
+		SetPedComponentVariation(PlayerPedId(), 10, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 0, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 1, 5, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 2, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 6, -1, 0, 2)
+		SetPedPropIndex(PlayerPedId(), 7, -1, 0, 2)
 	end
 	
 	SetEntityCoordsNoOffset(PlayerPedId(), config.spawnCoord[1], config.spawnCoord[2], config.spawnCoord[3], true, true, true)
-	SetEntityHeading(PlayerPedId(),f(158.62))
+	SetEntityHeading(PlayerPedId(), f(158.62))
 	continuousFadeOutNetwork = false
 
-	for id = 0,256 do
+	for id = 0, 256 do
 		if id ~= PlayerId() and NetworkIsPlayerActive(id) then
-			NetworkFadeInEntity(GetPlayerPed(id),true)
+			NetworkFadeInEntity(GetPlayerPed(id), true)
 		end
 	end
 
-	TriggerServerEvent("character-creator:finishedCharacter", characterNome,characterSobrenome,characterIdade,currentCharacterMode)
+	TriggerServerEvent("character-creator:finishedCharacter", characterNome, characterSobrenome, characterIdade, currentCharacterMode)
 
 	TriggerCamController(-1)
 	EndFade()
 	doStatus = 2
 end)
 
-RegisterNUICallback('cChangeHeading',function(data,cb)
-	SetEntityHeading(PlayerPedId(),f(data.camRotation))
+RegisterNUICallback('cChangeHeading', function(data, cb)
+	SetEntityHeading(PlayerPedId(), f(data.camRotation))
 	cb('ok')
 end)
 
-RegisterNUICallback('ChangeGender',function(data,cb)
+RegisterNUICallback('ChangeGender', function(data, cb)
 	currentCharacterMode.gender = tonumber(data.gender)
 	if tonumber(data.gender) == 1 then
 		changeGender("mp_f_freemode_01")
@@ -290,7 +290,7 @@ RegisterNUICallback('ChangeGender',function(data,cb)
 	cb('ok')
 end)
 
-RegisterNUICallback('UpdateSkinOptions',function(data,cb)
+RegisterNUICallback('UpdateSkinOptions', function(data, cb)
 	currentCharacterMode.fathersID = data.fathersID
 	currentCharacterMode.mothersID = data.mothersID
 	currentCharacterMode.skinColor = data.skinColor
@@ -304,10 +304,10 @@ end)
 
 function TaskUpdateSkinOptions()
 	local data = currentCharacterMode
-	SetPedHeadBlendData(PlayerPedId(),data.fathersID,data.mothersID,0,data.skinColor,0,0,f(data.shapeMix),0,0,false)
+	SetPedHeadBlendData(PlayerPedId(), data.fathersID, data.mothersID, 0, data.skinColor, 0, 0, f(data.shapeMix), 0, 0, false)
 end
 
-RegisterNUICallback('UpdateFaceOptions',function(data,cb)
+RegisterNUICallback('UpdateFaceOptions', function(data, cb)
 	currentCharacterMode.eyesColor = data.eyesColor
 	currentCharacterMode.eyebrowsHeight = data.eyebrowsHeight
 	currentCharacterMode.eyebrowsWidth = data.eyebrowsWidth
@@ -336,35 +336,35 @@ function TaskUpdateFaceOptions()
 	local ped = PlayerPedId()
 	local data = currentCharacterMode
 
-	SetPedEyeColor(ped,data.eyesColor)
+	SetPedEyeColor(ped, data.eyesColor)
 
-	SetPedFaceFeature(ped,6,data.eyebrowsHeight)
-	SetPedFaceFeature(ped,7,data.eyebrowsWidth)
+	SetPedFaceFeature(ped, 6, data.eyebrowsHeight)
+	SetPedFaceFeature(ped, 7, data.eyebrowsWidth)
 
-	SetPedFaceFeature(ped,0,data.noseWidth)
-	SetPedFaceFeature(ped,1,data.noseHeight)
-	SetPedFaceFeature(ped,2,data.noseLength)
-	SetPedFaceFeature(ped,3,data.noseBridge)
-	SetPedFaceFeature(ped,4,data.noseTip)
-	SetPedFaceFeature(ped,5,data.noseShift)
+	SetPedFaceFeature(ped, 0, data.noseWidth)
+	SetPedFaceFeature(ped, 1, data.noseHeight)
+	SetPedFaceFeature(ped, 2, data.noseLength)
+	SetPedFaceFeature(ped, 3, data.noseBridge)
+	SetPedFaceFeature(ped, 4, data.noseTip)
+	SetPedFaceFeature(ped, 5, data.noseShift)
 
-	SetPedFaceFeature(ped,8,data.cheekboneHeight)
-	SetPedFaceFeature(ped,9,data.cheekboneWidth)
-	SetPedFaceFeature(ped,10,data.cheeksWidth)
+	SetPedFaceFeature(ped, 8, data.cheekboneHeight)
+	SetPedFaceFeature(ped, 9, data.cheekboneWidth)
+	SetPedFaceFeature(ped, 10, data.cheeksWidth)
 
-	SetPedFaceFeature(ped,12,data.lips)
-	SetPedFaceFeature(ped,13,data.jawWidth)
-	SetPedFaceFeature(ped,14,data.jawHeight)
+	SetPedFaceFeature(ped, 12, data.lips)
+	SetPedFaceFeature(ped, 13, data.jawWidth)
+	SetPedFaceFeature(ped, 14, data.jawHeight)
 
-	SetPedFaceFeature(ped,15,data.chinLength)
-	SetPedFaceFeature(ped,16,data.chinPosition)
-	SetPedFaceFeature(ped,17,data.chinWidth)
-	SetPedFaceFeature(ped,18,data.chinShape)
+	SetPedFaceFeature(ped, 15, data.chinLength)
+	SetPedFaceFeature(ped, 16, data.chinPosition)
+	SetPedFaceFeature(ped, 17, data.chinWidth)
+	SetPedFaceFeature(ped, 18, data.chinShape)
 
-	SetPedFaceFeature(ped,19,data.neckWidth)
+	SetPedFaceFeature(ped, 19, data.neckWidth)
 end
 
-RegisterNUICallback('UpdateHeadOptions',function(data,cb)
+RegisterNUICallback('UpdateHeadOptions', function(data, cb)
 	currentCharacterMode.hairModel = data.hairModel
 	currentCharacterMode.firstHairColor = data.firstHairColor
 	currentCharacterMode.secondHairColor = data.secondHairColor
@@ -392,39 +392,39 @@ function TaskUpdateHeadOptions()
 	local ped = PlayerPedId()
 	local data = currentCharacterMode
 
-	SetPedComponentVariation(ped,2,data.hairModel,0,0)
-	SetPedHairColor(ped,data.firstHairColor,data.secondHairColor)
+	SetPedComponentVariation(ped, 2, data.hairModel, 0, 0)
+	SetPedHairColor(ped, data.firstHairColor, data.secondHairColor)
 
-	SetPedHeadOverlay(ped,2,data.eyebrowsModel,0.99)
-	SetPedHeadOverlayColor(ped,2,1,data.eyebrowsColor,data.eyebrowsColor)
+	SetPedHeadOverlay(ped, 2, data.eyebrowsModel, 0.99)
+	SetPedHeadOverlayColor(ped, 2, 1, data.eyebrowsColor, data.eyebrowsColor)
 
-	SetPedHeadOverlay(ped,1,data.beardModel,0.99)
-	SetPedHeadOverlayColor(ped,1,1,data.beardColor,data.beardColor)
+	SetPedHeadOverlay(ped, 1, data.beardModel, 0.99)
+	SetPedHeadOverlayColor(ped, 1, 1, data.beardColor, data.beardColor)
 
-	SetPedHeadOverlay(ped,10,data.chestModel,0.99)
-	SetPedHeadOverlayColor(ped,10,1,data.chestColor,data.chestColor)
+	SetPedHeadOverlay(ped, 10, data.chestModel, 0.99)
+	SetPedHeadOverlayColor(ped, 10, 1, data.chestColor, data.chestColor)
 
-	SetPedHeadOverlay(ped,5,data.blushModel,0.99)
-	SetPedHeadOverlayColor(ped,5,2,data.blushColor,data.blushColor)
+	SetPedHeadOverlay(ped, 5, data.blushModel, 0.99)
+	SetPedHeadOverlayColor(ped, 5, 2, data.blushColor, data.blushColor)
 
-	SetPedHeadOverlay(ped,8,data.lipstickModel,0.99)
-	SetPedHeadOverlayColor(ped,8,2,data.lipstickColor,data.lipstickColor)
+	SetPedHeadOverlay(ped, 8, data.lipstickModel, 0.99)
+	SetPedHeadOverlayColor(ped, 8, 2, data.lipstickColor, data.lipstickColor)
 
-	SetPedHeadOverlay(ped,0,data.blemishesModel,0.99)
-	SetPedHeadOverlayColor(ped,0,0,0,0)
+	SetPedHeadOverlay(ped, 0, data.blemishesModel, 0.99)
+	SetPedHeadOverlayColor(ped, 0, 0, 0, 0)
 
-	SetPedHeadOverlay(ped,3,data.ageingModel,0.99)
-	SetPedHeadOverlayColor(ped,3,0,0,0)
+	SetPedHeadOverlay(ped, 3, data.ageingModel, 0.99)
+	SetPedHeadOverlayColor(ped, 3, 0, 0, 0)
 
-	SetPedHeadOverlay(ped,6,data.complexionModel,0.99)
-	SetPedHeadOverlayColor(ped,6,0,0,0)
+	SetPedHeadOverlay(ped, 6, data.complexionModel, 0.99)
+	SetPedHeadOverlayColor(ped, 6, 0, 0, 0)
 
-	SetPedHeadOverlay(ped,7,data.sundamageModel,0.99)
-	SetPedHeadOverlayColor(ped,7,0,0,0)
+	SetPedHeadOverlay(ped, 7, data.sundamageModel, 0.99)
+	SetPedHeadOverlayColor(ped, 7, 0, 0, 0)
 
-	SetPedHeadOverlay(ped,9,data.frecklesModel,0.99)
-	SetPedHeadOverlayColor(ped,9,0,0,0)
+	SetPedHeadOverlay(ped, 9, data.frecklesModel, 0.99)
+	SetPedHeadOverlayColor(ped, 9, 0, 0, 0)
 
-	SetPedHeadOverlay(ped,4,data.makeupModel,0.99)
-	SetPedHeadOverlayColor(ped,4,0,0,0)
+	SetPedHeadOverlay(ped, 4, data.makeupModel, 0.99)
+	SetPedHeadOverlayColor(ped, 4, 0, 0, 0)
 end

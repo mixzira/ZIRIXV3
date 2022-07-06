@@ -66,21 +66,6 @@ function vRP.checkCrimeRecord(user_id)
     return identity.crimerecord
 end
 
-AddEventHandler("vRP:playerJoin",function(user_id,source,name)
-	if not vRP.getUserIdentity(user_id) then
-		local registration = vRP.generateRegistrationNumber()
-		local phone = vRP.generatePhoneNumber()
-		vRP.execute("vRP/init_user_identity",{
-			user_id = user_id,
-			registration = registration,
-			phone = phone,
-			firstname = "Indigente",
-			name = "Individuo",
-			age = 21
-		})
-	end
-end)
-
 AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
 	local identity = vRP.getUserIdentity(user_id)
 	if identity then
