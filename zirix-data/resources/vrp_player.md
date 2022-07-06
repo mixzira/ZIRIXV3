@@ -1,1 +1,0 @@
-<h1 align='center'><a href='https://github.com/ZIRAFLIX/ZIRIXV3/'>Player</a></h2>
