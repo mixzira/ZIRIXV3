@@ -1,4 +1,4 @@
-<h1 align='center'><a href='https://overextended.github.io/docs/oxmysql/'>OxMySQL</a></h2>
+# OxMySQL
 
 ### Introduction
 
@@ -10,13 +10,13 @@ Refer to [issue #77](https://github.com/overextended/oxmysql/issues/77) for info
 
 ### Features
 
-- Support for URI connection strings and semicolon separated values
-- Asynchronous queries utilising mysql2/promises connection pool
-- Javascript async_retval exports supports promises across resources and runtimes
-- Support for placeholder values (named and unnamed) to improve query speed and increase security against SQL injection
-- Improved error checking when placeholders and parameters do not match
-- Lua promises in `lib/MySQL.lua` files for improved performance when awaiting a response
-- Support mysql-async syntax while providing newer (more accurate) names
+* Support for URI connection strings and semicolon separated values
+* Asynchronous queries utilising mysql2/promises connection pool
+* Javascript async\_retval exports supports promises across resources and runtimes
+* Support for placeholder values (named and unnamed) to improve query speed and increase security against SQL injection
+* Improved error checking when placeholders and parameters do not match
+* Lua promises in `lib/MySQL.lua` files for improved performance when awaiting a response
+* Support mysql-async syntax while providing newer (more accurate) names
 
 ### Usage
 
@@ -60,8 +60,15 @@ This allows queries to be properly prepared and escaped; the following lines are
 
 Named placeholders are deprecated and should be avoided as much as possible.
 
-<br><br><br><br><br>
+\
+\
+\
+\
+\
 
-<hr>
-<p align='center'><a href='https://discord.gg/overextended'>Discord</a></p>
-<hr>
+
+***
+
+[Discord](https://discord.gg/overextended)
+
+***
