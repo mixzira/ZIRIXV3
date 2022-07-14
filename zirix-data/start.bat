@@ -8,5 +8,5 @@ echo     Contact: contato@ziraflix.com
 echo ===-------------------------------===
 
 pause
-start ..\artifacts\FXServer.exe +exec config/config.cfg +set onesync on +set onesync_population false +set sv_enforceGameBuild security
+start ..\artifacts\FXServer.exe +exec config/config.cfg +set onesync on +set onesync_population false
 exit
