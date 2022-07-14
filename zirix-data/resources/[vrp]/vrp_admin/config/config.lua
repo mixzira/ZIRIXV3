@@ -1,4 +1,4 @@
-config = { }
+config = {}
 
 config.Stock = ""  -- Webhook: Log Estoque de carros.
 config.Whitelist = "" -- Webhook: Log Adição Whitelist.

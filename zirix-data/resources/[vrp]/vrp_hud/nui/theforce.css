@@ -25,6 +25,10 @@ body{
     transform: translate(-50%);
 }
 
+.logo img {
+    width: 120px;
+}
+
 .status {
     position: absolute;
     width: 284px;
