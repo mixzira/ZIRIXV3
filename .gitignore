@@ -12,3 +12,6 @@ zirix-data/resources/[system]/screenshot-basic/*
 zirix-data/resources/[naoenviar]/*
 zirix-data/resources/[naoenviar]/**/*
 zirix-data/resources/[naoenviar]/**
+zirix-data/config/config.cfg
+zirix-data/config/keys.cfg
+zirix-data/config/keys.cfg
