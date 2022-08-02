@@ -349,6 +349,7 @@ img {
     top: 11px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
 }
 
 .chest-amount-bar span {

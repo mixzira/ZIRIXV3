@@ -168,7 +168,7 @@ vehs.vehglobal = {
 	["vamos"] = { ['name'] = "Vamos", ['price'] = 320000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -49115651, ['banned'] = false },
 	["vigero"] = { ['name'] = "Vigero", ['price'] = 170000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -825837129, ['banned'] = false },
 	["virgo"] = { ['name'] = "Virgo", ['price'] = 150000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -498054846, ['banned'] = false },
-	["virgo2"] = { ['name'] = "Virgo2", ['price'] = 250000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -899509638, ['banned'] = fals },
+	["virgo2"] = { ['name'] = "Virgo2", ['price'] = 250000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = -899509638, ['banned'] = false },
 	["virgo3"] = { ['name'] = "Virgo3", ['price'] = 180000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = 16646064, ['banned'] = false },
 	["voodoo"] = { ['name'] = "Voodoo", ['price'] = 220000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = 2006667053, ['banned'] = false },
 	["voodoo2"] = { ['name'] = "Voodoo2", ['price'] = 220000, ['tipo'] = "carros", ['mala'] = 50, ['slots'] = 10, ['hash'] = 523724515, ['banned'] = false },
