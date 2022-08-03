@@ -1,6 +1,7 @@
 config = {}
 
-config.permissions = 'off-manager'
+config.permissions = 'off-manager' -- If option below is false, define permission here.
+config.MultiCharForUsers = true -- "true":Any users create multiple characters, "false":Only users with permission  create multiple characters
 
 config.hairfades = {
     [1] = { label = 'Degradê 01', dlc = 'mphipster_overlays', texture = 'FM_Hip_F_Hair_000_a' },

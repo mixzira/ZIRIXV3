@@ -77,7 +77,9 @@ end
 
 vRP.prepare("vRP/create_user", "INSERT INTO vrp_users(whitelisted, banned) VALUES(false, false); SELECT LAST_INSERT_ID() AS id")
 vRP.prepare("vRP/add_identifier", "INSERT INTO vrp_user_ids(identifier, user_id) VALUES(@identifier, @user_id)")
+vRP.prepare("vRP/add_benefitsChars", "INSERT INTO vrp_benefits(steam) VALUES(@identifier)")
 vRP.prepare("vRP/userid_byidentifier", "SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier")
+vRP.prepare("vRP/get_usersBenefits","SELECT * FROM vrp_benefits WHERE steam = @steam")
 vRP.prepare("vRP/identifier_byuserid", "SELECT * FROM vrp_user_ids WHERE user_id = @user_id")
 vRP.prepare("vRP/set_userdata", "REPLACE INTO vrp_user_data(user_id, dkey, dvalue) VALUES(@user_id, @key, @value)")
 vRP.prepare("vRP/get_userdata", "SELECT dvalue FROM vrp_user_data WHERE user_id = @user_id AND dkey = @key")
@@ -369,6 +371,7 @@ AddEventHandler("baseModule:idLoaded", function(source, user_id)
 	if user_id then
 		local steam = vRP.getSteam(source)
 		local sdata = vRP.getUData(user_id, "vRP:datatable")
+		local consultChars = vRP.query('vRP/get_usersBenefits', { steam = steam })
 
 		vRP.users[steam] = user_id
 		vRP.rusers[user_id] = steam
@@ -388,11 +391,18 @@ AddEventHandler("baseModule:idLoaded", function(source, user_id)
 		TriggerEvent("vRP:playerJoin", user_id, source, steam)
 
 		if first_spawn then
+		
 			for k, v in pairs(vRP.user_sources) do
 				vRPclient._addPlayer(source, v)
 			end
 			vRPclient._addPlayer(-1, source)
 			Tunnel.setDestDelay(source, 0)
+			if #consultChars == 0 then
+
+				vRP.execute('vRP/add_benefitsChars', { identifier = steam})
+				
+			end
+			
 		end
 		TriggerEvent("vRP:playerSpawn", user_id, source, first_spawn)
 		TriggerEvent('character-creator:spawn', user_id, source, first_spawn)
