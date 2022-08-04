@@ -324,12 +324,10 @@ end)
 ExecuteCourotineBan = function (user_id,source)
 	local src = source
 	local steam = vRP.getSteam(src)	
-	print(source,user_id,src, steam)
 	local consultIds = vRP.query("vRP/userid_byidentifier", { identifier = steam })
 	for k,v in pairs(consultIds) do	
 		local consultBan = vRP.query("vRP/get_banned", { user_id = v.user_id })
 		if consultBan[1].banned then
-			print(k,v.user_id, consultBan[1].banned)
 			if os.time() > consultBan[1].expire_banned then
 				vRP.execute("vRP/set_banned", { user_id = k, banned = false })
 			end
