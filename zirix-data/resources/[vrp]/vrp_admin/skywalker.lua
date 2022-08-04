@@ -641,6 +641,90 @@ RegisterCommand('ban', function(source, args, rawCommand)
 	end
 end)
 
+RegisterCommand('banchar', function(source, args, rawCommand)
+	local user_id = vRP.getUserId(source)
+	local identity = vRP.getUserIdentity(user_id)
+
+	if vRP.hasPermission(user_id, 'administrador.permissao') or vRP.hasPermission(user_id, 'manager.permissao') then
+		if args[1] then
+			local nuser_id = vRP.getUserSource(parseInt(args[1]))
+			 local daysBanned = vRP.prompt(source, 'Digite quantos dias de banimento para esse personagem.', '')
+
+			PerformHttpRequest(config.BanChar, function(err, text, headers) end, 'POST', json.encode({
+				embeds = {
+					{ 
+						title = 'REGISTRO DE BANIMENTO:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀',
+						thumbnail = {
+							url = config.webhookIcon
+						}, 
+						fields = {
+							{ 
+								name = '**COLABORADOR DA EQUIPE:**',
+								value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]\n⠀'
+							},
+							{
+								name = '**ID DO PERSONAGEM BANIDO: **'..vRP.format(parseInt(args[1])),
+								value = '⠀'
+							},
+							{
+								name = '**DIAS: **'..vRP.format(parseInt(daysBanned)),
+								value = '⠀'
+							}
+						}, 
+						footer = { 
+							text = config.webhookBottomText..os.date('%d/%m/%Y | %H:%M:%S'),
+							icon_url = config.webhookIcon
+						},
+						color = config.webhookColor 
+					}
+				}
+			}), { ['Content-Type'] = 'application/json' })
+
+			vRP.setBannedChar(nuser_id, true, daysBanned)
+
+			TriggerClientEvent('Notify', source, 'sucesso', 'Voce baniu o passaporte <b>'..args[1]..'</b> da cidade.')
+		end
+	end
+end)
+
+RegisterCommand('unbanchar', function(source, args, rawCommand)
+	local user_id = vRP.getUserId(source)
+	local identity = vRP.getUserIdentity(user_id)
+	if vRP.hasPermission(user_id, 'administrador.permissao') or vRP.hasPermission(user_id, 'manager.permissao') then
+		if args[1] then
+
+			PerformHttpRequest(config.UnBanChar, function(err, text, headers) end, 'POST', json.encode({
+				embeds = {
+					{ 
+						title = 'REGISTRO DE DESBANIMENTO DO PERSONAGEM:⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀',
+						thumbnail = {
+							url = config.webhookIcon
+						}, 
+						fields = {
+							{ 
+								name = '**COLABORADOR DA EQUIPE:**',
+								value = '**'..identity.name..' '..identity.firstname..'** [**'..user_id..'**]\n⠀'
+							},
+							{
+								name = '**ID DO PERSONAGEM DESBANIDO: **'..vRP.format(parseInt(args[1])),
+								value = '⠀'
+							}
+						}, 
+						footer = { 
+							text = config.webhookBottomText..os.date('%d/%m/%Y | %H:%M:%S'),
+							icon_url = config.webhookIcon
+						},
+						color = config.webhookColor 
+					}
+				}
+			}), { ['Content-Type'] = 'application/json' })
+
+			vRP.setBannedChar(parseInt(args[1]), false, 0)
+			TriggerClientEvent('Notify', source, 'sucesso', 'Voce desbaniu o passaporte <b>'..args[1]..'</b> da cidade.')
+		end
+	end
+end)
+
 RegisterCommand('unban', function(source, args, rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)

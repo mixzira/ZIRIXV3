@@ -4,7 +4,9 @@ config.Stock = ""  -- Webhook: Log Estoque de carros.
 config.Whitelist = "" -- Webhook: Log Adição Whitelist.
 config.UnWhitelist = "" -- Webhook: Log Remoção Whitelist.
 config.Ban = "" -- Webhook: Log Adição Ban.
+config.BanChar = "" -- Webhook: Log Adição Ban personagem.
 config.UnBan = "" -- Webhook: Log Remoção Ban.
+config.UnBanChar = "" -- Webhook: Log Remoção Ban de personagem.
 config.Rename = "" -- Webhook: Log Renomear Jogador.
 config.Addcar = "" -- Webhook: Log Adição Veiculo.
 config.Remcar = "" -- Webhook: Log Remoção Veiculo.
@@ -47,6 +49,8 @@ COMANDOS:
 /unwl - Remove whitelist
 /kick - Kika um player
 /kickall - Kika todos players
+/banchar - Bane o personagem de player
+/unbanchar - Desbane o personagem de um player
 /ban - Bane um player
 /unban - Desbane um player
 /nc - Ativa no-clip

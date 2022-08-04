@@ -13,6 +13,7 @@ local spawnLogin = {}
 local creating = false
 
 vRP.prepare('vRP/get_users', 'SELECT * FROM vrp_user_ids WHERE identifier = @identifier')
+vRP.prepare('vRP/get_chars', 'SELECT * FROM vrp_users WHERE id = @user_id')
 vRP.prepare("vRP/get_usersBenefits","SELECT * FROM vrp_benefits WHERE steam = @steam")
 
 function getPlayerCharacters(identifier)
@@ -39,6 +40,7 @@ function src.getChars()
     local steam = vRP.getSteam(source)
     local chars = getPlayerCharacters(steam)
     local consultChars = vRP.query('vRP/get_usersBenefits', { steam = steam })
+    local consultUser = vRP.query('vRP/get_chars', { user_id = consultChars[1].user_id })
     local charSlot = parseInt(consultChars[1].chars)
     local characters = {}
 
@@ -56,9 +58,7 @@ function src.getChars()
                     end
                 end
                 charSlot = charSlot - 1
-                table.insert(characters,
-                    { id = b.user_id, name = identity.name, firstname = identity.firstname,
-                        registration = identity.registration, phone = identity.phone, genderIcon = genderIcon })
+                table.insert(characters,{ id = b.user_id, name = identity.name, firstname = identity.firstname, registration = identity.registration, phone = identity.phone, genderIcon = genderIcon, banned = consultUser[1].banned, expire = consultUser[1].expire_banned })
             end
         end
         return characters, charSlot
@@ -77,6 +77,15 @@ function src.setupCharacteristics(user_id)
         return clothingsResult.customization, currentCharacterModeResult
     end
 
+end
+
+function src.GetId(user_id)
+    local consultUser = vRP.query('vRP/get_chars', { user_id = user_id })
+    local banned = consultUser[1].banned
+    local expire_banned = os.date('%d/%m/%Y - %H:%M:%S', consultUser[1].expire_banned)
+ 
+         return banned, expire_banned
+   
 end
 
 function src.deleteChar(id)

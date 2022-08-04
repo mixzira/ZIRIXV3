@@ -1,3 +1,5 @@
+var infotab;
+
 $(document).ready(function(){
     let charAction = $("#content");
     window.addEventListener("message",function(event){
@@ -28,10 +30,12 @@ $(document).ready(function(){
 
 			case "hideSpawnButton":
 				$("#spawn-buttom").css('display', 'none');
+				$("#spawn-buttomBanned").css('display', 'none');
 			break;
 
 			case "showSpawnButton":
 				$("#spawn-buttom").fadeIn(1000);
+				$("#spawn-buttomBanned").fadeIn(1000);
 			break;
         };
     });
@@ -81,10 +85,32 @@ $(document).on('click','.char',function(){
     if($em) {
         $.post('https://vrp_multi_chars/spawnChar',JSON.stringify({
 			id: $el.attr('data-char-id')
-		}));
-		setTimeout(function(){
-			$("#spawnar").fadeIn(1000);
-		}, 500);
+		}),(data) => {
+
+ 					if (data.banned) 
+ 						{
+ 							$("#spawnar").fadeOut(500)
+ 								setTimeout(function(){
+							$("#spawnarBanned").fadeIn(1000);
+						}, 500);
+ 							var concMsg =  '<h6>FIM DO BANIMENTO: '+ data.expire +'</h6>'
+							$('#spawn-buttomBanned').html(concMsg);					
+ 									}
+ 								else
+ 							{
+ 								var concMsg =  '<h6>FIM DO BANIMENTO: '+ data.expire +'</h6>'
+ 								$("#spawnarBanned").fadeOut(500)
+ 								$('#spawn-buttomBanned').html(concMsg);	
+ 							
+ 					setTimeout(function(){
+ 							
+							$("#spawnar").fadeIn(1000);
+						}, 500);
+ 					}
+
+
+		});
+
     }
 });
 
