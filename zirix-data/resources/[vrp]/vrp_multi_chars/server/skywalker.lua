@@ -13,9 +13,11 @@ local spawnLogin = {}
 local creating = false
 
 vRP.prepare('vRP/get_users', 'SELECT * FROM vrp_user_ids WHERE identifier = @identifier')
+vRP.prepare('vRP/get_chars', 'SELECT * FROM vrp_users WHERE id = @user_id')
+vRP.prepare("vRP/get_usersBenefits","SELECT * FROM vrp_benefits WHERE steam = @steam")
 
 function getPlayerCharacters(identifier)
-	return vRP.query('vRP/get_users', { identifier = identifier })
+    return vRP.query('vRP/get_users', { identifier = identifier })
 end
 
 function src.verifyChars()
@@ -37,7 +39,9 @@ function src.getChars()
     local source = source
     local steam = vRP.getSteam(source)
     local chars = getPlayerCharacters(steam)
-    local charSlot = 4
+    local consultChars = vRP.query('vRP/get_usersBenefits', { steam = steam })
+    local consultUser = vRP.query('vRP/get_chars', { user_id = consultChars[1].user_id })
+    local charSlot = parseInt(consultChars[1].chars)
     local characters = {}
 
     if chars then
@@ -50,24 +54,24 @@ function src.getChars()
                     if tonumber(currentCharacterModeResult.customization.modelhash) == 1885233650 then
                         genderIcon = 'assets/masculino.png'
                     else
-                        genderIcon = 'assets/feminino.png'  
+                        genderIcon = 'assets/feminino.png'
                     end
                 end
                 charSlot = charSlot - 1
-                table.insert(characters, { id = b.user_id, name = identity.name, firstname = identity.firstname, registration = identity.registration, phone = identity.phone, genderIcon = genderIcon })
+                table.insert(characters,{ id = b.user_id, name = identity.name, firstname = identity.firstname, registration = identity.registration, phone = identity.phone, genderIcon = genderIcon, banned = consultUser[1].banned, expire = consultUser[1].expire_banned })
             end
         end
-        return characters, charSlot        
+        return characters, charSlot
     end
     return nil
 end
 
 function src.setupCharacteristics(user_id)
     local clothingsConsult = vRP.getUData(parseInt(user_id), 'vRP:datatable')
-	local clothingsResult = json.decode(clothingsConsult)
-    
+    local clothingsResult = json.decode(clothingsConsult)
+
     local currentCharacterModeConsult = vRP.getUData(parseInt(user_id), 'currentCharacterMode')
-	local currentCharacterModeResult = json.decode(currentCharacterModeConsult)
+    local currentCharacterModeResult = json.decode(currentCharacterModeConsult)
 
     if clothingsResult and currentCharacterModeResult then
         return clothingsResult.customization, currentCharacterModeResult
@@ -75,12 +79,21 @@ function src.setupCharacteristics(user_id)
 
 end
 
+function src.GetId(user_id)
+    local consultUser = vRP.query('vRP/get_chars', { user_id = user_id })
+    local banned = consultUser[1].banned
+    local expire_banned = os.date('%d/%m/%Y - %H:%M:%S', consultUser[1].expire_banned)
+ 
+         return banned, expire_banned
+   
+end
+
 function src.deleteChar(id)
-	local source = source
-	local steam = vRP.getSteam(source)
-	vRP.execute('vRP/remove_user', { user_id = parseInt(id) })
-	Citizen.Wait(1000)
-	return getPlayerCharacters(steam)
+    local source = source
+    local steam = vRP.getSteam(source)
+    vRP.execute('vRP/remove_user', { user_id = parseInt(id) })
+    Citizen.Wait(1000)
+    return getPlayerCharacters(steam)
 end
 
 RegisterServerEvent('chars:teste')
@@ -91,12 +104,12 @@ end)
 
 RegisterServerEvent('chars:setup')
 AddEventHandler('chars:setup', function(source)
-	TriggerClientEvent('chars:setupChar', source)
+    TriggerClientEvent('chars:setupChar', source)
 end)
 
 RegisterServerEvent('chars:charChosen')
 AddEventHandler('chars:charChosen', function(id)
-	local source = source
+    local source = source
     TriggerEvent('baseModule:idLoaded', source, id, nil)
     --TriggerEvent('character-creator:spawn', source, id)
 end)
@@ -104,7 +117,7 @@ end)
 RegisterServerEvent('chars:createFirstChar')
 AddEventHandler('chars:createFirstChar', function()
     local source = source
-	local steam = vRP.getSteam(source)
+    local steam = vRP.getSteam(source)
     local rows = vRP.query('vRP/userid_byidentifier', { identifier = steam })
     local user_id = rows[1].user_id
 
@@ -113,8 +126,8 @@ AddEventHandler('chars:createFirstChar', function()
         local phone = vRP.generatePhoneNumber()
 
         TriggerClientEvent('Notify', source, 'importante', 'Aguarde, estamos iniciando o criador de personagem...', 5000)
-        
-        vRP.execute('vRP/init_user_identity',{
+
+        vRP.execute('vRP/init_user_identity', {
             user_id = user_id,
             registration = registration,
             phone = phone,
@@ -135,33 +148,38 @@ end)
 RegisterServerEvent('chars:createChar')
 AddEventHandler('chars:createChar', function()
     local source = source
-	local steam = vRP.getSteam(source)
+    local steam = vRP.getSteam(source)
     local persons = getPlayerCharacters(steam)
     local consult = vRP.query('vRP/userid_byidentifier', { identifier = steam })
+    local getQtyMaxUsers = vRP.query('vRP/get_usersBenefits', { steam = steam })
+    local getQtyUsers = vRP.query('vRP/get_users', { id = consult[1].user_id })
 
     if parseInt(#persons) >= 1 then
         local rows = vRP.query('vRP/get_userdata', { user_id = consult[1].user_id, key = 'vRP:datatable' })
-	    local array = json.decode(rows[1].dvalue)
-        for a, b in pairs(array.groups)  do
-            if a == config.permissions then
-                if not creating then
-                    local rows, affected = vRP.query('vRP/create_user', {})
+        local array = json.decode(rows[1].dvalue)
+        if config.MultiCharForUsers then
 
-                    TriggerClientEvent('Notify', source, 'importante', 'Aguarde, estamos iniciando o criador de personagem...', 5000)
-                    
+            if not creating then
+                local rows, affected = vRP.query('vRP/create_user', {})
+               
+
+                if #getQtyUsers <= getQtyMaxUsers[1].chars then
+
+                    TriggerClientEvent('Notify', source, 'importante','Aguarde, estamos iniciando o criador de personagem...', 5000)
+
                     if #rows then
                         local ids = GetPlayerIdentifiers(source)
                         local user_id = rows[1].id
                         for l, w in pairs(ids) do
-                            if (string.find(w,'ip:') == nil) then
-                                vRP.execute('vRP/add_identifier',{ user_id = user_id, identifier = w })
+                            if (string.find(w, 'ip:') == nil) then
+                                vRP.execute('vRP/add_identifier', { user_id = user_id, identifier = w })
                             end
                         end
-                        
+
                         local registration = vRP.generateRegistrationNumber()
                         local phone = vRP.generatePhoneNumber()
-                        
-                        vRP.execute('vRP/init_user_identity',{
+
+                        vRP.execute('vRP/init_user_identity', {
                             user_id = user_id,
                             registration = registration,
                             phone = phone,
@@ -179,8 +197,54 @@ AddEventHandler('chars:createChar', function()
                         return vRP.setWhitelisted(user_id, true)
                     end
                 end
+                return TriggerClientEvent('Notify', source, 'importante', 'Você atingiu o limite de personagens.', 5000)
             end
+
+        else
+            for a, b in pairs(array.groups) do
+                if a == config.permissions then
+                    if not creating then
+                        local rows, affected = vRP.query('vRP/create_user', {})
+
+                        if #getQtyUsers <= getQtyMaxUsers[1].chars then
+                            TriggerClientEvent('Notify', source, 'importante','Aguarde, estamos iniciando o criador de personagem...', 5000)
+
+                            if #rows then
+                                local ids = GetPlayerIdentifiers(source)
+                                local user_id = rows[1].id
+                                for l, w in pairs(ids) do
+                                    if (string.find(w, 'ip:') == nil) then
+                                        vRP.execute('vRP/add_identifier', { user_id = user_id, identifier = w })
+                                    end
+                                end
+
+                                local registration = vRP.generateRegistrationNumber()
+                                local phone = vRP.generatePhoneNumber()
+
+                                vRP.execute('vRP/init_user_identity', {
+                                    user_id = user_id,
+                                    registration = registration,
+                                    phone = phone,
+                                    firstname = 'Indigente',
+                                    name = 'Individuo',
+                                    age = 18
+                                })
+
+                                Citizen.Wait(1000)
+
+                                spawnLogin[parseInt(user_id)] = true
+                                TriggerEvent('baseModule:idLoaded', source, user_id)
+                                TriggerClientEvent('closeInterfaceCreateChar', source)
+                                TriggerEvent('character-creator:spawn', user_id, source, true)
+                                return vRP.setWhitelisted(user_id, true)
+                            end
+                        end
+                        return TriggerClientEvent('Notify', source, 'importante', 'Você atingiu o limite de personagens.', 5000)
+                    end
+                end
+            end
+          
         end
-        return TriggerClientEvent('Notify', source, 'importante', 'Você atingiu o limite de personagens.', 5000)
     end
+
 end)

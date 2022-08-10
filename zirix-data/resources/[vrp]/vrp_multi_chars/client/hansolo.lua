@@ -23,7 +23,11 @@ RegisterNUICallback('closeNui',function()
 end)
 
 RegisterNUICallback('spawnChar', function(data, cb)
+    local getBanned, expireBanned = zSERVER.GetId(data.id)
     TriggerServerEvent('chars:teste', data.id)
+    
+        cb({ banned = getBanned, expire = expireBanned})
+
 end)
 
 RegisterNUICallback('joinInTheCity', function(data, cb)
@@ -83,8 +87,10 @@ function blockControls()
 end
 
 function zCLIENT.spawnChar(user_id)
-    SendNUIMessage({ action = 'hideSpawnButton' })
+    local getBanned = zSERVER.GetId(user_id)
+    SendNUIMessage({ action = 'hideSpawnButton', info = getBanned })
     local clothingsChar, characteristics = zSERVER.setupCharacteristics(user_id)
+
     myCharacteristics.complexionModel = tonumber(characteristics.complexionModel)
     myCharacteristics.noseBridge = tonumber(characteristics.noseBridge)
     myCharacteristics.chinWidth = tonumber(characteristics.chinWidth)
@@ -177,7 +183,7 @@ function zCLIENT.spawnChar(user_id)
     continuousFadeOutNetwork = true
     spawned = true
 
-    SendNUIMessage({ action = 'showSpawnButton' })
+    SendNUIMessage({ action = 'showSpawnButton', info = getBanned })
 end
 
 function TaskUpdateSkinOptions(model)

@@ -16,6 +16,7 @@ vRP.user_tables = {}
 vRP.user_tmp_tables = {}
 vRP.user_sources = {}
 
+
 local db_drivers = {}
 local db_driver
 local cached_prepares = {}
@@ -77,14 +78,18 @@ end
 
 vRP.prepare("vRP/create_user", "INSERT INTO vrp_users(whitelisted, banned) VALUES(false, false); SELECT LAST_INSERT_ID() AS id")
 vRP.prepare("vRP/add_identifier", "INSERT INTO vrp_user_ids(identifier, user_id) VALUES(@identifier, @user_id)")
-vRP.prepare("vRP/userid_byidentifier", "SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier")
+vRP.prepare("vRP/add_benefitsChars", "INSERT INTO vrp_benefits(steam, user_id) VALUES(@identifier, @user_id)")
+vRP.prepare("vRP/userid_byidentifier", "SELECT user_id,identifier FROM vrp_user_ids WHERE identifier = @identifier")
+vRP.prepare("vRP/get_usersBenefits","SELECT * FROM vrp_benefits WHERE steam = @steam")
+vRP.prepare("vRP/get_usersBenefitsId","SELECT * FROM vrp_benefits WHERE user_id = @user_id")
 vRP.prepare("vRP/identifier_byuserid", "SELECT * FROM vrp_user_ids WHERE user_id = @user_id")
 vRP.prepare("vRP/set_userdata", "REPLACE INTO vrp_user_data(user_id, dkey, dvalue) VALUES(@user_id, @key, @value)")
 vRP.prepare("vRP/get_userdata", "SELECT dvalue FROM vrp_user_data WHERE user_id = @user_id AND dkey = @key")
 vRP.prepare("vRP/set_srvdata", "REPLACE INTO vrp_srv_data(dkey, dvalue) VALUES(@key, @value)")
 vRP.prepare("vRP/get_srvdata", "SELECT dvalue FROM vrp_srv_data WHERE dkey = @key")
-vRP.prepare("vRP/get_banned", "SELECT banned FROM vrp_users WHERE id = @user_id")
-vRP.prepare("vRP/set_banned", "UPDATE vrp_users SET banned = @banned WHERE id = @user_id")
+vRP.prepare("vRP/get_banned", "SELECT banned, expire_banned FROM vrp_users WHERE id = @user_id")
+vRP.prepare("vRP/set_banned", "UPDATE vrp_users SET banned = @banned, expire_banned = @time WHERE id = @user_id")
+vRP.prepare("vRP/set_bannedGlobal", "UPDATE vrp_benefits SET global_ban = @banned WHERE user_id = @user_id")
 vRP.prepare("vRP/get_whitelisted", "SELECT whitelisted FROM vrp_users WHERE id = @user_id")
 vRP.prepare("vRP/set_whitelisted", "UPDATE vrp_users SET whitelisted = @whitelisted WHERE id = @user_id")
 vRP.prepare("vRP/update_ip", "UPDATE vrp_users SET ip = @ip WHERE id = @uid")
@@ -138,6 +143,16 @@ function vRP.getPlayerEndpoint(player)
 end
 
 function vRP.isBanned(user_id, cbr)
+	local rows = vRP.query('vRP/get_usersBenefitsId', {  user_id = user_id  })
+	
+	if #rows > 0 then
+		return rows[1].global_ban
+	else
+		return false
+	end
+end
+
+function vRP.isBannedChar(user_id, cbr)
 	local rows = vRP.query("vRP/get_banned", { user_id = user_id })
 	if #rows > 0 then
 		return rows[1].banned
@@ -148,15 +163,33 @@ end
 
 function vRP.setBanned(source, banned)
 	local steam = vRP.getSteam(source)
-	local chars = vRP.query('vRP/get_users', { identifier = steam })
-	for k, v in pairs(chars) do
-		local nuser_id = vRP.getUserSource(parseInt(v.user_id))
-		vRP.execute("vRP/set_banned", { user_id = v.user_id, banned = banned })
+	local chars = vRP.query('vRP/get_usersBenefits', {  steam = steam  })
+		local nuser_id = source
+		vRP.execute("vRP/set_bannedGlobal", { user_id = chars[1].user_id, banned = banned })
 		if nuser_id then
-			DropPlayer(nuser_id, "Você foi banido! [ Mais informações em: discord.gg/diamondcity ]")
+			DropPlayer(nuser_id, "Sua conta foi banida! [ Mais informações em: discord.gg/diamondcity ]")
 		end
-	end
+	
 end
+function vRP.setBannedChar(source, banned, time)
+	local steam = vRP.getSteam(source)
+	local getId = vRP.query('vRP/get_usersBenefits', {  steam = steam  })
+	local nuser_id = source
+	local user_id = getId[1].user_id
+	local UTC = 0
+	local timeBan = os.time() + 60*60*24*tonumber(time) + 60*60*UTC
+			if time then
+					vRP.execute("vRP/set_banned", { user_id = user_id , banned = banned, time = timeBan })
+				else
+					vRP.execute("vRP/set_banned", { user_id = user_id , banned = banned, time = 0 })
+			end
+		if nuser_id then
+			local dateExpireBan = os.date('%d/%m/%Y - %H:%M:%S', timeBan)
+			DropPlayer(nuser_id, "Seu personagem foi banido e você poderá voltar com ele(a) em: "..dateExpireBan.." [ Mais informações em: discord.gg/diamondcity ]")
+		end
+	
+end
+
 
 function vRP.isWhitelisted(user_id, cbr)
 	local rows = vRP.query("vRP/get_whitelisted", { user_id = user_id })
@@ -288,24 +321,40 @@ async(function()
 	task_save_datatables()
 end)
 
+ExecuteCourotineBan = function (user_id,source)
+	local src = source
+	local steam = vRP.getSteam(src)	
+	local consultIds = vRP.query("vRP/userid_byidentifier", { identifier = steam })
+	for k,v in pairs(consultIds) do	
+		local consultBan = vRP.query("vRP/get_banned", { user_id = v.user_id })
+		if consultBan[1].banned then
+			if os.time() > consultBan[1].expire_banned then
+				vRP.execute("vRP/set_banned", { user_id = k, banned = false })
+			end
+		end		
+	end	
+end
+
 AddEventHandler("queue:playerConnecting", function(source, ids, name, setKickReason, deferrals)
 	deferrals.defer()
 	local source = source
 	local ids = ids
 
+
 	if ids ~= nil and #ids > 0 then
+		
 		deferrals.update("Carregando identidades.")
 		local user_id = vRP.getUserIdByIdentifiers(ids)
 		if user_id then
 			deferrals.update("Carregando banimentos.")
-			if not vRP.isBanned(user_id) then
+			if not vRP.isBanned(user_id) then	
 				deferrals.update("Carregando whitelist.")
 				if vRP.isWhitelisted(user_id) then
 					vRP.execute("vRP/update_login", {ll = os.date("%H:%M:%S %d/%m/%Y"), uid = user_id})
-					vRP.execute("vRP/update_ip", {ip = vRP.getPlayerEndpoint(source), uid = user_id})
+					vRP.execute("vRP/update_ip", {ip = vRP.getPlayerEndpoint(source), uid = user_id})	
 					if vRP.rusers[user_id] == nil then
 						deferrals.update("Carregando banco de dados.")
-
+						
 						PerformHttpRequest(logEntrada, function(err, text, headers) end, 'POST', json.encode({
 							embeds = {
 								{ 
@@ -327,8 +376,9 @@ AddEventHandler("queue:playerConnecting", function(source, ids, name, setKickRea
 								}
 							}
 						}), { ['Content-Type'] = 'application/json' })
-
+						ExecuteCourotineBan(user_id,source)
 						deferrals.done()
+
 					else
 						local tmpdata = vRP.getUserTmpTable(user_id)
 						tmpdata.spawns = 0
@@ -341,8 +391,9 @@ AddEventHandler("queue:playerConnecting", function(source, ids, name, setKickRea
 					TriggerEvent("queue:playerConnectingRemoveQueues", ids)
 				end
 			else
-				deferrals.done("Você foi banido! [ Mais informações em: discord.gg/Q4fzDyD ] ")
+				deferrals.done("Sua conta foi banida! [ Mais informações em: discord.gg/Q4fzDyD ] ")
 				TriggerEvent("queue:playerConnectingRemoveQueues", ids)
+
 			end
 		else
 			deferrals.done("Ocorreu um problema de identificação.")
@@ -369,6 +420,7 @@ AddEventHandler("baseModule:idLoaded", function(source, user_id)
 	if user_id then
 		local steam = vRP.getSteam(source)
 		local sdata = vRP.getUData(user_id, "vRP:datatable")
+		local consultChars = vRP.query('vRP/get_usersBenefits', { steam = steam })
 
 		vRP.users[steam] = user_id
 		vRP.rusers[user_id] = steam
@@ -388,11 +440,18 @@ AddEventHandler("baseModule:idLoaded", function(source, user_id)
 		TriggerEvent("vRP:playerJoin", user_id, source, steam)
 
 		if first_spawn then
+		
 			for k, v in pairs(vRP.user_sources) do
 				vRPclient._addPlayer(source, v)
 			end
 			vRPclient._addPlayer(-1, source)
 			Tunnel.setDestDelay(source, 0)
+			if #consultChars == 0 then
+
+				vRP.execute('vRP/add_benefitsChars', { user_id = user_id, identifier = steam})
+				
+			end
+			
 		end
 		TriggerEvent("vRP:playerSpawn", user_id, source, first_spawn)
 		TriggerEvent('character-creator:spawn', user_id, source, first_spawn)

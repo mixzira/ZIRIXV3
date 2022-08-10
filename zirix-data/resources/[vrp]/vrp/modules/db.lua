@@ -29,6 +29,7 @@ vRP.prepare('vRP/create_vrp_users',
             `ip` varchar(255) NOT NULL DEFAULT '0.0.0',
             `last_login` varchar(255) NOT NULL DEFAULT '0.0.0',
             `coins` int(50) NOT NULL DEFAULT '0',
+            `expire_banned` int(11) DEFAULT NULL,
             PRIMARY KEY (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
     ]]
@@ -116,6 +117,16 @@ vRP.prepare('vRP/create_vrp_priority',
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     ]]
 )
+vRP.prepare('vRP/create_vrp_benefits',
+    [[
+        CREATE TABLE IF NOT EXISTS `vrp_benefits` (
+            `chars` int(10) NOT NULL DEFAULT 4,
+            `steam` varchar(50) DEFAULT NULL,
+            `user_id` int(11) DEFAULT NULL,
+            `global_ban` tinyint(1) DEFAULT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ]]
+)
 
 vRP.prepare('vRP/create_vrp_stock_exchange',
     [[
@@ -138,7 +149,7 @@ vRP.prepare('vRP/create_vrp_estoque',
 )
 
 
-CreateThread(function()
+CreateThread(function()  
     vRP.execute('vRP/create_vrp_srv_data')
     vRP.execute('vRP/create_vrp_users')
     vRP.execute('vRP/create_vrp_user_data')
@@ -147,6 +158,7 @@ CreateThread(function()
     vRP.execute('vRP/create_vrp_user_moneys')
     vRP.execute('vRP/create_vrp_user_vehicles')
     vRP.execute('vRP/create_vrp_priority')
+    vRP.execute('vRP/create_vrp_benefits')
     vRP.execute('vRP/create_vrp_stock_exchange')
     vRP.execute('vRP/create_vrp_estoque')
     vRP.execute('vRP/create_vrp_homes_permissions')
