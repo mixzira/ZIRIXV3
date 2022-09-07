@@ -10,12 +10,16 @@ svPLAYER = Tunnel.getInterface("vrp_player")
 
 RegisterCommand("vtuning",function(source,args)
 	local vehicle = GetVehiclePedIsUsing(PlayerPedId())
+	if vehicle == 0 then
+		vehicle = svPLAYER.vTuningFarAway()
+	end
 	if IsEntityAVehicle(vehicle) then
 		local motor = GetVehicleMod(vehicle,11)
 		local freio = GetVehicleMod(vehicle,12)
 		local transmissao = GetVehicleMod(vehicle,13)
 		local suspensao = GetVehicleMod(vehicle,15)
 		local blindagem = GetVehicleMod(vehicle,16)
+		local turbo = IsToggleModOn(vehicle,18)
 		local body = GetVehicleBodyHealth(vehicle)
 		local engine = GetVehicleEngineHealth(vehicle)
 		local fuel = GetVehicleFuelLevel(vehicle)
@@ -82,7 +86,15 @@ RegisterCommand("vtuning",function(source,args)
 			blindagem = "Nível 5 / "..GetNumVehicleMods(vehicle,16)
 		end
 
-		TriggerEvent("Notify","importante","<b>Motor:</b> "..motor.."<br><b>Freio:</b> "..freio.."<br><b>Transmissão:</b> "..transmissao.."<br><b>Suspensão:</b> "..suspensao.."<br><b>Blindagem:</b> "..blindagem.."<br><b>Chassi:</b> "..parseInt(body/10).."%<br><b>Engine:</b> "..parseInt(engine/10).."%<br><b>Gasolina:</b> "..parseInt(fuel).."%",15000)
+		if turbo then
+			turbo = "Ativado"
+		else
+			turbo = "Desativado"
+		end
+
+		TriggerEvent("Notify","importante","<b>Motor:</b> "..motor.."<br><b>Freio:</b> "..freio.."<br><b>Transmissão:</b> "..transmissao.."<br><b>Suspensão:</b> "..suspensao.."<br><b>Blindagem:</b> "..blindagem.."<br><b>Turbo:</b> "..turbo.."<br><b>Chassi:</b> "..parseInt(body/10).."%<br><b>Engine:</b> "..parseInt(engine/10).."%<br><b>Gasolina:</b> "..parseInt(fuel).."%",15000)
+	else
+		TriggerEvent("Notify","negado","Você não está dentro ou perto de um veículo.")
 	end
 end)
 
