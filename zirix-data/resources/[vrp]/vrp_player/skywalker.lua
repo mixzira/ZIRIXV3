@@ -15,6 +15,7 @@ function svPLAYER.vTuningFarAway()
 	if user_id then
 		local vehicle = vRPclient.getNearestVehicle(source,7)
 		return vehicle
+	end
 end
 
 function svPLAYER.checkChapeu()
