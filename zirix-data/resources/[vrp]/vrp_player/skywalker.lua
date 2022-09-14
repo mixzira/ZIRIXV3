@@ -9,6 +9,15 @@ Tunnel.bindInterface("vrp_player",svPLAYER)
 clPLAYER = Tunnel.getInterface("vrp_player")
 local idgens = Tools.newIDGenerator()
 
+function svPLAYER.vTuningFarAway()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local vehicle = vRPclient.getNearestVehicle(source,7)
+		return vehicle
+	end
+end
+
 function svPLAYER.checkChapeu()
 	local source = source
 	local user_id = vRP.getUserId(source)
