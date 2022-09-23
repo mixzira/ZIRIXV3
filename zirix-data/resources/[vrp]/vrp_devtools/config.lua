@@ -1,6 +1,6 @@
 Config = {}
 
-Config.webhook = "https://discord.com/api/webhooks/974543166080417823/Gz27a6gi4XN9zFuznCXAwdnyg6qtjSb13n65rpBkCVU-7hRWE6vFo_AD3TiQtZFQwgq2" -- link do seu webhook
+Config.webhook = "" -- link do seu webhook
 Config.webhookIcon = 'https://media.discordapp.net/attachments/987803672895434837/987921877257297960/dcfoto.png'
 Config.webhookBottomText = 'Anti-DevTools System '
 Config.webhookColor = 16431885
