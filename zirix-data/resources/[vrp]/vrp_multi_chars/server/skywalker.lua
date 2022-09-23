@@ -12,6 +12,7 @@ local genderIcon = 'assets/error.png'
 local spawnLogin = {}
 local creating = false
 
+vRP.prepare('vRP/get_usersAndId', 'SELECT * FROM vrp_user_ids WHERE identifier = @identifier AND user_id = @user_id')
 vRP.prepare('vRP/get_users', 'SELECT * FROM vrp_user_ids WHERE identifier = @identifier')
 vRP.prepare('vRP/get_chars', 'SELECT * FROM vrp_users WHERE id = @user_id')
 vRP.prepare("vRP/get_usersBenefits","SELECT * FROM vrp_benefits WHERE steam = @steam")
@@ -110,8 +111,20 @@ end)
 RegisterServerEvent('chars:charChosen')
 AddEventHandler('chars:charChosen', function(id)
     local source = source
+    local steam = vRP.getSteam(source)
+    local getQuery = vRP.query("vRP/get_usersAndId", {identifier = steam, user_id = id})
+
+  if #getQuery == 1 then
+    local consultUser = vRP.query('vRP/get_chars', { user_id = getQuery[1].user_id })
+    local banned = consultUser[1].banned
+    if not banned then
     TriggerEvent('baseModule:idLoaded', source, id, nil)
     --TriggerEvent('character-creator:spawn', source, id)
+    end
+  else
+    vRP.setBanned(source, true)
+  end
+
 end)
 
 RegisterServerEvent('chars:createFirstChar')
