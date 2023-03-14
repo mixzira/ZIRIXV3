@@ -6,8 +6,6 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-image::https://user-images.githubusercontent.com/58696475/179862379-5aaeaffe-a02b-427c-b269-f0691a2d7d5f.gif[ZIRIXV3,float="center",width="100%"]
-
 = AGORA COM MULTI-CHARS
 Após recebermos diversos relatos de nossos clientes e membros de nossa comunidade, que ao procurar outros "desenvolvedores" da comunidade foi lhes reportado que integrar o Multi-char a uma vRP/vRPex seria muito complexo, se não impossível. Decidimos então integrar o Multi-chars para encerrar esse mito, sem problemas ou dificuldades a reportar.
 
