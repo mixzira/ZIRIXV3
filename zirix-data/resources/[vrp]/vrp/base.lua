@@ -339,10 +339,7 @@ AddEventHandler("queue:playerConnecting", function(source, ids, name, setKickRea
 	deferrals.defer()
 	local source = source
 	local ids = ids
-
-
-	if ids ~= nil and #ids > 0 then
-		
+	if ids ~= nil and #ids > 0 then	
 		deferrals.update("Carregando identidades.")
 		local user_id = vRP.getUserIdByIdentifiers(ids)
 		if user_id then
